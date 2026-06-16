@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="比爸 BD 作品書櫃 — 深淵迴響">
+<title>書櫃｜比爸 BD</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{
+    background:linear-gradient(135deg,#0d1f3c,#0a0e17);
+    padding:60px 20px 40px;text-align:center;
+    border-bottom:1px solid var(--border);
+}
+.page-hero h1{font-size:36px;color:var(--white);margin-bottom:8px;}
+.page-hero p{color:var(--text-dim);font-size:15px;}
+/* 書籍詳情 */
+.book-detail{
+    background:var(--bg2);border:1px solid var(--border);border-radius:10px;
+    padding:36px;margin-bottom:48px;
+}
+.book-detail-top{display:flex;gap:36px;margin-bottom:32px;}
+.book-cover-lg{
+    width:160px;min-width:160px;height:220px;border-radius:6px;
+    background:linear-gradient(135deg,#0d1f3c,#1a3a5c,#0a0e17);
+    border:1px solid var(--border);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.book-cover-lg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,240,255,.18),transparent 60%);}
+.book-cover-lg .ctitle{color:var(--accent);font-size:20px;font-weight:900;z-index:1;text-align:center;padding:0 10px;text-shadow:0 0 10px var(--accent-glow);}
+.book-cover-lg .cauthor{color:rgba(255,255,255,.45);font-size:12px;z-index:1;margin-top:8px;}
+.book-meta-info{flex:1;}
+.book-meta-info .genres{margin-bottom:10px;}
+.book-meta-info h2{font-size:28px;color:var(--white);margin-bottom:12px;}
+.book-meta-info .synopsis{font-size:15px;line-height:1.9;color:var(--text-dim);margin-bottom:16px;}
+.book-stats{display:flex;gap:20px;font-size:13px;color:var(--text-dim);margin-bottom:20px;flex-wrap:wrap;}
+.book-actions{display:flex;gap:10px;flex-wrap:wrap;}
+/* 章節列表 */
+.chapter-section h3{font-size:18px;color:var(--accent);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.chapter-grid{display:flex;flex-direction:column;gap:8px;}
+.ch-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;background:var(--bg);border:1px solid var(--border2);
+    border-radius:5px;text-decoration:none;color:var(--text);transition:.2s;
+}
+.ch-item:hover{border-color:var(--accent);color:var(--accent);padding-left:26px;}
+.ch-item.locked{opacity:.4;cursor:not-allowed;pointer-events:none;}
+.ch-left{display:flex;align-items:center;gap:14px;}
+.ch-num{font-family:monospace;color:var(--accent);font-size:12px;min-width:52px;}
+.ch-name{font-size:14px;}
+.ch-right{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-dim);}
+@media(max-width:768px){
+    .book-detail-top{flex-direction:column;align-items:center;text-align:center;}
+    .book-stats{justify-content:center;}
+    .book-actions{justify-content:center;}
+    .ch-right .ch-date{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo">比爸 BD</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">關於作者</a></li>
+      <li><a href="support.html">支持贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a></li>
+      <li><button class="nav-theme" onclick="toggleTheme()">☀️/🌙</button></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>作品書櫃</h1>
+  <p>比爸 BD 的所有連載與完結作品</p>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- 作品 A：深淵迴響 -->
+    <div class="book-detail" id="abyssal">
+      <div class="book-detail-top">
+        <div class="book-cover-lg">
+          <span class="ctitle">深淵迴響</span>
+          <span class="cauthor">比爸 BD</span>
+        </div>
+        <div class="book-meta-info">
+          <div class="genres">
+            <span class="badge">科幻</span>&nbsp;
+            <span class="badge">懸疑</span>&nbsp;
+            <span class="badge">太空探索</span>&nbsp;
+            <span class="badge badge-hot">連載中</span>
+          </div>
+          <h2>深淵迴響</h2>
+          <p class="synopsis">
+            西元 2142 年，探測艦「奧德賽號」在距離地球 4.2 光年的半人馬座 α 星系邊緣，失去了所有通訊信號。
+            當船長林克從冰冷的休眠艙中甦醒，迎接他的不是溫暖的醫療燈光，而是刺眼的紅色警報。
+            艙內的重力系統失效，其他船員全數失蹤，只有 AI 主機 ARIA 開口說話——
+            「我有重要的事情要告訴您。」
+            每一條線索都指向一個比死亡更可怕的真相。
+          </p>
+          <div class="book-stats">
+            <span>📅 2026年 連載中</span>
+            <span>📝 1章（持續更新）</span>
+            <span>🏷️ 科幻 / 懸疑 / 太空</span>
+          </div>
+          <div class="book-actions">
+            <a href="reading.html?book=abyssal&chapter=1" class="btn btn-primary">開始閱讀第一章</a>
+            <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink">💬 討論此作品</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 章節目錄 -->
+      <div class="chapter-section">
+        <h3>📖 章節目錄</h3>
+        <div class="chapter-grid">
+          <a href="reading.html?book=abyssal&chapter=1" class="ch-item">
+            <div class="ch-left">
+              <span class="ch-num">Ch.001</span>
+              <span class="ch-name">休眠艙的異常</span>
+              <span class="badge badge-hot" style="font-size:11px;">最新</span>
+            </div>
+            <div class="ch-right">
+              <span class="ch-date">2026.06.17</span>
+            </div>
+          </a>
+          <div class="ch-item locked">
+            <div class="ch-left">
+              <span class="ch-num">Ch.002</span>
+              <span class="ch-name">ARIA 的告白</span>
+            </div>
+            <div class="ch-right"><span>敬請期待</span></div>
+          </div>
+          <div class="ch-item locked">
+            <div class="ch-left">
+              <span class="ch-num">Ch.003</span>
+              <span class="ch-name">第三個休眠艙</span>
+            </div>
+            <div class="ch-right"><span>敬請期待</span></div>
+          </div>
+          <div class="ch-item locked">
+            <div class="ch-left">
+              <span class="ch-num">Ch.004</span>
+              <span class="ch-name">深淵的回聲</span>
+            </div>
+            <div class="ch-right"><span>敬請期待</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 作品 B：籌備中 -->
+    <div class="book-detail" style="opacity:.5;">
+      <div class="book-detail-top">
+        <div class="book-cover-lg" style="background:linear-gradient(135deg,#1a0a2e,#3a1a5c,#0a0e17);">
+          <span class="ctitle" style="color:#b060ff;">下一部作品</span>
+          <span class="cauthor">比爸 BD</span>
+        </div>
+        <div class="book-meta-info">
+          <div class="genres"><span class="badge" style="border-color:#b060ff;color:#b060ff;">籌備中</span></div>
+          <h2>即將公開</h2>
+          <p class="synopsis">比爸 BD 的下一部作品正在醞釀中。敬請關注 Threads 帳號 @bbdaddy924，以獲得第一手消息與搶先預告。</p>
+          <div class="book-stats"><span>📅 籌備中</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-logo">比爸 BD</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="bookshelf.html">書櫃</a>
+      <a href="about.html">關於作者</a><a href="support.html">支持贊助</a>
+      <a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a>
+      <a href="privacy.html">隱私權政策</a><a href="terms.html">服務條款</a>
+    </nav>
+    <div class="footer-copy">
+      <p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p>
+      <p>本網站所有小說內容受著作權法保護，嚴禁未經授權之盜轉、複製或商業使用。</p>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

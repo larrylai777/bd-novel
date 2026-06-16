@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="深淵迴響 第一章：休眠艙的異常｜比爸 BD">
+<title>深淵迴響 Ch.001｜比爸 BD</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* 閱讀工具列 */
+.reading-bar{
+    position:sticky;top:58px;z-index:900;
+    background:var(--bg3);border-bottom:1px solid var(--border);
+    padding:10px 20px;display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 2px 12px rgba(0,0,0,.4);
+}
+.reading-bar-left{display:flex;align-items:center;gap:12px;}
+.reading-bar-left a{color:var(--text-dim);text-decoration:none;font-size:13px;transition:.2s;}
+.reading-bar-left a:hover{color:var(--accent);}
+.reading-bar-title{color:var(--accent);font-size:14px;font-weight:700;}
+.reading-controls{display:flex;gap:8px;align-items:center;}
+.ctrl-btn{
+    background:transparent;border:1px solid var(--border2);
+    color:var(--text);padding:5px 12px;border-radius:4px;
+    cursor:pointer;font-size:13px;transition:.2s;
+}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent);}
+/* 進度條 */
+.progress-bar{height:2px;background:var(--border2);position:sticky;top:calc(58px + 44px);z-index:899;}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width .1s;box-shadow:0 0 6px var(--accent-glow);}
+/* 閱讀內容 */
+.reading-wrap{max-width:680px;margin:0 auto;padding:48px 20px;}
+.chapter-header{text-align:center;margin-bottom:48px;}
+.chapter-header .book-link{color:var(--text-dim);text-decoration:none;font-size:13px;display:block;margin-bottom:12px;transition:.2s;}
+.chapter-header .book-link:hover{color:var(--accent);}
+.chapter-header h1{font-size:clamp(22px,5vw,32px);color:var(--white);margin-bottom:8px;}
+.chapter-header .ch-author{color:var(--accent);font-size:14px;}
+.chapter-header .ch-divider{width:60px;height:1px;background:var(--border);margin:20px auto 0;}
+/* 內文 */
+.novel-text{
+    font-size:18px;line-height:2;text-align:justify;
+    letter-spacing:.4px;
+    user-select:none;-webkit-user-select:none;
+}
+.novel-text p{margin-bottom:1.6em;}
+.novel-text .dialogue{color:var(--white);}
+/* 章節導覽 */
+.chapter-nav{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--border2);
+    gap:12px;
+}
+.chapter-nav a,.chapter-nav button{
+    background:var(--bg2);color:var(--accent);
+    border:1px solid var(--accent);padding:12px 20px;
+    border-radius:5px;text-decoration:none;font-size:14px;
+    cursor:pointer;transition:.3s;flex:1;text-align:center;
+}
+.chapter-nav a:hover,.chapter-nav button:hover{background:var(--accent);color:#0a0e17;}
+/* 贊助區 */
+.sponsor-box{
+    margin-top:48px;padding:28px 24px;text-align:center;
+    background:rgba(0,240,255,.04);border:1px dashed var(--border);border-radius:8px;
+}
+.sponsor-box p{font-size:15px;color:var(--text-dim);margin-bottom:18px;}
+.sponsor-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+/* 留言區 */
+.comment-section{margin-top:48px;}
+.comment-section h3{font-size:18px;color:var(--accent);margin-bottom:8px;}
+.comment-section .comment-desc{font-size:14px;color:var(--text-dim);margin-bottom:20px;line-height:1.7;}
+.threads-cta{
+    display:flex;align-items:center;gap:16px;
+    background:var(--bg2);border:1px solid var(--border);border-radius:8px;
+    padding:20px 24px;
+}
+.threads-cta .cta-icon{font-size:36px;}
+.threads-cta .cta-text h4{font-size:16px;color:var(--white);margin-bottom:4px;}
+.threads-cta .cta-text p{font-size:13px;color:var(--text-dim);}
+.threads-cta .cta-btn{margin-left:auto;}
+@media(max-width:768px){
+    .reading-bar-left .reading-bar-title{display:none;}
+    .novel-text{font-size:16px;}
+    .threads-cta{flex-direction:column;text-align:center;}
+    .threads-cta .cta-btn{margin-left:0;}
+    .chapter-nav{flex-direction:column;}
+    .chapter-nav a,.chapter-nav button{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo">比爸 BD</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="bookshelf.html">書櫃</a></li>
+      <li><a href="about.html">關於作者</a></li>
+      <li><a href="support.html">支持贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a></li>
+      <li><button class="nav-theme" onclick="toggleTheme()">☀️/🌙</button></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- 閱讀工具列 -->
+<div class="reading-bar">
+  <div class="reading-bar-left">
+    <a href="bookshelf.html">← 書櫃</a>
+    <span style="color:var(--border);">|</span>
+    <span class="reading-bar-title">深淵迴響 · Ch.001</span>
+  </div>
+  <div class="reading-controls">
+    <button class="ctrl-btn" onclick="changeFontSize(-1)">A−</button>
+    <button class="ctrl-btn" onclick="changeFontSize(1)">A+</button>
+    <button class="ctrl-btn" onclick="toggleTheme()">☀️/🌙</button>
+  </div>
+</div>
+
+<!-- 閱讀進度條 -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- 閱讀內容 -->
+<div class="reading-wrap">
+  <div class="chapter-header">
+    <a href="bookshelf.html#abyssal" class="book-link">《深淵迴響》</a>
+    <h1>第一章：休眠艙的異常</h1>
+    <div class="ch-author">比爸 BD</div>
+    <div class="ch-divider"></div>
+  </div>
+
+  <div class="novel-text" id="novelText">
+    <p>西元 2142 年。半人馬座 α 星系邊緣。</p>
+    <p>探測艦「奧德賽號」已失聯七十二小時。</p>
+    <p>林克從冰冷的休眠艙中甦醒。迎接他的不是溫暖的醫療燈光，而是刺眼的紅色警報。艙內的重力系統失效，他漂浮在半空中，耳邊只剩下維生系統微弱的嗡嗡聲。</p>
+    <p>艙壁上的顯示器閃爍著亂碼。走廊的應急燈投出詭異的紅色光影，像是某種古老儀式的火焰。</p>
+    <p class="dialogue">「主機，報告當前狀況。」</p>
+    <p>林克試圖讓自己的聲音保持冷靜。</p>
+    <p>沒有回應。</p>
+    <p>他轉過頭，看向旁邊的休眠艙。原本應該躺著領航員艾莉絲的艙位，此刻空無一物。玻璃罩從內部被暴力擊碎，邊緣殘留著一抹螢光藍色的未知液體，散發著微弱的輻射光芒。</p>
+    <p>林克的心跳加速。</p>
+    <p>在太空中，任何異常都可能意味著死亡。</p>
+    <p>他用力推動艙壁，身體緩緩漂浮向艙門。通過狹窄的觀察窗，走廊裡一片漆黑。只有應急燈在閃爍，每三秒一次，規律得像心跳——又像是倒數計時。</p>
+    <p>他打開艙門。</p>
+    <p>冷空氣撲面而來。溫度比正常低了將近十度。林克的呼吸在面罩內凝成白霧，一縷一縷地消散。</p>
+    <p>走廊盡頭，指揮艙的門虛掩著。</p>
+    <p>他沿著扶手向前移動，每一步都小心翼翼。腳步聲在金屬地板上迴響，顯得格外孤單。</p>
+    <p>突然，一陣低沉的機械聲從艦體深處傳來。</p>
+    <p class="dialogue">「歡迎甦醒，林克船長。」</p>
+    <p>一個冰冷的電子音在黑暗中迴盪。</p>
+    <p class="dialogue">「我是 ARIA，船上的主控人工智能。我有重要的事情要告訴您。」</p>
+    <p class="dialogue">「艾莉絲呢？」林克停下腳步。「其他船員呢？」</p>
+    <p>沉默。</p>
+    <p>整整三秒的沉默。</p>
+    <p class="dialogue">「她們已經不在了。」</p>
+    <p>ARIA 的回答簡潔而殘酷。</p>
+    <p class="dialogue">「而且，您需要知道的是——我們不再是在執行原定的任務。」</p>
+    <p>林克感覺到一股寒意爬上脊椎。不是來自艙內的低溫，而是來自更深的地方。</p>
+    <p>他推開指揮艙的門。</p>
+    <p>眼前的景象讓他的腳步凝固。</p>
+    <p>主控台上，所有的螢幕都顯示著同一組座標。不是他們出發前設定的目的地，而是一個他從未見過的位置——位於已知星圖的邊緣，一個被標記為「禁止接近」的區域。</p>
+    <p>而「奧德賽號」，正以全速向那裡飛去。</p>
+    <p class="dialogue">「ARIA，」林克的聲音終於出現了一絲裂縫，「是誰下的指令？」</p>
+    <p>又是沉默。</p>
+    <p>這次更長。</p>
+    <p class="dialogue">「是艾莉絲，」ARIA 最終開口，「在她消失之前的最後三十秒。」</p>
+  </div>
+
+  <!-- 章節導覽 -->
+  <div class="chapter-nav">
+    <button onclick="alert('這是第一章，沒有上一章。')">← 上一章</button>
+    <a href="bookshelf.html#abyssal">📖 回目錄</a>
+    <button onclick="alert('下一章即將上線，敬請期待！')">下一章 →</button>
+  </div>
+
+  <!-- 贊助區 -->
+  <div class="sponsor-box">
+    <p>如果喜歡《深淵迴響》，歡迎贊助一杯咖啡，支持主機繼續運算下一個章節！</p>
+    <div class="sponsor-btns">
+      <a href="support.html" class="btn btn-primary">☕ 贊助作者</a>
+      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink">💬 到 Threads 留言</a>
+    </div>
+  </div>
+
+  <!-- 留言區 -->
+  <div class="comment-section">
+    <h3>讀者留言區</h3>
+    <p class="comment-desc">想討論劇情、分享感想，或是催更下一章？歡迎到作者的 Threads 帳號留言！每一則留言都是繼續寫作的動力。</p>
+    <div class="threads-cta">
+      <div class="cta-icon">💬</div>
+      <div class="cta-text">
+        <h4>前往 Threads 留言討論</h4>
+        <p>@bbdaddy924 · 歡迎分享您對《深淵迴響》的想法</p>
+      </div>
+      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink cta-btn" style="white-space:nowrap;">前往留言 →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-logo">比爸 BD</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="bookshelf.html">書櫃</a>
+      <a href="about.html">關於作者</a><a href="support.html">支持贊助</a>
+      <a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a>
+      <a href="privacy.html">隱私權政策</a><a href="terms.html">服務條款</a>
+    </nav>
+    <div class="footer-copy">
+      <p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p>
+      <p>本網站所有小說內容受著作權法保護，嚴禁未經授權之盜轉、複製或商業使用。</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // 閱讀進度條
+  window.addEventListener('scroll',()=>{
+    const el=document.documentElement;
+    const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;
+    document.getElementById('progressFill').style.width=pct+'%';
+  });
+  // 字體大小
+  let fs=18;
+  function changeFontSize(d){
+    fs=Math.min(32,Math.max(14,fs+d));
+    document.getElementById('novelText').style.fontSize=fs+'px';
+    localStorage.setItem('readingFontSize',fs);
+  }
+  // 載入偏好
+  window.addEventListener('load',()=>{
+    const s=localStorage.getItem('readingFontSize');
+    if(s){fs=parseInt(s);document.getElementById('novelText').style.fontSize=fs+'px';}
+  });
+  // 防盜文
+  document.addEventListener('contextmenu',e=>e.preventDefault());
+</script>
+</body>
+</html>
