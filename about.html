@@ -3,43 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="關於作者比爸 BD — 科幻懸疑小說創作者">
-<title>關於作者｜比爸 BD</title>
+<title>關於作者 — 比爸 BD</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.page-hero{background:linear-gradient(135deg,#0d1f3c,#0a0e17);padding:60px 20px 40px;text-align:center;border-bottom:1px solid var(--border);}
-.page-hero h1{font-size:36px;color:var(--white);margin-bottom:8px;}
-.page-hero p{color:var(--text-dim);font-size:15px;}
-.about-layout{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start;}
-.author-profile{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:32px;text-align:center;position:sticky;top:80px;}
-.profile-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#0d1f3c,#1a3a5c);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:52px;margin:0 auto 16px;box-shadow:0 0 24px var(--accent-glow);}
-.profile-name{font-size:22px;color:var(--white);font-weight:900;margin-bottom:4px;}
-.profile-handle{color:var(--accent);font-size:13px;margin-bottom:16px;}
-.profile-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
-.profile-social{display:flex;flex-direction:column;gap:8px;}
-.social-link{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:5px;text-decoration:none;font-size:14px;font-weight:700;transition:.2s;}
-.social-threads{background:transparent;border:1px solid var(--accent2);color:var(--accent2);}
-.social-threads:hover{background:var(--accent2);color:#fff;}
-.social-support{background:transparent;border:1px solid var(--accent);color:var(--accent);}
-.social-support:hover{background:var(--accent);color:#0a0e17;}
-.about-content{display:flex;flex-direction:column;gap:32px;}
-.about-block{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:28px;}
-.about-block h2{font-size:20px;color:var(--accent);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.about-block p{font-size:15px;line-height:1.9;color:var(--text-dim);margin-bottom:12px;}
-.about-block p:last-child{margin-bottom:0;}
-.timeline{display:flex;flex-direction:column;gap:0;}
-.tl-item{display:flex;gap:20px;padding-bottom:24px;position:relative;}
-.tl-item:last-child{padding-bottom:0;}
-.tl-item::before{content:'';position:absolute;left:19px;top:32px;bottom:0;width:1px;background:var(--border);}
-.tl-item:last-child::before{display:none;}
-.tl-dot{width:40px;min-width:40px;height:40px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;z-index:1;}
-.tl-body h4{font-size:15px;color:var(--white);margin-bottom:4px;}
-.tl-body .tl-year{font-size:12px;color:var(--accent);margin-bottom:6px;}
-.tl-body p{font-size:14px;color:var(--text-dim);line-height:1.7;}
-@media(max-width:768px){
-    .about-layout{grid-template-columns:1fr;}
-    .author-profile{position:static;}
-}
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start;}
+.about-sidebar{position:sticky;top:calc(var(--nav-h)+24px);}
+.profile-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;text-align:center;}
+.profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#1a3a5c,#0a1628);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto 16px;}
+.profile-name{font-size:22px;color:var(--white);margin-bottom:4px;}
+.profile-handle{font-size:13px;color:var(--accent);margin-bottom:16px;}
+.profile-bio{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;}
+.profile-links{display:flex;flex-direction:column;gap:8px;}
+.about-content h2{font-size:clamp(24px,3vw,36px);color:var(--white);margin-bottom:16px;}
+.about-content p{font-size:16px;color:var(--text-dim);line-height:1.9;margin-bottom:20px;}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:32px;}
+.timeline-item{display:flex;gap:20px;padding-bottom:32px;position:relative;}
+.timeline-item::before{content:"";position:absolute;left:7px;top:20px;bottom:0;width:1px;background:var(--border);}
+.timeline-item:last-child::before{display:none;}
+.timeline-dot{width:16px;height:16px;min-width:16px;border-radius:50%;background:var(--accent);margin-top:3px;}
+.timeline-year{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:4px;}
+.timeline-text{font-size:14px;color:var(--text-dim);line-height:1.7;}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;}.about-sidebar{position:static;}}
 </style>
 </head>
 <body>
@@ -52,7 +36,7 @@
       <li><a href="about.html" class="active">關於作者</a></li>
       <li><a href="support.html">支持贊助</a></li>
       <li><a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a></li>
-      <li><button class="nav-theme" onclick="toggleTheme()">☀️/🌙</button></li>
+      <li><button class="nav-theme" onclick="toggleTheme()">☀</button></li>
     </ul>
     <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
@@ -60,74 +44,45 @@
 
 <div class="page-hero">
   <h1>關於作者</h1>
-  <p>認識比爸 BD 與他的創作世界</p>
+  <p>比爸 BD — 科幻懸疑小說創作者</p>
 </div>
 
 <section class="section">
   <div class="container">
-    <div class="about-layout">
-
-      <!-- 側邊個人資料 -->
-      <div class="author-profile">
-        <div class="profile-avatar">🧑‍🚀</div>
-        <div class="profile-name">比爸 BD</div>
-        <div class="profile-handle">@bbdaddy924</div>
-        <div class="profile-tags">
-          <span class="badge">科幻</span>
-          <span class="badge">懸疑</span>
-          <span class="badge">太空</span>
-        </div>
-        <div class="profile-social">
-          <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="social-link social-threads">💬 Threads 留言</a>
-          <a href="support.html" class="social-link social-support">☕ 支持贊助</a>
-        </div>
-      </div>
-
-      <!-- 主要內容 -->
-      <div class="about-content">
-        <div class="about-block">
-          <h2>創作理念</h2>
-          <p>我相信，最好的科幻故事不是在描述未來的科技，而是在探索永恆的人性。當我們把人類放進宇宙的尺度裡，所有的愛、恐懼、背叛與犧牲，都會被放大到令人窒息的程度。</p>
-          <p>《深淵迴響》的誕生，來自一個簡單的問題：如果你在距離地球 4.2 光年的地方獨自醒來，你會選擇相信誰？</p>
-          <p>這個問題沒有標準答案。但在尋找答案的過程中，我們會看見自己最真實的樣子。</p>
-        </div>
-
-        <div class="about-block">
-          <h2>創作歷程</h2>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-dot">✍️</div>
-              <div class="tl-body">
-                <div class="tl-year">創作起點</div>
-                <h4>開始寫作</h4>
-                <p>從短篇科幻故事開始，在各大平台嘗試不同的敘事風格，逐漸找到屬於自己的聲音。</p>
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot">🌌</div>
-              <div class="tl-body">
-                <div class="tl-year">宇宙觀建構</div>
-                <h4>比爸星系宇宙觀</h4>
-                <p>開始建構獨特的宇宙觀設定，融合東西方哲學元素，創造出「比爸星系」的世界觀。</p>
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot">🚀</div>
-              <div class="tl-body">
-                <div class="tl-year">2026</div>
-                <h4>《深淵迴響》正式連載</h4>
-                <p>第一部長篇科幻懸疑小說正式上線，開始在個人網站連載，歡迎讀者一同見證這段旅程。</p>
-              </div>
-            </div>
+    <div class="about-grid">
+      <div class="about-sidebar reveal">
+        <div class="profile-card">
+          <div class="profile-avatar">🧑‍🚀</div>
+          <div class="profile-name">比爸 BD</div>
+          <div class="profile-handle">@bbdaddy924</div>
+          <p class="profile-bio">科幻懸疑小說創作者。相信最好的故事，是那些讓你在深夜讀完後，還會繼續思考宇宙與人性的故事。</p>
+          <div class="profile-links">
+            <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink btn-sm">💬 Threads 留言</a>
+            <a href="support.html" class="btn btn-outline btn-sm">☕ 支持贊助</a>
           </div>
         </div>
+      </div>
+      <div class="about-content reveal reveal-delay-1">
+        <h2>創作理念</h2>
+        <p>我相信，科幻小說的本質不是預測未來，而是用未來的鏡子，照出現在的我們。</p>
+        <p>在《深淵迴響》裡，我想探討的不只是太空探索的壯闊，而是當一個人失去了記憶、失去了身份認同，他還剩下什麼？那個「剩下的東西」，才是真正的人性。</p>
+        <p>我的宇宙觀融合了東西方的哲學元素——西方的地、水、風、火，以及東方的木、火、土、金、水——試圖在科幻的框架下，構建一個更完整的宇宙秩序。</p>
 
-        <div class="about-block">
-          <h2>與我交流</h2>
-          <p>我非常重視與讀者的互動。如果你對劇情有任何想法、疑問，或是想要催更下一章，歡迎到我的 Threads 帳號 <strong style="color:var(--accent);">@bbdaddy924</strong> 留言。</p>
-          <p>每一則留言都是我繼續寫作的動力。在宇宙的深淵裡，我們一起尋找真相。</p>
-          <div style="margin-top:16px;">
-            <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink">💬 前往 Threads 留言</a>
+        <h2 style="margin-top:40px;">創作歷程</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-year">2026</div>
+              <div class="timeline-text">《深淵迴響》開始連載，個人小說網站正式上線。</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-year">籌備中</div>
+              <div class="timeline-text">比爸星系宇宙觀世界設定持續擴展，下一部作品醞釀中。</div>
+            </div>
           </div>
         </div>
       </div>
@@ -141,15 +96,17 @@
     <nav class="footer-nav">
       <a href="index.html">首頁</a><a href="bookshelf.html">書櫃</a>
       <a href="about.html">關於作者</a><a href="support.html">支持贊助</a>
-      <a href="https://www.threads.com/@bbdaddy924" target="_blank">Threads</a>
       <a href="privacy.html">隱私權政策</a><a href="terms.html">服務條款</a>
     </nav>
-    <div class="footer-copy">
-      <p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p>
-      <p>本網站所有小說內容受著作權法保護，嚴禁未經授權之盜轉、複製或商業使用。</p>
-    </div>
+    <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
   </div>
 </footer>
-<script src="main.js"></script>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting)i.target.classList.add("visible");});},{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
+function toggleMenu(){document.getElementById("navMenu").classList.toggle("open");}
+if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
+</script>
 </body>
 </html>
