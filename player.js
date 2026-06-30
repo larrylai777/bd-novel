@@ -144,7 +144,27 @@ const BD_PLAYLIST = [
         #bd-player { padding: 5px 8px; }
       }
       @media (max-width: 600px) {
-        #bd-player { display: none; }
+        #bd-player {
+          display: flex;
+          padding: 4px 8px;
+          gap: 4px;
+          background: rgba(255,255,255,0.06);
+          border-radius: 980px;
+          flex-shrink: 0;
+        }
+        #bd-track-info { display: none; }
+        #bd-vol { display: none; }
+        .bd-vis { display: none; }
+        .bd-pBtn {
+          font-size: 13px;
+          width: 28px;
+          height: 28px;
+        }
+        #bd-play-btn {
+          width: 30px;
+          height: 30px;
+          font-size: 12px;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -168,9 +188,14 @@ const BD_PLAYLIST = [
       <input type="range" id="bd-vol" min="0" max="1" step="0.01" value="0.5" title="音量">
     `;
 
-    // 插入到導航列 nav-wrap 最後
+    // 插入到 nav-right-mobile 容器內（漢堡選單前），若不存在則插到 nav-wrap 最後
     const navWrap = nav.querySelector(".nav-wrap");
-    if (navWrap) navWrap.appendChild(player);
+    const mobileRight = nav.querySelector(".nav-right-mobile");
+    if (mobileRight) {
+      mobileRight.insertBefore(player, mobileRight.firstChild);
+    } else if (navWrap) {
+      navWrap.appendChild(player);
+    }
 
     // 綁定事件
     document.getElementById("bd-play-btn").addEventListener("click", togglePlay);

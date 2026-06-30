@@ -178,4 +178,15 @@ body.light .reading-toolbar { background: rgba(255,255,255,0.85); }
   .hero { padding: 100px 22px 60px; }
   .reading-toolbar { padding: 0 14px; }
   .page-hero { padding: calc(var(--nav-h) + 40px) 22px 40px; }
+  .nav-wrap { gap: 8px; }
+  /* 手機版右側：播放器 + 漢堡選單並排 */
+  .nav-right-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 769px) {
+  .nav-right-mobile { display: contents; }
 }
