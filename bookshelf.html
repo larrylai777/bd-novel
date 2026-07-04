@@ -6,9 +6,10 @@
 <title>書櫃 — 比爸 BD</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.book-hero{padding:calc(var(--nav-h)+80px) 22px 60px;text-align:center;background:var(--bg);}
+.book-hero{padding:calc(var(--nav-h)+60px) 22px 60px;text-align:center;background:var(--bg);border-bottom:1px solid var(--border);}
 .book-hero h1{font-size:clamp(36px,6vw,64px);color:var(--white);margin-bottom:12px;}
 .book-hero p{font-size:17px;color:var(--text-dim);}
+@media(max-width:768px){.book-hero{padding:calc(var(--nav-h)+40px) 22px 40px;}}
 .book-card{display:grid;grid-template-columns:240px 1fr;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2px;transition:.3s;}
 .book-card:hover{border-color:var(--border2);box-shadow:0 12px 40px rgba(0,0,0,.4);}
 .book-cover{background:linear-gradient(160deg,#0a1628,#000);display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;overflow:hidden;}
