@@ -260,12 +260,76 @@
 (function(){
   const canvas=document.getElementById("starCanvas");
   const ctx=canvas.getContext("2d");
-  let stars=[];
-  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
-  function init(){stars=[];for(let i=0;i<200;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2+0.2,o:Math.random()*.6+.2,speed:Math.random()*.15+.05});}}
-  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.o+")";ctx.fill();s.y-=s.speed;if(s.y<-2){s.y=canvas.height+2;s.x=Math.random()*canvas.width;}});requestAnimationFrame(draw);}
-  window.addEventListener("resize",()=>{resize();init();});
-  resize();init();draw();
+  let stars=[], W=0, H=0, dpr=1, animId=null;
+
+  function resize(){
+    dpr = window.devicePixelRatio || 1;
+    W = canvas.parentElement.offsetWidth || window.innerWidth;
+    H = canvas.parentElement.offsetHeight || window.innerHeight;
+    canvas.width  = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width  = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function starCount(){
+    // 手機減少星星數量，節省效能
+    if(W < 480) return 80;
+    if(W < 768) return 130;
+    return 220;
+  }
+
+  function init(){
+    stars=[];
+    const count = starCount();
+    for(let i=0;i<count;i++){
+      stars.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: Math.random()*1.4+0.2,
+        o: Math.random()*.55+.2,
+        speed: Math.random()*.18+.04,
+        twinkle: Math.random()*Math.PI*2
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const t = Date.now()/1000;
+    stars.forEach(s=>{
+      // 輕微閃爍效果
+      const alpha = s.o + Math.sin(t*1.2 + s.twinkle)*0.12;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle="rgba(255,255,255,"+Math.max(0.05,Math.min(1,alpha))+")";
+      ctx.fill();
+      s.y -= s.speed;
+      if(s.y < -2){ s.y=H+2; s.x=Math.random()*W; }
+    });
+    animId = requestAnimationFrame(draw);
+  }
+
+  let resizeTimer;
+  window.addEventListener("resize",()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{
+      if(animId) cancelAnimationFrame(animId);
+      resize(); init(); draw();
+    }, 150);
+  });
+
+  // 頁面可見性 API：切換分頁時暫停動畫，節省電量
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){
+      if(animId) cancelAnimationFrame(animId);
+    } else {
+      draw();
+    }
+  });
+
+  resize(); init(); draw();
 })();
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");});},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
