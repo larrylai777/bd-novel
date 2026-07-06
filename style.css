@@ -61,10 +61,12 @@ a:hover { opacity: .8; }
 body.light #nav { background: rgba(255,255,255,0.72); }
 .nav-wrap {
   max-width: 1200px; margin: 0 auto; height: 100%;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
   padding: 0 22px;
+  gap: 40px;
+  position: relative;
 }
-.nav-logo { font-size: 17px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; text-decoration: none; }
+.nav-logo { position: absolute; left: 22px; font-size: 17px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; text-decoration: none; }
 .nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
 .nav-menu a { font-size: 13px; color: var(--text-dim); text-decoration: none; transition: color .2s; }
 .nav-menu a:hover, .nav-menu a.active { color: var(--white); }
@@ -178,7 +180,8 @@ body.light .reading-toolbar { background: rgba(255,255,255,0.85); }
   .hero { padding: 100px 22px 60px; }
   .reading-toolbar { padding: 0 14px; }
   .page-hero { padding: calc(var(--nav-h) + 40px) 22px 40px; }
-  .nav-wrap { gap: 8px; }
+  .nav-wrap { justify-content: space-between; gap: 8px; }
+  .nav-logo { position: static; }
   /* 手機版右側：播放器 + 漢堡選單並排 */
   .nav-right-mobile {
     display: flex;
