@@ -319,7 +319,7 @@ window.addEventListener("scroll",()=>{
   document.getElementById("progressFill").style.width=pct+"%";
 });
 function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
-function toggleMenu(){document.getElementById("navMenu").classList.toggle("open");}
+function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
 if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
