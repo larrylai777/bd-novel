@@ -386,6 +386,18 @@ body.light .reading-toolbar { background: rgba(255,255,255,0.85); }
   :root { --nav-h: 48px; }
   /* 手機版：選單隐藏，顯示漢堡鍵 */
   .nav-menu { display: none; }
+  /* 開啟時強制全螢幕 */
+  .nav-menu.open {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+  }
   .nav-hamburger { display: flex; }
   /* 手機版 nav-wrap： logo 靠左，漢堡鍵靠右 */
   .nav-wrap { justify-content: space-between; padding: 0 16px; }
