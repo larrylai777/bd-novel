@@ -19,7 +19,7 @@
   --glow:     rgba(41,151,255,0.2);
   --radius:   18px;
   --radius-sm:10px;
-  --nav-h:    52px;
+  --nav-h:    68px;
   --font:     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 body.light {
@@ -182,6 +182,7 @@ body.light .reading-toolbar { background: rgba(255,255,255,0.85); }
   .page-hero { padding: calc(var(--nav-h) + 40px) 22px 40px; }
   .nav-wrap { justify-content: space-between; gap: 8px; }
   .nav-logo { position: static; }
+  :root { --nav-h: 56px; }
   /* 手機版右側：播放器 + 漢堡選單並排 */
   .nav-right-mobile {
     display: flex;
