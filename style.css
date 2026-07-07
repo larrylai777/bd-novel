@@ -213,13 +213,106 @@ body.light .nav-menu.open li button { color: #1d1d1f; border-bottom-color: rgba(
 .page-hero p { font-size: 17px; color: var(--text-dim); }
 
 /* Footer */
-footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0 32px; }
-.footer-wrap { max-width: 1200px; margin: 0 auto; padding: 0 22px; }
-.footer-logo { font-size: 14px; font-weight: 700; color: var(--text-xs); margin-bottom: 16px; }
-.footer-nav { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 20px; }
-.footer-nav a { font-size: 12px; color: var(--text-xs); text-decoration: none; transition: color .2s; }
-.footer-nav a:hover { color: var(--text-dim); }
-.footer-copy { font-size: 12px; color: var(--text-xs); line-height: 1.8; }
+/* Footer — Apple 風格多欄 */
+footer {
+  background: #1d1d1f;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 48px 0 24px;
+}
+body.light footer {
+  background: #f5f5f7;
+  border-top-color: rgba(0,0,0,0.1);
+}
+.footer-wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+/* 多欄網格 */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 24px;
+  margin-bottom: 16px;
+}
+body.light .footer-grid { border-bottom-color: rgba(0,0,0,0.1); }
+.footer-col { padding: 0 12px; }
+.footer-col:first-child { padding-left: 0; }
+.footer-col:last-child { padding-right: 0; }
+.footer-col-title {
+  font-size: 12px; font-weight: 600;
+  color: rgba(245,245,247,0.9);
+  margin-bottom: 12px; line-height: 1.4;
+}
+body.light .footer-col-title { color: rgba(29,29,31,0.9); }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a {
+  font-size: 12px;
+  color: rgba(245,245,247,0.55);
+  text-decoration: none;
+  transition: color .2s;
+  line-height: 1.6;
+}
+.footer-col ul li a:hover { color: rgba(245,245,247,0.9); }
+body.light .footer-col ul li a { color: rgba(29,29,31,0.55); }
+body.light .footer-col ul li a:hover { color: rgba(29,29,31,0.9); }
+/* 底部法律區 */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 8px;
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(245,245,247,0.45);
+  line-height: 1.8;
+}
+body.light .footer-copy { color: rgba(29,29,31,0.45); }
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: center;
+}
+.footer-legal a {
+  font-size: 12px;
+  color: rgba(245,245,247,0.45);
+  text-decoration: none;
+  transition: color .2s;
+  padding: 0 8px;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  line-height: 1;
+}
+.footer-legal a:last-child { border-right: none; }
+.footer-legal a:hover { color: rgba(245,245,247,0.9); }
+body.light .footer-legal a { color: rgba(29,29,31,0.45); border-right-color: rgba(0,0,0,0.2); }
+body.light .footer-legal a:hover { color: rgba(29,29,31,0.9); }
+/* Logo */
+.footer-logo { display: none; }
+/* RWD 手機版：單欄堆疊 */
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 0; }
+  .footer-col {
+    padding: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  body.light .footer-col { border-bottom-color: rgba(0,0,0,0.1); }
+  .footer-col-title {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; margin-bottom: 0; cursor: pointer;
+    font-size: 14px;
+  }
+  .footer-col-title::after { content: "+"; font-size: 16px; font-weight: 300; opacity: 0.6; }
+  .footer-col.open .footer-col-title::after { content: "−"; }
+  .footer-col ul { display: none; padding-bottom: 12px; }
+  .footer-col.open ul { display: block; }
+  .footer-col ul li a { font-size: 14px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-legal { gap: 0; }
+  .footer-legal a { padding: 2px 8px 2px 0; border-right: none; display: inline-block; }
+}
 
 /* Reading */
 .reading-toolbar { position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 90; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 22px; height: 44px; }
