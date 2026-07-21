@@ -385,10 +385,10 @@ body.light .reading-toolbar { background: rgba(255,255,255,0.85); }
 .progress-bar { position: fixed; top: calc(var(--nav-h) + 44px); left: 0; right: 0; height: 2px; background: var(--border); z-index: 89; }
 .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width .1s; }
 .reading-body { max-width: 680px; margin: 0 auto; padding: calc(var(--nav-h) + 44px + 32px) 22px 80px; }
-.reading-chapter-title { font-size: clamp(28px, 5vw, 42px); color: var(--white); margin-bottom: 8px; letter-spacing: -0.03em; }
-.reading-meta { font-size: 13px; color: var(--text-xs); margin-bottom: 48px; }
-.reading-content { font-size: 18px; line-height: 2.0; color: var(--text-dim); letter-spacing: 0.01em; }
-.reading-content p { margin-bottom: 1.6em; }
+.reading-chapter-title { font-size: clamp(28px, 5vw, 42px); color: var(--white); margin-bottom: 8px; letter-spacing: -0.03em; text-align: center; }
+.reading-meta { font-size: 13px; color: var(--text-xs); margin-bottom: 48px; text-align: center; }
+.reading-content { font-size: 18px; line-height: 2.0; color: var(--text-dim); letter-spacing: 0.01em; text-align: center; }
+.reading-content p { margin-bottom: 1.6em; text-align: center; }
 .reading-nav { display: flex; gap: 12px; justify-content: center; padding: 40px 0; flex-wrap: wrap; }
 
 /* Responsive */
