@@ -23,6 +23,82 @@
   text-transform: uppercase;
   margin-bottom: 12px;
 }
+
+/* ── 懸浮播放列 ── */
+.podcast-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(28,28,30,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.podcast-bar.visible { transform: translateY(0); }
+.pb-cover {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#1a1a2e,#16213e);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.pb-info { flex: 1; min-width: 0; }
+.pb-title {
+  font-size: 13px; font-weight: 600; color: #f5f5f7;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
+}
+.pb-show {
+  font-size: 11px; color: rgba(245,245,247,0.55); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pb-progress-wrap { flex: 2; max-width: 320px; display: flex; flex-direction: column; gap: 6px; }
+.pb-progress {
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.15); border-radius: 2px; cursor: pointer; position: relative;
+}
+.pb-progress-fill {
+  height: 100%; background: #0a84ff; border-radius: 2px; width: 0%;
+  transition: width 0.3s linear; pointer-events: none;
+}
+.pb-time { display: flex; justify-content: space-between; font-size: 10px; color: rgba(245,245,247,0.4); }
+.pb-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.pb-btn {
+  background: none; border: none; color: rgba(245,245,247,0.8); cursor: pointer;
+  padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  transition: color 0.15s, background 0.15s; font-size: 14px;
+}
+.pb-btn:hover { color: #f5f5f7; background: rgba(255,255,255,0.1); }
+.pb-btn.play-btn {
+  width: 40px; height: 40px; background: #0a84ff; color: #fff; font-size: 16px;
+}
+.pb-btn.play-btn:hover { background: #0071e3; }
+.pb-apple-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: rgba(245,245,247,0.5); text-decoration: none;
+  padding: 6px 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
+  transition: color 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0;
+}
+.pb-apple-link:hover { color: #f5f5f7; border-color: rgba(255,255,255,0.35); }
+.pb-close {
+  background: none; border: none; color: rgba(245,245,247,0.4); cursor: pointer;
+  font-size: 20px; padding: 4px; line-height: 1; flex-shrink: 0; transition: color 0.15s;
+}
+.pb-close:hover { color: #f5f5f7; }
+@media (max-width: 768px) {
+  .podcast-bar { height: 64px; padding: 0 16px; gap: 10px; }
+  .pb-progress-wrap { display: none; }
+  .pb-apple-link { display: none; }
+  .pb-cover { width: 38px; height: 38px; }
+}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -63,10 +139,7 @@
 <div class="reading-body">
   <h1 class="reading-chapter-title">第三章：最後一次</h1>
   <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
-
-  <div class="podcast-embed">
-    <div class="podcast-label">🎧 本章有音頻版本</div>
-    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E4%B8%80%E6%AC%A1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775984511"></iframe>
+<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E4%B8%80%E6%AC%A1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775984511"></iframe>
   </div>
 
   <div class="reading-content" id="readingContent">
@@ -302,5 +375,64 @@ document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
 </script>
 
+
+<!-- ── 懸浮播放列 ── -->
+<div class="podcast-bar" id="podcastBar">
+  <div class="pb-cover">🎙</div>
+  <div class="pb-info">
+    <div class="pb-title" id="pbTitle">第一章：出生警報</div>
+    <div class="pb-show">《第九次出生》· 比爸 BD</div>
+  </div>
+  <div class="pb-progress-wrap">
+    <div class="pb-progress" id="pbProgress">
+      <div class="pb-progress-fill" id="pbFill"></div>
+    </div>
+    <div class="pb-time"><span id="pbCurrent">0:00</span><span id="pbDuration">--:--</span></div>
+  </div>
+  <div class="pb-controls">
+    <button class="pb-btn" onclick="pbSkip(-15)" title="倒退 15 秒">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3a9 9 0 1 0 6.36 2.64L17.5 7A7 7 0 1 1 12.5 5V3z"/><text x="6.5" y="15.5" font-size="6.5" font-weight="bold" fill="currentColor">15</text></svg>
+    </button>
+    <button class="pb-btn play-btn" id="pbPlayBtn" onclick="pbOpen()">▶</button>
+    <button class="pb-btn" onclick="pbSkip(30)" title="快進 30 秒">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 3v2a7 7 0 1 1-4.95 2.05L5.14 5.64A9 9 0 1 0 11.5 3z"/><text x="6.5" y="15.5" font-size="6.5" font-weight="bold" fill="currentColor">30</text></svg>
+    </button>
+  </div>
+  <a class="pb-apple-link" id="pbAppleLink" href="#" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    在 Apple Podcast 收聽
+  </a>
+  <button class="pb-close" onclick="pbClose()" title="關閉">×</button>
+</div>
+<script>
+(function(){
+  var episodes = {
+    'reading.html':     { title:'第一章：出生警報',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%80%E9%9B%86-%E5%87%BA%E7%94%9F%E8%AD%A6%E5%A0%B1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775288517' },
+    'reading-ch2.html': { title:'第二章：母親的謊言', url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%AF%8D%E8%A6%AA%E7%9A%84%E8%AC%8A%E8%A8%80-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775767209' },
+    'reading-ch3.html': { title:'第三章：最後一次',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E4%B8%80%E6%AC%A1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775984511' },
+    'reading-ch4.html': { title:'第四章：死者醒來',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%BB%E8%80%85%E9%86%92%E4%BE%86-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000777033358' },
+    'reading-ch5.html': { title:'第五章：管道盡頭',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%AE%A1%E9%81%93%E7%9B%A1%E9%A0%AD-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000777390027' },
+    'reading-ch6.html': { title:'第六章：地下學校',  url:'https://podcasts.apple.com/tw/podcast/id1760949371' }
+  };
+  var page = location.pathname.split('/').pop() || 'reading.html';
+  var ep = episodes[page];
+  if (!ep) return;
+  document.getElementById('pbTitle').textContent = ep.title;
+  document.getElementById('pbAppleLink').href = ep.url;
+  var closed = false;
+  setTimeout(function(){
+    if (!closed) document.getElementById('podcastBar').classList.add('visible');
+  }, 1500);
+  window.pbOpen = function(){
+    window.open(ep.url, '_blank');
+    document.getElementById('pbPlayBtn').textContent = '⏸';
+  };
+  window.pbSkip = function(s){ window.open(ep.url, '_blank'); };
+  window.pbClose = function(){
+    closed = true;
+    document.getElementById('podcastBar').classList.remove('visible');
+  };
+})();
+</script>
 </body>
 </html>
