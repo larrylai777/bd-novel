@@ -99,6 +99,153 @@
   .pb-cover { width: 38px; height: 38px; }
 }
 
+
+/* ── 新版閱讀頂部工具列 ── */
+.reading-toolbar {
+  position: sticky;
+  top: var(--nav-h, 68px);
+  z-index: 800;
+  background: rgba(18,18,20,0.92);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  gap: 12px;
+}
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  color: rgba(245,245,247,0.72);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+.toolbar-btn:hover { background: rgba(255,255,255,0.12); color: #f5f5f7; }
+.toolbar-btn.primary {
+  background: rgba(0,122,255,0.18);
+  border-color: rgba(0,122,255,0.4);
+  color: #4da3ff;
+}
+.toolbar-btn.primary:hover { background: rgba(0,122,255,0.28); color: #6db8ff; }
+.toolbar-chapter-label {
+  font-size: 12px; color: rgba(245,245,247,0.45);
+  padding: 0 8px; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+}
+@media(max-width:768px){
+  .reading-toolbar { padding: 0 14px; height: 48px; }
+  .toolbar-chapter-label { display: none; }
+  .toolbar-btn { padding: 5px 9px; font-size: 11px; }
+  .reading-toolbar-center { gap: 2px; }
+}
+
+/* ── 背景音樂懸浮播放列 ── */
+.music-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(10,10,14,0.94);
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 14px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.music-bar.visible { transform: translateY(0); }
+.mb-cover {
+  width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg,#0d1b2a,#1b2838,#0a3d62);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.mb-info { flex: 1; min-width: 0; }
+.mb-title {
+  font-size: 12px; font-weight: 600; color: #f5f5f7;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mb-sub {
+  font-size: 10px; color: rgba(245,245,247,0.45); margin-top: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mb-progress-wrap {
+  flex: 2; max-width: 300px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.mb-progress {
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.12); border-radius: 2px;
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.mb-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg,#4da3ff,#a78bfa);
+  border-radius: 2px; transition: width 0.5s linear;
+  pointer-events: none;
+}
+.mb-time {
+  display: flex; justify-content: space-between;
+  font-size: 9px; color: rgba(245,245,247,0.35);
+}
+.mb-controls { display: flex; align-items: center; gap: 6px; }
+.mb-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,245,247,0.8); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; transition: background 0.18s, color 0.18s;
+}
+.mb-btn:hover { background: rgba(255,255,255,0.14); color: #f5f5f7; }
+.mb-btn.play {
+  width: 36px; height: 36px; font-size: 14px;
+  background: rgba(0,122,255,0.22);
+  border-color: rgba(0,122,255,0.45); color: #4da3ff;
+}
+.mb-btn.play:hover { background: rgba(0,122,255,0.35); color: #6db8ff; }
+.mb-volume { display: flex; align-items: center; gap: 6px; }
+.mb-volume-icon { font-size: 13px; color: rgba(245,245,247,0.5); cursor: pointer; }
+.mb-volume-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 70px; height: 3px;
+  background: rgba(255,255,255,0.15); border-radius: 2px; cursor: pointer; outline: none;
+}
+.mb-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px;
+  border-radius: 50%; background: #4da3ff; cursor: pointer;
+}
+.mb-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,245,247,0.5); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transition: background 0.18s;
+  flex-shrink: 0;
+}
+.mb-close:hover { background: rgba(255,255,255,0.12); color: #f5f5f7; }
+@media(max-width:768px){
+  .music-bar { padding: 0 14px; gap: 10px; height: 60px; }
+  .mb-progress-wrap, .mb-volume { display: none; }
+  .mb-btn { width: 30px; height: 30px; font-size: 12px; }
+  .mb-btn.play { width: 34px; height: 34px; }
+}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -125,13 +272,17 @@
 
 <div class="reading-toolbar">
   <div class="reading-toolbar-left">
-    <a href="bookshelf.html" class="toolbar-btn">← 書櫃</a>
-    <span style="font-size:12px;color:var(--text-xs);">第九次出生</span>
+    <a href="bookshelf.html" class="toolbar-btn">☰ 目錄</a>
+    <span class="toolbar-chapter-label">第三章：最後一次</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-ch2.html" class="toolbar-btn">← 上一章</a>
+    <a href="reading-ch4.html" class="toolbar-btn primary">下一章 →</a>
   </div>
   <div class="reading-toolbar-right">
-    <button class="toolbar-btn" onclick="changeFontSize(-1)">A−</button>
-    <button class="toolbar-btn" onclick="changeFontSize(1)">A+</button>
-    <button class="toolbar-btn" onclick="toggleTheme()">☀/🌙</button>
+    <button class="toolbar-btn" onclick="changeFontSize(-1)" title="縮小字體">A−</button>
+    <button class="toolbar-btn" onclick="changeFontSize(1)" title="放大字體">A+</button>
+    <button class="toolbar-btn" id="themeBtn" onclick="toggleTheme()" title="切換主題">☀</button>
   </div>
 </div>
 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -376,62 +527,101 @@ document.addEventListener("selectstart",e=>e.preventDefault());
 </script>
 
 
-<!-- ── 懸浮播放列 ── -->
-<div class="podcast-bar" id="podcastBar">
-  <div class="pb-cover">🎙</div>
-  <div class="pb-info">
-    <div class="pb-title" id="pbTitle">第一章：出生警報</div>
-    <div class="pb-show">《第九次出生》· 比爸 BD</div>
+
+
+<!-- ── 背景音樂懸浮播放列 ── -->
+<div class="music-bar" id="musicBar">
+  <div class="mb-cover">🎵</div>
+  <div class="mb-info">
+    <div class="mb-title">第九次出生 主題曲</div>
+    <div class="mb-sub">《第九次出生》· 比爸 BD</div>
   </div>
-  <div class="pb-progress-wrap">
-    <div class="pb-progress" id="pbProgress">
-      <div class="pb-progress-fill" id="pbFill"></div>
+  <div class="mb-progress-wrap">
+    <div class="mb-progress" id="mbProgress">
+      <div class="mb-progress-fill" id="mbFill"></div>
     </div>
-    <div class="pb-time"><span id="pbCurrent">0:00</span><span id="pbDuration">--:--</span></div>
+    <div class="mb-time">
+      <span id="mbCurrent">0:00</span>
+      <span id="mbDuration">--:--</span>
+    </div>
   </div>
-  <div class="pb-controls">
-    <button class="pb-btn" onclick="pbSkip(-15)" title="倒退 15 秒">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3a9 9 0 1 0 6.36 2.64L17.5 7A7 7 0 1 1 12.5 5V3z"/><text x="6.5" y="15.5" font-size="6.5" font-weight="bold" fill="currentColor">15</text></svg>
-    </button>
-    <button class="pb-btn play-btn" id="pbPlayBtn" onclick="pbOpen()">▶</button>
-    <button class="pb-btn" onclick="pbSkip(30)" title="快進 30 秒">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 3v2a7 7 0 1 1-4.95 2.05L5.14 5.64A9 9 0 1 0 11.5 3z"/><text x="6.5" y="15.5" font-size="6.5" font-weight="bold" fill="currentColor">30</text></svg>
-    </button>
+  <div class="mb-controls">
+    <button class="mb-btn" id="mbPrevBtn" onclick="mbRestart()" title="重新播放">⟨⟨</button>
+    <button class="mb-btn play" id="mbPlayBtn" onclick="mbToggle()">▶</button>
+    <button class="mb-btn" onclick="mbSkip(15)" title="快進 15 秒">⟩⟩</button>
   </div>
-  <a class="pb-apple-link" id="pbAppleLink" href="#" target="_blank">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    在 Apple Podcast 收聽
-  </a>
-  <button class="pb-close" onclick="pbClose()" title="關閉">×</button>
+  <div class="mb-volume">
+    <span class="mb-volume-icon" id="mbVolIcon" onclick="mbMute()">🔊</span>
+    <input type="range" class="mb-volume-slider" id="mbVolSlider" min="0" max="1" step="0.05" value="0.6" oninput="mbSetVol(this.value)">
+  </div>
+  <button class="mb-close" onclick="mbClose()" title="關閉">×</button>
 </div>
+<audio id="bgAudio" loop preload="metadata">
+  <source src="theme.mp3" type="audio/mpeg">
+</audio>
 <script>
 (function(){
-  var episodes = {
-    'reading.html':     { title:'第一章：出生警報',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%80%E9%9B%86-%E5%87%BA%E7%94%9F%E8%AD%A6%E5%A0%B1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775288517' },
-    'reading-ch2.html': { title:'第二章：母親的謊言', url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%AF%8D%E8%A6%AA%E7%9A%84%E8%AC%8A%E8%A8%80-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775767209' },
-    'reading-ch3.html': { title:'第三章：最後一次',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E4%B8%80%E6%AC%A1-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000775984511' },
-    'reading-ch4.html': { title:'第四章：死者醒來',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%BB%E8%80%85%E9%86%92%E4%BE%86-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000777033358' },
-    'reading-ch5.html': { title:'第五章：管道盡頭',  url:'https://podcasts.apple.com/tw/podcast/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%AE%A1%E9%81%93%E7%9B%A1%E9%A0%AD-%E7%AC%AC%E4%B9%9D%E6%AC%A1%E5%87%BA%E7%94%9F/id1760949371?i=1000777390027' },
-    'reading-ch6.html': { title:'第六章：地下學校',  url:'https://podcasts.apple.com/tw/podcast/id1760949371' }
-  };
-  var page = location.pathname.split('/').pop() || 'reading.html';
-  var ep = episodes[page];
-  if (!ep) return;
-  document.getElementById('pbTitle').textContent = ep.title;
-  document.getElementById('pbAppleLink').href = ep.url;
+  var audio = document.getElementById('bgAudio');
+  var playBtn = document.getElementById('mbPlayBtn');
+  var fill = document.getElementById('mbFill');
+  var cur = document.getElementById('mbCurrent');
+  var dur = document.getElementById('mbDuration');
+  var bar = document.getElementById('musicBar');
+  var volSlider = document.getElementById('mbVolSlider');
+  var volIcon = document.getElementById('mbVolIcon');
+  var muted = false;
   var closed = false;
-  setTimeout(function(){
-    if (!closed) document.getElementById('podcastBar').classList.add('visible');
-  }, 1500);
-  window.pbOpen = function(){
-    window.open(ep.url, '_blank');
-    document.getElementById('pbPlayBtn').textContent = '⏸';
+  audio.volume = 0.6;
+
+  function fmt(s){ var m=Math.floor(s/60); return m+':'+(('0'+Math.floor(s%60)).slice(-2)); }
+
+  audio.addEventListener('loadedmetadata', function(){
+    dur.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('timeupdate', function(){
+    if(!audio.duration) return;
+    var pct = (audio.currentTime/audio.duration)*100;
+    fill.style.width = pct+'%';
+    cur.textContent = fmt(audio.currentTime);
+  });
+
+  // 點擊進度條跳轉
+  document.getElementById('mbProgress').addEventListener('click', function(e){
+    if(!audio.duration) return;
+    var rect = this.getBoundingClientRect();
+    var pct = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  });
+
+  window.mbToggle = function(){
+    if(audio.paused){
+      audio.play().then(function(){ playBtn.textContent='⏸'; }).catch(function(){});
+    } else {
+      audio.pause(); playBtn.textContent='▶';
+    }
   };
-  window.pbSkip = function(s){ window.open(ep.url, '_blank'); };
-  window.pbClose = function(){
+  window.mbRestart = function(){ audio.currentTime=0; };
+  window.mbSkip = function(s){ audio.currentTime = Math.min(audio.duration||0, audio.currentTime+s); };
+  window.mbSetVol = function(v){
+    audio.volume = parseFloat(v);
+    muted = false;
+    volIcon.textContent = v>0.5?'🔊':v>0?'🔉':'🔇';
+  };
+  window.mbMute = function(){
+    muted = !muted;
+    audio.muted = muted;
+    volIcon.textContent = muted ? '🔇' : (audio.volume>0.5?'🔊':'🔉');
+  };
+  window.mbClose = function(){
     closed = true;
-    document.getElementById('podcastBar').classList.remove('visible');
+    audio.pause();
+    bar.classList.remove('visible');
   };
+
+  // 頁面載入後 2 秒滑入播放列（不自動播放，等用戶點擊）
+  setTimeout(function(){
+    if(!closed) bar.classList.add('visible');
+  }, 2000);
 })();
 </script>
 </body>
