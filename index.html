@@ -19,7 +19,7 @@
 .feature-title{font-size:20px;color:var(--white);margin-bottom:10px;}
 .feature-desc{font-size:14px;color:var(--text-dim);line-height:1.7;}
 .novel-showcase{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;min-height:480px;}
-.novel-main{background:linear-gradient(160deg,#0a1628 0%,#000 100%);padding:56px 48px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+.novel-main{background:linear-gradient(160deg,#0a1628 0%,#000 100%);padding:56px 48px;display:flex;flex-direction:row;align-items:flex-end;gap:32px;position:relative;overflow:hidden;}.novel-cover-wrap{flex-shrink:0;width:140px;position:relative;z-index:1;}.novel-cover-wrap img{width:140px;height:210px;object-fit:cover;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.7),0 2px 8px rgba(41,151,255,.3);display:block;}
 .novel-main::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(41,151,255,.15) 0%,transparent 60%);}
 .novel-main-content{position:relative;z-index:1;}
 .novel-tag{margin-bottom:16px;}
@@ -133,6 +133,9 @@
     </div>
     <div class="novel-showcase reveal">
       <div class="novel-main">
+        <div class="novel-cover-wrap">
+          <img src="cover-ninth-birth.jpg" alt="第九次出生 封面">
+        </div>
         <div class="novel-main-content">
           <div class="novel-tag">
             <span class="badge">科幻</span>&nbsp;
