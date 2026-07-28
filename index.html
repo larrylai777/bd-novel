@@ -381,6 +381,7 @@ const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersec
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
 function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
+function toggleFooterCol(el){var col=el.parentElement;col.classList.toggle("open");}
 if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
 </script>
 
