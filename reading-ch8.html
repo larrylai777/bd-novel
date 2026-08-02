@@ -95,19 +95,19 @@
 /* ── 背景音樂播放列 ── */
 .music-bar {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 9998;
-  background: rgba(18,18,20,0.88);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(10,10,14,0.94);
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  border-top: 1px solid rgba(255,255,255,0.08);
   padding: 0 24px;
-  height: 52px;
+  height: 64px;
   display: flex;
   align-items: center;
   gap: 14px;
-  transform: translateY(-100%);
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 .music-bar.visible { transform: translateY(0); }
 .mb-cover {
@@ -180,6 +180,56 @@
   .mb-progress-wrap, .mb-volume { display: none; }
   .mb-btn { width: 30px; height: 30px; font-size: 12px; }
   .mb-btn.play { width: 34px; height: 34px; }
+}
+
+/* ── 閱讀工具列 ── */
+.reading-toolbar {
+  position: sticky;
+  top: var(--nav-h, 68px);
+  z-index: 800;
+  background: rgba(18,18,20,0.92);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  gap: 12px;
+}
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  color: rgba(245,245,247,0.72);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+.toolbar-btn:hover { background: rgba(255,255,255,0.12); color: #f5f5f7; }
+.toolbar-btn.primary {
+  background: rgba(0,122,255,0.18);
+  border-color: rgba(0,122,255,0.4);
+  color: #4da3ff;
+}
+.toolbar-btn.primary:hover { background: rgba(0,122,255,0.28); color: #6db8ff; }
+.toolbar-chapter-label {
+  font-size: 12px; color: rgba(245,245,247,0.45);
+  padding: 0 8px; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+}
+@media(max-width:768px){
+  .reading-toolbar { padding: 0 14px; height: 48px; }
+  .toolbar-chapter-label { display: none; }
+  .toolbar-btn { padding: 5px 9px; font-size: 11px; }
+  .reading-toolbar-center { gap: 2px; }
 }
 
 </style>
