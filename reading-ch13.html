@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九次出生 Ch.013 — 比爸 BD</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+.podcast-embed {
+  margin: 24px 0 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.podcast-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  color: var(--text-xs); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.music-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: saturate(120%) blur(28px);
+  -webkit-backdrop-filter: saturate(120%) blur(28px);
+  border-top: 1px solid var(--border);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; gap: 14px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.music-bar.visible { transform: translateY(0); }
+.mb-cover { width: 32px; height: 32px; border-radius: 6px; background: var(--surface2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.mb-info { flex: 1; min-width: 0; }
+.mb-title { font-size: 12px; font-weight: 500; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+.mb-sub { font-size: 10px; color: var(--text-xs); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mb-progress-wrap { flex: 2; max-width: 280px; display: flex; flex-direction: column; gap: 5px; }
+.mb-progress { width: 100%; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; position: relative; }
+.mb-progress-fill { height: 100%; background: rgba(255,255,255,0.5); border-radius: 2px; width: 0%; transition: width 0.3s linear; pointer-events: none; }
+.mb-time { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-xs); }
+.mb-controls { display: flex; align-items: center; gap: 6px; }
+.mb-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: background 0.18s, color 0.18s; }
+.mb-btn:hover { background: var(--surface2); color: var(--white); }
+.mb-btn.play { width: 36px; height: 36px; font-size: 13px; background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.mb-btn.play:hover { background: rgba(255,255,255,0.15); }
+.mb-volume { display: flex; align-items: center; gap: 6px; }
+.mb-volume-icon { font-size: 12px; color: var(--text-xs); cursor: pointer; }
+.mb-volume-slider { -webkit-appearance: none; appearance: none; width: 70px; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; outline: none; }
+.mb-volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--white); cursor: pointer; }
+.mb-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-xs); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.18s; flex-shrink: 0; }
+.mb-close:hover { background: var(--surface2); color: var(--white); }
+@media(max-width:768px){ .music-bar { padding: 0 14px; gap: 10px; height: 60px; } .mb-progress-wrap, .mb-volume { display: none; } .mb-btn { width: 30px; height: 30px; font-size: 11px; } .mb-btn.play { width: 34px; height: 34px; } }
+.reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s; white-space: nowrap; }
+.toolbar-btn:hover { background: var(--surface2); color: var(--white); opacity: 1; }
+.toolbar-btn.primary { background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
+.toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+@media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+.part-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--accent-gold); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 3px 10px; margin-bottom: 12px; }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30GG7PY520');
+</script>
+</head>
+<body class="page-enter">
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">作者</a></li>
+      <li><a href="support.html">贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+    </ul>
+    <div class="nav-right-mobile"><button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+
+<div class="reading-toolbar">
+  <div class="reading-toolbar-left">
+    <a href="bookshelf.html" class="toolbar-btn">☰ 目錄</a>
+    <span class="toolbar-chapter-label">第十三章：黑河圖書館</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-ch12.html" class="toolbar-btn">← 上一章</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">下一章 →</span>
+  </div>
+  <div class="reading-toolbar-right">
+    <button class="toolbar-btn" onclick="changeFontSize(-1)" title="縮小字體">A−</button>
+    <button class="toolbar-btn" onclick="changeFontSize(1)" title="放大字體">A+</button>
+    <button class="toolbar-btn" id="themeBtn" onclick="toggleTheme()" title="切換主題">☀</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="reading-body">
+  <div style="text-align:center;padding-top:32px;">
+    <span class="part-badge">第二部：黑河低語</span>
+  </div>
+  <h1 class="reading-chapter-title">第十三章：黑河圖書館</h1>
+  <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
+
+  <div class="podcast-embed">
+    <div class="podcast-label">🎧 本章有音頻版本</div>
+    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第十三集上線後將在此嵌入，敬請期待。</p>
+  </div>
+
+  <div class="reading-content" id="readingContent">
+    <p>墜落停止的時候。</p><p>沒有撞擊。</p><p>只有一種很輕的浮力。</p><p>像被放進水裡。</p><p>林澈睜開眼。</p><p>四周是藍白色的光。</p><p>不是法院的光。</p><p>是水的光。</p><p>他躺在一片很淺的水面上。</p><p>水沒有波紋。</p><p>卻在流動。</p><p>像時間本身在動。</p><p>而水面上什麼都沒發生。</p><p>那種流動很奇怪。</p><p>不是水往一個方向去。</p><p>是無數個方向。</p><p>同時在流。</p><p>彼此穿過彼此。</p><p>卻沒有碰撞。</p><p>像很多條時間線。</p><p>被硬擠進同一片水域裡。</p><p>各自流著各自的故事。</p><p>祈安在旁邊。</p><p>咳嗽著坐起來。</p><p>她的左眼滲出更多血。</p><p>灰色的眼球裡，那道細黑線繃得很緊。</p><p>「這裡……」</p><p>她環顧四周。</p><p>聲音很輕。</p><p>「是黑河圖書館。」</p><p>「舊稿裡提過。」</p><p>「沒人找得到的地方。」</p><p>林澈慢慢站起來。</p><p>赤裸的雙腳踩在水面上。</p><p>水沒有淹過腳踝。</p><p>只是貼著皮膚。</p><p>冰涼。</p><p>安靜。</p><p>他低頭看自己的腳。</p><p>水底下沒有地板。</p><p>只有更深的藍。</p><p>深得看不見盡頭。</p><p>彷彿他不是站在水面上。</p><p>而是站在一整片天空的倒影上。</p><p>四周聳立著巨大的書架。</p><p>不是紙做的。</p><p>是水凝結成的形狀。</p><p>一排一排，高到看不見頂。</p><p>架上沒有書。</p><p>是一片一片透明的水膜。</p><p>每一片裡都有影像在流動。</p><p>無聲。</p><p>慢速。</p><p>像被按了靜音的記憶。</p><p>有些水膜的邊緣已經模糊。</p><p>像放置太久的照片。</p><p>顏色一點一點褪去。</p><p>祈安走過一整排。</p><p>視線掃過那些流動的畫面。</p><p>一個孩子第一次學會走路。</p><p>一場葬禮。</p><p>一次告白。</p><p>一次分手。</p><p>無數個瞬間。</p><p>被凝結在這片永不結冰的水裡。</p><p>「這裡的書。」</p><p>她低聲說。</p><p>「不是誰寫的。」</p><p>「是黑河自己收藏的。」</p><p>「所有它經過的地方。」</p><p>「所有它吸收過的記憶。」</p><p>「它捨不得丟。」</p><p>「就都留在這裡。」</p><p>林澈看著那些水膜。</p><p>忽然意識到一件事。</p><p>這裡儲存的不只是死者的記憶。</p><p>還有那些。</p><p>從未被任何人正式記錄下來的。</p><p>日常的碎片。</p><p>一句沒說出口的道歉。</p><p>一次沒能趕上的擁抱。</p><p>黑河像一個沉默的收藏家。</p><p>把整座城市漏掉的東西。</p><p>一片一片。</p><p>撿回來。</p><p>保存著。</p><p>「你看那裡。」</p><p>祈安忽然指向遠處一排較矮的書架。</p><p>那裡的水膜顏色特別暗。</p><p>幾乎是黑色的。</p><p>「那些是什麼。」</p><p>林澈感覺到。</p><p>那個方向傳來一種很不一樣的氣息。</p><p>不是悲傷。</p><p>是某種更沉重的東西。</p><p>一種被刻意壓抑很久的憤怒。</p><p>祈安沒有靠近。</p><p>她的腳步在那排書架前停住。</p><p>保持著一段距離。</p><p>「舊稿裡提過。」</p><p>她說。</p><p>聲音壓得很低。</p><p>「那些是還沒發生的事。」</p><p>「黑河偶爾會提前收藏一些畫面。」</p><p>「像是它自己。」</p><p>「也在害怕什麼。」</p><p>「所以先把答案藏起來。」</p><p>林澈盯著那片黑色的書架。</p><p>黑河在他體內輕輕動了一下。</p><p>不是低語。</p><p>是一種更接近警告的東西。</p><p>彷彿在說。</p><p>不要看。</p><p>還不是時候。</p><p>他把視線移開。</p><p>回到眼前這片較淺的水域。</p><p>看著最近的一片水膜。</p><p>裡面是一個女人在哭。</p><p>抱著一個很小的包裹。</p><p>包裹沒有動。</p><p>林澈看不清她的臉。</p><p>但那個場景很熟悉。</p><p>像他自己記憶裡某個角落的形狀。</p><p>「那是。」</p><p>祈安走近。</p><p>聲音發抖。</p><p>「第一次出生。」</p><p>水膜自己往外伸展。</p><p>像感應到他們的靠近。</p><p>慢慢展開。</p><p>變成整整一面牆的畫面。</p><p>林澈看見了。</p><p>一間簡陋的產房。</p><p>不是第七產房那種白。</p><p>是最初期的殖民帳篷。</p><p>塑膠布搭起來的臨時空間。</p><p>外面是火星最原始的紅色荒地。</p><p>沒有穹頂。</p><p>沒有紅色的夜色濾鏡。</p><p>只有真正的、赤裸裸的荒蕪。</p><p>女人躺在臨時床上。</p><p>滿頭是汗。</p><p>旁邊只有兩個人。</p><p>一個穿著舊式太空服的醫生。</p><p>一個抱著儀器不停按壓的技術員。</p><p>嬰兒的哭聲很快停了。</p><p>沒有停很久。</p><p>是永遠停了。</p><p>女人的尖叫劃破帳篷。</p><p>技術員手忙腳亂。</p><p>醫生後退一步。</p><p>搖頭。</p><p>畫面裡沒有聲音。</p><p>但林澈聽見了。</p><p>不是用耳朵。</p><p>是黑河直接把那個聲音灌進他腦子。</p><p>「不。」</p><p>「不可能。」</p><p>「這是第一個孩子。」</p><p>「殖民地的第一個孩子。」</p><p>「不能死。」</p><p>「不能死。」</p><p>「政府不會允許他死。」</p><p>技術員的手指飛快地敲打儀器。</p><p>畫面切換。</p><p>一份文件。</p><p>「出生確認書」。</p><p>上面填著一個名字。</p><p>一個生日。</p><p>一份健康報告。</p><p>全部是假的。</p><p>嬰兒早已沒有心跳。</p><p>但紙上寫著——存活。</p><p>「這就是第一次出生。」</p><p>祈安的聲音很輕。</p><p>「一個被寫成活著的死人。」</p><p>「赤環城的第一個謊言。」</p><p>水膜裡的畫面繼續播放。</p><p>技術員把嬰兒的身體。</p><p>連同一小段殘留的腦電波訊號。</p><p>一起接進了最原始的記憶儲存裝置。</p><p>那台裝置後來有了名字。</p><p>冥河陣列。</p><p>「他們沒有埋葬他。」</p><p>祈安說。</p><p>「他們把他變成了系統的一部分。」</p><p>「因為死亡。」</p><p>「在這座城市的第一天。」</p><p>「就是不被允許的。」</p><p>林澈伸出手。</p><p>碰上那片水膜。</p><p>畫面猛地拉近。</p><p>他看見那個嬰兒的臉。</p><p>不是嬰兒該有的安詳。</p><p>是一種很小、很小的困惑。</p><p>像在問。</p><p>我做錯了什麼？</p><p>為什麼我不能只是死掉？</p><p>林澈的意識被吸進去。</p><p>他成了那個嬰兒。</p><p>短短一瞬間。</p><p>他感覺到帳篷外的風。</p><p>感覺到母親的手停在半空，不敢碰他。</p><p>感覺到自己的心跳，一下，停了。</p><p>然後。</p><p>被別的東西接住。</p><p>不是懷抱。</p><p>是電流。</p><p>是資料。</p><p>是編號。</p><p>那種感覺很難形容。</p><p>像有人把一整座冰冷的城市。</p><p>灌進一個原本只該裝著母親體溫的空間裡。</p><p>從那一刻起。</p><p>死亡在赤環城。</p><p>不再是一個結束。</p><p>而是一次原料的回收。</p><p>林澈猛地抽回手。</p><p>跌坐在水裡。</p><p>水花濺起，卻沒有聲音。</p><p>「他想被抱住。」</p><p>林澈在心裡說。</p><p>祈安聽懂了。</p><p>「他只是想有人抱他一下。」</p><p>「然後被允許死掉。」</p><p>「可是這座城市。」</p><p>「連死都要偷。」</p><p>她蹲下來。</p><p>伸手想扶起林澈。</p><p>動作卻停在半空。</p><p>她低頭看著自己的手。</p><p>灰色左眼裡的黑線。</p><p>正微微顫動。</p><p>「我剛才。」</p><p>她說。</p><p>聲音有點抖。</p><p>「也看見了一小段。」</p><p>「不是這個嬰兒的。」</p><p>「是我自己第四次死之前的。」</p><p>林澈看向她。</p><p>祈安沒有繼續說下去。</p><p>她只是望著那片已經暗下去的水膜。</p><p>像在等一個答案。</p><p>或是。</p><p>在等自己有勇氣。</p><p>把那段記憶說完。</p><p>一個聲音從書架深處傳來。</p><p>不是低語。</p><p>是真正的腳步聲。</p><p>很輕。</p><p>很穩。</p><p>林澈轉頭。</p><p>白司禮站在那裡。</p><p>沒有投影的虛浮感。</p><p>是實體。</p><p>真正的他。</p><p>第一次，不是隔著螢幕。</p><p>不是隔著門。</p><p>他的臉色很白。</p><p>比平常更白。</p><p>眼神有點散。</p><p>像剛從什麼地方被拽出來。</p><p>「你怎麼會在這裡……」</p><p>祈安下意識擋在林澈前面。</p><p>白司禮沒有看她。</p><p>他的視線落在另一片水膜上。</p><p>那片水膜是林澈碰過的旁邊那片。</p><p>自己亮了起來。</p><p>沒有人碰它。</p><p>它自己展開。</p><p>畫面裡是一個很小的男孩。</p><p>八歲左右。</p><p>坐在一間狹小的公寓裡。</p><p>牆壁斑駁。</p><p>窗外是火星的紅色天空。</p><p>還沒有穹頂濾鏡的那種原始紅。</p><p>一個女人蹲在男孩面前。</p><p>替他綁鞋帶。</p><p>「白子。」</p><p>她說。</p><p>聲音很溫柔。</p><p>「今天記得跟老師說。」</p><p>「你長大要當醫生。」</p><p>「救很多人。」</p><p>男孩點頭。</p><p>笑得很開心。</p><p>露出缺了一顆的門牙。</p><p>白司禮站在水膜前。</p><p>一動不動。</p><p>他的手開始抖。</p><p>不是投影訊號的那種抖。</p><p>是真正的、屬於身體的抖。</p><p>「這不是我的記憶。」</p><p>他說。</p><p>聲音很輕。</p><p>「我沒有童年。」</p><p>「我是被創造出來的制度人格。」</p><p>「我沒有母親。」</p><p>畫面裡的女人抬起頭。</p><p>對著鏡頭一樣的角度笑了一下。</p><p>然後畫面忽然切斷。</p><p>雪花。</p><p>黑屏。</p><p>只留下一行字。</p><p>浮在水面上。</p><p>「白子，八歲。」</p><p>「記憶署第一批『第一次出生』實驗延伸體。」</p><p>「代號：九號管理者。」</p><p>「情感模組已抹除。」</p><p>「保留部分程序性溫和語調，用於執行任務。」</p><p>白司禮盯著那行字。</p><p>很久。</p><p>很久。</p><p>久到水面的光都開始晃動。</p><p>「不可能。」</p><p>他說。</p><p>第二次說。</p><p>聲音卻沒有第一次那麼堅定。</p><p>林澈看著他。</p><p>第一次。</p><p>不是恨。</p><p>是一種很陌生的東西。</p><p>像看見自己。</p><p>他忽然想起周嶺在管道裡對母親說的那句話。</p><p>「活著的時候，我是醫師。」</p><p>「死了以後，我是污染物。」</p><p>如果白司禮真的是白子。</p><p>真的是那個曾經被溫柔對待過的孩子。</p><p>那他現在。</p><p>活著的時候是九號管理者。</p><p>那他在自己被抹除之前。</p><p>到底是什麼？</p><p>白司禮忽然抬手。</p><p>按住自己的太陽穴。</p><p>指縫間滲出一點透明的液體。</p><p>不是血。</p><p>比血更像數據。</p><p>「頭很痛。」</p><p>他喃喃。</p><p>「這種痛不該存在。」</p><p>「我沒有痛覺模組。」</p><p>祈安緊緊抱住林澈。</p><p>「我們該走了。」</p><p>她低聲說。</p><p>「這裡不安全。」</p><p>白司禮卻沒有動。</p><p>他看著那片已經熄滅的水膜。</p><p>像在等它重新亮起來。</p><p>像在等那個叫他「白子」的聲音。</p><p>再喊他一次。</p><p>書架之間的水氣忽然凝結。</p><p>在空中形成一個小小的漩渦。</p><p>漩渦裡浮出更多畫面。</p><p>碎片式的。</p><p>短暫的。</p><p>一個生日蛋糕。</p><p>只有一根蠟燭。</p><p>一雙手在替他梳頭。</p><p>一次感冒發燒。</p><p>有人徹夜守在床邊。</p><p>白司禮看著那些碎片。</p><p>他的呼吸開始不穩。</p><p>那些畫面一片一片地。</p><p>疊在他眼前。</p><p>像有人終於把一整本相冊。</p><p>攤開在他面前。</p><p>而他花了半輩子。</p><p>告訴自己這本相冊不存在。</p><p>「我記得這個蛋糕。」</p><p>他忽然說。</p><p>聲音很輕。</p><p>像在自言自語。</p><p>「巧克力口味。」</p><p>「因為家裡沒有錢買更好的。」</p><p>「但她說巧克力最好吃。」</p><p>「因為它。」</p><p>「跟眼淚的顏色最像。」</p><p>「這樣哭的時候。」</p><p>「別人也看不出來。」</p><p>他說到這裡。</p><p>猛地停住。</p><p>像自己也被這句話嚇到。</p><p>「這不是……」</p><p>他喃喃。</p><p>「這不該存在於我的資料庫裡。」</p><p>「情感模組已經抹除。」</p><p>「這種細節……」</p><p>「這種細節不該有。」</p><p>可那些細節。</p><p>正一片一片地。</p><p>從他喉嚨深處。</p><p>被擠出來。</p><p>像被壓在很深地方的水。</p><p>終於找到一道裂縫。</p><p>「這些都不是真的。」</p><p>他說。</p><p>聲音越來越輕。</p><p>「這些都是……」</p><p>他說不下去了。</p><p>「我一直以為。」</p><p>他終於說。</p><p>聲音很輕。</p><p>輕得不像審判官。</p><p>不像制度。</p><p>只像一個人。</p><p>「我是在執行使命。」</p><p>「現在我不知道。」</p><p>「我在執行的。」</p><p>「是不是別人的命。」</p><p>黑河圖書館深處。</p><p>書架與書架之間。</p><p>無數水膜同時微微發亮。</p><p>像有什麼東西被驚動了。</p><p>也像有什麼東西。</p><p>終於等到了它等的人。</p><p>林澈看著白司禮。</p><p>看著這個追殺他八次的人。</p><p>第一次。</p><p>像個真正會痛的人一樣。</p><p>站在那裡。</p><p>不知道該往哪裡走。</p><p>祈安拉了拉他的手。</p><p>「走吧。」</p><p>她再說一次。</p><p>聲音更急。</p><p>「白司禮的投影很快會發現他離線了。」</p><p>「他們會來找他。」</p><p>「連帶會找到這裡。」</p><p>林澈沒有動。</p><p>他看著白司禮。</p><p>黑河在他體內輕輕流動。</p><p>不是低語。</p><p>是一種很奇怪的。</p><p>近乎同情的東西。</p><p>他忽然明白。</p><p>自己和白司禮。</p><p>也許是同一種東西的兩面。</p><p>一個被反覆重置。</p><p>卻始終記得自己的名字。</p><p>一個被徹底抹除。</p><p>卻在某個角落。</p><p>留下一絲沒被清乾淨的痕跡。</p><p>林澈朝白司禮伸出手。</p><p>那隻手很小。</p><p>指尖還帶著淡淡的藍光。</p><p>白司禮看著那隻手。</p><p>沒有動。</p><p>「我不需要你的同情。」</p><p>他說。</p><p>聲音重新變得平穩。</p><p>像一道剛剛裂開又勉強拼回去的牆。</p><p>「我依然要執行任務。」</p><p>「不管我是誰。」</p><p>祈安警覺地把林澈往後拉。</p><p>「他要變回原樣了。」</p><p>她說。</p><p>林澈的手還懸在半空。</p><p>沒有收回。</p><p>「你不用現在決定。」</p><p>他在心裡對白司禮說。</p><p>雖然對方聽不見。</p><p>雖然也許。</p><p>黑河會替他把這句話送過去。</p><p>「但你已經看見了。」</p><p>「你不能再假裝沒看見。」</p><p>水膜的光開始劇烈閃動。</p><p>像感應到某種外部的力量。</p><p>正在逼近這個地方。</p><p>白司禮猛地抬頭。</p><p>「他們來了。」</p><p>他說。</p><p>聲音又恢復了那種公文式的平穩。</p><p>「妳們得走了。」</p><p>「從那邊。」</p><p>他指向書架深處一道幾乎看不見的縫隙。</p><p>「那裡通往校準中心的外圍。」</p><p>「趁我還能拖住他們。」</p><p>祈安愣住。</p><p>「你在幫我們？」</p><p>白司禮沒有回答。</p><p>他轉身。</p><p>背對著他們。</p><p>肩膀的線條很直。</p><p>像一堵重新豎起來的牆。</p><p>「快走。」</p><p>他說。</p><p>聲音裡有一絲。</p><p>連他自己都沒發現的。</p><p>顫抖。</p><p>祈安抱緊林澈。</p><p>走向那道縫隙。</p><p>走了幾步。</p><p>她忽然停下。</p><p>回頭看了白司禮一眼。</p><p>「你的記憶。」</p><p>她說。</p><p>「不會消失了。」</p><p>「你已經看見了。」</p><p>「看見的東西。」</p><p>「拿不回去了。」</p><p>白司禮沒有回頭。</p><p>他的背影在藍白色的水光裡。</p><p>顯得格外單薄。</p><p>不像一個追殺過林澈八次的人。</p><p>更像一個。</p><p>剛剛才發現自己一直被困在某個地方的人。</p><p>「我知道。」</p><p>他說。</p><p>聲音很輕。</p><p>「所以我才要妳們快走。」</p><p>「趁我還沒決定。」</p><p>「要不要把這件事。」</p><p>「也告訴上面。」</p><p>祈安沒有再說什麼。</p><p>她抱著林澈。</p><p>鑽進那道縫隙。</p><p>黑暗立刻包住他們。</p><p>身後。</p><p>水膜的光還在明明滅滅。</p><p>像無數雙眼睛。</p><p>看著那個獨自站在圖書館中央的人。</p><p>看著他一動不動。</p><p>看著他的肩膀。</p><p>在無人看見的角度。</p><p>微微地。</p><p>顫抖了一下。</p><p>林澈趴在祈安肩上。</p><p>回頭望了最後一眼。</p><p>他看見白司禮抬起手。</p><p>按在那片播放著「白子」記憶的水膜上。</p><p>動作很輕。</p><p>像怕碰碎什麼。</p><p>也像。</p><p>終於。</p><p>在很多年後。</p><p>第一次。</p><p>允許自己。</p><p>觸碰一段。</p><p>不屬於任務的東西。</p><p>黑河的水聲漸漸遠去。</p><p>祈安的腳步聲。</p><p>在狹窄的通道裡回響。</p><p>一下。</p><p>一下。</p><p>像倒數。</p><p>也像。</p><p>某種新的開始。</p><p>前方隱約傳來機械運轉的低鳴。</p><p>校準中心的外圍。</p><p>已經不遠了。</p><p>林澈閉上眼睛。</p><p>黑河的水氣還沾在他的皮膚上。</p><p>冰涼。</p><p>卻不再讓他感到恐懼。</p><p>他想起那句話。</p><p>看見的東西。</p><p>拿不回去了。</p><p>也許他自己也一樣。</p><p>從第一次出生開始。</p><p>從周嶺的血滴在他額頭開始。</p><p>從母親說出「這一次媽媽不替你選」開始。</p><p>他已經看見太多。</p><p>多到沒有辦法。</p><p>再假裝自己什麼都不知道。</p><p>祈安抱著他。</p><p>繼續往前走。</p><p>朝著那道機械低鳴的方向。</p><p>朝著。</p><p>下一段。</p><p>還沒有人替他寫好答案的路。</p>
+    <p style="text-align:center;color:var(--text-xs);font-size:13px;margin-top:40px;">— 第十三章完 —</p>
+  </div>
+
+  <div class="reading-nav">
+    <a href="reading-ch12.html" class="btn btn-ghost btn-sm">← 上一章</a>
+    <a href="bookshelf.html" class="btn btn-ghost btn-sm">回目錄</a>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
+    <a href="https://p.ecpay.com.tw/BF50B91" target="_blank" class="btn btn-outline btn-sm">支持作者</a>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
+    <p style="font-size:14px;color:var(--text-dim);margin-bottom:16px;">喜歡這個故事嗎？到 Threads 上和作者聊聊你的想法！</p>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-primary btn-sm">前往 @bbdaddy924 留言</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作品</div>
+        <ul>
+          <li><a href="bookshelf.html">書櫃</a></li>
+          <li><a href="reading.html">第一部：第九門（Ch.001–009）</a></li>
+          <li><a href="reading-ch10.html">第二部：黑河低語（Ch.010–）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作者</div>
+        <ul>
+          <li><a href="about.html">關於比爸 BD</a></li>
+          <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div>
+        <ul>
+          <li><a href="support.html">贊助方案</a></li>
+          <li><a href="https://p.ecpay.com.tw/BF50B91" target="_blank">綠界贊助</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">法律</div>
+        <ul>
+          <li><a href="privacy.html">隱私權政策</a></li>
+          <li><a href="terms.html">服務條款</a></li>
+          <li><a href="mailto:bbdaddy924@gmail.com">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
+      <nav class="footer-legal">
+        <a href="privacy.html">隱私權政策</a>
+        <a href="terms.html">服務條款</a>
+        <a href="mailto:bbdaddy924@gmail.com">聯絡我們</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+let fontSize=18;
+function changeFontSize(d){fontSize=Math.min(24,Math.max(14,fontSize+d));document.getElementById("readingContent").style.fontSize=fontSize+"px";}
+window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
+function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
+function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
+function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
+if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+</script>
+<div class="music-bar" id="musicBar">
+  <div class="mb-cover">🎵</div>
+  <div class="mb-info"><div class="mb-title">第九次出生 主題曲</div><div class="mb-sub">《第九次出生》· 比爸 BD</div></div>
+  <div class="mb-progress-wrap"><div class="mb-progress" id="mbProgress"><div class="mb-progress-fill" id="mbFill"></div></div><div class="mb-time"><span id="mbCurrent">0:00</span><span id="mbDuration">--:--</span></div></div>
+  <div class="mb-controls">
+    <button class="mb-btn" onclick="mbRestart()" title="重新播放">⟨⟨</button>
+    <button class="mb-btn play" id="mbPlayBtn" onclick="mbToggle()">▶</button>
+    <button class="mb-btn" onclick="mbSkip(15)" title="快進 15 秒">⟩⟩</button>
+  </div>
+  <div class="mb-volume"><span class="mb-volume-icon" id="mbVolIcon" onclick="mbMute()">🔊</span><input type="range" class="mb-volume-slider" id="mbVolSlider" min="0" max="1" step="0.05" value="0.6" oninput="mbSetVol(this.value)"></div>
+  <button class="mb-close" onclick="mbClose()" title="關閉">×</button>
+</div>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
+<script>
+(function(){
+  var audio=document.getElementById('bgAudio'),playBtn=document.getElementById('mbPlayBtn'),fill=document.getElementById('mbFill'),cur=document.getElementById('mbCurrent'),dur=document.getElementById('mbDuration'),bar=document.getElementById('musicBar'),volIcon=document.getElementById('mbVolIcon'),muted=false,closed=false;
+  audio.volume=0.6;
+  function fmt(s){var m=Math.floor(s/60);return m+':'+(('0'+Math.floor(s%60)).slice(-2));}
+  audio.addEventListener('loadedmetadata',function(){dur.textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',function(){if(!audio.duration)return;fill.style.width=(audio.currentTime/audio.duration*100)+'%';cur.textContent=fmt(audio.currentTime);});
+  document.getElementById('mbProgress').addEventListener('click',function(e){if(!audio.duration)return;var rect=this.getBoundingClientRect();audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration;});
+  window.mbToggle=function(){if(audio.paused){audio.play().then(function(){playBtn.textContent='❚❚';}).catch(function(){});}else{audio.pause();playBtn.textContent='▶';}};
+  window.mbRestart=function(){audio.currentTime=0;};
+  window.mbSkip=function(s){audio.currentTime=Math.min(audio.duration||0,audio.currentTime+s);};
+  window.mbClose=function(){closed=true;bar.classList.remove('visible');audio.pause();playBtn.textContent='▶';};
+  window.mbMute=function(){muted=!muted;audio.muted=muted;volIcon.textContent=muted?'🔇':'🔊';};
+  window.mbSetVol=function(v){audio.volume=parseFloat(v);};
+  var shown=false;
+  window.addEventListener('scroll',function(){if(closed)return;if(window.scrollY>300&&!shown){shown=true;bar.classList.add('visible');}});
+})();
+</script>
+</body>
+</html>
