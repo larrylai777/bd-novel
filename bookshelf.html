@@ -8,182 +8,128 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── 書櫃頁面專用樣式 ── */
+.bookshelf-page { padding-top: var(--nav-h); }
 
-/* 整頁最外層：把 fixed nav 的高度推開 */
-.bookshelf-page {
-  padding-top: var(--nav-h);
-}
-
-/* Hero 標題區 */
-.book-hero {
-  padding: 60px 22px 50px;
+/* 書櫃 Hero */
+.shelf-hero {
+  padding: 80px 24px 72px;
   text-align: center;
-  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
-.book-hero h1 {
-  font-size: clamp(36px, 6vw, 64px);
-  color: var(--white);
-  margin-bottom: 10px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.shelf-hero-eyebrow {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 20px;
 }
-.book-hero p {
-  font-size: 17px;
-  color: var(--text-dim);
-  margin: 0;
+.shelf-hero-title {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.03em; margin-bottom: 14px;
+}
+.shelf-hero-sub {
+  font-size: 15px; color: var(--text-dim);
+  max-width: 400px; margin: 0 auto;
 }
 
-/* 作品卡片 */
-.book-card {
+/* 作品區塊 */
+.shelf-section { padding: 72px 24px; max-width: 900px; margin: 0 auto; }
+.shelf-section + .shelf-section { padding-top: 0; }
+
+.shelf-part-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 作品卡 */
+.book-row {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  background: var(--surface);
+  grid-template-columns: 180px 1fr;
+  gap: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 2px;
-  transition: border-color .3s, box-shadow .3s;
+  margin-bottom: 48px;
 }
-.book-card:hover {
-  border-color: var(--border2);
-  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+@media(max-width:600px){ .book-row { grid-template-columns: 1fr; } }
+
+.book-row-cover {
+  background: var(--bg2);
+  min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 10px;
+  border-right: 1px solid var(--border);
 }
-.book-cover {
-  background: linear-gradient(160deg, #0a1628, #000);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 260px;
-  position: relative;
-  overflow: hidden;
+@media(max-width:600px){ .book-row-cover { min-height: 140px; border-right: none; border-bottom: 1px solid var(--border); } }
+
+.book-row-cover-title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.04em; line-height: 1.0;
+  text-align: center; padding: 0 16px;
 }
-.book-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 40% 40%, rgba(41,151,255,.2), transparent 60%);
+.book-row-cover-sub {
+  font-size: 11px; color: var(--text-xs);
+  letter-spacing: .08em; text-align: center;
 }
-.book-cover-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--white);
-  z-index: 1;
-  text-align: center;
-  padding: 20px;
-  line-height: 1.4;
+
+.book-row-info { padding: 32px 36px; }
+@media(max-width:600px){ .book-row-info { padding: 24px 20px; } }
+
+.book-row-title {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.02em; margin-bottom: 10px;
 }
-.book-info {
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.book-row-desc {
+  font-size: 13px; color: var(--text-dim);
+  line-height: 1.8; margin-bottom: 14px;
 }
-.book-badges {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
+.book-row-meta {
+  font-size: 11px; color: var(--text-xs);
+  margin-bottom: 24px; letter-spacing: .02em;
 }
-.book-title {
-  font-size: clamp(22px, 3vw, 32px);
-  color: var(--white);
-  margin-bottom: 12px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.book-desc {
-  font-size: 15px;
-  color: var(--text-dim);
-  line-height: 1.85;
-  margin-bottom: 20px;
-}
-.book-meta {
-  font-size: 13px;
-  color: var(--text-xs);
-  margin-bottom: 24px;
-}
+.book-row-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
 
 /* 章節目錄 */
-.chapter-list {
-  margin-top: 32px;
+.ch-list-header {
+  font-size: 10px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text-xs);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
 }
-.chapter-list-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-xs);
-  margin-bottom: 10px;
-  padding-left: 4px;
+.ch-list-item {
+  display: flex; align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none; color: var(--text);
+  transition: opacity .2s;
 }
-.chapter-items {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid var(--border);
+.ch-list-item:last-child { border-bottom: none; }
+.ch-list-item:hover { opacity: 0.6; }
+.ch-list-num {
+  font-size: 10px; font-weight: 500; letter-spacing: .06em;
+  color: var(--text-xs); width: 52px; flex-shrink: 0;
 }
-.chapter-item {
-  background: var(--bg);
-  padding: 15px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  transition: background .2s;
-}
-.chapter-item:hover {
-  background: var(--surface);
-}
-.ch-num {
-  font-size: 11px;
-  color: var(--text-xs);
-  min-width: 40px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-.ch-title {
-  font-size: 14px;
-  color: var(--white);
-  flex: 1;
-}
-.ch-status {
-  font-size: 11px;
-  color: var(--text-xs);
-  flex-shrink: 0;
-}
-.ch-arrow {
-  color: var(--text-xs);
-  font-size: 14px;
-  flex-shrink: 0;
-}
-.coming-soon {
-  opacity: .4;
-  pointer-events: none;
-  cursor: default;
-}
+.ch-list-title { flex: 1; font-size: 14px; font-weight: 400; color: var(--white); }
+.ch-list-status { font-size: 11px; color: var(--text-xs); flex-shrink: 0; }
 
-/* RWD 手機版 */
-@media (max-width: 768px) {
-  .book-hero {
-    padding: 40px 20px 36px;
-  }
-  .book-card {
-    grid-template-columns: 1fr;
-  }
-  .book-cover {
-    min-height: 160px;
-  }
-  .book-info {
-    padding: 24px 20px;
-  }
-  .chapter-item {
-    padding: 14px 16px;
-  }
+/* 第二部預告卡 */
+.part2-card {
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(201,168,76,0.03);
+}
+.part2-card .book-row-cover {
+  border-right-color: rgba(201,168,76,0.15);
+}
+.part2-now-reading {
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent-gold); opacity: 0.7;
 }
 </style>
 <!-- Google tag (gtag.js) -->
@@ -195,9 +141,7 @@
   gtag('config', 'G-30GG7PY520');
 </script>
 </head>
-<body>
-
-<!-- 導航列 -->
+<body class="page-enter">
 <nav id="nav">
   <div class="nav-wrap">
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
@@ -206,7 +150,6 @@
       <li><a href="about.html">作者</a></li>
       <li><a href="support.html">贊助</a></li>
       <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-      
     </ul>
     <div class="nav-right-mobile">
       <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
@@ -216,138 +159,117 @@
   </div>
 </nav>
 
-<!-- 整頁容器：padding-top = nav 高度，確保內容不被遮擋 -->
 <div class="bookshelf-page">
 
-  <!-- Hero 標題 -->
-  <div class="book-hero">
-    <h1>書櫃</h1>
-    <p>比爸 BD 的所有連載與完結作品</p>
+  <div class="shelf-hero reveal">
+    <div class="shelf-hero-eyebrow">比爸 BD · 作品目錄</div>
+    <h1 class="shelf-hero-title">書櫃</h1>
+    <p class="shelf-hero-sub">《第九次出生》— 科幻懸疑長篇連載</p>
   </div>
 
-  <div class="divider"></div>
+  <div class="shelf-section reveal">
 
-  <!-- 作品列表 -->
-  <section class="section">
-    <div class="container">
-
-      <!-- 作品卡片 -->
-      <div class="book-card reveal" id="ninth-birth">
-        <div class="book-cover" style="padding:0;">
-          <img src="cover-ninth-birth.jpg" alt="第九次出生 封面" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="book-info">
-          <div class="book-badges">
-            <span class="badge">科幻</span>
-            <span class="badge badge-purple">懸疑</span>
-            <span class="badge badge-green">第一部完結</span>
-          </div>
-          <h2 class="book-title">第九次出生</h2>
-          <p class="book-desc">火星文明用「冥河陣列」抹除所有人的前世記憶，唯有林澈保留了八世記憶。他知道自己已經死過八次，也知道第九次人生將在十八歲被政府處決。當輪迴是一場實驗，他必須在死亡倒數前，揭開人類文明最黑暗的真相。</p>
-          <div class="book-meta">📅 2026 年連載 &middot; 第一部《第九門》（共 9 章）完結</div>
-          <a href="reading.html" class="btn btn-primary btn-sm">開始閱讀</a>
-        </div>
+    <!-- 第一部 -->
+    <div class="shelf-part-label">第一部：第九門 — 完結</div>
+    <div class="book-row">
+      <div class="book-row-cover">
+        <div class="book-row-cover-title">第九次出生</div>
+        <div class="book-row-cover-sub">第一部 · 第九門</div>
       </div>
-
-      <!-- 章節目錄 -->
-      <div class="chapter-list reveal">
-        <div class="chapter-list-title">第一部：《第九門》 &mdash; 章節目錄</div>
-        <div class="chapter-items">
-          <a href="reading.html" class="chapter-item">
-            <span class="ch-num">Ch.001</span>
-            <span class="ch-title">出生警報</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch2.html" class="chapter-item">
-            <span class="ch-num">Ch.002</span>
-            <span class="ch-title">母親的謊言</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch3.html" class="chapter-item">
-            <span class="ch-num">Ch.003</span>
-            <span class="ch-title">最後一次</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch4.html" class="chapter-item">
-            <span class="ch-num">Ch.004</span>
-            <span class="ch-title">死者醒來</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch5.html" class="chapter-item">
-            <span class="ch-num">Ch.005</span>
-            <span class="ch-title">管道盡頭</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch6.html" class="chapter-item">
-            <span class="ch-num">Ch.006</span>
-            <span class="ch-title">地下學校</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch7.html" class="chapter-item">
-            <span class="ch-num">Ch.007</span>
-            <span class="ch-title">周嶺的殘響</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch8.html" class="chapter-item">
-            <span class="ch-num">Ch.008</span>
-            <span class="ch-title">舊門</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
-          <a href="reading-ch9.html" class="chapter-item">
-            <span class="ch-num">Ch.009</span>
-            <span class="ch-title">第九門</span>
-            <span class="ch-status">已上線</span>
-            <span class="ch-arrow">›</span>
-          </a>
+      <div class="book-row-info">
+        <div class="book-row-badges">
+          <span class="badge">科幻</span>
+          <span class="badge">懸疑</span>
+          <span class="badge">第一部完結</span>
         </div>
-      </div>
+        <h2 class="book-row-title">第九次出生 — 第一部《第九門》</h2>
+        <p class="book-row-desc">火星文明用「冥河陣列」抹除所有人的前世記憶，唯有林澈保留了八世記憶。他知道自己已經死過八次，也知道第九次人生將在十八歲被政府處決。</p>
+        <div class="book-row-meta">2026 年開始連載 · 共 9 章 · 已完結</div>
 
+        <div class="ch-list-header">章節目錄</div>
+        <a href="reading.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.001</span>
+          <span class="ch-list-title">出生警報</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch2.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.002</span>
+          <span class="ch-list-title">母親的謊言</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch3.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.003</span>
+          <span class="ch-list-title">最後一次</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch4.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.004</span>
+          <span class="ch-list-title">死者醒來</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch5.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.005</span>
+          <span class="ch-list-title">管道盡頭</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch6.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.006</span>
+          <span class="ch-list-title">地下學校</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch7.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.007</span>
+          <span class="ch-list-title">周嶺的殘響</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch8.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.008</span>
+          <span class="ch-list-title">舊門</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <a href="reading-ch9.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.009</span>
+          <span class="ch-list-title">第九門</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+      </div>
     </div>
-  </section>
 
-  <!-- 第二部預告 -->
-  <section class="section" style="padding-top:0;">
-    <div class="container">
-      <div class="book-card reveal" style="border:1px solid rgba(255,200,0,0.18);background:rgba(255,200,0,0.04);">
-        <div class="book-cover" style="background:linear-gradient(135deg,#0a0a0f 0%,#0d1a2e 40%,#071020 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-          <div style="font-size:48px;">🌊</div>
-          <div style="font-size:11px;color:rgba(255,200,0,0.6);letter-spacing:.1em;font-weight:600;">NOW READING</div>
+    <!-- 第二部 -->
+    <div class="shelf-part-label">第二部：黑河低語 — 連載中</div>
+    <div class="book-row part2-card">
+      <div class="book-row-cover">
+        <div class="book-row-cover-title">黑河<br>低語</div>
+        <div class="part2-now-reading">Now Reading</div>
+      </div>
+      <div class="book-row-info">
+        <div class="book-row-badges">
+          <span class="badge">科幻</span>
+          <span class="badge">懸疑</span>
+          <span class="badge" style="color:var(--accent-gold);border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.08);">第二部連載中</span>
         </div>
-        <div class="book-info">
-          <div class="book-badges">
-            <span class="badge">科幻</span>
-            <span class="badge badge-purple">懸疑</span>
-            <span class="badge" style="background:rgba(255,200,0,0.12);color:#f5c518;border-color:rgba(255,200,0,0.3);">第二部</span>
-          </div>
-          <h2 class="book-title">第九次出生 &mdash; 第二部</h2>
-          <h3 style="font-size:22px;font-weight:700;color:#f5c518;margin:0 0 12px;letter-spacing:.04em;">《黑河低語》</h3>
-          <p class="book-desc">黑河從不停止低語。它在等。等林澈長大。等他回頭。第二部將揭開黑河背後的真相，以及赤環城最深處的秘密。</p>
-          <div class="book-meta">📅 2026 年連載中 &middot; 第十章已上線</div>
-          <div style="margin-top:16px;">
-            <div class="chapter-list-title" style="margin-bottom:10px;">第二部：《黑河低語》 &mdash; 章節目錄</div>
-            <a href="reading-ch10.html" class="chapter-item" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--white);margin-bottom:4px;">
-              <span class="ch-num" style="font-size:11px;color:var(--text-xs);font-weight:600;letter-spacing:.06em;">Ch.010</span>
-              <span class="ch-title" style="flex:1;padding:0 12px;font-size:14px;font-weight:500;">門後餘波</span>
-              <span style="font-size:12px;color:var(--accent);">已上線 &rsaquo;</span>
-            </a>
-          </div>
-          <a href="reading-ch10.html" class="btn btn-primary btn-sm" style="margin-top:12px;">開始閱讀第二部</a>
+        <h2 class="book-row-title">第九次出生 — 第二部《黑河低語》</h2>
+        <p class="book-row-desc">黑河從不停止低語。它在等。等林澈長大。等他回頭。第二部將揭開黑河背後的真相，以及赤環城最深處的秘密。</p>
+        <div class="book-row-meta">2026 年連載中 · 第十章已上線</div>
+
+        <div class="ch-list-header">章節目錄</div>
+        <a href="reading-ch10.html" class="ch-list-item">
+          <span class="ch-list-num">Ch.010</span>
+          <span class="ch-list-title">門後餘波</span>
+          <span class="ch-list-status" style="color:var(--accent-gold);">已上線 ›</span>
+        </a>
+        <div class="ch-list-item" style="opacity:0.3;cursor:default;">
+          <span class="ch-list-num">Ch.011</span>
+          <span class="ch-list-title">即將連載</span>
+          <span class="ch-list-status">敬請期待</span>
         </div>
       </div>
     </div>
-  </section>
+
+  </div>
 
 </div><!-- end .bookshelf-page -->
 
-<!-- 頁尾 -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-grid">
@@ -364,7 +286,7 @@
         <ul>
           <li><a href="about.html">關於比爸 BD</a></li>
           <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-          <li><a href="https://podcasts.apple.com/tw/podcast/第一集-出生警報-第九次出生/id1760949371?i=1000775288517" target="_blank">Apple Podcast</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -397,18 +319,27 @@
 </footer>
 
 <script>
-const obs = new IntersectionObserver(e => {
-  e.forEach(i => { if (i.isIntersecting) i.target.classList.add("visible"); });
-}, { threshold: .1 });
-document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-function toggleTheme() {
-  document.body.classList.toggle("light");
-  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+function toggleMenu(){
+  var m = document.getElementById('navMenu');
+  var h = document.querySelector('.nav-hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('active');
 }
-function toggleFooterCol(el){var col=el.parentElement;col.classList.toggle("open");}
-function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
-if (localStorage.getItem("theme") === "light") document.body.classList.add("light");
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+}
+function toggleFooterCol(el){
+  if(window.innerWidth > 768) return;
+  el.parentElement.classList.toggle('open');
+}
+if(localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
 </script>
-
 </body>
 </html>

@@ -3,53 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="比爸 BD — 科幻懸疑小說連載。第九次出生 — 第四章《死者醒來》已上線。">
+<meta name="description" content="比爸 BD — 科幻懸疑小說連載。第九次出生 — 第二部《黑河低語》連載中。">
 <title>比爸 BD — 科幻懸疑小說</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 <style>
-.latest-bar{background:rgba(41,151,255,.06);border-bottom:1px solid rgba(41,151,255,.12);padding:10px 22px;text-align:center;font-size:13px;color:var(--text-dim);margin-top:var(--nav-h);}
-.latest-bar strong{color:var(--accent);}
-.latest-bar a{color:var(--accent);font-weight:600;}
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.feature-item{background:var(--bg);padding:48px 32px;text-align:center;transition:background .3s;}
-.feature-item:hover{background:var(--surface);}
-.feature-icon{font-size:40px;margin-bottom:20px;}
-.feature-title{font-size:20px;color:var(--white);margin-bottom:10px;}
-.feature-desc{font-size:14px;color:var(--text-dim);line-height:1.7;}
-.novel-showcase{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;min-height:480px;}
-.novel-main{background:linear-gradient(160deg,#0a1628 0%,#000 100%);padding:56px 48px;display:flex;flex-direction:row;align-items:flex-end;gap:32px;position:relative;overflow:hidden;}.novel-cover-wrap{flex-shrink:0;width:140px;position:relative;z-index:1;}.novel-cover-wrap img{width:140px;height:210px;object-fit:cover;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.7),0 2px 8px rgba(41,151,255,.3);display:block;}
-.novel-main::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(41,151,255,.15) 0%,transparent 60%);}
-.novel-main-content{position:relative;z-index:1;}
-.novel-tag{margin-bottom:16px;}
-.novel-main-title{font-size:clamp(32px,4vw,52px);color:var(--white);margin-bottom:12px;letter-spacing:-0.03em;}
-.novel-main-desc{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:28px;max-width:400px;}
-.novel-side{display:flex;flex-direction:column;gap:2px;}
-.novel-side-item{background:var(--bg2);padding:32px 28px;flex:1;display:flex;flex-direction:column;justify-content:center;transition:background .3s;cursor:pointer;}
-.novel-side-item:hover{background:var(--surface);}
-.novel-side-title{font-size:18px;color:var(--white);margin-bottom:6px;}
-.novel-side-desc{font-size:13px;color:var(--text-dim);line-height:1.6;}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.stat-item{background:var(--bg);padding:40px 24px;text-align:center;}
-.stat-num{font-size:clamp(36px,5vw,56px);font-weight:700;color:var(--white);letter-spacing:-0.04em;margin-bottom:6px;}
-.stat-num span{color:var(--accent);}
-.stat-label{font-size:14px;color:var(--text-dim);}
-.author-strip{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:48px;display:flex;align-items:center;gap:40px;}
-.author-avatar{width:80px;height:80px;min-width:80px;border-radius:50%;background:linear-gradient(135deg,#1a3a5c,#0a1628);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:36px;}
-.author-name{font-size:22px;color:var(--white);margin-bottom:6px;}
-.author-bio{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;}
-.author-links{display:flex;gap:10px;flex-wrap:wrap;}
-.update-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-.update-item{background:var(--bg);padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;transition:background .2s;}
-.update-item:hover{background:var(--surface);}
-.update-num{font-size:12px;color:var(--text-xs);min-width:28px;font-weight:600;}
-.update-info{flex:1;}
-.update-title{font-size:15px;color:var(--white);margin-bottom:3px;}
-.update-meta{font-size:12px;color:var(--text-xs);}
-.update-arrow{color:var(--text-xs);font-size:14px;}
-@media(max-width:900px){.feature-grid{grid-template-columns:1fr;}.novel-showcase{grid-template-columns:1fr;}.stats-row{grid-template-columns:1fr;}.author-strip{flex-direction:column;text-align:center;padding:32px 24px;}.author-links{justify-content:center;}}
-@media(max-width:600px){.novel-main{padding:36px 24px;}.feature-item{padding:32px 20px;}}
+/* ── 水波紋 Canvas ── */
+#riverCanvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; opacity: 0.18;
+}
+/* ── 英雄區 ── */
+.hero-wrap {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 160px 24px 120px;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp .9s .2s forwards;
+}
+.hero-title {
+  font-size: clamp(56px, 10vw, 120px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.04em; line-height: 0.92;
+  margin-bottom: 0;
+  opacity: 0; animation: fadeUp .9s .4s forwards;
+}
+.hero-title-sub {
+  display: block;
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 400; color: var(--text-xs);
+  letter-spacing: .04em; line-height: 1;
+  margin-top: 20px;
+  opacity: 0; animation: fadeUp .9s .55s forwards;
+}
+.hero-desc {
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: var(--text-dim);
+  max-width: 440px; margin: 40px auto 52px;
+  font-weight: 400; line-height: 1.9;
+  opacity: 0; animation: fadeUp .9s .7s forwards;
+}
+.hero-cta {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .9s .85s forwards;
+}
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp .9s 1.2s forwards;
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--border2));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+.hero-scroll-text {
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text-xs);
+}
+
+/* ── 作品展示 ── */
+.novel-block {
+  position: relative; z-index: 1;
+  padding: 0 24px 120px;
+  max-width: 1100px; margin: 0 auto;
+}
+.novel-block-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+@media(max-width:768px){ .novel-block-inner { grid-template-columns: 1fr; } }
+.novel-main-panel {
+  background: var(--bg);
+  padding: 64px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+@media(max-width:768px){ .novel-main-panel { padding: 40px 28px; } }
+.novel-main-eyebrow {
+  font-size: 11px; font-weight: 400; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 20px;
+}
+.novel-main-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.03em; margin-bottom: 20px;
+  line-height: 1.1;
+}
+.novel-main-desc {
+  font-size: 14px; color: var(--text-dim);
+  line-height: 1.9; margin-bottom: 36px;
+  max-width: 380px;
+}
+.novel-side-panel {
+  background: var(--bg2);
+  display: flex; flex-direction: column;
+}
+.novel-side-item {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none; display: block;
+}
+.novel-side-item:last-child { border-bottom: none; }
+.novel-side-item:hover { background: var(--surface); }
+.novel-side-ch {
+  font-size: 10px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 6px;
+}
+.novel-side-title {
+  font-size: 14px; font-weight: 500; color: var(--white);
+  margin-bottom: 4px;
+}
+.novel-side-desc { font-size: 12px; color: var(--text-xs); line-height: 1.6; }
+
+/* ── 數字統計 ── */
+.stats-strip {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 24px;
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: center; gap: 0;
+}
+.stat-block {
+  text-align: center; padding: 0 64px;
+  border-right: 1px solid var(--border);
+}
+.stat-block:last-child { border-right: none; }
+.stat-n {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.04em; line-height: 1.0;
+}
+.stat-l {
+  font-size: 11px; color: var(--text-xs);
+  margin-top: 8px; letter-spacing: .06em;
+  text-transform: uppercase;
+}
+@media(max-width:600px){
+  .stats-inner { gap: 0; }
+  .stat-block { padding: 0 28px; }
+}
+
+/* ── 近期更新 ── */
+.updates-section {
+  position: relative; z-index: 1;
+  max-width: 1100px; margin: 0 auto;
+  padding: 120px 24px;
+}
+.updates-header {
+  margin-bottom: 56px;
+}
+.updates-eyebrow {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-xs);
+  margin-bottom: 14px;
+}
+.updates-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.03em;
+}
+.update-row {
+  display: flex; align-items: baseline; gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none; color: var(--text);
+  transition: opacity .2s;
+}
+.update-row:last-child { border-bottom: none; }
+.update-row:hover { opacity: 0.6; }
+.update-row-num {
+  font-size: 11px; font-weight: 400; letter-spacing: .06em;
+  color: var(--text-xs); flex-shrink: 0; width: 20px;
+}
+.update-row-title {
+  flex: 1; font-size: 16px; font-weight: 400; color: var(--white);
+}
+.update-row-meta {
+  font-size: 12px; color: var(--text-xs); flex-shrink: 0;
+}
+
+/* ── 作者區 ── */
+.author-section {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 100px 24px;
+}
+.author-inner {
+  max-width: 640px; margin: 0 auto; text-align: center;
+}
+.author-avatar-wrap {
+  width: 72px; height: 72px; border-radius: 50%;
+  overflow: hidden; margin: 0 auto 28px;
+  border: 1px solid var(--border);
+}
+.author-avatar-wrap img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+}
+.author-name {
+  font-size: 20px; font-weight: 600; color: var(--white);
+  margin-bottom: 16px; letter-spacing: -0.01em;
+}
+.author-bio {
+  font-size: 15px; color: var(--text-dim);
+  line-height: 1.9; margin-bottom: 32px;
+}
+.author-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -60,7 +242,11 @@
   gtag('config', 'G-30GG7PY520');
 </script>
 </head>
-<body>
+<body class="page-enter">
+
+<!-- 水波紋背景 -->
+<canvas id="riverCanvas"></canvas>
+
 <nav id="nav">
   <div class="nav-wrap">
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
@@ -69,202 +255,141 @@
       <li><a href="about.html">作者</a></li>
       <li><a href="support.html">贊助</a></li>
       <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-      
     </ul>
-    <div class="nav-theme-wrap"><button class="nav-theme" onclick="toggleTheme()" aria-label="切換主題">☀</button></div>
-    <div class="nav-right-mobile"><button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
-      <span></span><span></span><span></span>
-    </button></div>
+    <div class="nav-right-mobile">
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <div class="latest-bar">
-  <strong>🌊 第二部開始連載</strong> — 第十章《門後餘波》正式上線！第二部《黑河低語》連載中。
-  <a href="reading-ch10.html">開始閱讀第二部 →</a>
+  <strong>第二部《黑河低語》連載中</strong> — 第十章《門後餘波》已上線。
+  <a href="reading-ch10.html">立即閱讀 →</a>
 </div>
 
-<section class="hero">
-  <canvas class="hero-canvas" id="starCanvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-eyebrow">比爸 BD 科幻懸疑小說</div>
-    <h1 class="hero-title">第九次出生<br><span>Ⅰ：第九門 — 完結</span></h1>
-    <p class="hero-sub">如果你出生時就記得前八世的人生，你還敢活到十八歲嗎？</p>
-    <div class="hero-cta">
-      <a href="reading.html" class="btn btn-primary">立即閱讀</a>
-      <a href="bookshelf.html" class="btn btn-ghost">瀏覽書櫃</a>
-    </div>
+<!-- 英雄區 -->
+<div class="hero-wrap">
+  <div class="hero-eyebrow">比爸 BD · 科幻懸疑小說</div>
+  <h1 class="hero-title">
+    第九次出生
+    <span class="hero-title-sub">第二部：黑河低語 · 連載中</span>
+  </h1>
+  <p class="hero-desc">如果你出生時就記得前八世的人生，你還敢活到十八歲嗎？</p>
+  <div class="hero-cta">
+    <a href="reading.html" class="btn btn-primary">從第一章開始</a>
+    <a href="reading-ch10.html" class="btn btn-outline">第二部 →</a>
   </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">為什麼選擇這裡</div>
-      <h2 class="section-title">沉浸式閱讀體驗</h2>
-      <p class="section-sub">專為科幻懸疑小說打造的閱讀環境，讓每一個字都值得細細品味。</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-item reveal reveal-delay-1">
-        <div class="feature-icon">🌌</div>
-        <div class="feature-title">深度宇宙觀</div>
-        <div class="feature-desc">比爸星系宇宙觀設定，融合東西方哲學，構建獨一無二的科幻世界。</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <div class="feature-icon">🔦</div>
-        <div class="feature-title">護眼閱讀模式</div>
-        <div class="feature-desc">深色與淺色模式自由切換，字體大小隨心調整，閱讀進度自動記憶。</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <div class="feature-icon">🔒</div>
-        <div class="feature-title">版權保護</div>
-        <div class="feature-desc">所有內容受著作權法保護，符合台灣個資法與服務條款規範。</div>
-      </div>
-    </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">精選作品</div>
-      <h2 class="section-title">現正連載</h2>
-    </div>
-    <div class="novel-showcase reveal">
-      <div class="novel-main">
-        <div class="novel-cover-wrap">
-          <img src="cover-ninth-birth.jpg" alt="第九次出生 封面">
-        </div>
-        <div class="novel-main-content">
-          <div class="novel-tag">
-            <span class="badge">科幻</span>&nbsp;
-            <span class="badge badge-purple">懸疑</span>&nbsp;
-            <span class="badge badge-green">第一部完結</span>
-          </div>
-          <h2 class="novel-main-title">第九次出生</h2>
-          <p class="novel-main-desc">火星文明用「冥河陣列」抹除所有人的前世記憶，唯有林澈保留了八世記憶。他知道自己已經死過八次，也知道第九次人生將在十八歲被政府處決。當輪迴是一場實驗，他必須在死亡倒數前，揭開人類文明最黑暗的真相。</p>
-          <a href="reading.html" class="btn btn-primary btn-sm">開始閱讀</a>
-        </div>
-      </div>
-      <div class="novel-side">
-        <div class="novel-side-item" onclick="location.href='reading-ch6.html'">
-          <div class="novel-side-title">第六章：地下學校</div>
-          <div class="novel-side-desc">被河叫醒的孩子們。黑河的門就在大廳中央。</div>
-        </div>
-        <div class="novel-side-item" onclick="location.href='reading-ch7.html'">
-          <div class="novel-side-title">第七章：周嶺的殘響</div>
-          <div class="novel-side-desc">死者的聲音追上來。林若曦面對所有殘響。</div>
-        </div>
-        <div class="novel-side-item" onclick="location.href='reading-ch8.html'">
-          <div class="novel-side-title">第八章：舊門</div>
-          <div class="novel-side-desc">赤環城最早的門。祝安用生命擋住門的密碼。</div>
-        </div>
-        <div class="novel-side-item" onclick="location.href='reading-ch9.html'">
-          <div class="novel-side-title">第九章：第九門</div>
-          <div class="novel-side-desc">門上就著所有被劃掉的名字。那個「澈」字還沒有被劃掉。</div>
-        </div>
-        <div class="novel-side-item" onclick="location.href='reading-ch10.html'" style="border-color:rgba(255,200,0,0.2);background:rgba(255,200,0,0.04);">
-          <div class="novel-side-title" style="color:#f5c518;">🌊 第十章：門後餘波（第二部開始）</div>
-          <div class="novel-side-desc">黑河退去。林澈睑眼。手上的藍光還在流動。</div>
-        </div>
+<!-- 作品展示 -->
+<div class="novel-block reveal">
+  <div class="novel-block-inner">
+    <div class="novel-main-panel">
+      <div class="novel-main-eyebrow">現正連載 · 第二部</div>
+      <h2 class="novel-main-title">第九次出生</h2>
+      <p class="novel-main-desc">火星文明用「冥河陣列」抹除所有人的前世記憶，唯有林澈保留了八世記憶。他知道自己已經死過八次，也知道第九次人生將在十八歲被政府處決。當輪迴是一場實驗，他必須在死亡倒數前，揭開人類文明最黑暗的真相。</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="reading.html" class="btn btn-outline btn-sm">第一部：第九門</a>
+        <a href="reading-ch10.html" class="btn btn-primary btn-sm">第二部：黑河低語</a>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="section-sm">
-  <div class="container">
-    <div class="stats-row reveal">
-      <div class="stat-item">
-        <div class="stat-num">2<span>+</span></div>
-        <div class="stat-label">連載作品</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2026</div>
-        <div class="stat-label">開始連載年份</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">宇宙的可能性</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">最新動態</div>
-      <h2 class="section-title">近期更新</h2>
-    </div>
-    <div class="update-list reveal">
-      <a href="reading-ch10.html" class="update-item" style="border-color:rgba(255,200,0,0.15);">
-        <span class="update-num" style="color:#f5c518;">01</span>
-        <div class="update-info">
-          <div class="update-title">🌊 第二部《黑河低語》第十章《門後餘波》正式上線</div>
-          <div class="update-meta">2026 · 第二部開始連載</div>
-        </div>
-        <span class="update-arrow">›</span>
+    <div class="novel-side-panel">
+      <a href="reading-ch7.html" class="novel-side-item">
+        <div class="novel-side-ch">Ch.007</div>
+        <div class="novel-side-title">周嶺的殘響</div>
+        <div class="novel-side-desc">死者的聲音追上來。林若曦面對所有殘響。</div>
       </a>
-      <a href="reading-ch9.html" class="update-item">
-        <span class="update-num">02</span>
-        <div class="update-info">
-          <div class="update-title">《第九次出生》第九章《第九門》正式上線</div>
-          <div class="update-meta">2026 · 科幻懸疑</div>
-        </div>
-        <span class="update-arrow">›</span>
+      <a href="reading-ch8.html" class="novel-side-item">
+        <div class="novel-side-ch">Ch.008</div>
+        <div class="novel-side-title">舊門</div>
+        <div class="novel-side-desc">赤環城最早的門。祈安用生命擋住門的密碼。</div>
       </a>
-      <a href="reading-ch8.html" class="update-item">
-        <span class="update-num">02</span>
-        <div class="update-info">
-          <div class="update-title">《第九次出生》第八章《舊門》正式上線</div>
-          <div class="update-meta">2026 · 科幻懸疑</div>
-        </div>
-        <span class="update-arrow">›</span>
+      <a href="reading-ch9.html" class="novel-side-item">
+        <div class="novel-side-ch">Ch.009 · 第一部完結</div>
+        <div class="novel-side-title">第九門</div>
+        <div class="novel-side-desc">門上刻著所有被劃掉的名字。那個「澈」字還沒有被劃掉。</div>
       </a>
-      <a href="bookshelf.html" class="update-item">
-        <span class="update-num">03</span>
-        <div class="update-info">
-          <div class="update-title">個人小說網站正式啟動</div>
-          <div class="update-meta">2026 · 公告</div>
-        </div>
-        <span class="update-arrow">›</span>
-      </a>
-      <a href="https://www.threads.com/@bbdaddy924" target="_blank" class="update-item">
-        <span class="update-num">03</span>
-        <div class="update-info">
-          <div class="update-title">歡迎到 Threads 與作者互動留言</div>
-          <div class="update-meta">@bbdaddy924</div>
-        </div>
-        <span class="update-arrow">›</span>
+      <a href="reading-ch10.html" class="novel-side-item" style="background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
+        <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.010 · 第二部開始</div>
+        <div class="novel-side-title">門後餘波</div>
+        <div class="novel-side-desc">黑河退去。林澈睜眼。手上的藍光還在流動。</div>
       </a>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
-
-<section class="section">
-  <div class="container">
-    <div class="author-strip reveal">
-      <div class="author-avatar" style="background:none;border:none;padding:0;"><img src="avatar.png" alt="比爸 BD" style="width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;display:block;"></div>
-      <div style="flex:1;">
-        <div class="author-name">比爸 BD</div>
-        <p class="author-bio">科幻懸疑小說創作者。相信最好的故事，是那些在宇宙的尺度裡，讓人看見自己的故事。《第九次出生》是他的第一部長篇連載作品。</p>
-        <div class="author-links">
-          <a href="about.html" class="btn btn-ghost btn-sm">關於作者</a>
-          <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-pink btn-sm">💬 Threads</a>
-          <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-outline btn-sm">☕ 支持贊助</a>
-        </div>
-      </div>
+<!-- 數字統計 -->
+<div class="stats-strip reveal">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="stat-n">10</div>
+      <div class="stat-l">已上線章節</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-n">2</div>
+      <div class="stat-l">連載部數</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-n">∞</div>
+      <div class="stat-l">宇宙的可能性</div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- 近期更新 -->
+<div class="updates-section reveal">
+  <div class="updates-header">
+    <div class="updates-eyebrow">最新動態</div>
+    <h2 class="updates-title">近期更新</h2>
+  </div>
+  <a href="reading-ch10.html" class="update-row">
+    <span class="update-row-num">01</span>
+    <span class="update-row-title">第二部《黑河低語》第十章《門後餘波》正式上線</span>
+    <span class="update-row-meta">2026 · 第二部開始</span>
+  </a>
+  <a href="reading-ch9.html" class="update-row">
+    <span class="update-row-num">02</span>
+    <span class="update-row-title">第一部《第九門》第九章完結，共九章全部上線</span>
+    <span class="update-row-meta">2026 · 第一部完結</span>
+  </a>
+  <a href="reading-ch8.html" class="update-row">
+    <span class="update-row-num">03</span>
+    <span class="update-row-title">第八章《舊門》正式上線</span>
+    <span class="update-row-meta">2026 · 科幻懸疑</span>
+  </a>
+  <a href="bookshelf.html" class="update-row">
+    <span class="update-row-num">04</span>
+    <span class="update-row-title">個人小說網站正式啟動</span>
+    <span class="update-row-meta">2026 · 公告</span>
+  </a>
+  <a href="https://www.threads.com/@bbdaddy924" target="_blank" class="update-row">
+    <span class="update-row-num">05</span>
+    <span class="update-row-title">歡迎到 Threads 與作者互動留言</span>
+    <span class="update-row-meta">@bbdaddy924</span>
+  </a>
+</div>
+
+<!-- 作者區 -->
+<div class="author-section reveal">
+  <div class="author-inner">
+    <div class="author-avatar-wrap">
+      <img src="avatar.png" alt="比爸 BD">
+    </div>
+    <div class="author-name">比爸 BD</div>
+    <p class="author-bio">科幻懸疑小說創作者。相信最好的故事，是那些在宇宙的尺度裡，讓人看見自己的故事。《第九次出生》是他的第一部長篇連載作品。</p>
+    <div class="author-links">
+      <a href="about.html" class="btn btn-ghost btn-sm">關於作者</a>
+      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads</a>
+      <a href="https://p.ecpay.com.tw/BF50B91" target="_blank" class="btn btn-outline btn-sm">支持贊助</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-wrap">
@@ -282,14 +407,14 @@
         <ul>
           <li><a href="about.html">關於比爸 BD</a></li>
           <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-          <li><a href="https://podcasts.apple.com/tw/podcast/第一集-出生警報-第九次出生/id1760949371?i=1000775288517" target="_blank">Apple Podcast</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div>
         <ul>
           <li><a href="support.html">贊助方案</a></li>
-          <li><a href="https://portaly.cc/bbdaddy924/support" target="_blank">Portaly 贊助</a></li>
+          <li><a href="https://p.ecpay.com.tw/BF50B91" target="_blank">綠界贊助</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -315,87 +440,108 @@
 </footer>
 
 <script>
+/* ── 水波紋動畫 ── */
 (function(){
-  const canvas=document.getElementById("starCanvas");
-  const ctx=canvas.getContext("2d");
-  let stars=[], W=0, H=0, dpr=1, animId=null;
+  const canvas = document.getElementById('riverCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, dpr, animId;
+  const waves = [];
 
   function resize(){
     dpr = window.devicePixelRatio || 1;
-    W = canvas.parentElement.offsetWidth || window.innerWidth;
-    H = canvas.parentElement.offsetHeight || window.innerHeight;
-    canvas.width  = Math.round(W * dpr);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    canvas.style.width  = W + "px";
-    canvas.style.height = H + "px";
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function starCount(){
-    // 手機減少星星數量，節省效能
-    if(W < 480) return 80;
-    if(W < 768) return 130;
-    return 220;
-  }
-
-  function init(){
-    stars=[];
-    const count = starCount();
-    for(let i=0;i<count;i++){
-      stars.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: Math.random()*1.4+0.2,
-        o: Math.random()*.55+.2,
-        speed: Math.random()*.18+.04,
-        twinkle: Math.random()*Math.PI*2
+  function initWaves(){
+    waves.length = 0;
+    const count = W < 768 ? 4 : 7;
+    for(let i = 0; i < count; i++){
+      waves.push({
+        y: (H / count) * i + Math.random() * (H / count),
+        amplitude: 18 + Math.random() * 28,
+        frequency: 0.003 + Math.random() * 0.004,
+        speed: 0.0004 + Math.random() * 0.0006,
+        phase: Math.random() * Math.PI * 2,
+        opacity: 0.04 + Math.random() * 0.08
       });
     }
   }
 
   function draw(){
-    ctx.clearRect(0,0,W,H);
-    const t = Date.now()/1000;
-    stars.forEach(s=>{
-      // 輕微閃爍效果
-      const alpha = s.o + Math.sin(t*1.2 + s.twinkle)*0.12;
+    ctx.clearRect(0, 0, W, H);
+    const t = Date.now();
+    waves.forEach(w => {
       ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle="rgba(255,255,255,"+Math.max(0.05,Math.min(1,alpha))+")";
-      ctx.fill();
-      s.y -= s.speed;
-      if(s.y < -2){ s.y=H+2; s.x=Math.random()*W; }
+      ctx.moveTo(0, w.y);
+      for(let x = 0; x <= W; x += 4){
+        const y = w.y + Math.sin(x * w.frequency + t * w.speed + w.phase) * w.amplitude;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(255,255,255,' + w.opacity + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
     });
     animId = requestAnimationFrame(draw);
   }
 
   let resizeTimer;
-  window.addEventListener("resize",()=>{
+  window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(()=>{
+    resizeTimer = setTimeout(() => {
       if(animId) cancelAnimationFrame(animId);
-      resize(); init(); draw();
+      resize(); initWaves(); draw();
     }, 150);
   });
 
-  // 頁面可見性 API：切換分頁時暫停動畫，節省電量
-  document.addEventListener("visibilitychange",()=>{
-    if(document.hidden){
-      if(animId) cancelAnimationFrame(animId);
-    } else {
-      draw();
+  resize(); initWaves(); draw();
+})();
+
+/* ── 導覽列 ── */
+function toggleMenu(){
+  var m = document.getElementById('navMenu');
+  var h = document.querySelector('.nav-hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('active');
+}
+
+/* ── 主題切換 ── */
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+}
+if(localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+
+/* ── 頁尾 Accordion ── */
+function toggleFooterCol(el){
+  if(window.innerWidth > 768) return;
+  el.parentElement.classList.toggle('open');
+}
+
+/* ── Scroll Reveal ── */
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+/* ── 章節連結過場動畫 ── */
+document.querySelectorAll('a[href*="reading"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(href && !href.startsWith('http') && !href.startsWith('#')){
+      e.preventDefault();
+      document.body.style.transition = 'opacity .3s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 300);
     }
   });
-
-  resize(); init(); draw();
-})();
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");});},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
-function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
-function toggleFooterCol(el){var col=el.parentElement;col.classList.toggle("open");}
-if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
+});
 </script>
-
 </body>
 </html>
