@@ -765,6 +765,27 @@ body.page-transition {
 }
 .toc-close:hover { background: rgba(255,255,255,0.15); }
 
+.toc-close-fixed {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1102;
+  width: 36px; height: 36px;
+  background: rgba(30,30,30,0.9);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #f0f0f0;
+  font-size: 16px;
+  display: none;
+  align-items: center; justify-content: center;
+  transition: background .2s, opacity .2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.toc-close-fixed:hover { background: rgba(60,60,60,0.95); }
+.toc-panel.open ~ .toc-close-fixed,
+.toc-close-fixed.visible { display: flex; }
+
 .toc-part-label {
   font-size: 10px; font-weight: 700; letter-spacing: .14em;
   text-transform: uppercase; color: var(--accent-gold);

@@ -228,12 +228,12 @@ document.addEventListener("selectstart",e=>e.preventDefault());
 function openToc(){
   document.getElementById('tocOverlay').classList.add('open');
   document.getElementById('tocPanel').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.getElementById('tocCloseFixed').classList.add('visible');
 }
 function closeToc(){
   document.getElementById('tocOverlay').classList.remove('open');
   document.getElementById('tocPanel').classList.remove('open');
-  document.body.style.overflow='';
+  document.getElementById('tocCloseFixed').classList.remove('visible');
 }
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closeToc();
