@@ -479,7 +479,7 @@
 
   function initWaves(){
     waves.length = 0;
-    const count = W < 768 ? 6 : 10;
+    const count = W < 768 ? 4 : 7;
     for(let i = 0; i < count; i++){
       waves.push({
         y: (H / count) * i + Math.random() * (H / count),
