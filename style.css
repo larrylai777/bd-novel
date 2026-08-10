@@ -722,90 +722,122 @@ body.page-transition {
 .ch-status { font-size: 12px; color: var(--text-xs); flex-shrink: 0; }
 
 /* ── 章節目錄彈出層 ── */
+/* TOC overlay — 不需要了，由 panel 本身覆蓋 */
 .toc-overlay {
-  position: fixed; inset: 0; z-index: 1100;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  opacity: 0; pointer-events: none;
-  transition: opacity .25s;
+  display: none;
 }
-.toc-overlay.open { opacity: 1; pointer-events: auto; }
 
+/* TOC panel — Apple 官網風格：從頂部向下展開全螢幕 */
 .toc-panel {
-  position: fixed; top: 0; left: 0; bottom: 0; z-index: 1101;
-  width: min(340px, 88vw);
-  background: #111;
-  border-right: 1px solid rgba(255,255,255,0.08);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 100vh;
+  z-index: 1101;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   overflow-y: auto;
-  transform: translateX(-100%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
-  padding: 0 0 40px;
+  overflow-x: hidden;
+  transform: translateY(-100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  padding: 0 0 60px;
 }
-.toc-panel.open { transform: translateX(0); }
+.toc-panel.open {
+  transform: translateY(0);
+}
+@keyframes tocItemIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+.toc-panel.open .toc-item {
+  animation: tocItemIn .3s cubic-bezier(.4,0,.2,1) both;
+}
+.toc-panel.open .toc-item:nth-child(1)  { animation-delay: .04s; }
+.toc-panel.open .toc-item:nth-child(2)  { animation-delay: .07s; }
+.toc-panel.open .toc-item:nth-child(3)  { animation-delay: .10s; }
+.toc-panel.open .toc-item:nth-child(4)  { animation-delay: .13s; }
+.toc-panel.open .toc-item:nth-child(5)  { animation-delay: .16s; }
+.toc-panel.open .toc-item:nth-child(6)  { animation-delay: .19s; }
+.toc-panel.open .toc-item:nth-child(7)  { animation-delay: .22s; }
+.toc-panel.open .toc-item:nth-child(8)  { animation-delay: .25s; }
+.toc-panel.open .toc-item:nth-child(9)  { animation-delay: .28s; }
+.toc-panel.open .toc-item:nth-child(10) { animation-delay: .31s; }
+.toc-panel.open .toc-item:nth-child(11) { animation-delay: .34s; }
+.toc-panel.open .toc-item:nth-child(12) { animation-delay: .37s; }
+.toc-panel.open .toc-item:nth-child(13) { animation-delay: .40s; }
+.toc-panel.open .toc-item:nth-child(14) { animation-delay: .43s; }
+.toc-panel.open .toc-item:nth-child(15) { animation-delay: .46s; }
+.toc-panel.open .toc-item:nth-child(16) { animation-delay: .49s; }
 
 .toc-header {
   position: sticky; top: 0; z-index: 2;
-  background: #111;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 18px 20px 14px;
+  background: rgba(0,0,0,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: calc(var(--nav-h) + 8px) 32px 16px;
   display: flex; align-items: center; justify-content: space-between;
 }
 .toc-header-title {
-  font-size: 13px; font-weight: 600; letter-spacing: .04em;
-  color: #f0f0f0;
+  font-size: 11px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(240,240,240,0.35);
 }
 .toc-close {
-  width: 30px; height: 30px;
+  width: 32px; height: 32px;
   background: rgba(255,255,255,0.08);
   border: none; border-radius: 50%; cursor: pointer;
-  color: #f0f0f0; font-size: 15px; line-height: 30px;
-  text-align: center; transition: background .2s;
+  color: #f0f0f0; font-size: 14px;
   display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
 }
 .toc-close:hover { background: rgba(255,255,255,0.15); }
 
+/* 右上角固定 X 按鈕 */
 .toc-close-fixed {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: calc((var(--nav-h) - 32px) / 2);
+  right: 18px;
   z-index: 1102;
-  width: 36px; height: 36px;
-  background: rgba(30,30,30,0.9);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50%;
+  width: 32px; height: 32px;
+  background: none;
+  border: none;
   cursor: pointer;
-  color: #f0f0f0;
-  font-size: 16px;
+  color: rgba(240,240,240,0.7);
+  font-size: 18px;
   display: none;
   align-items: center; justify-content: center;
-  transition: background .2s, opacity .2s;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  transition: color .2s;
 }
-.toc-close-fixed:hover { background: rgba(60,60,60,0.95); }
-.toc-panel.open ~ .toc-close-fixed,
+.toc-close-fixed:hover { color: #fff; }
 .toc-close-fixed.visible { display: flex; }
 
 .toc-part-label {
-  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
   text-transform: uppercase; color: var(--accent-gold);
-  padding: 18px 20px 8px;
+  padding: 28px 32px 10px;
 }
 .toc-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 11px 20px;
+  display: flex; align-items: center;
+  padding: 18px 32px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: background .15s;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: opacity .15s;
+  gap: 0;
 }
-.toc-item:hover { background: rgba(255,255,255,0.05); opacity: 1; }
-.toc-item.toc-active { background: rgba(255,255,255,0.06); }
+.toc-item:hover { opacity: 0.65; background: none; }
+.toc-item.toc-active { opacity: 1; }
 .toc-item-num {
-  font-size: 11px; font-weight: 600; letter-spacing: .04em;
-  color: rgba(240,240,240,0.28); width: 44px; flex-shrink: 0;
+  font-size: 12px; font-weight: 500; letter-spacing: .04em;
+  color: rgba(240,240,240,0.28); width: 56px; flex-shrink: 0;
 }
 .toc-item-title {
-  flex: 1; font-size: 14px; color: #e8e8e8; font-weight: 400;
+  flex: 1;
+  font-size: clamp(22px, 5vw, 30px);
+  color: rgba(240,240,240,0.85);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
-.toc-item.toc-active .toc-item-title { color: var(--accent-gold); font-weight: 600; }
-.toc-item-arrow { font-size: 12px; color: rgba(240,240,240,0.28); }
+.toc-item.toc-active .toc-item-title { color: var(--accent-gold); }
+.toc-item-arrow {
+  font-size: 20px; color: rgba(240,240,240,0.2);
+  transition: transform .2s, color .2s;
+}
+.toc-item:hover .toc-item-arrow { color: rgba(240,240,240,0.5); transform: translateX(4px); }
