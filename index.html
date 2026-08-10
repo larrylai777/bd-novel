@@ -534,14 +534,12 @@ function toggleMenu(){
   var h = document.querySelector('.nav-hamburger');
   m.classList.toggle('open');
   h.classList.toggle('active');
-  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
 }
 function closeMenu(){
   var m = document.getElementById('navMenu');
   var h = document.querySelector('.nav-hamburger');
   m.classList.remove('open');
   h.classList.remove('active');
-  document.body.style.overflow = '';
 }
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){

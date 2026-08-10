@@ -483,6 +483,9 @@ body.page-transition {
     width: 100vw !important; height: 100vh !important;
     z-index: 9999 !important;
     transform: none !important;
+    background: rgba(0,0,0,0.97) !important;
+    backdrop-filter: blur(40px) !important;
+    -webkit-backdrop-filter: blur(40px) !important;
   }
   .nav-hamburger { display: flex; }
   .nav-wrap { justify-content: space-between; padding: 0 18px; }
