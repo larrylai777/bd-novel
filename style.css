@@ -195,7 +195,7 @@ body.light .nav-menu.open li a:hover { color: #000; }
     position: fixed;
     top: calc((var(--nav-h) - 36px) / 2);
     right: 16px;
-    z-index: 1000;
+    z-index: 10001;
     width: 36px; height: 36px;
     display: none;
     align-items: center; justify-content: center;
