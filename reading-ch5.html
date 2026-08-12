@@ -433,8 +433,23 @@ window.addEventListener("scroll",()=>{
   document.getElementById("progressFill").style.width=pct+"%";
 });
 function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
-function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
-function closeMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.remove("open");h.classList.remove("active");}
+function toggleMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  var isOpen=!m.classList.contains('open');
+  m.classList.toggle('open', isOpen);
+  h.classList.toggle('active', isOpen);
+  if(c) c.classList.toggle('visible', isOpen);
+}
+function closeMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  m.classList.remove('open');
+  h.classList.remove('active');
+  if(c) c.classList.remove('visible');
+}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
 function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
 if(localStorage.getItem("theme")==="light")document.body.classList.add("light");

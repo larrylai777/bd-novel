@@ -209,7 +209,8 @@ body.light .nav-menu.open li a:hover { color: #000; }
     -webkit-tap-highlight-color: transparent;
     transition: transform .2s ease, background .2s ease, color .2s ease;
   }
-  .nav-menu.open ~ .nav-menu-close { display: flex; animation: navCloseIn .22s ease both; }
+  .nav-menu-close { display: none !important; }
+  .nav-menu-close.visible { display: flex !important; animation: navCloseIn .22s ease both; }
   .nav-menu.open ~ .nav-right-mobile .nav-hamburger { opacity: 0; pointer-events: none; }
   .nav-menu-close:hover, .nav-menu-close:active { background: rgba(70,70,70,0.9); color: #fff; transform: scale(0.94); }
   body.light .nav-menu-close { background: rgba(238,238,238,0.9); border-color: rgba(0,0,0,0.12); color: rgba(20,20,20,0.85); }
