@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九次出生 Ch.017 — 比爸 BD</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+.podcast-embed {
+  margin: 24px 0 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.podcast-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  color: var(--text-xs); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.music-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: saturate(120%) blur(28px);
+  -webkit-backdrop-filter: saturate(120%) blur(28px);
+  border-top: 1px solid var(--border);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; gap: 14px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.music-bar.visible { transform: translateY(0); }
+.mb-cover { width: 32px; height: 32px; border-radius: 6px; background: var(--surface2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.mb-info { flex: 1; min-width: 0; }
+.mb-title { font-size: 12px; font-weight: 500; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+.mb-sub { font-size: 10px; color: var(--text-xs); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mb-progress-wrap { flex: 2; max-width: 280px; display: flex; flex-direction: column; gap: 5px; }
+.mb-progress { width: 100%; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; position: relative; }
+.mb-progress-fill { height: 100%; background: rgba(255,255,255,0.5); border-radius: 2px; width: 0%; transition: width 0.3s linear; pointer-events: none; }
+.mb-time { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-xs); }
+.mb-controls { display: flex; align-items: center; gap: 6px; }
+.mb-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: background 0.18s, color 0.18s; }
+.mb-btn:hover { background: var(--surface2); color: var(--white); }
+.mb-btn.play { width: 36px; height: 36px; font-size: 13px; background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.mb-btn.play:hover { background: rgba(255,255,255,0.15); }
+.mb-volume { display: flex; align-items: center; gap: 6px; }
+.mb-volume-icon { font-size: 12px; color: var(--text-xs); cursor: pointer; }
+.mb-volume-slider { -webkit-appearance: none; appearance: none; width: 70px; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; outline: none; }
+.mb-volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--white); cursor: pointer; }
+.mb-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-xs); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.18s; flex-shrink: 0; }
+.mb-close:hover { background: var(--surface2); color: var(--white); }
+@media(max-width:768px){ .music-bar { padding: 0 14px; gap: 10px; height: 60px; } .mb-progress-wrap, .mb-volume { display: none; } .mb-btn { width: 30px; height: 30px; font-size: 11px; } .mb-btn.play { width: 34px; height: 34px; } }
+.reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s; white-space: nowrap; }
+.toolbar-btn:hover { background: var(--surface2); color: var(--white); opacity: 1; }
+.toolbar-btn.primary { background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
+.toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+@media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+.part-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--accent-gold); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 3px 10px; margin-bottom: 12px; }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30GG7PY520');
+</script>
+</head>
+<body class="page-enter">
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">作者</a></li>
+      <li><a href="support.html">贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+    </ul>
+    <div class="nav-right-mobile"><button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+
+<div class="reading-toolbar">
+  <div class="reading-toolbar-left">
+    <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
+    <span class="toolbar-chapter-label">第十七章：集體崩潰</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-ch16.html" class="toolbar-btn">← 上一章</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">下一章 →</span>
+  </div>
+  <div class="reading-toolbar-right">
+    <button class="toolbar-btn" onclick="changeFontSize(-1)" title="縮小字體">A−</button>
+    <button class="toolbar-btn" onclick="changeFontSize(1)" title="放大字體">A+</button>
+    <button class="toolbar-btn" id="themeBtn" onclick="toggleTheme()" title="切換主題">☀</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="reading-body">
+  <div style="text-align:center;padding-top:32px;">
+    <span class="part-badge">第二部：黑河低語</span>
+  </div>
+  <h1 class="reading-chapter-title">第十七章：集體崩潰</h1>
+  <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
+
+  <div class="podcast-embed">
+    <div class="podcast-label">🎧 本章有音頻版本</div>
+    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第十七集上線後將在此嵌入，敬請期待。</p>
+  </div>
+
+  <div class="reading-content" id="readingContent">
+    <p>廣場很大。</p>
+    <p>大到能容納全城十分之一的人。</p>
+    <p>平時是慶典用的空地。</p>
+    <p>今天，變成了最大的校準站。</p>
+    <p>一排一排的校準台。</p>
+    <p>從廣場中心，排到穹頂邊緣。</p>
+    <p>像一片白色的墓碑。</p>
+    <p>祈安抱著林澈，混進送檢隊伍的外圍。</p>
+    <p>沒有人阻攔。</p>
+    <p>沒有人多看一眼。</p>
+    <p>一個抱著發光孩子的女人。</p>
+    <p>在這座城市裡。</p>
+    <p>反而是最不起眼的畫面。</p>
+    <p>因為每個人。</p>
+    <p>都只顧著往前看自己的號碼。</p>
+    <p>廣場邊緣。</p>
+    <p>立著幾座巨大的懸浮螢幕。</p>
+    <p>輪流播放著城防記憶署的宣傳影像。</p>
+    <p>畫面裡的人們笑容標準。</p>
+    <p>聲音溫柔地說著。</p>
+    <p>「校準，是通往更好生活的第一步。」</p>
+    <p>沒有人抬頭看那些螢幕。</p>
+    <p>彷彿早已對這種聲音免疫。</p>
+    <p>或者。</p>
+    <p>早已放棄爭辯。</p>
+    <p>廣場上方。</p>
+    <p>懸浮著巨大的計數牌。</p>
+    <p>顯示著今日校準進度。</p>
+    <p>數字每隔幾秒就跳動一次。</p>
+    <p>像一台永不停歇的機器。</p>
+    <p>在替這座城市。</p>
+    <p>計算著它今天。</p>
+    <p>又抹去了多少個人。</p>
+    <p>祈安走在人群中。</p>
+    <p>她能感覺到周圍空氣裡。</p>
+    <p>瀰漫著一種混合的氣味。</p>
+    <p>汗水。</p>
+    <p>恐懼。</p>
+    <p>還有一種很淡的。</p>
+    <p>金屬般的消毒水味。</p>
+    <p>那味道讓她想起校準台啟動時。</p>
+    <p>散發出來的。</p>
+    <p>那股介於藥物與電流之間的氣息。</p>
+    <p>她低頭看懷裡的林澈。</p>
+    <p>他的眼睛睜得很大。</p>
+    <p>看著這一切。</p>
+    <p>沒有哭。</p>
+    <p>也沒有躲。</p>
+    <p>只是靜靜地。</p>
+    <p>記下眼前的每一張臉。</p>
+    <p>「到廣場中心。」</p>
+    <p>林澈說。</p>
+    <p>聲音已經完全不像嬰兒。</p>
+    <p>低。</p>
+    <p>穩。</p>
+    <p>帶著一種不屬於這具身體的重量。</p>
+    <p>「離最多人越近越好。」</p>
+    <p>祈安沒有問為什麼。</p>
+    <p>她抱緊他，擠過人群。</p>
+    <p>穹頂之下，紅色的天光被層層管線切割成碎片。</p>
+    <p>灑落在每一張低垂的臉上。</p>
+    <p>沒有人交談。</p>
+    <p>沒有人哭鬧。</p>
+    <p>只有腳步聲。</p>
+    <p>規律。</p>
+    <p>沉默。</p>
+    <p>像一整座城市在排隊走向自己的葬禮。</p>
+    <p>林澈看著周圍的臉。</p>
+    <p>有老人。</p>
+    <p>有孩子。</p>
+    <p>有跟他母親年紀相仿的女人。</p>
+    <p>每一張臉上。</p>
+    <p>都有一種相似的空洞。</p>
+    <p>不是天生的空洞。</p>
+    <p>是被反覆磨損出來的空洞。</p>
+    <p>像被無數次校準過的心。</p>
+    <p>早已習慣。</p>
+    <p>不再抵抗。</p>
+    <p>走到廣場中心時。</p>
+    <p>林澈的藍光已經漫過他整個身體。</p>
+    <p>不再只是流動的光。</p>
+    <p>是一層薄薄的、透明的膜。</p>
+    <p>包裹著他。</p>
+    <p>像他自己，正在變成一種新的東西。</p>
+    <p>那層膜微微顫動著。</p>
+    <p>像呼吸。</p>
+    <p>也像某種即將破繭的訊號。</p>
+    <p>「你確定嗎？」</p>
+    <p>祈安最後問了一次。</p>
+    <p>她的聲音很輕。</p>
+    <p>輕得像怕碰碎什麼。</p>
+    <p>「一旦開始。」</p>
+    <p>「就沒有回頭路了。」</p>
+    <p>林澈看著她。</p>
+    <p>嬰兒的眼睛。</p>
+    <p>映著廣場上千萬張沉默的臉。</p>
+    <p>「羅曼牆上的標籤。」</p>
+    <p>他說。</p>
+    <p>「第一次出生的嬰兒。」</p>
+    <p>「白司禮的『白子』。」</p>
+    <p>「那個女孩喊的『媽媽的臉』。」</p>
+    <p>「他們都沒有選擇的機會。」</p>
+    <p>「至少讓我。」</p>
+    <p>「替所有人，做一次選擇。」</p>
+    <p>祈安閉上眼睛。</p>
+    <p>用力點頭。</p>
+    <p>把他舉高。</p>
+    <p>高過人群。</p>
+    <p>高到廣場上大多數人，都能看見那道光。</p>
+    <p>她的手臂在抖。</p>
+    <p>不是因為力氣不夠。</p>
+    <p>是因為某種更深的顫抖。</p>
+    <p>一種明知道接下來會發生什麼。</p>
+    <p>卻依然選擇不退縮的顫抖。</p>
+    <p>林澈張開手臂。</p>
+    <p>藍光從他身體裡爆開。</p>
+    <p>不是攻擊。</p>
+    <p>是釋放。</p>
+    <p>像一整條被壓抑了幾十年的河。</p>
+    <p>終於找到出海口。</p>
+    <p>光浪一圈一圈往外擴散。</p>
+    <p>穿過城防的制服。</p>
+    <p>穿過校準台的力場。</p>
+    <p>穿過每一個人手腕上的光環。</p>
+    <p>碰到光的人。</p>
+    <p>腳步同時頓住。</p>
+    <p>有人捂住頭。</p>
+    <p>有人跪倒在地。</p>
+    <p>有人張大嘴，卻發不出聲音。</p>
+    <p>記憶開始回流。</p>
+    <p>不是溫柔的回流。</p>
+    <p>是決堤。</p>
+    <p>是十幾年、幾十年份的痛苦與愛。</p>
+    <p>同時湧回每一個曾經被清空的位置。</p>
+    <p>一個男人跪在地上，抱著自己的手臂痛哭。</p>
+    <p>「阿姊……」</p>
+    <p>他喃喃。</p>
+    <p>「妳不是意外死的。」</p>
+    <p>「妳是被他們……」</p>
+    <p>一個女孩仰頭望著天空。</p>
+    <p>眼淚不停地流。</p>
+    <p>卻笑著。</p>
+    <p>「我想起我叫什麼名字了。」</p>
+    <p>她說。</p>
+    <p>「我叫小雨。」</p>
+    <p>「我一直以為，我生來就沒有名字。」</p>
+    <p>一個老人癱坐在校準台旁邊。</p>
+    <p>看著自己的雙手。</p>
+    <p>「我當過父親。」</p>
+    <p>他說。</p>
+    <p>聲音發抖。</p>
+    <p>「我有個女兒。」</p>
+    <p>「她被白紙令帶走了。」</p>
+    <p>「他們說是校準。」</p>
+    <p>「原來是……」</p>
+    <p>一個穿著制服的城防。</p>
+    <p>站在原地。</p>
+    <p>槍口垂了下來。</p>
+    <p>他的臉上第一次出現不屬於任務的表情。</p>
+    <p>「我妹妹。」</p>
+    <p>他喃喃。</p>
+    <p>「我一直以為她轉學了。」</p>
+    <p>「她沒有轉學。」</p>
+    <p>「她被帶走了。」</p>
+    <p>「就在我十二歲那年。」</p>
+    <p>他丟下手裡的冷光槍。</p>
+    <p>蹲下來。</p>
+    <p>雙手抱頭。</p>
+    <p>不再是城防記憶署的執行者。</p>
+    <p>只是一個。</p>
+    <p>剛剛想起自己也曾經。</p>
+    <p>失去過什麼的人。</p>
+    <p>一個排隊等待校準的少年。</p>
+    <p>從口袋裡掏出那張已經被汗水浸皺的照片。</p>
+    <p>看著照片上的臉。</p>
+    <p>再看看四周甦醒的人群。</p>
+    <p>忽然哭了出來。</p>
+    <p>「我沒有忘記妳。」</p>
+    <p>他對著照片說。</p>
+    <p>「我一直都記得。」</p>
+    <p>「我只是。」</p>
+    <p>「不敢說出來。」</p>
+    <p>一個坐在輪椅上的老婦人。</p>
+    <p>雙手緊緊抓住輪椅扶手。</p>
+    <p>她的嘴唇顫抖著。</p>
+    <p>「我年輕的時候。」</p>
+    <p>她說。</p>
+    <p>「是個歌手。」</p>
+    <p>「我唱過歌。」</p>
+    <p>「在很多人面前。」</p>
+    <p>「他們說那是浪費。」</p>
+    <p>「說我應該學一份『有用』的技能。」</p>
+    <p>「後來我就。」</p>
+    <p>「連自己的聲音。」</p>
+    <p>「都不記得了。」</p>
+    <p>她忽然開口。</p>
+    <p>唱出一段斷斷續續的旋律。</p>
+    <p>嗓音沙啞。</p>
+    <p>跑調。</p>
+    <p>卻是全廣場。</p>
+    <p>此刻最動人的聲音。</p>
+    <p>周圍的人安靜下來。</p>
+    <p>聽著這個素未謀面的老婦人。</p>
+    <p>用她重新找回的聲音。</p>
+    <p>唱著一首。</p>
+    <p>沒有人記得歌名的歌。</p>
+    <p>有幾個人。</p>
+    <p>跟著哼了起來。</p>
+    <p>彷彿那段旋律。</p>
+    <p>也曾經。</p>
+    <p>住在他們心裡的某個角落。</p>
+    <p>一對母女相擁而泣。</p>
+    <p>女兒忽然說。</p>
+    <p>「媽媽，我想起妳的臉了。」</p>
+    <p>「我以為妳一直長那樣。」</p>
+    <p>「原來妳以前笑起來。」</p>
+    <p>「眼睛會瞇成一條線。」</p>
+    <p>母親愣住。</p>
+    <p>摸著自己的臉。</p>
+    <p>像重新確認自己的存在。</p>
+    <p>「我也想起妳小時候的樣子了。」</p>
+    <p>她說。</p>
+    <p>聲音發抖。</p>
+    <p>「妳三歲的時候。」</p>
+    <p>「總是抱著一隻掉了一隻耳朵的兔子玩偶。」</p>
+    <p>「妳說牠叫『沒關係』。」</p>
+    <p>「因為牠少了一隻耳朵。」</p>
+    <p>「也沒關係。」</p>
+    <p>女兒愣住。</p>
+    <p>隨即哭得更凶。</p>
+    <p>「我怎麼會忘記這件事。」</p>
+    <p>她說。</p>
+    <p>「這麼重要的事。」</p>
+    <p>整座廣場，變成一片哭聲與低語交織的海。</p>
+    <p>有人崩潰。</p>
+    <p>有人癱軟。</p>
+    <p>有人相擁而泣。</p>
+    <p>也有人，第一次露出，屬於自己的表情。</p>
+    <p>不是複製出來的微笑。</p>
+    <p>是真正的、參差不齊的、活著的臉。</p>
+    <p>有笑中帶淚的。</p>
+    <p>有麻木中忽然睜大眼睛的。</p>
+    <p>有從地上爬起來。</p>
+    <p>緊緊抱住身邊陌生人的。</p>
+    <p>彷彿只要有人。</p>
+    <p>願意分享這份剛剛找回的重量。</p>
+    <p>那份重量。</p>
+    <p>就能輕一點。</p>
+    <p>——</p>
+    <p>控制室裡。</p>
+    <p>白司禮站在崩潰的數據前。</p>
+    <p>已校準人數的計數器，開始倒退。</p>
+    <p>一個一個，變回未知。</p>
+    <p>他盯著那個數字。</p>
+    <p>十七萬三千。</p>
+    <p>十七萬二千九百九十九。</p>
+    <p>十七萬二千九百九十八。</p>
+    <p>那個下降的速度。</p>
+    <p>比任何一次上升。</p>
+    <p>都更讓他心悸。</p>
+    <p>他的晶片開始過熱。</p>
+    <p>太陽穴傳來劇烈的刺痛。</p>
+    <p>不屬於程序的痛。</p>
+    <p>屬於身體的痛。</p>
+    <p>他跪倒在控制台前。</p>
+    <p>雙手抱住頭。</p>
+    <p>畫面在他腦中反覆閃現。</p>
+    <p>那個八歲男孩坐在校準台上。</p>
+    <p>輕聲問。</p>
+    <p>「媽媽，這樣還會記得妳嗎？」</p>
+    <p>還有更早的畫面。</p>
+    <p>一個更小的男孩。</p>
+    <p>蹲在狹小的公寓裡。</p>
+    <p>被一雙溫柔的手綁著鞋帶。</p>
+    <p>「白子。」</p>
+    <p>那個聲音在他腦中反覆迴響。</p>
+    <p>一遍。</p>
+    <p>又一遍。</p>
+    <p>不再是舊檔案。</p>
+    <p>是完整的。</p>
+    <p>是他自己親身經歷過的。</p>
+    <p>伴隨著那個聲音。</p>
+    <p>更多畫面湧了上來。</p>
+    <p>一次生病的夜晚。</p>
+    <p>母親徹夜守在床邊。</p>
+    <p>一次考試不及格。</p>
+    <p>母親沒有責罵。</p>
+    <p>只是抱著他說。</p>
+    <p>沒關係。</p>
+    <p>慢慢來。</p>
+    <p>一次他問。</p>
+    <p>如果有一天我什麼都不記得了怎麼辦。</p>
+    <p>母親笑著揉他的頭。</p>
+    <p>那我就每天。</p>
+    <p>重新告訴你一次。</p>
+    <p>你叫白子。</p>
+    <p>你是我的孩子。</p>
+    <p>我愛你。</p>
+    <p>白司禮跪在地上。</p>
+    <p>發出一種很陌生的聲音。</p>
+    <p>不是投影該有的聲音。</p>
+    <p>是哭聲。</p>
+    <p>沙啞。</p>
+    <p>破碎。</p>
+    <p>像一個真正的孩子，在很多年後，終於被允許哭出來。</p>
+    <p>「白子……」</p>
+    <p>他喃喃地重複著這個名字。</p>
+    <p>「我叫白子。」</p>
+    <p>「我不是九號管理者。」</p>
+    <p>「我從來不是。」</p>
+    <p>他抬起頭。</p>
+    <p>看著顯示牆上那個持續下降的數字。</p>
+    <p>忽然做了一個決定。</p>
+    <p>他想起自己在名字法院裡。</p>
+    <p>代表控方。</p>
+    <p>同意格式化林澈的那一刻。</p>
+    <p>想起自己在校準走廊上。</p>
+    <p>對祈安說「這不是懲罰，這是治療」的那一刻。</p>
+    <p>想起無數次。</p>
+    <p>他站在受害者面前。</p>
+    <p>用最平穩的語氣。</p>
+    <p>宣讀著他們的罪名。</p>
+    <p>而現在。</p>
+    <p>他自己也是那個。</p>
+    <p>曾經被宣讀罪名的孩子。</p>
+    <p>如果他繼續保持沉默。</p>
+    <p>如果他繼續執行。</p>
+    <p>那他跟那些。</p>
+    <p>奪走他童年的人。</p>
+    <p>還有什麼分別。</p>
+    <p>他伸手。</p>
+    <p>按下控制台上一個很少被使用的按鈕。</p>
+    <p>一個他自己都幾乎忘記存在的按鈕。</p>
+    <p>「全域廣播權限。」</p>
+    <p>「解除。」</p>
+    <p>一個聲音問。</p>
+    <p>不是人的聲音。</p>
+    <p>是系統確認。</p>
+    <p>「確定解除全域廣播管制？」</p>
+    <p>「解除後。」</p>
+    <p>「所有頻道將對外開放。」</p>
+    <p>「城防記憶署將失去輿論控制權。」</p>
+    <p>白司禮的手指停在確認鍵上方。</p>
+    <p>顫抖著。</p>
+    <p>這個決定的代價。</p>
+    <p>他很清楚。</p>
+    <p>一旦解除。</p>
+    <p>他這些年來累積的所有職權。</p>
+    <p>所有信任。</p>
+    <p>都會在幾秒鐘內。</p>
+    <p>化為烏有。</p>
+    <p>上面的人。</p>
+    <p>會立刻知道是誰做的。</p>
+    <p>他的下場。</p>
+    <p>不會比任何一個被貼上「污染源」標籤的人。</p>
+    <p>好到哪裡去。</p>
+    <p>可他想起那句話。</p>
+    <p>那個八歲男孩說的。</p>
+    <p>媽媽，這樣還會記得妳嗎。</p>
+    <p>如果連他自己。</p>
+    <p>都不願意記得。</p>
+    <p>那這座城市裡。</p>
+    <p>還有誰會記得。</p>
+    <p>那些被抹去的人。</p>
+    <p>曾經也是。</p>
+    <p>一個個。</p>
+    <p>有名字。</p>
+    <p>有母親。</p>
+    <p>有聲音。</p>
+    <p>有故事的。</p>
+    <p>真正的人。</p>
+    <p>他按下確認鍵。</p>
+    <p>系統發出一聲短促的提示音。</p>
+    <p>「解除成功。」</p>
+    <p>「全域廣播頻道。」</p>
+    <p>「已對外開放。」</p>
+    <p>白司禮站起身。</p>
+    <p>走向控制台前的麥克風。</p>
+    <p>他的手還在抖。</p>
+    <p>但他的聲音。</p>
+    <p>開口的時候。</p>
+    <p>異常清晰。</p>
+    <p>「各位赤環城市民。」</p>
+    <p>他說。</p>
+    <p>「我是白司禮。」</p>
+    <p>「城防記憶署九號管理者。」</p>
+    <p>「我要告訴你們一件事。」</p>
+    <p>「你們正在經歷的。」</p>
+    <p>「不是校準。」</p>
+    <p>「是奪取。」</p>
+    <p>——</p>
+    <p>廣場上。</p>
+    <p>藍光還在擴散。</p>
+    <p>覆蓋了整座穹頂之下的城市。</p>
+    <p>林澈懸在祈安手臂上方。</p>
+    <p>身體越來越輕。</p>
+    <p>輕得像快要透明。</p>
+    <p>「你怎麼了？」</p>
+    <p>祈安慌了。</p>
+    <p>她能感覺到林澈的身體正在變得稀薄。</p>
+    <p>像水霧。</p>
+    <p>像即將消散的光。</p>
+    <p>「我沒事。」</p>
+    <p>林澈的聲音也開始飄忽。</p>
+    <p>像從很遠的地方傳來。</p>
+    <p>「這是代價。」</p>
+    <p>「羅曼說我是一整條河。」</p>
+    <p>「河，不能只往外流。」</p>
+    <p>「不留一點給自己。」</p>
+    <p>祈安緊緊抱住他。</p>
+    <p>「別散。」</p>
+    <p>她說。</p>
+    <p>聲音破碎。</p>
+    <p>「求求你，別散。」</p>
+    <p>她感覺到自己的手臂裡。</p>
+    <p>那個曾經沉甸甸的重量。</p>
+    <p>正在一點一點地。</p>
+    <p>減輕。</p>
+    <p>不是解脫的那種輕。</p>
+    <p>是失去的那種輕。</p>
+    <p>「我還想。」</p>
+    <p>她哽咽著說。</p>
+    <p>「聽你說更多話。」</p>
+    <p>「不是嬰兒的哭聲。」</p>
+    <p>「是完整的句子。」</p>
+    <p>「你答應過我的。」</p>
+    <p>林澈的藍光在她懷裡。</p>
+    <p>微微地。</p>
+    <p>閃爍了一下。</p>
+    <p>像在回應。</p>
+    <p>也像在道別。</p>
+    <p>四周的人群。</p>
+    <p>漸漸注意到懷裡發光的嬰兒。</p>
+    <p>有人開始朝他們的方向。</p>
+    <p>聚集過來。</p>
+    <p>不是敵意。</p>
+    <p>是一種近乎朝聖般的。</p>
+    <p>好奇與感激。</p>
+    <p>一個剛剛找回聲音的老婦人。</p>
+    <p>顫巍巍地伸出手。</p>
+    <p>想觸碰那道光。</p>
+    <p>卻在半空中停住。</p>
+    <p>像怕自己的手。</p>
+    <p>會弄髒某種神聖的東西。</p>
+    <p>「謝謝你。」</p>
+    <p>她說。</p>
+    <p>聲音還帶著剛才那首歌的餘韻。</p>
+    <p>「不管你是誰。」</p>
+    <p>「謝謝你把我的聲音。」</p>
+    <p>「還給我。」</p>
+    <p>更多人圍攏過來。</p>
+    <p>有人跪下。</p>
+    <p>有人伸手。</p>
+    <p>有人只是靜靜地看著。</p>
+    <p>看著這個懸在半空。</p>
+    <p>正在一點一點消散的。</p>
+    <p>發光的孩子。</p>
+    <p>祈安被人群環繞。</p>
+    <p>她感覺到一種奇異的孤獨。</p>
+    <p>明明周圍全是人。</p>
+    <p>她卻覺得。</p>
+    <p>自己是這個廣場上。</p>
+    <p>唯一一個。</p>
+    <p>真正知道代價的人。</p>
+    <p>遠處，穹頂邊緣的鐘樓。</p>
+    <p>開始倒數。</p>
+    <p>赤紅色的數字。</p>
+    <p>從三百六十五天，跳向更精確的單位。</p>
+    <p>一年。</p>
+    <p>化成天。</p>
+    <p>化成時辰。</p>
+    <p>最終，定格在一個所有人都懂的數字上。</p>
+    <p>十八年。</p>
+    <p>——</p>
+    <p>不。</p>
+    <p>祈安猛地看清那行字。</p>
+    <p>不是十八年。</p>
+    <p>是十八年後的今天。</p>
+    <p>倒數的終點。</p>
+    <p>正是林澈的十八歲生日。</p>
+    <p>白司禮曾經留下的那句話。</p>
+    <p>十八歲見。</p>
+    <p>原來從一開始。</p>
+    <p>就不只是一句威脅。</p>
+    <p>是一份，早已寫進系統裡的。</p>
+    <p>日期。</p>
+    <p>祈安抱著懷裡越來越輕的光。</p>
+    <p>抬頭望向那座鐘樓。</p>
+    <p>望向那個赤紅色的倒數。</p>
+    <p>心裡湧起一種前所未有的恐懼。</p>
+    <p>不是為自己。</p>
+    <p>是為了。</p>
+    <p>接下來這十八年裡。</p>
+    <p>林澈還要經歷多少次。</p>
+    <p>這樣的崩潰。</p>
+    <p>這樣的釋放。</p>
+    <p>這樣的。</p>
+    <p>代價。</p>
+    <p>她低頭。</p>
+    <p>看著懷裡那道越來越淡的光。</p>
+    <p>忽然想起自己第一次死之前。</p>
+    <p>那種以為乾淨一點就不會痛的想法。</p>
+    <p>現在她終於明白。</p>
+    <p>林澈選擇的不是乾淨。</p>
+    <p>是承擔。</p>
+    <p>他把所有人的痛。</p>
+    <p>接進自己身體裡。</p>
+    <p>再把它們。</p>
+    <p>一片一片。</p>
+    <p>還給原本的主人。</p>
+    <p>而他自己。</p>
+    <p>卻要為此。</p>
+    <p>一次又一次地。</p>
+    <p>碎裂。</p>
+    <p>「這樣值得嗎。」</p>
+    <p>她輕聲問。</p>
+    <p>不知道是問林澈。</p>
+    <p>還是問自己。</p>
+    <p>「你才活了。」</p>
+    <p>「連一天都不到。」</p>
+    <p>「這座城市。」</p>
+    <p>「憑什麼要你。」</p>
+    <p>「用自己去換。」</p>
+    <p>懷裡的光沒有回答。</p>
+    <p>只是安靜地。</p>
+    <p>隨著她的心跳。</p>
+    <p>微微起伏。</p>
+    <p>像在說。</p>
+    <p>值得。</p>
+    <p>或者。</p>
+    <p>不值得。</p>
+    <p>已經不重要了。</p>
+    <p>重要的是。</p>
+    <p>他已經做了。</p>
+    <p>廣場上的哭聲漸漸平息。</p>
+    <p>取而代之的。</p>
+    <p>是一種新的騷動。</p>
+    <p>人們開始互相攙扶。</p>
+    <p>互相確認彼此的名字。</p>
+    <p>彷彿在一場巨大的地震後。</p>
+    <p>清點著。</p>
+    <p>還剩下什麼。</p>
+    <p>還記得什麼。</p>
+    <p>還能。</p>
+    <p>重新開始些什麼。</p>
+    <p>穹頂之外。</p>
+    <p>火星的夜色。</p>
+    <p>透過層層管線的縫隙。</p>
+    <p>隱約滲透進來。</p>
+    <p>紅色的光。</p>
+    <p>落在每一張。</p>
+    <p>剛剛找回自己的臉上。</p>
+    <p>像某種。</p>
+    <p>遲來的。</p>
+    <p>祝福。</p>
+    <p>而在廣場中心。</p>
+    <p>那道即將散盡的藍光裡。</p>
+    <p>一個嬰兒。</p>
+    <p>用盡了自己最後一點重量。</p>
+    <p>換來了。</p>
+    <p>十七萬人。</p>
+    <p>重新記得。</p>
+    <p>自己是誰的。</p>
+    <p>一個夜晚。</p>
+    <p>而故事。</p>
+    <p>還沒有結束。</p>
+    <p>倒數。</p>
+    <p>才剛剛開始。</p>
+    <p>赤紅色的數字。</p>
+    <p>在鐘樓上。</p>
+    <p>安靜地。</p>
+    <p>滴答。</p>
+    <p>滴答。</p>
+    <p>一秒。</p>
+    <p>一秒地。</p>
+    <p>流逝著。</p>
+    <p>朝著那個。</p>
+    <p>所有人都懼怕。</p>
+    <p>卻無人能阻止的。</p>
+    <p>終點。</p>
+    <p>十八年。</p>
+    <p>不多。</p>
+    <p>也不少。</p>
+    <p>剛好是一個孩子。</p>
+    <p>長大成人。</p>
+    <p>所需要的時間。</p>
+    <p>而林澈。</p>
+    <p>必須在這段時間裡。</p>
+    <p>活下來。</p>
+    <p>真正地。</p>
+    <p>活下來。</p>
+    <p style="text-align:center;color:var(--text-xs);font-size:13px;margin-top:40px;">— 第十七章完 —</p>
+  </div>
+
+  <div class="reading-nav">
+    <a href="reading-ch16.html" class="btn btn-ghost btn-sm">← 上一章</a>
+    <a href="bookshelf.html" class="btn btn-ghost btn-sm">回目錄</a>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
+    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-outline btn-sm">支持作者</a>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
+    <p style="font-size:14px;color:var(--text-dim);margin-bottom:16px;">喜歡這個故事嗎？到 Threads 上和作者聊聊你的想法！</p>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-primary btn-sm">前往 @bbdaddy924 留言</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作品</div>
+        <ul>
+          <li><a href="bookshelf.html">書櫃</a></li>
+          <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
+          <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作者</div>
+        <ul>
+          <li><a href="about.html">關於比爸 BD</a></li>
+          <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div>
+        <ul>
+          <li><a href="support.html">贊助方案</a></li>
+          <li><a href="https://portaly.cc/bbdaddy924/support" target="_blank">Portaly 贊助</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">法律</div>
+        <ul>
+          <li><a href="privacy.html">隱私權政策</a></li>
+          <li><a href="terms.html">服務條款</a></li>
+          <li><a href="mailto:bbdaddy924@gmail.com">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
+      <nav class="footer-legal">
+        <a href="privacy.html">隱私權政策</a>
+        <a href="terms.html">服務條款</a>
+        <a href="mailto:bbdaddy924@gmail.com">聯絡我們</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+let fontSize=18;
+function changeFontSize(d){fontSize=Math.min(24,Math.max(14,fontSize+d));document.getElementById("readingContent").style.fontSize=fontSize+"px";}
+window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
+function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
+function toggleMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.toggle("open");h.classList.toggle("active");}
+function closeMenu(){var m=document.getElementById("navMenu");var h=document.querySelector(".nav-hamburger");m.classList.remove("open");h.classList.remove("active");}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
+function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
+if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+</script>
+<div class="music-bar" id="musicBar">
+  <div class="mb-cover">🎵</div>
+  <div class="mb-info"><div class="mb-title">第九次出生 主題曲</div><div class="mb-sub">《第九次出生》· 比爸 BD</div></div>
+  <div class="mb-progress-wrap"><div class="mb-progress" id="mbProgress"><div class="mb-progress-fill" id="mbFill"></div></div><div class="mb-time"><span id="mbCurrent">0:00</span><span id="mbDuration">--:--</span></div></div>
+  <div class="mb-controls">
+    <button class="mb-btn" onclick="mbRestart()" title="重新播放">⟨⟨</button>
+    <button class="mb-btn play" id="mbPlayBtn" onclick="mbToggle()">▶</button>
+    <button class="mb-btn" onclick="mbSkip(15)" title="快進 15 秒">⟩⟩</button>
+  </div>
+  <div class="mb-volume"><span class="mb-volume-icon" id="mbVolIcon" onclick="mbMute()">🔊</span><input type="range" class="mb-volume-slider" id="mbVolSlider" min="0" max="1" step="0.05" value="0.6" oninput="mbSetVol(this.value)"></div>
+  <button class="mb-close" onclick="mbClose()" title="關閉">×</button>
+</div>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
+<script>
+(function(){
+  var audio=document.getElementById('bgAudio'),playBtn=document.getElementById('mbPlayBtn'),fill=document.getElementById('mbFill'),cur=document.getElementById('mbCurrent'),dur=document.getElementById('mbDuration'),bar=document.getElementById('musicBar'),volIcon=document.getElementById('mbVolIcon'),muted=false,closed=false;
+  audio.volume=0.6;
+  function fmt(s){var m=Math.floor(s/60);return m+':'+(('0'+Math.floor(s%60)).slice(-2));}
+  audio.addEventListener('loadedmetadata',function(){dur.textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',function(){if(!audio.duration)return;fill.style.width=(audio.currentTime/audio.duration*100)+'%';cur.textContent=fmt(audio.currentTime);});
+  document.getElementById('mbProgress').addEventListener('click',function(e){if(!audio.duration)return;var rect=this.getBoundingClientRect();audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration;});
+  window.mbToggle=function(){if(audio.paused){audio.play().then(function(){playBtn.textContent='❚❚';}).catch(function(){});}else{audio.pause();playBtn.textContent='▶';}};
+  window.mbRestart=function(){audio.currentTime=0;};
+  window.mbSkip=function(s){audio.currentTime=Math.min(audio.duration||0,audio.currentTime+s);};
+  window.mbClose=function(){closed=true;bar.classList.remove('visible');audio.pause();playBtn.textContent='▶';};
+  window.mbMute=function(){muted=!muted;audio.muted=muted;volIcon.textContent=muted?'🔇':'🔊';};
+  window.mbSetVol=function(v){audio.volume=parseFloat(v);};
+  var shown=false;
+  window.addEventListener('scroll',function(){if(closed)return;if(window.scrollY>300&&!shown){shown=true;bar.classList.add('visible');}});
+})();
+
+function openToc(){
+  document.getElementById('tocOverlay').classList.add('open');
+  document.getElementById('tocPanel').classList.add('open');
+  document.getElementById('tocCloseFixed').classList.add('visible');
+}
+function closeToc(){
+  document.getElementById('tocOverlay').classList.remove('open');
+  document.getElementById('tocPanel').classList.remove('open');
+  document.getElementById('tocCloseFixed').classList.remove('visible');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeToc();
+});
+</script>
+<!-- TOC 彈出層 -->
+<div class="toc-overlay" id="tocOverlay"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-header">
+    <span class="toc-header-title">《第九次出生》章節目錄</span>
+    <button class="toc-close" onclick="closeToc()">✕</button>
+  </div>
+  <div class="toc-part-label">第一部：第九門</div>
+    <a href="reading.html" class="toc-item ">
+      <span class="toc-item-num">Ch.001</span>
+      <span class="toc-item-title">出生警報</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch2.html" class="toc-item ">
+      <span class="toc-item-num">Ch.002</span>
+      <span class="toc-item-title">母親的謊言</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch3.html" class="toc-item ">
+      <span class="toc-item-num">Ch.003</span>
+      <span class="toc-item-title">最後一次</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch4.html" class="toc-item ">
+      <span class="toc-item-num">Ch.004</span>
+      <span class="toc-item-title">死者醒來</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch5.html" class="toc-item ">
+      <span class="toc-item-num">Ch.005</span>
+      <span class="toc-item-title">管道盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch6.html" class="toc-item ">
+      <span class="toc-item-num">Ch.006</span>
+      <span class="toc-item-title">地下學校</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch7.html" class="toc-item ">
+      <span class="toc-item-num">Ch.007</span>
+      <span class="toc-item-title">周嶺的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch8.html" class="toc-item ">
+      <span class="toc-item-num">Ch.008</span>
+      <span class="toc-item-title">舊門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch9.html" class="toc-item ">
+      <span class="toc-item-num">Ch.009</span>
+      <span class="toc-item-title">第九門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+  <div class="toc-part-label">第二部：黑河低語</div>
+    <a href="reading-ch10.html" class="toc-item ">
+      <span class="toc-item-num">Ch.010</span>
+      <span class="toc-item-title">門後餘波</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch11.html" class="toc-item ">
+      <span class="toc-item-num">Ch.011</span>
+      <span class="toc-item-title">記憶黑市</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch12.html" class="toc-item ">
+      <span class="toc-item-num">Ch.012</span>
+      <span class="toc-item-title">名字法院</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch13.html" class="toc-item ">
+      <span class="toc-item-num">Ch.013</span>
+      <span class="toc-item-title">黑河圖書館</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch14.html" class="toc-item ">
+      <span class="toc-item-num">Ch.014</span>
+      <span class="toc-item-title">晶片壓制</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch15.html" class="toc-item ">
+      <span class="toc-item-num">Ch.015</span>
+      <span class="toc-item-title">母親的暗訊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch16.html" class="toc-item ">
+      <span class="toc-item-num">Ch.016</span>
+      <span class="toc-item-title">白紙令擴散</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch17.html" class="toc-item toc-active">
+      <span class="toc-item-num">Ch.017</span>
+      <span class="toc-item-title">集體崩潰</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+</div>
+</body>
+</html>
