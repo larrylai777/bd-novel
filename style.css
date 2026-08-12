@@ -188,6 +188,37 @@ body.light .nav-menu.open li a { color: rgba(26,26,26,0.85); }
 body.light .nav-menu.open li a::after { color: rgba(26,26,26,0.2); }
 body.light .nav-menu.open li a:hover { color: #000; }
 
+/* 手機版全螢幕選單的獨立右上角關閉按鈕 */
+.nav-menu-close { display: none; }
+@media (max-width: 768px) {
+  .nav-menu-close {
+    position: fixed;
+    top: calc((var(--nav-h) - 36px) / 2);
+    right: 16px;
+    z-index: 1000;
+    width: 36px; height: 36px;
+    display: none;
+    align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 50%;
+    background: rgba(30,30,30,0.72);
+    color: rgba(240,240,240,0.95);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .nav-menu.open ~ .nav-menu-close { display: flex; animation: navCloseIn .22s ease both; }
+  .nav-menu.open ~ .nav-right-mobile .nav-hamburger { opacity: 0; pointer-events: none; }
+  .nav-menu-close:hover, .nav-menu-close:active { background: rgba(70,70,70,0.9); color: #fff; transform: scale(0.94); }
+  body.light .nav-menu-close { background: rgba(238,238,238,0.9); border-color: rgba(0,0,0,0.12); color: rgba(20,20,20,0.85); }
+}
+@keyframes navCloseIn {
+  from { opacity: 0; transform: scale(.82) rotate(-45deg); }
+  to { opacity: 1; transform: none; }
+}
+
 .nav-right-mobile { display: flex; align-items: center; gap: 4px; }
 .nav-theme-wrap { display: flex; align-items: center; }
 .nav-theme {
