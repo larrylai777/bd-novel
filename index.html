@@ -273,6 +273,34 @@ body > * { position: relative; z-index: 1; }
   .part3-latest { border-left-width: 1px; }
 }
 
+/* 日間模式：名字庫 Hero 與第三部卡片改用淺色星圖層，避免深色文字落在黑底 */
+body.light::before {
+  background: radial-gradient(circle at 50% 42%, rgba(92,164,231,.17), transparent 33%),
+              radial-gradient(circle at 13% 84%, rgba(103,140,255,.10), transparent 28%), #f8f8f6;
+}
+body.light #nameSkyCanvas { opacity:.24; mix-blend-mode:multiply; }
+body.light .hero-wrap { background:linear-gradient(180deg,rgba(248,252,255,.95),rgba(243,248,252,.98)); }
+body.light .hero-eyebrow { color:rgba(24,65,95,.62); }
+body.light .hero-title { color:#121820; text-shadow:none; }
+body.light .hero-title-sub { color:#2e6d9f; }
+body.light .hero-desc { color:rgba(20,35,48,.70); }
+body.light .hero-caption { color:rgba(46,109,159,.76); }
+body.light .part3-feature {
+  border-color:rgba(73,140,203,.28);
+  background:linear-gradient(135deg,rgba(210,236,255,.78),rgba(250,253,255,.92) 48%,rgba(229,244,255,.78));
+  box-shadow:0 14px 48px rgba(53,120,179,.10),inset 0 1px 0 rgba(255,255,255,.86);
+}
+body.light .part3-feature .novel-main-panel { background:linear-gradient(145deg,#eaf6ff,#f8fcff 68%); }
+body.light .part3-feature .novel-side-panel { background:#f3f9fd; }
+body.light .part3-feature .novel-main-eyebrow,
+body.light .part3-recent .novel-side-ch,
+body.light .part3-latest .novel-side-ch { color:#3579af !important; }
+body.light .part3-feature .novel-main-title { color:#15283a; text-shadow:none; }
+body.light .part3-feature .novel-main-desc { color:rgba(24,47,67,.72); }
+body.light .part3-feature .novel-side-title { color:#19344c; }
+body.light .part3-feature .novel-side-desc { color:rgba(24,47,67,.58); }
+body.light .part3-latest { background:linear-gradient(90deg,rgba(142,203,255,.18),transparent 75%) !important; }
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>

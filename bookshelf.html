@@ -156,6 +156,30 @@
 .part3-card .ch-list-status { color:var(--part3-blue) !important; }
 .part3-card .ch-list-item:hover { background:rgba(142,203,255,.045); }
 @media(max-width:600px){ .part3-card .book-row-cover { border-bottom-color:rgba(142,203,255,.24); } }
+
+/* 日間模式：避免書櫃的固定深色卡片與日間文字互相抵銷 */
+body.light .bookshelf-page,
+body.light .shelf-hero { background:var(--bg); }
+body.light .part3-card {
+  border-color:rgba(73,140,203,.30);
+  background:linear-gradient(135deg,rgba(210,236,255,.72),rgba(250,253,255,.94) 52%,rgba(229,244,255,.78));
+  box-shadow:0 14px 48px rgba(53,120,179,.10),inset 0 1px 0 rgba(255,255,255,.86);
+}
+body.light .part3-card .book-row-cover {
+  background:radial-gradient(circle at 58% 32%,rgba(105,182,243,.30),transparent 30%),linear-gradient(145deg,#dfefff,#f7fbff 70%);
+  border-right-color:rgba(73,140,203,.24);
+}
+body.light .part3-card .book-row-cover::after { opacity:.34; }
+body.light .part3-card .book-row-cover-title { color:#17324a; text-shadow:none; }
+body.light .part3-card .book-row-cover-sub { color:#3579af; }
+body.light .part3-card .book-row-info { background:rgba(248,252,255,.86); }
+body.light .part3-card .book-row-title,
+body.light .part3-card .ch-list-title { color:#17324a; }
+body.light .part3-card .book-row-desc { color:rgba(24,47,67,.72); }
+body.light .part3-card .book-row-meta,
+body.light .part3-card .ch-list-status { color:#3579af !important; }
+body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203,.32) !important; background:rgba(142,203,255,.14) !important; }
+@media(max-width:600px){ body.light .part3-card .book-row-cover { border-bottom-color:rgba(73,140,203,.24); } }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
