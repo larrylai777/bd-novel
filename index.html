@@ -9,11 +9,25 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── 水波紋 Canvas ── */
-#riverCanvas {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.18;
+/* ── 第三部：名字庫星圖 ── */
+:root {
+  --part3-blue: #8ecbff;
+  --part3-blue-bright: #d5efff;
+  --part3-blue-soft: rgba(142,203,255,.18);
+  --part3-blue-faint: rgba(142,203,255,.07);
+  --part3-warning: #ff625f;
 }
+#nameSkyCanvas {
+  position: fixed; inset: 0; z-index: 0;
+  width: 100%; height: 100%; pointer-events: none;
+  opacity: .72;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 42%, rgba(82,157,235,.11), transparent 30%),
+              radial-gradient(circle at 13% 84%, rgba(86,123,255,.06), transparent 26%), #000;
+}
+body > * { position: relative; z-index: 1; }
 /* ── 英雄區 ── */
 .hero-wrap {
   position: relative; z-index: 1;
@@ -232,6 +246,33 @@
   line-height: 1.9; margin-bottom: 32px;
 }
 .author-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ── 第三部混合視覺：首頁層 ── */
+.hero-eyebrow { color: rgba(213,239,255,.64); }
+.hero-title { text-shadow: 0 0 58px rgba(142,203,255,.08); }
+.hero-title-sub { color: var(--part3-blue); letter-spacing: .13em; }
+.hero-caption { margin-top: 28px; font-size: 10px; letter-spacing: .15em; color: rgba(142,203,255,.55); opacity: 0; animation: fadeUp .9s 1s forwards; }
+.part3-feature {
+  border-color: rgba(142,203,255,.27);
+  background: linear-gradient(135deg, rgba(142,203,255,.07), rgba(255,255,255,.01) 46%, rgba(0,0,0,.32));
+  box-shadow: 0 0 80px rgba(80,151,233,.045), inset 0 1px 0 rgba(213,239,255,.05);
+}
+.part3-feature .novel-main-panel { background: linear-gradient(145deg, rgba(7,17,28,.96), rgba(0,0,0,.98) 66%); }
+.part3-feature .novel-side-panel { background: rgba(2,7,12,.94); }
+.part3-feature .novel-main-eyebrow { color: var(--part3-blue); }
+.part3-feature .novel-main-title { text-shadow: 0 0 32px rgba(142,203,255,.09); }
+.part3-feature .btn-primary { background: var(--part3-blue-bright); color: #07111a; border-color: var(--part3-blue-bright); }
+.part3-feature .btn-primary:hover { background: #fff; }
+.part3-recent .novel-side-ch, .part3-latest .novel-side-ch { color: var(--part3-blue) !important; }
+.part3-latest { background: linear-gradient(90deg, rgba(142,203,255,.08), transparent 75%) !important; border-left: 2px solid var(--part3-blue); }
+.part3-latest .novel-side-title { color: var(--part3-blue-bright); }
+@media(max-width:768px){
+  #nameSkyCanvas { opacity: .58; }
+  .hero-caption { margin-top: 22px; font-size: 9px; }
+  .part3-feature { border-radius: 16px; }
+  .part3-latest { border-left-width: 1px; }
+}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -244,8 +285,8 @@
 </head>
 <body class="page-enter">
 
-<!-- 水波紋背景 -->
-<canvas id="riverCanvas"></canvas>
+<!-- 第三部：名字庫星圖背景 -->
+<canvas id="nameSkyCanvas" aria-hidden="true"></canvas>
 
 <nav id="nav">
   <div class="nav-wrap">
@@ -282,6 +323,7 @@
     <a href="reading.html" class="btn btn-primary">從第一章開始</a>
     <a href="reading-ch20.html" class="btn btn-outline">閱讀第三部 →</a>
   </div>
+  <div class="hero-caption">姓名節點／藍白源點／星圖連線／低頻呼吸動畫</div>
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
     <span class="hero-scroll-text">Scroll</span>
@@ -290,10 +332,10 @@
 
 <!-- 作品展示 -->
 <div class="novel-block reveal">
-  <div class="novel-block-inner">
-    <div class="novel-main-panel">
+  <div class="novel-block-inner part3-feature">
+    <div class="novel-main-panel part3-current">
       <div class="novel-main-eyebrow">第三部 · 連載中</div>
-      <h2 class="novel-main-title">第九次出生</h2>
+      <h2 class="novel-main-title">十八歲倒數</h2>
       <p class="novel-main-desc">名字庫揭開源點鎖定協議。林澈的第九次出生，竟借用了另一個孩子被刪除的名字。倒數十八分鐘，赤環城的起源謊言正在鬆動。</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a href="reading.html" class="btn btn-outline btn-sm">第一部：第九門</a>
@@ -312,12 +354,12 @@
         <div class="novel-side-title">十八歲倒數</div>
         <div class="novel-side-desc">格式化倒數十分鐘。祈安抱著林澈，走進由名字構成的門。</div>
       </a>
-      <a href="reading-ch19.html" class="novel-side-item">
+      <a href="reading-ch19.html" class="novel-side-item part3-recent">
         <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.019 · 第三部</div>
         <div class="novel-side-title">名字庫入口</div>
         <div class="novel-side-desc">名字化作星空。祈安帶著林澈的藍光，走向赤環城最初的秘密。</div>
       </a>
-      <a href="reading-ch20.html" class="novel-side-item" style="background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
+      <a href="reading-ch20.html" class="novel-side-item part3-latest">
         <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.020 · 第三部 · 最新</div>
         <div class="novel-side-title">被刪除的名字</div>
         <div class="novel-side-desc">源點鎖定協議即將解除。林澈的出生，原來借用了另一個孩子的名字。</div>
@@ -458,67 +500,53 @@
 </footer>
 
 <script>
-/* ── 水波紋動畫 ── */
+/* ── 第三部：名字庫星圖動畫 ── */
 (function(){
-  const canvas = document.getElementById('riverCanvas');
+  const canvas = document.getElementById('nameSkyCanvas');
+  if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, dpr, animId;
-  const waves = [];
-
+  const labels = ['林澈','祈安','白司禮','源點','空白','未命名','名字庫','第九次','冥河','若曦','出生','回聲','鎖定','陣列'];
+  let W, H, dpr, nodes = [], animId;
   function resize(){
-    dpr = window.devicePixelRatio || 1;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth; H = window.innerHeight;
-    canvas.width = Math.round(W * dpr);
-    canvas.height = Math.round(H * dpr);
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-
-  function initWaves(){
-    waves.length = 0;
-    const count = W < 768 ? 4 : 7;
-    for(let i = 0; i < count; i++){
-      waves.push({
-        y: (H / count) * i + Math.random() * (H / count),
-        amplitude: 30 + Math.random() * 50,
-        frequency: 0.002 + Math.random() * 0.004,
-        speed: 0.0005 + Math.random() * 0.0008,
-        phase: Math.random() * Math.PI * 2,
-        opacity: 0.2 + Math.random() * 0.3,
-        lineWidth: 2.0 + Math.random() * 8.0
-      });
-    }
+  function initNodes(){
+    const count = W < 768 ? 22 : 36;
+    nodes = Array.from({length:count}, (_,i)=>({
+      x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.6+.55,
+      vx:(Math.random()-.5)*.10, vy:(Math.random()-.5)*.10,
+      label:labels[i%labels.length], alpha:.19+Math.random()*.42,
+      phase:Math.random()*Math.PI*2
+    }));
   }
-
-  function draw(){
-    ctx.clearRect(0, 0, W, H);
-    const t = Date.now();
-    waves.forEach(w => {
-      ctx.beginPath();
-      ctx.moveTo(0, w.y);
-      for(let x = 0; x <= W; x += 3){
-        const y = w.y + Math.sin(x * w.frequency + t * w.speed + w.phase) * w.amplitude
-                      + Math.sin(x * w.frequency * 2.3 + t * w.speed * 0.7 + w.phase) * w.amplitude * 0.3;
-        ctx.lineTo(x, y);
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(n=>{ n.x+=n.vx; n.y+=n.vy; if(n.x<-35)n.x=W+35; if(n.x>W+35)n.x=-35; if(n.y<-35)n.y=H+35; if(n.y>H+35)n.y=-35; });
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j], distance=Math.hypot(a.x-b.x,a.y-b.y);
+      if(distance<175){
+        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle='rgba(142,203,255,'+((1-distance/175)*.14)+')'; ctx.lineWidth=.55; ctx.stroke();
       }
-      ctx.strokeStyle = 'rgba(255,255,255,' + w.opacity + ')';
-      ctx.lineWidth = w.lineWidth;
-      ctx.stroke();
+    }
+    nodes.forEach(n=>{
+      const pulse=.72+Math.sin(t*.0011+n.phase)*.28;
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r*pulse,0,Math.PI*2);
+      ctx.fillStyle='rgba(213,239,255,'+n.alpha+')'; ctx.fill();
+      if(n.alpha>.48 && W>560){
+        ctx.font='10px -apple-system,BlinkMacSystemFont,"PingFang TC",sans-serif';
+        ctx.fillStyle='rgba(171,217,255,'+(n.alpha*.72)+')'; ctx.fillText(n.label,n.x+7,n.y-6);
+      }
     });
-    animId = requestAnimationFrame(draw);
+    animId=requestAnimationFrame(draw);
   }
-
   let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if(animId) cancelAnimationFrame(animId);
-      resize(); initWaves(); draw();
-    }, 150);
-  });
-
-  resize(); initWaves(); draw();
+  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(animId)cancelAnimationFrame(animId);resize();initNodes();draw(0);},150);});
+  resize(); initNodes(); draw(0);
 })();
 
 /* ── 導覽列 ── */

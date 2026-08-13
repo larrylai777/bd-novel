@@ -131,6 +131,31 @@
   font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent-gold); opacity: 0.7;
 }
+
+/* 第三部：名字庫／源點識別 */
+:root { --part3-blue:#8ecbff; --part3-blue-bright:#d5efff; }
+.part3-card {
+  border-color:rgba(142,203,255,.30);
+  background:linear-gradient(135deg,rgba(142,203,255,.075),rgba(255,255,255,.012) 52%,rgba(0,0,0,.28));
+  box-shadow:0 0 72px rgba(65,139,223,.045),inset 0 1px 0 rgba(213,239,255,.05);
+}
+.part3-card .book-row-cover {
+  background:radial-gradient(circle at 58% 32%,rgba(142,203,255,.19),transparent 28%),linear-gradient(145deg,#07111a,#020304 70%);
+  border-right-color:rgba(142,203,255,.24);
+  position:relative; overflow:hidden;
+}
+.part3-card .book-row-cover::after {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.48;
+  background:radial-gradient(circle at 20% 24%,rgba(213,239,255,.8) 0 1px,transparent 2px),radial-gradient(circle at 78% 30%,rgba(142,203,255,.85) 0 1px,transparent 2px),radial-gradient(circle at 38% 74%,rgba(142,203,255,.65) 0 1px,transparent 2px),radial-gradient(circle at 82% 82%,rgba(213,239,255,.55) 0 1px,transparent 2px);
+}
+.part3-card .book-row-cover-title { color:var(--part3-blue-bright); text-shadow:0 0 30px rgba(142,203,255,.22); position:relative; z-index:1; }
+.part3-card .book-row-cover-sub { color:var(--part3-blue); position:relative; z-index:1; }
+.part3-card .book-row-info { background:rgba(2,7,12,.55); }
+.part3-badge { color:var(--part3-blue) !important; border-color:rgba(142,203,255,.32) !important; background:rgba(142,203,255,.08) !important; }
+.part3-card .book-row-meta { color:rgba(142,203,255,.68); }
+.part3-card .ch-list-status { color:var(--part3-blue) !important; }
+.part3-card .ch-list-item:hover { background:rgba(142,203,255,.045); }
+@media(max-width:600px){ .part3-card .book-row-cover { border-bottom-color:rgba(142,203,255,.24); } }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -314,16 +339,16 @@
 
     <!-- 第三部預告 -->
     <div id="part3" class="shelf-part-label">第三部：十八歲倒數 — 連載中</div>
-    <div class="book-row" style="border-color:rgba(201,168,76,0.32);background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(255,255,255,0.01));">
-      <div class="book-row-cover" style="background:linear-gradient(145deg,#18140a,#060606);border-color:rgba(201,168,76,0.38);">
-        <div class="book-row-cover-title" style="color:var(--accent-gold);">十八歲<br>倒數</div>
+    <div class="book-row part3-card">
+      <div class="book-row-cover">
+        <div class="book-row-cover-title">十八歲<br>倒數</div>
         <div class="book-row-cover-sub">第九次出生 · 第三部</div>
       </div>
       <div class="book-row-info">
         <div class="book-row-badges">
           <span class="badge">科幻</span>
           <span class="badge">懸疑</span>
-          <span class="badge" style="color:var(--accent-gold);border-color:rgba(201,168,76,0.32);background:rgba(201,168,76,0.08);">連載中</span>
+          <span class="badge part3-badge">連載中</span>
         </div>
         <h2 class="book-row-title">第九次出生 — 第三部《十八歲倒數》</h2>
         <p class="book-row-desc">祈安抱著化為藍光的林澈，走進由無數名字組成的星空。當十八歲的倒數重新開始，赤環城最深處的秘密，終於準備睜開眼睛。</p>
@@ -332,12 +357,12 @@
         <a href="reading-ch19.html" class="ch-list-item">
           <span class="ch-list-num">Ch.019</span>
           <span class="ch-list-title">名字庫入口</span>
-          <span class="ch-list-status" style="color:var(--accent-gold);">已上線 ›</span>
+          <span class="ch-list-status">已上線 ›</span>
         </a>
         <a href="reading-ch20.html" class="ch-list-item">
           <span class="ch-list-num">Ch.020</span>
           <span class="ch-list-title">被刪除的名字</span>
-          <span class="ch-list-status" style="color:var(--accent-gold);">已上線 ›</span>
+          <span class="ch-list-status">已上線 ›</span>
         </a>
         <div class="ch-list-item" style="cursor:default;opacity:.62;">
           <span class="ch-list-num">Ch.021</span>
