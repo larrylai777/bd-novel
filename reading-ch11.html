@@ -187,7 +187,18 @@
 let fontSize=18;
 function changeFontSize(d){fontSize=Math.min(24,Math.max(14,fontSize+d));document.getElementById("readingContent").style.fontSize=fontSize+"px";}
 window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
-function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");}
+function updateThemeButton(){
+  const btn=document.getElementById("themeBtn");
+  if(!btn) return;
+  const isLight=document.body.classList.contains("light");
+  btn.textContent=isLight?"☾":"☀";
+  btn.title=isLight?"切換深色模式":"切換日間模式";
+}
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+  updateThemeButton();
+}
 function toggleMenu(){
   var m=document.getElementById('navMenu');
   var h=document.querySelector('.nav-hamburger');
@@ -207,7 +218,8 @@ function closeMenu(){
 }
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
 function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
-if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
+if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+updateThemeButton();
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
 </script>
