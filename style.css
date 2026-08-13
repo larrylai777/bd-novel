@@ -988,3 +988,16 @@ body.light .nav-hamburger span { background:rgba(26,26,26,.76); }
   body.light .nav-menu.open li a:hover,
   body.light .nav-menu.open li a:active { color:#000; }
 }
+
+/* 日間模式下的主要操作維持深色底與白字，避免主按鈕文字消失。 */
+body.light .btn-primary {
+  background:#171717;
+  border-color:#171717;
+  color:#fff;
+}
+body.light .btn-primary:hover,
+body.light .btn-primary:active {
+  background:#323232;
+  border-color:#323232;
+  color:#fff;
+}
