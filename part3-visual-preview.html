@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第三部《十八歲倒數》— 視覺預覽</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --name-blue:#8ecbff;
+  --name-blue-soft:rgba(142,203,255,.18);
+  --name-blue-faint:rgba(142,203,255,.07);
+  --warning:#ff625f;
+  --warning-faint:rgba(255,98,95,.10);
+}
+*{box-sizing:border-box}
+body{background:#000;color:var(--white);overflow-x:hidden}
+.preview-nav{position:fixed;inset:0 0 auto;z-index:20;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);background:rgba(0,0,0,.70);border-bottom:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.preview-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:12px;letter-spacing:.1em}.preview-logo img{width:30px;height:30px;object-fit:contain}.preview-back{font-size:12px;color:var(--text-dim);text-decoration:none;border-bottom:1px solid transparent;transition:.2s}.preview-back:hover{color:var(--white);border-color:var(--white)}
+.preview-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--name-blue);padding:7px 10px;border:1px solid rgba(142,203,255,.25);border-radius:999px;background:rgba(142,203,255,.05)}
+.name-sky{position:relative;min-height:100svh;display:grid;place-items:center;isolation:isolate;overflow:hidden;padding:120px 24px 70px}.name-sky::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 50% 47%,rgba(101,177,255,.12),transparent 30%),radial-gradient(circle at 15% 80%,rgba(100,138,255,.08),transparent 28%),#000}.name-sky::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.42;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at center,#000 20%,transparent 70%)}
+#nameSkyCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}.hero-content{max-width:880px;text-align:center;position:relative}.hero-content .preview-label{display:inline-flex;margin-bottom:30px}.name-sky h1{font-size:clamp(58px,10vw,138px);font-weight:700;letter-spacing:-.07em;line-height:.88;margin:0;color:#fff;text-shadow:0 0 50px rgba(142,203,255,.10)}.name-sky h1 span{display:block;font-size:clamp(14px,2vw,20px);font-weight:400;letter-spacing:.22em;line-height:1.5;margin-top:25px;color:var(--name-blue)}.hero-copy{max-width:520px;margin:36px auto 0;color:var(--text-dim);font-size:clamp(14px,1.7vw,17px);line-height:1.9}.hero-caption{margin-top:34px;font-size:11px;letter-spacing:.12em;color:rgba(142,203,255,.58)}
+.section{max-width:1120px;margin:0 auto;padding:110px 24px}.section-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--name-blue);margin-bottom:16px}.section-title{font-size:clamp(30px,4vw,52px);letter-spacing:-.045em;line-height:1.03;margin:0 0 18px}.section-intro{max-width:580px;color:var(--text-dim);line-height:1.9;font-size:15px}
+.preview-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:48px}.preview-card{border:1px solid rgba(142,203,255,.18);border-radius:20px;background:linear-gradient(145deg,rgba(142,203,255,.08),rgba(255,255,255,.01) 50%,rgba(0,0,0,.6));overflow:hidden;min-height:360px;position:relative}.preview-card-head{padding:20px 22px;border-bottom:1px solid rgba(142,203,255,.14);display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;color:var(--name-blue)}.preview-card-body{padding:38px 30px}.star-card{background:radial-gradient(circle at 60% 35%,rgba(142,203,255,.18),transparent 22%),linear-gradient(145deg,#071019,#030405 65%)}.star-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.8) 0 1px,transparent 2px),radial-gradient(circle at 80% 25%,rgba(142,203,255,.8) 0 1px,transparent 2px),radial-gradient(circle at 40% 70%,rgba(142,203,255,.7) 0 1px,transparent 2px),radial-gradient(circle at 78% 80%,rgba(255,255,255,.6) 0 1px,transparent 2px);opacity:.6;pointer-events:none}.book-cover-title{font-size:clamp(40px,5vw,66px);font-weight:700;letter-spacing:-.07em;line-height:.88;position:relative;z-index:1}.book-cover-sub{margin-top:18px;color:var(--name-blue);font-size:12px;letter-spacing:.16em}.book-cover-rule{width:100%;height:1px;background:linear-gradient(90deg,var(--name-blue),transparent);margin:46px 0 16px}.book-cover-foot{font-size:11px;color:var(--text-dim);letter-spacing:.1em}
+.chapter-demo{display:flex;flex-direction:column;justify-content:space-between;background:#020304}.chapter-label{font-size:11px;letter-spacing:.12em;color:var(--name-blue)}.chapter-demo h3{font-size:clamp(28px,4vw,42px);letter-spacing:-.05em;margin:14px 0;color:#fff}.chapter-demo p{font-size:15px;line-height:2.15;color:rgba(255,255,255,.72);margin:0}.chapter-divider{height:1px;background:rgba(255,255,255,.12);margin:28px 0}.source-lock{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,98,95,.32);background:var(--warning-faint);border-radius:10px;padding:12px 14px;color:#ffaaa8;font-size:11px;letter-spacing:.09em}.source-lock time{font-variant-numeric:tabular-nums;font-size:16px;color:var(--warning);letter-spacing:.04em}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden;margin-top:18px}.rule{padding:30px 26px;background:#050505}.rule-index{font-size:11px;color:var(--name-blue);letter-spacing:.14em}.rule h3{font-size:18px;letter-spacing:-.02em;margin:14px 0 10px}.rule p{font-size:13px;line-height:1.8;color:var(--text-dim);margin:0}
+.status-box{margin-top:48px;border:1px solid rgba(142,203,255,.25);border-radius:16px;background:rgba(142,203,255,.045);padding:22px 24px;display:flex;gap:16px;align-items:flex-start}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--name-blue);box-shadow:0 0 18px var(--name-blue);margin-top:6px;flex:0 0 auto}.status-box p{margin:0;color:var(--text-dim);line-height:1.75;font-size:14px}.status-box strong{color:var(--white);font-weight:500}
+@media(max-width:780px){.preview-grid{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.section{padding:80px 20px}.preview-card{min-height:320px}.preview-card-body{padding:30px 22px}.name-sky{padding-left:20px;padding-right:20px}.name-sky h1{letter-spacing:-.06em}.hero-copy{margin-top:30px}.preview-nav{padding:0 20px}.preview-logo span{display:none}}
+</style>
+</head>
+<body>
+<nav class="preview-nav">
+  <a class="preview-logo" href="index.html"><img src="logo.png" alt="比爸 BD"><span>第九次出生</span></a>
+  <span class="preview-label">Part III Visual Study</span>
+  <a class="preview-back" href="index.html">返回首頁</a>
+</nav>
+
+<section class="name-sky">
+  <canvas id="nameSkyCanvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <span class="preview-label">名字庫星圖 · 首頁主視覺</span>
+    <h1>十八歲倒數<span>第九次出生 · 第三部</span></h1>
+    <p class="hero-copy">不是黑河的盡頭，而是每一個被保存、被刪除、被借走的名字，重新開始發光的地方。</p>
+    <div class="hero-caption">姓名節點／藍白源點／星圖連線／低頻呼吸動畫</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-kicker">Mixed Visual System</div>
+  <h2 class="section-title">星圖在外，沉浸在內。</h2>
+  <p class="section-intro">首頁與第三部書櫃卡片負責建立「名字庫」的世界；閱讀正文則克制地維持黑底與大行距，讓劇情本身承接壓力。紅色只屬於真正的警示與倒數。</p>
+
+  <div class="preview-grid">
+    <article class="preview-card star-card">
+      <div class="preview-card-head"><span>PART III / BOOK IDENTITY</span><span>◌</span></div>
+      <div class="preview-card-body">
+        <div class="book-cover-title">十八歲<br>倒數</div>
+        <div class="book-cover-sub">THE ARCHIVE OF NAMES</div>
+        <div class="book-cover-rule"></div>
+        <div class="book-cover-foot">藍白光邊不取代金色 Logo；它只標記第三部。</div>
+      </div>
+    </article>
+
+    <article class="preview-card chapter-demo">
+      <div class="preview-card-head"><span>READING / QUIET MODE</span><span>Ch.020</span></div>
+      <div class="preview-card-body">
+        <div class="chapter-label">第三部：十八歲倒數</div>
+        <h3>被刪除的名字</h3>
+        <div class="chapter-divider"></div>
+        <p>正文不放背景動畫。<br>黑色留下來。<br>讓每一行文字自己發亮。</p>
+        <div class="source-lock"><span>源點鎖定協議 · 警示狀態</span><time>17:59:59</time></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div class="rule-index">01 / NAME SKY</div><h3>藍白名字星圖</h3><p>首頁水波改為名字節點與細線，動作緩慢、透明度低，保留黑河沉浸的安靜質地。</p></div>
+    <div class="rule"><div class="rule-index">02 / PART III CARD</div><h3>只強化第三部</h3><p>書櫃與首頁第三部卡片使用微弱藍白光邊與源點漸層；第一、二部維持既有金色系統。</p></div>
+    <div class="rule"><div class="rule-index">03 / ALERT ONLY</div><h3>紅色只在倒數</h3><p>紅色不作為全站主色，只在「源點鎖定、倒數、協議解除」等關鍵劇情狀態短暫出現。</p></div>
+  </div>
+
+  <div class="status-box"><span class="status-dot"></span><p><strong>這是視覺預覽，不會影響現有網站。</strong><br>若確認採用，我會把星圖動畫套到首頁、把第三部卡片改為藍白光邊，並只在第三部閱讀頁標題／目錄與特定倒數元件使用對應效果。</p></div>
+</section>
+
+<script>
+(() => {
+  const canvas = document.getElementById('nameSkyCanvas');
+  const ctx = canvas.getContext('2d');
+  const labels = ['林澈','祈安','白司禮','源點','空白','未命名','名字庫','第九次','冥河','若曦','出生','回聲','鎖定','陣列'];
+  let width, height, dpr, nodes = [], frame;
+  function setup(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth; height = canvas.clientHeight;
+    canvas.width = width * dpr; canvas.height = height * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count = width < 720 ? 22 : 36;
+    nodes = Array.from({length:count}, (_,i)=>({
+      x:Math.random()*width, y:Math.random()*height,
+      r:Math.random()*1.8+.6, label:labels[i%labels.length],
+      vx:(Math.random()-.5)*.11, vy:(Math.random()-.5)*.11,
+      alpha:.25+Math.random()*.55, phase:Math.random()*Math.PI*2
+    }));
+  }
+  function draw(t){
+    ctx.clearRect(0,0,width,height);
+    nodes.forEach(n=>{ n.x+=n.vx; n.y+=n.vy; if(n.x<-40)n.x=width+40;if(n.x>width+40)n.x=-40;if(n.y<-40)n.y=height+40;if(n.y>height+40)n.y=-40; });
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
+      if(dist<170){ ctx.strokeStyle=`rgba(142,203,255,${(1-dist/170)*.16})`;ctx.lineWidth=.55;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); }
+    }
+    nodes.forEach(n=>{
+      const pulse=.72+Math.sin(t*.0012+n.phase)*.28;
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r*pulse,0,Math.PI*2);ctx.fillStyle=`rgba(212,235,255,${n.alpha})`;ctx.fill();
+      if(n.alpha>.54){ctx.font='10px -apple-system,BlinkMacSystemFont,sans-serif';ctx.fillStyle=`rgba(171,217,255,${n.alpha*.7})`;ctx.fillText(n.label,n.x+7,n.y-6);}
+    });
+    frame=requestAnimationFrame(draw);
+  }
+  setup(); draw(0);
+  window.addEventListener('resize',()=>{cancelAnimationFrame(frame);setup();draw(0);});
+})();
+</script>
+</body>
+</html>
