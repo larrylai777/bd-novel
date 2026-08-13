@@ -326,6 +326,8 @@ body.light .part3-latest { background:linear-gradient(90deg,rgba(142,203,255,.18
       <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
     </ul>
     <div class="nav-right-mobile">
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
+
       <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
         <span></span><span></span><span></span>
       </button>
@@ -635,5 +637,29 @@ document.querySelectorAll('a[href*="reading"]').forEach(a => {
   });
 });
 </script>
+
+<script>
+/* 共用導覽列日夜切換狀態：保留既有閱讀工具列按鈕，並同步更新導覽列圖示。 */
+(function(){
+  function updateNavThemeToggle(){
+    var isLight=document.body.classList.contains('light');
+    document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
+      btn.textContent=isLight?'☾':'☀';
+      btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
+      btn.title=isLight?'切換深色模式':'切換日間模式';
+    });
+  }
+  var originalToggle=window.toggleTheme;
+  if(typeof originalToggle==='function' && !window.__navThemeToggleWrapped){
+    window.toggleTheme=function(){
+      originalToggle();
+      updateNavThemeToggle();
+    };
+    window.__navThemeToggleWrapped=true;
+  }
+  updateNavThemeToggle();
+})();
+</script>
+
 </body>
 </html>

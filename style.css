@@ -953,3 +953,38 @@ body.light .part3-source-status.is-warning .part3-countdown {
 body.light .part3-source-status.is-warning .part3-source-detail {
   color: rgba(108,42,39,.62);
 }
+
+/* ── 導覽列日夜切換控制 ── */
+.nav-theme-toggle {
+  width:32px; height:32px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--border); border-radius:50%;
+  background:var(--surface); color:var(--text-dim);
+  cursor:pointer; font-size:15px; line-height:1;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.nav-theme-toggle:hover,
+.nav-theme-toggle:active { background:var(--surface2); color:var(--white); transform:scale(.95); }
+body.light .nav-theme-toggle {
+  background:rgba(0,0,0,.045);
+  border-color:rgba(0,0,0,.12);
+  color:rgba(20,20,20,.78);
+}
+body.light .nav-theme-toggle:hover,
+body.light .nav-theme-toggle:active { background:rgba(0,0,0,.09); color:#000; }
+body.light .nav-hamburger span { background:rgba(26,26,26,.76); }
+
+/* 手機版的 !important 深色覆寫需由日間模式再覆蓋一次。 */
+@media(max-width:768px){
+  body.light .nav-menu.open {
+    background:rgba(248,248,246,.985) !important;
+    backdrop-filter:blur(40px) !important;
+    -webkit-backdrop-filter:blur(40px) !important;
+  }
+  body.light .nav-menu.open li { border-bottom-color:rgba(0,0,0,.07); }
+  body.light .nav-menu.open li a { color:rgba(20,20,20,.88); }
+  body.light .nav-menu.open li a::after { color:rgba(20,20,20,.25); }
+  body.light .nav-menu.open li a:hover,
+  body.light .nav-menu.open li a:active { color:#000; }
+}
