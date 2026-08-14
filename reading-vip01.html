@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九次出生 VIP.001 — 比爸 BD</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── VIP 閱讀頁專屬樣式 ── */
+:root {
+  --vip-gold:#c9a84c;
+  --vip-gold-border:rgba(201,168,76,0.35);
+  --vip-gold-glow:rgba(201,168,76,0.12);
+}
+
+/* Podcast 區塊 */
+.podcast-embed {
+  margin: 24px 0 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.podcast-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  color: var(--text-xs); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* 背景音樂播放列 */
+.music-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: saturate(120%) blur(28px);
+  -webkit-backdrop-filter: saturate(120%) blur(28px);
+  border-top: 1px solid var(--border);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; gap: 14px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.music-bar.visible { transform: translateY(0); }
+.mb-cover { width: 32px; height: 32px; border-radius: 6px; background: var(--surface2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.mb-info { flex: 1; min-width: 0; }
+.mb-title { font-size: 12px; font-weight: 500; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+.mb-sub { font-size: 10px; color: var(--text-xs); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mb-progress-wrap { flex: 2; max-width: 280px; display: flex; flex-direction: column; gap: 5px; }
+.mb-progress { width: 100%; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; position: relative; }
+.mb-progress-fill { height: 100%; background: rgba(255,255,255,0.5); border-radius: 2px; width: 0%; transition: width 0.3s linear; pointer-events: none; }
+.mb-time { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-xs); }
+.mb-controls { display: flex; align-items: center; gap: 6px; }
+.mb-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: background 0.18s, color 0.18s; }
+.mb-btn:hover { background: var(--surface2); color: var(--white); }
+.mb-btn.play { width: 36px; height: 36px; font-size: 13px; background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.mb-btn.play:hover { background: rgba(255,255,255,0.15); }
+.mb-volume { display: flex; align-items: center; gap: 6px; }
+.mb-volume-icon { font-size: 12px; color: var(--text-xs); cursor: pointer; }
+.mb-volume-slider { -webkit-appearance: none; appearance: none; width: 70px; height: 2px; background: var(--border); border-radius: 2px; cursor: pointer; outline: none; }
+.mb-volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--white); cursor: pointer; }
+.mb-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-xs); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.18s; flex-shrink: 0; }
+.mb-close:hover { background: var(--surface2); color: var(--white); }
+@media(max-width:768px){ .music-bar { padding: 0 14px; gap: 10px; height: 60px; } .mb-progress-wrap, .mb-volume { display: none; } .mb-btn { width: 30px; height: 30px; font-size: 11px; } .mb-btn.play { width: 34px; height: 34px; } }
+
+/* 閱讀工具列 */
+.reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s; white-space: nowrap; }
+.toolbar-btn:hover { background: var(--surface2); color: var(--white); opacity: 1; }
+.toolbar-btn.primary { background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
+.toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+@media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+
+/* VIP 章節標識 */
+.vip-reading-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--vip-gold); background: rgba(201,168,76,.10);
+  border: 1px solid var(--vip-gold-border);
+  border-radius: 6px; padding: 3px 10px;
+  margin-bottom: 12px;
+}
+.vip-reading-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--vip-gold); box-shadow: 0 0 6px var(--vip-gold);
+  flex-shrink: 0;
+}
+
+/* VIP 贊助 CTA 區塊 */
+.vip-cta-block {
+  margin: 32px 0 40px;
+  padding: 24px 28px;
+  border: 1px solid var(--vip-gold-border);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(201,168,76,.07), rgba(0,0,0,.28) 60%);
+  box-shadow: 0 0 40px rgba(201,168,76,.04), inset 0 1px 0 rgba(201,168,76,.08);
+  text-align: center;
+}
+.vip-cta-title {
+  font-size: 15px; font-weight: 600; color: var(--white);
+  margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.vip-cta-desc {
+  font-size: 13px; color: var(--text-dim); line-height: 1.7;
+  margin-bottom: 18px;
+}
+.vip-cta-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 10px 24px; border-radius: 980px;
+  font-size: 13px; font-weight: 600; letter-spacing: .02em;
+  color: #000; background: var(--vip-gold);
+  text-decoration: none; border: none; cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+.vip-cta-btn:hover { opacity: .85; transform: scale(1.02); }
+.vip-cta-note {
+  font-size: 11px; color: var(--text-xs); margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* 日間模式 VIP */
+body.light .vip-reading-badge { color: #8a6000; background: rgba(201,168,76,.14); border-color: rgba(160,120,30,.35); }
+body.light .vip-reading-dot { background: #8a6000; box-shadow: 0 0 6px rgba(138,96,0,.5); }
+body.light .vip-cta-block { background: linear-gradient(135deg, rgba(201,168,76,.12), rgba(255,252,240,.90) 60%); border-color: rgba(160,120,30,.35); }
+body.light .vip-cta-title { color: #1a1200; }
+body.light .vip-cta-desc { color: rgba(40,30,0,.72); }
+body.light .vip-cta-note { color: rgba(40,30,0,.5); }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30GG7PY520');
+</script>
+</head>
+<body class="page-enter part3-reading">
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">作者</a></li>
+      <li><a href="support.html">贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+    </ul>
+    <div class="nav-right-mobile">
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
+      <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+    <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
+  </div>
+</nav>
+
+<div class="reading-toolbar">
+  <div class="reading-toolbar-left">
+    <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
+    <span class="toolbar-chapter-label">VIP.001 · 搶先閱讀</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-ch21.html" class="toolbar-btn">← 上一章</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">下一章 →</span>
+  </div>
+  <div class="reading-toolbar-right">
+    <button class="toolbar-btn" onclick="changeFontSize(-1)" title="縮小字體">A−</button>
+    <button class="toolbar-btn" onclick="changeFontSize(1)" title="放大字體">A+</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="reading-body">
+  <div style="text-align:center;padding-top:32px;">
+    <span class="vip-reading-badge"><span class="vip-reading-dot"></span>VIP · 搶先閱讀</span>
+  </div>
+  <!-- 章節標題：作者填入後請修改此處 -->
+  <h1 class="reading-chapter-title">第二十二章：（章節標題）</h1>
+  <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
+
+  <!-- VIP 贊助 CTA（顯示在正文前） -->
+  <div class="vip-cta-block">
+    <div class="vip-cta-title">✨ 感謝你搶先閱讀</div>
+    <p class="vip-cta-desc">這是尚未公開的搶先章節。如果你喜歡這個故事，歡迎隨緣贊助支持作者繼續創作。</p>
+    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-cta-btn">❤ 隨緣贊助作者</a>
+    <p class="vip-cta-note">贊助為自願行為，不強制付費。本章將在正式公開後移至一般章節目錄。</p>
+  </div>
+
+  <!-- 第三部狀態列（依劇情調整，可移除） -->
+  <!-- <div class="part3-source-status is-warning">
+    <span class="part3-source-orb"></span>
+    <span class="part3-source-name">名字記憶回流</span>
+    <span class="part3-source-detail">源點鎖定解除倒數</span>
+    <span class="part3-countdown">00:XX:00</span>
+  </div> -->
+
+  <div class="reading-content" id="readingContent">
+    <!-- ===== 作者請在此填入章節正文 ===== -->
+    <!-- 每段用 <p>...</p> 包裹，段落之間自動有間距 -->
+    <!-- 範例格式：
+    <p>第一段內文。</p>
+    <p>第二段內文，</p>
+    <p>繼續。</p>
+    -->
+    <p style="color:var(--text-xs);font-size:13px;text-align:center;padding:40px 0;">（作者尚未填入本章內容，請稍候。）</p>
+  </div>
+
+  <div class="reading-nav">
+    <a href="reading-ch21.html" class="btn btn-ghost btn-sm">← 上一章</a>
+    <a href="bookshelf.html#vip" class="btn btn-ghost btn-sm">回 VIP 目錄</a>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
+    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-outline btn-sm">支持作者</a>
+  </div>
+
+  <!-- 底部贊助 CTA -->
+  <div class="vip-cta-block" style="margin-top:20px;">
+    <div class="vip-cta-title">喜歡這個故事嗎？</div>
+    <p class="vip-cta-desc">你的支持是作者繼續寫下去的最大動力。隨緣贊助，感謝每一份心意。</p>
+    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-cta-btn">❤ 隨緣贊助</a>
+    <p class="vip-cta-note">贊助後歡迎至 Threads @bbdaddy924 私訊作者，讓他知道你在這裡。</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
+    <p style="font-size:14px;color:var(--text-dim);margin-bottom:16px;">到 Threads 上和作者聊聊你的想法！</p>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-primary btn-sm">前往 @bbdaddy924 留言</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作品</div>
+        <ul>
+          <li><a href="bookshelf.html">書櫃</a></li>
+          <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
+          <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
+          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–021 · 連載中）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">作者</div>
+        <ul>
+          <li><a href="about.html">關於比爸 BD</a></li>
+          <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div>
+        <ul>
+          <li><a href="support.html">贊助方案</a></li>
+          <li><a href="https://portaly.cc/bbdaddy924/support" target="_blank">Portaly 贊助</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="toggleFooterCol(this)">法律</div>
+        <ul>
+          <li><a href="privacy.html">隱私權政策</a></li>
+          <li><a href="terms.html">服務條款</a></li>
+          <li><a href="mailto:bbdaddy924@gmail.com">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
+      <nav class="footer-legal">
+        <a href="privacy.html">隱私權政策</a>
+        <a href="terms.html">服務條款</a>
+        <a href="mailto:bbdaddy924@gmail.com">聯絡我們</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+let fontSize=18;
+function changeFontSize(d){fontSize=Math.min(24,Math.max(14,fontSize+d));document.getElementById("readingContent").style.fontSize=fontSize+"px";}
+window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
+function updateThemeButton(){
+  const btn=document.getElementById("themeBtn");
+  if(!btn) return;
+  const isLight=document.body.classList.contains("light");
+  btn.textContent=isLight?"☾":"☀";
+  btn.title=isLight?"切換深色模式":"切換日間模式";
+}
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+  updateThemeButton();
+}
+function toggleMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  var isOpen=!m.classList.contains('open');
+  m.classList.toggle('open', isOpen);
+  h.classList.toggle('active', isOpen);
+  if(c) c.classList.toggle('visible', isOpen);
+}
+function closeMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  m.classList.remove('open');
+  h.classList.remove('active');
+  if(c) c.classList.remove('visible');
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
+function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
+if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+updateThemeButton();
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+</script>
+
+<div class="music-bar" id="musicBar">
+  <div class="mb-cover">🎵</div>
+  <div class="mb-info"><div class="mb-title">第九次出生 主題曲</div><div class="mb-sub">《第九次出生》· 比爸 BD</div></div>
+  <div class="mb-progress-wrap"><div class="mb-progress" id="mbProgress"><div class="mb-progress-fill" id="mbFill"></div></div><div class="mb-time"><span id="mbCurrent">0:00</span><span id="mbDuration">--:--</span></div></div>
+  <div class="mb-controls">
+    <button class="mb-btn" onclick="mbRestart()" title="重新播放">⟨⟨</button>
+    <button class="mb-btn play" id="mbPlayBtn" onclick="mbToggle()">▶</button>
+    <button class="mb-btn" onclick="mbSkip(15)" title="快進 15 秒">⟩⟩</button>
+  </div>
+  <div class="mb-volume"><span class="mb-volume-icon" id="mbVolIcon" onclick="mbMute()">🔊</span><input type="range" class="mb-volume-slider" id="mbVolSlider" min="0" max="1" step="0.05" value="0.6" oninput="mbSetVol(this.value)"></div>
+  <button class="mb-close" onclick="mbClose()" title="關閉">×</button>
+</div>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
+<script>
+(function(){
+  var audio=document.getElementById('bgAudio'),playBtn=document.getElementById('mbPlayBtn'),fill=document.getElementById('mbFill'),cur=document.getElementById('mbCurrent'),dur=document.getElementById('mbDuration'),bar=document.getElementById('musicBar'),volIcon=document.getElementById('mbVolIcon'),muted=false,closed=false;
+  audio.volume=0.6;
+  function fmt(s){var m=Math.floor(s/60);return m+':'+(('0'+Math.floor(s%60)).slice(-2));}
+  audio.addEventListener('loadedmetadata',function(){dur.textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',function(){if(!audio.duration)return;fill.style.width=(audio.currentTime/audio.duration*100)+'%';cur.textContent=fmt(audio.currentTime);});
+  document.getElementById('mbProgress').addEventListener('click',function(e){if(!audio.duration)return;var rect=this.getBoundingClientRect();audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration;});
+  window.mbToggle=function(){if(audio.paused){audio.play().then(function(){playBtn.textContent='❚❚';}).catch(function(){});}else{audio.pause();playBtn.textContent='▶';}};
+  window.mbRestart=function(){audio.currentTime=0;};
+  window.mbSkip=function(s){audio.currentTime=Math.min(audio.duration||0,audio.currentTime+s);};
+  window.mbClose=function(){closed=true;bar.classList.remove('visible');audio.pause();playBtn.textContent='▶';};
+  window.mbMute=function(){muted=!muted;audio.muted=muted;volIcon.textContent=muted?'🔇':'🔊';};
+  window.mbSetVol=function(v){audio.volume=parseFloat(v);};
+  var shown=false;
+  window.addEventListener('scroll',function(){if(closed)return;if(window.scrollY>300&&!shown){shown=true;bar.classList.add('visible');}});
+})();
+
+function openToc(){
+  document.getElementById('tocOverlay').classList.add('open');
+  document.getElementById('tocPanel').classList.add('open');
+  document.getElementById('tocCloseFixed').classList.add('visible');
+}
+function closeToc(){
+  document.getElementById('tocOverlay').classList.remove('open');
+  document.getElementById('tocPanel').classList.remove('open');
+  document.getElementById('tocCloseFixed').classList.remove('visible');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeToc();
+});
+</script>
+
+<!-- TOC 彈出層 -->
+<div class="toc-overlay" id="tocOverlay"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-header">
+    <span class="toc-header-title">《第九次出生》章節目錄</span>
+  </div>
+  <div class="toc-part-label">第一部：第九門</div>
+    <a href="reading.html" class="toc-item"><span class="toc-item-num">Ch.001</span><span class="toc-item-title">出生警報</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch2.html" class="toc-item"><span class="toc-item-num">Ch.002</span><span class="toc-item-title">母親的謊言</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch3.html" class="toc-item"><span class="toc-item-num">Ch.003</span><span class="toc-item-title">最後一次</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch4.html" class="toc-item"><span class="toc-item-num">Ch.004</span><span class="toc-item-title">死者醒來</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch5.html" class="toc-item"><span class="toc-item-num">Ch.005</span><span class="toc-item-title">管道盡頭</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch6.html" class="toc-item"><span class="toc-item-num">Ch.006</span><span class="toc-item-title">地下學校</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch7.html" class="toc-item"><span class="toc-item-num">Ch.007</span><span class="toc-item-title">周嶺的殘響</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch8.html" class="toc-item"><span class="toc-item-num">Ch.008</span><span class="toc-item-title">舊門</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch9.html" class="toc-item"><span class="toc-item-num">Ch.009</span><span class="toc-item-title">第九門</span><span class="toc-item-arrow">›</span></a>
+  <div class="toc-part-label">第二部：黑河低語</div>
+    <a href="reading-ch10.html" class="toc-item"><span class="toc-item-num">Ch.010</span><span class="toc-item-title">門後餘波</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch11.html" class="toc-item"><span class="toc-item-num">Ch.011</span><span class="toc-item-title">記憶黑市</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch12.html" class="toc-item"><span class="toc-item-num">Ch.012</span><span class="toc-item-title">名字法院</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch13.html" class="toc-item"><span class="toc-item-num">Ch.013</span><span class="toc-item-title">黑河圖書館</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch14.html" class="toc-item"><span class="toc-item-num">Ch.014</span><span class="toc-item-title">晶片壓制</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch15.html" class="toc-item"><span class="toc-item-num">Ch.015</span><span class="toc-item-title">母親的暗訊</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch16.html" class="toc-item"><span class="toc-item-num">Ch.016</span><span class="toc-item-title">白紙令擴散</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch17.html" class="toc-item"><span class="toc-item-num">Ch.017</span><span class="toc-item-title">集體崩潰</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch18.html" class="toc-item"><span class="toc-item-num">Ch.018</span><span class="toc-item-title">十八歲倒數</span><span class="toc-item-arrow">›</span></a>
+  <div class="toc-part-label">第三部：十八歲倒數</div>
+    <a href="reading-ch19.html" class="toc-item"><span class="toc-item-num">Ch.019</span><span class="toc-item-title">名字庫入口</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch20.html" class="toc-item"><span class="toc-item-num">Ch.020</span><span class="toc-item-title">被刪除的名字</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch21.html" class="toc-item"><span class="toc-item-num">Ch.021</span><span class="toc-item-title">找回自我</span><span class="toc-item-arrow">›</span></a>
+  <div class="toc-part-label" style="color:var(--vip-gold,#c9a84c);border-bottom-color:rgba(201,168,76,.22);">✨ VIP 搶先閱讀</div>
+    <a href="reading-vip01.html" class="toc-item toc-active" style="border-color:rgba(201,168,76,.34);background:rgba(201,168,76,.06);">
+      <span class="toc-item-num" style="color:rgba(201,168,76,.7);">VIP.001</span>
+      <span class="toc-item-title" style="color:var(--vip-gold,#c9a84c);">搶先閱讀</span>
+      <span class="toc-item-arrow" style="color:rgba(201,168,76,.7);">›</span>
+    </a>
+</div>
+<button id="tocCloseFixed" class="toc-close-fixed" onclick="closeToc()" aria-label="關閉目錄">✕</button>
+
+<script>
+/* 共用導覽列日夜切換狀態 */
+(function(){
+  function updateNavThemeToggle(){
+    var isLight=document.body.classList.contains('light');
+    document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
+      btn.textContent=isLight?'☾':'☀';
+      btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
+      btn.title=isLight?'切換深色模式':'切換日間模式';
+    });
+  }
+  var originalToggle=window.toggleTheme;
+  if(typeof originalToggle==='function' && !window.__navThemeToggleWrapped){
+    window.toggleTheme=function(){
+      originalToggle();
+      updateNavThemeToggle();
+    };
+    window.__navThemeToggleWrapped=true;
+  }
+  updateNavThemeToggle();
+})();
+</script>
+</body>
+</html>
