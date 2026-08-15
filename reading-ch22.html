@@ -3,20 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第九次出生 VIP.001 — 比爸 BD</title>
-<meta name="robots" content="noindex,nofollow">
+<title>第九次出生 Ch.022 — 比爸 BD</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── VIP 閱讀頁專屬樣式 ── */
-:root {
-  --vip-gold:#c9a84c;
-  --vip-gold-border:rgba(201,168,76,0.35);
-  --vip-gold-glow:rgba(201,168,76,0.12);
-}
-
-/* Podcast 區塊 */
 .podcast-embed {
   margin: 24px 0 40px;
   padding: 20px 24px;
@@ -29,8 +20,6 @@
   color: var(--text-xs); text-transform: uppercase;
   margin-bottom: 10px;
 }
-
-/* 背景音樂播放列 */
 .music-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
   background: rgba(0,0,0,0.92);
@@ -63,8 +52,6 @@
 .mb-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-xs); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.18s; flex-shrink: 0; }
 .mb-close:hover { background: var(--surface2); color: var(--white); }
 @media(max-width:768px){ .music-bar { padding: 0 14px; gap: 10px; height: 60px; } .mb-progress-wrap, .mb-volume { display: none; } .mb-btn { width: 30px; height: 30px; font-size: 11px; } .mb-btn.play { width: 34px; height: 34px; } }
-
-/* 閱讀工具列 */
 .reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
 .reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
 .reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
@@ -75,62 +62,26 @@
 .toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
 .toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
 @media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+.part-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--accent-gold); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 3px 10px; margin-bottom: 12px; }
 
-/* VIP 章節標識 */
-.vip-reading-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; letter-spacing: .10em;
-  text-transform: uppercase;
-  color: var(--vip-gold); background: rgba(201,168,76,.10);
-  border: 1px solid var(--vip-gold-border);
-  border-radius: 6px; padding: 3px 10px;
-  margin-bottom: 12px;
-}
-.vip-reading-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--vip-gold); box-shadow: 0 0 6px var(--vip-gold);
-  flex-shrink: 0;
-}
+/* 第三部：名字庫／源點識別（不干擾正文閱讀） */
+:root { --part3-blue:#8ecbff; --part3-blue-bright:#d5efff; --part3-warning:#ff625f; }
+.part3-reading .reading-toolbar { border-bottom-color:rgba(142,203,255,.20); box-shadow:0 8px 28px rgba(44,110,180,.035); }
+.part3-reading .part-badge { color:var(--part3-blue); border-color:rgba(142,203,255,.32); background:rgba(142,203,255,.08); box-shadow:0 0 18px rgba(142,203,255,.055); }
+.part3-reading .reading-body { position:relative; }
+.part3-reading .reading-body::before { content:""; position:absolute; top:24px; left:50%; transform:translateX(-50%); width:min(560px,88vw); height:210px; pointer-events:none; background:radial-gradient(ellipse at center top,rgba(142,203,255,.055),transparent 70%); z-index:-1; }
+.part3-source-status { max-width:720px; margin:0 auto 34px; padding:11px 14px; display:flex; align-items:center; gap:10px; border:1px solid rgba(142,203,255,.22); border-radius:8px; background:rgba(142,203,255,.045); color:rgba(213,239,255,.78); font-size:10px; letter-spacing:.10em; text-transform:uppercase; }
+.part3-source-orb { width:8px; height:8px; border-radius:50%; background:var(--part3-blue); box-shadow:0 0 14px var(--part3-blue); flex:0 0 auto; }
+.part3-source-name { color:var(--part3-blue); white-space:nowrap; }
+.part3-source-detail { color:var(--text-xs); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.part3-source-status.is-warning { border-color:rgba(255,98,95,.34); background:rgba(255,98,95,.065); }
+.part3-source-status.is-warning .part3-source-orb { background:var(--part3-warning); box-shadow:0 0 14px var(--part3-warning); }
+.part3-source-status.is-warning .part3-source-name { color:#ffaaa8; }
+.part3-countdown { margin-left:auto; color:#ff837e; font-size:13px; font-variant-numeric:tabular-nums; letter-spacing:.08em; white-space:nowrap; }
+.part3-reading .toc-item.toc-active { border-color:rgba(142,203,255,.34); background:rgba(142,203,255,.08); }
+.part3-reading .toc-item.toc-active .toc-item-num, .part3-reading .toc-item.toc-active .toc-item-title, .part3-reading .toc-item.toc-active .toc-item-arrow { color:var(--part3-blue) !important; }
+@media(max-width:768px){ .part3-source-status { margin:0 0 26px; padding:10px 12px; gap:8px; font-size:9px; } .part3-source-detail { max-width:120px; } .part3-countdown { font-size:12px; } }
 
-/* VIP 贊助 CTA 區塊 */
-.vip-cta-block {
-  margin: 32px 0 40px;
-  padding: 24px 28px;
-  border: 1px solid var(--vip-gold-border);
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(201,168,76,.07), rgba(0,0,0,.28) 60%);
-  box-shadow: 0 0 40px rgba(201,168,76,.04), inset 0 1px 0 rgba(201,168,76,.08);
-  text-align: center;
-}
-.vip-cta-title {
-  font-size: 15px; font-weight: 600; color: var(--white);
-  margin-bottom: 8px; letter-spacing: -0.01em;
-}
-.vip-cta-desc {
-  font-size: 13px; color: var(--text-dim); line-height: 1.7;
-  margin-bottom: 18px;
-}
-.vip-cta-btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 10px 24px; border-radius: 980px;
-  font-size: 13px; font-weight: 600; letter-spacing: .02em;
-  color: #000; background: var(--vip-gold);
-  text-decoration: none; border: none; cursor: pointer;
-  transition: opacity .2s, transform .2s;
-}
-.vip-cta-btn:hover { opacity: .85; transform: scale(1.02); }
-.vip-cta-note {
-  font-size: 11px; color: var(--text-xs); margin-top: 12px;
-  line-height: 1.6;
-}
-
-/* 日間模式 VIP */
-body.light .vip-reading-badge { color: #8a6000; background: rgba(201,168,76,.14); border-color: rgba(160,120,30,.35); }
-body.light .vip-reading-dot { background: #8a6000; box-shadow: 0 0 6px rgba(138,96,0,.5); }
-body.light .vip-cta-block { background: linear-gradient(135deg, rgba(201,168,76,.12), rgba(255,252,240,.90) 60%); border-color: rgba(160,120,30,.35); }
-body.light .vip-cta-title { color: #1a1200; }
-body.light .vip-cta-desc { color: rgba(40,30,0,.72); }
-body.light .vip-cta-note { color: rgba(40,30,0,.5); }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
@@ -161,7 +112,7 @@ body.light .vip-cta-note { color: rgba(40,30,0,.5); }
 <div class="reading-toolbar">
   <div class="reading-toolbar-left">
     <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
-    <span class="toolbar-chapter-label">VIP.001 · 第二十二章搶先看</span>
+    <span class="toolbar-chapter-label">第二十二章：白司禮的晶片</span>
   </div>
   <div class="reading-toolbar-center">
     <a href="reading-ch21.html" class="toolbar-btn">← 上一章</a>
@@ -176,26 +127,20 @@ body.light .vip-cta-note { color: rgba(40,30,0,.5); }
 
 <div class="reading-body">
   <div style="text-align:center;padding-top:32px;">
-    <span class="vip-reading-badge"><span class="vip-reading-dot"></span>VIP · 搶先閱讀</span>
+    <span class="part-badge">第三部：十八歲倒數</span>
   </div>
   <h1 class="reading-chapter-title">第二十二章：白司禮的晶片</h1>
   <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
-
-  <!-- VIP 搶先預覽討說 -->
-  <div class="vip-cta-block">
-    <div class="vip-cta-title">✨ 搶先看一點點</div>
-    <p class="vip-cta-desc">這是第二十二章的搶先預覽片段，完整內容將在公開前持續更新。如果你喜歡這個故事，歡迎隨緣贊助支持作者。</p>
-    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-cta-btn">❤ 隨緣贊助作者</a>
-    <p class="vip-cta-note">贊助為自願行為，不強制付費。完整章節公開後將移至一般章節目錄。</p>
+  <div class="part3-source-status" aria-label="名字庫異常狀態">
+    <span class="part3-source-orb"></span>
+    <span class="part3-source-name">記憶碎片異常亮起</span>
+    <span class="part3-source-detail">白司禮通訊器偵測未知警報</span>
   </div>
 
-  <!-- 第三部狀態列（依劇情調整，可移除） -->
-  <!-- <div class="part3-source-status is-warning">
-    <span class="part3-source-orb"></span>
-    <span class="part3-source-name">名字記憶回流</span>
-    <span class="part3-source-detail">源點鎖定解除倒數</span>
-    <span class="part3-countdown">00:XX:00</span>
-  </div> -->
+  <div class="podcast-embed">
+    <div class="podcast-label">🎧 本章有音頻版本</div>
+    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第二十二集上線後將在此嵌入，敬請期待。</p>
+  </div>
 
   <div class="reading-content" id="readingContent">
     <p>柱體深處，</p>
@@ -212,37 +157,25 @@ body.light .vip-cta-note { color: rgba(40,30,0,.5); }
     <p>有幾個甚至開始快速地閃爍，</p>
     <p>像正在被強行讀取。</p>
     <p>白司禮感覺到自己腰間的通訊器，</p>
-    <p>發出一陣尖銳的警報聲。</p>
+    <p>發出一陣刺耳的警報聲。</p>
     <p>那個聲音尖銳、急促，</p>
     <p>跟他過去聽過的任何一種警報都不一樣。</p>
   </div>
 
-  <!-- 正文後贊助區塊 -->
-  <div class="vip-cta-block" style="margin:32px 0 0;">
-    <div class="vip-cta-title">喜歡這章嗎？</div>
-    <p class="vip-cta-desc">完整章節將在公開前持續更新。如果你喜歡這個故事，歡迎隨緣贊助支持作者繼續創作。</p>
-    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-cta-btn">❤ 隨緣贊助作者</a>
-    <p class="vip-cta-note">贊助為自願行為，不強制付費。贊助後歡迎至 Threads @bbdaddy924 私訊作者，讓他知道你在這裡。</p>
-  </div>
-
   <div class="reading-nav">
     <a href="reading-ch21.html" class="btn btn-ghost btn-sm">← 上一章</a>
-    <a href="bookshelf.html#vip" class="btn btn-ghost btn-sm">回 VIP 目錄</a>
+    <a href="bookshelf.html#part3" class="btn btn-ghost btn-sm">回目錄</a>
     <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
-    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-outline btn-sm">支持作者</a>
-  </div>
-
-  <!-- 底部贊助 CTA -->
-  <div class="vip-cta-block" style="margin-top:20px;">
-    <div class="vip-cta-title">喜歡這個故事嗎？</div>
-    <p class="vip-cta-desc">你的支持是作者繼續寫下去的最大動力。隨緣贊助，感謝每一份心意。</p>
-    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-cta-btn">❤ 隨緣贊助</a>
-    <p class="vip-cta-note">贊助後歡迎至 Threads @bbdaddy924 私訊作者，讓他知道你在這裡。</p>
   </div>
 
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
-    <p style="font-size:14px;color:var(--text-dim);margin-bottom:16px;">到 Threads 上和作者聊聊你的想法！</p>
-    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-primary btn-sm">前往 @bbdaddy924 留言</a>
+    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《白司禮的晶片》嗎？</p>
+    <p style="font-size:14px;color:var(--text-dim);margin:0 0 18px;">如果你喜歡《第九次出生》，歡迎隨緣贊助，支持比爸 BD 繼續創作。每一份支持都會成為下一章的燃料。</p>
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-primary btn-sm">❤ 隨緣贊助作者</a>
+      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">前往 Threads 留言</a>
+    </div>
+    <p style="font-size:11px;color:var(--text-xs);margin:16px 0 0;">贊助為自願行為，不影響公開章節的閱讀與更新。</p>
   </div>
 </div>
 
@@ -255,7 +188,7 @@ body.light .vip-cta-note { color: rgba(40,30,0,.5); }
           <li><a href="bookshelf.html">書櫃</a></li>
           <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
           <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
-          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–021 · 連載中）</a></li>
+          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–022 · 連載中）</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -333,7 +266,6 @@ updateThemeButton();
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
 </script>
-
 <div class="music-bar" id="musicBar">
   <div class="mb-cover">🎵</div>
   <div class="mb-info"><div class="mb-title">第九次出生 主題曲</div><div class="mb-sub">《第九次出生》· 比爸 BD</div></div>
@@ -379,7 +311,6 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closeToc();
 });
 </script>
-
 <!-- TOC 彈出層 -->
 <div class="toc-overlay" id="tocOverlay"></div>
 <div class="toc-panel" id="tocPanel">
@@ -387,40 +318,123 @@ document.addEventListener('keydown',function(e){
     <span class="toc-header-title">《第九次出生》章節目錄</span>
   </div>
   <div class="toc-part-label">第一部：第九門</div>
-    <a href="reading.html" class="toc-item"><span class="toc-item-num">Ch.001</span><span class="toc-item-title">出生警報</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch2.html" class="toc-item"><span class="toc-item-num">Ch.002</span><span class="toc-item-title">母親的謊言</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch3.html" class="toc-item"><span class="toc-item-num">Ch.003</span><span class="toc-item-title">最後一次</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch4.html" class="toc-item"><span class="toc-item-num">Ch.004</span><span class="toc-item-title">死者醒來</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch5.html" class="toc-item"><span class="toc-item-num">Ch.005</span><span class="toc-item-title">管道盡頭</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch6.html" class="toc-item"><span class="toc-item-num">Ch.006</span><span class="toc-item-title">地下學校</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch7.html" class="toc-item"><span class="toc-item-num">Ch.007</span><span class="toc-item-title">周嶺的殘響</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch8.html" class="toc-item"><span class="toc-item-num">Ch.008</span><span class="toc-item-title">舊門</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch9.html" class="toc-item"><span class="toc-item-num">Ch.009</span><span class="toc-item-title">第九門</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading.html" class="toc-item">
+      <span class="toc-item-num">Ch.001</span>
+      <span class="toc-item-title">出生警報</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch2.html" class="toc-item">
+      <span class="toc-item-num">Ch.002</span>
+      <span class="toc-item-title">母親的謊言</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch3.html" class="toc-item">
+      <span class="toc-item-num">Ch.003</span>
+      <span class="toc-item-title">最後一次</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch4.html" class="toc-item">
+      <span class="toc-item-num">Ch.004</span>
+      <span class="toc-item-title">死者醒來</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch5.html" class="toc-item">
+      <span class="toc-item-num">Ch.005</span>
+      <span class="toc-item-title">管道盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch6.html" class="toc-item">
+      <span class="toc-item-num">Ch.006</span>
+      <span class="toc-item-title">地下學校</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch7.html" class="toc-item">
+      <span class="toc-item-num">Ch.007</span>
+      <span class="toc-item-title">周嶺的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch8.html" class="toc-item">
+      <span class="toc-item-num">Ch.008</span>
+      <span class="toc-item-title">舊門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch9.html" class="toc-item">
+      <span class="toc-item-num">Ch.009</span>
+      <span class="toc-item-title">第九門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
   <div class="toc-part-label">第二部：黑河低語</div>
-    <a href="reading-ch10.html" class="toc-item"><span class="toc-item-num">Ch.010</span><span class="toc-item-title">門後餘波</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch11.html" class="toc-item"><span class="toc-item-num">Ch.011</span><span class="toc-item-title">記憶黑市</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch12.html" class="toc-item"><span class="toc-item-num">Ch.012</span><span class="toc-item-title">名字法院</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch13.html" class="toc-item"><span class="toc-item-num">Ch.013</span><span class="toc-item-title">黑河圖書館</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch14.html" class="toc-item"><span class="toc-item-num">Ch.014</span><span class="toc-item-title">晶片壓制</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch15.html" class="toc-item"><span class="toc-item-num">Ch.015</span><span class="toc-item-title">母親的暗訊</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch16.html" class="toc-item"><span class="toc-item-num">Ch.016</span><span class="toc-item-title">白紙令擴散</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch17.html" class="toc-item"><span class="toc-item-num">Ch.017</span><span class="toc-item-title">集體崩潰</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch18.html" class="toc-item"><span class="toc-item-num">Ch.018</span><span class="toc-item-title">十八歲倒數</span><span class="toc-item-arrow">›</span></a>
+    <a href="reading-ch10.html" class="toc-item">
+      <span class="toc-item-num">Ch.010</span>
+      <span class="toc-item-title">門後餘波</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch11.html" class="toc-item">
+      <span class="toc-item-num">Ch.011</span>
+      <span class="toc-item-title">記憶黑市</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch12.html" class="toc-item">
+      <span class="toc-item-num">Ch.012</span>
+      <span class="toc-item-title">名字法院</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch13.html" class="toc-item">
+      <span class="toc-item-num">Ch.013</span>
+      <span class="toc-item-title">黑河圖書館</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch14.html" class="toc-item">
+      <span class="toc-item-num">Ch.014</span>
+      <span class="toc-item-title">晶片壓制</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch15.html" class="toc-item">
+      <span class="toc-item-num">Ch.015</span>
+      <span class="toc-item-title">母親的暗訊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch16.html" class="toc-item">
+      <span class="toc-item-num">Ch.016</span>
+      <span class="toc-item-title">白紙令擴散</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch17.html" class="toc-item">
+      <span class="toc-item-num">Ch.017</span>
+      <span class="toc-item-title">集體崩潰</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch18.html" class="toc-item">
+      <span class="toc-item-num">Ch.018</span>
+      <span class="toc-item-title">十八歲倒數</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
   <div class="toc-part-label">第三部：十八歲倒數</div>
-    <a href="reading-ch19.html" class="toc-item"><span class="toc-item-num">Ch.019</span><span class="toc-item-title">名字庫入口</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch20.html" class="toc-item"><span class="toc-item-num">Ch.020</span><span class="toc-item-title">被刪除的名字</span><span class="toc-item-arrow">›</span></a>
-    <a href="reading-ch21.html" class="toc-item"><span class="toc-item-num">Ch.021</span><span class="toc-item-title">找回自我</span><span class="toc-item-arrow">›</span></a>
-  <div class="toc-part-label" style="color:var(--vip-gold,#c9a84c);border-bottom-color:rgba(201,168,76,.22);">✨ VIP 搶先閱讀</div>
-    <a href="reading-vip01.html" class="toc-item toc-active" style="border-color:rgba(201,168,76,.34);background:rgba(201,168,76,.06);">
-      <span class="toc-item-num" style="color:rgba(201,168,76,.7);">VIP.001</span>
-      <span class="toc-item-title" style="color:var(--vip-gold,#c9a84c);">搶先閱讀</span>
-      <span class="toc-item-arrow" style="color:rgba(201,168,76,.7);">›</span>
+    <a href="reading-ch19.html" class="toc-item">
+      <span class="toc-item-num">Ch.019</span>
+      <span class="toc-item-title">名字庫入口</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch20.html" class="toc-item">
+      <span class="toc-item-num">Ch.020</span>
+      <span class="toc-item-title">被刪除的名字</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch21.html" class="toc-item">
+      <span class="toc-item-num">Ch.021</span>
+      <span class="toc-item-title">找回自我</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch22.html" class="toc-item toc-active">
+      <span class="toc-item-num">Ch.022</span>
+      <span class="toc-item-title">白司禮的晶片</span>
+      <span class="toc-item-arrow">›</span>
     </a>
 </div>
 <button id="tocCloseFixed" class="toc-close-fixed" onclick="closeToc()" aria-label="關閉目錄">✕</button>
 
 <script>
-/* 共用導覽列日夜切換狀態 */
+/* 共用導覽列日夜切換狀態：保留既有閱讀工具列按鈕，並同步更新導覽列圖示。 */
 (function(){
   function updateNavThemeToggle(){
     var isLight=document.body.classList.contains('light');
@@ -441,5 +455,6 @@ document.addEventListener('keydown',function(e){
   updateNavThemeToggle();
 })();
 </script>
+
 </body>
 </html>

@@ -157,145 +157,6 @@
 .part3-card .ch-list-item:hover { background:rgba(142,203,255,.045); }
 @media(max-width:600px){ .part3-card .book-row-cover { border-bottom-color:rgba(142,203,255,.24); } }
 
-/* ── VIP 搶先閱讀區 ── */
-:root { --vip-gold:#c9a84c; --vip-gold-dim:rgba(201,168,76,0.18); --vip-gold-border:rgba(201,168,76,0.35); }
-.vip-section-wrap {
-  max-width:900px; margin:0 auto; padding:0 24px 80px;
-}
-.vip-section-header {
-  display:flex; align-items:center; gap:14px;
-  margin-bottom:32px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--vip-gold-border);
-}
-.vip-section-icon {
-  width:36px; height:36px; border-radius:50%;
-  background:radial-gradient(circle at 38% 38%,rgba(201,168,76,.28),rgba(201,168,76,.06));
-  border:1px solid var(--vip-gold-border);
-  display:flex; align-items:center; justify-content:center;
-  font-size:16px; flex-shrink:0;
-  box-shadow:0 0 18px rgba(201,168,76,.12);
-}
-.vip-section-label {
-  font-size:11px; font-weight:500; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--vip-gold); opacity:.85;
-  margin-bottom:4px;
-}
-.vip-section-title {
-  font-size:clamp(18px,3vw,24px); font-weight:700;
-  color:var(--white); letter-spacing:-0.02em;
-}
-.vip-desc-row {
-  display:flex; align-items:flex-start; justify-content:space-between;
-  gap:20px; margin-bottom:28px; flex-wrap:wrap;
-}
-.vip-desc-text {
-  font-size:13px; color:var(--text-dim); line-height:1.8;
-  max-width:520px;
-}
-.vip-donate-btn {
-  display:inline-flex; align-items:center; gap:7px;
-  padding:9px 20px; border-radius:980px;
-  font-size:12px; font-weight:500; letter-spacing:.04em;
-  color:var(--vip-gold); background:rgba(201,168,76,.08);
-  border:1px solid var(--vip-gold-border);
-  text-decoration:none; white-space:nowrap;
-  transition:background .2s, box-shadow .2s;
-  flex-shrink:0;
-}
-.vip-donate-btn:hover {
-  background:rgba(201,168,76,.16);
-  box-shadow:0 0 20px rgba(201,168,76,.15);
-  opacity:1;
-}
-.vip-card {
-  border:1px solid var(--vip-gold-border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(0,0,0,.32) 60%);
-  box-shadow:0 0 56px rgba(201,168,76,.04),inset 0 1px 0 rgba(201,168,76,.08);
-  margin-bottom:16px;
-}
-.vip-card-header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:18px 24px 14px;
-  border-bottom:1px solid rgba(201,168,76,.14);
-  gap:12px; flex-wrap:wrap;
-}
-.vip-card-meta { display:flex; align-items:center; gap:10px; }
-.vip-badge {
-  display:inline-flex; align-items:center; gap:5px;
-  padding:3px 10px; border-radius:980px;
-  font-size:10px; font-weight:600; letter-spacing:.10em;
-  text-transform:uppercase;
-  color:var(--vip-gold); background:rgba(201,168,76,.10);
-  border:1px solid rgba(201,168,76,.28);
-}
-.vip-badge-dot {
-  width:5px; height:5px; border-radius:50%;
-  background:var(--vip-gold); box-shadow:0 0 6px var(--vip-gold);
-  flex-shrink:0;
-}
-.vip-card-num {
-  font-size:10px; font-weight:500; letter-spacing:.08em;
-  color:rgba(201,168,76,.6);
-}
-.vip-card-title {
-  font-size:15px; font-weight:600; color:var(--white);
-  letter-spacing:-0.01em;
-}
-.vip-card-status {
-  font-size:11px; color:rgba(201,168,76,.7);
-  white-space:nowrap;
-}
-.vip-card-body { padding:16px 24px 20px; }
-.vip-card-preview {
-  font-size:13px; color:var(--text-dim); line-height:1.8;
-  margin-bottom:16px;
-}
-.vip-read-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:8px 18px; border-radius:980px;
-  font-size:12px; font-weight:500;
-  color:#000; background:var(--vip-gold);
-  text-decoration:none; border:none; cursor:pointer;
-  transition:opacity .2s, transform .2s;
-}
-.vip-read-btn:hover { opacity:.85; transform:scale(1.02); }
-.vip-coming-card {
-  border:1px dashed rgba(201,168,76,.22);
-  border-radius:var(--radius);
-  padding:20px 24px;
-  display:flex; align-items:center; gap:14px;
-  opacity:.55;
-}
-.vip-coming-icon { font-size:18px; flex-shrink:0; }
-.vip-coming-text { font-size:13px; color:var(--text-dim); }
-.vip-notice {
-  margin-top:24px; padding:14px 18px;
-  border-radius:8px; border:1px solid var(--border);
-  background:var(--surface);
-  font-size:11px; color:var(--text-xs); line-height:1.7;
-}
-/* 日間模式 VIP */
-body.light .vip-card {
-  background:linear-gradient(135deg,rgba(201,168,76,.10),rgba(255,252,240,.92) 60%);
-  border-color:rgba(160,120,30,.35);
-}
-body.light .vip-card-header { border-bottom-color:rgba(160,120,30,.14); }
-body.light .vip-card-title { color:#1a1200; }
-body.light .vip-card-preview { color:rgba(40,30,0,.72); }
-body.light .vip-badge { color:#8a6000; background:rgba(201,168,76,.14); border-color:rgba(160,120,30,.30); }
-body.light .vip-badge-dot { background:#8a6000; box-shadow:0 0 6px rgba(138,96,0,.5); }
-body.light .vip-card-num { color:rgba(138,96,0,.6); }
-body.light .vip-card-status { color:rgba(138,96,0,.7); }
-body.light .vip-section-label { color:#8a6000; }
-body.light .vip-section-title { color:#1a1200; }
-body.light .vip-donate-btn { color:#8a6000; background:rgba(201,168,76,.12); border-color:rgba(160,120,30,.35); }
-body.light .vip-donate-btn:hover { background:rgba(201,168,76,.22); }
-body.light .vip-coming-card { border-color:rgba(160,120,30,.22); }
-body.light .vip-coming-text { color:rgba(40,30,0,.55); }
-body.light .vip-notice { background:rgba(255,252,240,.8); border-color:rgba(160,120,30,.18); color:rgba(40,30,0,.55); }
 
 /* 日間模式：避免書櫃的固定深色卡片與日間文字互相抵銷 */
 body.light .bookshelf-page,
@@ -518,7 +379,7 @@ body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203
         </div>
         <h2 class="book-row-title">第九次出生 — 第三部《十八歲倒數》</h2>
         <p class="book-row-desc">祈安抱著化為藍光的林澈，走進由無數名字組成的星空。當十八歲的倒數重新開始，赤環城最深處的秘密，終於準備睜開眼睛。</p>
-        <div class="book-row-meta">2026 年開始連載 · 第三部第三章已上線</div>
+        <div class="book-row-meta">2026 年開始連載 · 第三部第四章已上線</div>
         <div class="ch-list-header">章節目錄</div>
         <a href="reading-ch19.html" class="ch-list-item">
           <span class="ch-list-num">Ch.019</span>
@@ -535,8 +396,13 @@ body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203
           <span class="ch-list-title">找回自我</span>
           <span class="ch-list-status">已上線 ›</span>
         </a>
-        <div class="ch-list-item" style="cursor:default;opacity:.62;">
+        <a href="reading-ch22.html" class="ch-list-item">
           <span class="ch-list-num">Ch.022</span>
+          <span class="ch-list-title">白司禮的晶片</span>
+          <span class="ch-list-status">已上線 ›</span>
+        </a>
+        <div class="ch-list-item" style="cursor:default;opacity:.62;">
+          <span class="ch-list-num">Ch.023</span>
           <span class="ch-list-title">下一章即將連載</span>
           <span class="ch-list-status">敬請期待</span>
         </div>
@@ -547,51 +413,6 @@ body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203
 
 </div><!-- end .bookshelf-page -->
 
-<!-- VIP 搶先閱讀區 -->
-<div id="vip" class="vip-section-wrap reveal">
-
-  <div class="vip-section-header">
-    <div class="vip-section-icon">✨</div>
-    <div>
-      <div class="vip-section-label">VIP · 搶先閱讀</div>
-      <div class="vip-section-title">搶先看到下一章</div>
-    </div>
-  </div>
-
-  <div class="vip-desc-row">
-    <p class="vip-desc-text">這裡收錄尚未公開的章節內容。所有內容均為「隨緣贊助」，不強制付費。如果你喜歡這個故事，歡迎請作者喝一杯咖啡！</p>
-    <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="vip-donate-btn">
-      ❤ 隨緣贊助作者
-    </a>
-  </div>
-
-  <!-- VIP 章節列表：待作者填入內容後可依樣新增 -->
-  <div class="vip-card">
-    <div class="vip-card-header">
-      <div class="vip-card-meta">
-        <span class="vip-badge"><span class="vip-badge-dot"></span>搶先閱讀</span>
-        <span class="vip-card-num">VIP.001</span>
-        <span class="vip-card-title">第二十二章：白司禮的晶片</span>
-      </div>
-      <span class="vip-card-status">隨緣贊助 · 搶先閱讀 ›</span>
-    </div>
-    <div class="vip-card-body">
-      <p class="vip-card-preview">柱體深處，那些還未展開的記憶碎片，忽然集體地亮了起來。整座名字庫猛地震動——白司禮腰間的通訊器發出了一種尚未聽過的警報聲。</p>
-      <a href="reading-vip01.html" class="vip-read-btn">✨ 進入搶先閱讀</a>
-    </div>
-  </div>
-
-  <!-- 即將上線占位卡 -->
-  <div class="vip-coming-card">
-    <span class="vip-coming-icon">🔒</span>
-    <span class="vip-coming-text">VIP.002 · 更多搶先章節即將上線，敲請期待。</span>
-  </div>
-
-  <div class="vip-notice">
-    ⚠️ 所有 VIP 搶先閱讀內容均為「隨緣贊助」，非強制付費。贊助後請至 Threads （@bbdaddy924）私訊作者以取得閱讀連結。贊助為自願行為，不影響公開章節的正常更新。
-  </div>
-
-</div><!-- end #vip -->
 
 <footer>
   <div class="footer-wrap">
@@ -602,7 +423,7 @@ body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203
           <li><a href="bookshelf.html">書櫃</a></li>
           <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
           <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
-          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–021 · 連載中）</a></li>
+          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–022 · 連載中）</a></li>
         </ul>
       </div>
       <div class="footer-col">
