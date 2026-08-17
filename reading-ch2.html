@@ -22,90 +22,61 @@
 }
 
 /* ── 背景音樂播放列 ── */
-.music-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: saturate(120%) blur(28px);
-  -webkit-backdrop-filter: saturate(120%) blur(28px);
-  border-top: 1px solid var(--border);
-  padding: 0 24px;
-  height: 64px;
-  display: flex; align-items: center; gap: 14px;
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+.music-fab {
+  position:fixed;
+  right:24px;
+  bottom:calc(24px + env(safe-area-inset-bottom,0px));
+  z-index:9999;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:50%;
+  background:rgba(12,12,14,.88);
+  color:#fff;
+  font-size:23px;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.10);
+  backdrop-filter:saturate(140%) blur(18px);
+  -webkit-backdrop-filter:saturate(140%) blur(18px);
+  transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease;
 }
-.music-bar.visible { transform: translateY(0); }
-.mb-cover {
-  width: 32px; height: 32px; border-radius: 6px;
-  background: var(--surface2);
-  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
+.music-fab:hover {
+  transform:translateY(-2px) scale(1.04);
+  background:rgba(32,32,36,.96);
+  border-color:rgba(255,255,255,.38);
 }
-.mb-info { flex: 1; min-width: 0; }
-.mb-title {
-  font-size: 12px; font-weight: 500; color: var(--white);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
+.music-fab:active { transform:scale(.94); }
+.music-fab.is-playing {
+  border-color:rgba(201,168,76,.72);
+  background:radial-gradient(circle at 34% 28%,rgba(255,234,171,.32),rgba(201,168,76,.22) 44%,rgba(13,13,15,.94) 76%);
+  box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 22px rgba(201,168,76,.25);
+  animation:musicFabPulse 2.1s ease-in-out infinite;
 }
-.mb-sub {
-  font-size: 10px; color: var(--text-xs); margin-top: 1px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+@keyframes musicFabPulse {
+  0%,100% { box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 18px rgba(201,168,76,.20); }
+  50% { box-shadow:0 0 0 9px rgba(201,168,76,.04),0 12px 34px rgba(0,0,0,.40),0 0 30px rgba(201,168,76,.34); }
 }
-.mb-progress-wrap { flex: 2; max-width: 280px; display: flex; flex-direction: column; gap: 5px; }
-.mb-progress {
-  width: 100%; height: 2px;
-  background: var(--border); border-radius: 2px; cursor: pointer; position: relative;
+body.light .music-fab {
+  background:rgba(255,255,255,.90);
+  border-color:rgba(20,20,25,.16);
+  box-shadow:0 10px 28px rgba(20,30,45,.16),inset 0 1px 0 rgba(255,255,255,.9);
 }
-.mb-progress-fill {
-  height: 100%; background: rgba(255,255,255,0.5); border-radius: 2px; width: 0%;
-  transition: width 0.3s linear; pointer-events: none;
+body.light .music-fab.is-playing {
+  background:radial-gradient(circle at 34% 28%,rgba(255,239,192,.86),rgba(221,190,102,.50) 46%,rgba(255,255,255,.96) 78%);
+  border-color:rgba(138,96,0,.44);
 }
-.mb-time { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-xs); }
-.mb-controls { display: flex; align-items: center; gap: 6px; }
-.mb-btn {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text-dim); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; transition: background 0.18s, color 0.18s;
+@media(max-width:768px) {
+  .music-fab {
+    right:18px;
+    bottom:calc(18px + env(safe-area-inset-bottom,0px));
+    width:54px;
+    height:54px;
+    font-size:22px;
+  }
 }
-.mb-btn:hover { background: var(--surface2); color: var(--white); }
-.mb-btn.play {
-  width: 36px; height: 36px; font-size: 13px;
-  background: var(--surface2);
-  border-color: var(--border2); color: var(--white);
-}
-.mb-btn.play:hover { background: rgba(255,255,255,0.15); }
-.mb-volume { display: flex; align-items: center; gap: 6px; }
-.mb-volume-icon { font-size: 12px; color: var(--text-xs); cursor: pointer; }
-.mb-volume-slider {
-  -webkit-appearance: none; appearance: none;
-  width: 70px; height: 2px;
-  background: var(--border); border-radius: 2px; cursor: pointer; outline: none;
-}
-.mb-volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 10px; height: 10px;
-  border-radius: 50%; background: var(--white); cursor: pointer;
-}
-.mb-close {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--surface); border: 1px solid var(--border);
-  color: var(--text-xs); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; transition: background 0.18s;
-  flex-shrink: 0;
-}
-.mb-close:hover { background: var(--surface2); color: var(--white); }
-@media(max-width:768px){
-  .music-bar { padding: 0 14px; gap: 10px; height: 60px; }
-  .mb-progress-wrap, .mb-volume { display: none; }
-  .mb-btn { width: 30px; height: 30px; font-size: 11px; }
-  .mb-btn.play { width: 34px; height: 34px; }
-}
-
-/* ── 閱讀工具列 ── */
 .reading-toolbar {
   position: sticky;
   top: var(--nav-h, 60px);
@@ -793,99 +764,30 @@ document.addEventListener("selectstart",e=>e.preventDefault());
 
 
 
-<!-- ── 背景音樂懸浮播放列 ── -->
-<div class="music-bar" id="musicBar">
-  <div class="mb-cover">🎵</div>
-  <div class="mb-info">
-    <div class="mb-title">第九次出生 主題曲</div>
-    <div class="mb-sub">《第九次出生》· 比爸 BD</div>
-  </div>
-  <div class="mb-progress-wrap">
-    <div class="mb-progress" id="mbProgress">
-      <div class="mb-progress-fill" id="mbFill"></div>
-    </div>
-    <div class="mb-time">
-      <span id="mbCurrent">0:00</span>
-      <span id="mbDuration">--:--</span>
-    </div>
-  </div>
-  <div class="mb-controls">
-    <button class="mb-btn" id="mbPrevBtn" onclick="mbRestart()" title="重新播放">⟨⟨</button>
-    <button class="mb-btn play" id="mbPlayBtn" onclick="mbToggle()">▶</button>
-    <button class="mb-btn" onclick="mbSkip(15)" title="快進 15 秒">⟩⟩</button>
-  </div>
-  <div class="mb-volume">
-    <span class="mb-volume-icon" id="mbVolIcon" onclick="mbMute()">🔊</span>
-    <input type="range" class="mb-volume-slider" id="mbVolSlider" min="0" max="1" step="0.05" value="0.6" oninput="mbSetVol(this.value)">
-  </div>
-  <button class="mb-close" onclick="mbClose()" title="關閉">×</button>
-</div>
-<audio id="bgAudio" loop preload="metadata">
-  <source src="theme.mp3" type="audio/mpeg">
-</audio>
+<button class="music-fab" id="musicFab" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
 <script>
 (function(){
-  var audio = document.getElementById('bgAudio');
-  var playBtn = document.getElementById('mbPlayBtn');
-  var fill = document.getElementById('mbFill');
-  var cur = document.getElementById('mbCurrent');
-  var dur = document.getElementById('mbDuration');
-  var bar = document.getElementById('musicBar');
-  var volSlider = document.getElementById('mbVolSlider');
-  var volIcon = document.getElementById('mbVolIcon');
-  var muted = false;
-  var closed = false;
-  audio.volume = 0.6;
-
-  function fmt(s){ var m=Math.floor(s/60); return m+':'+(('0'+Math.floor(s%60)).slice(-2)); }
-
-  audio.addEventListener('loadedmetadata', function(){
-    dur.textContent = fmt(audio.duration);
-  });
-  audio.addEventListener('timeupdate', function(){
-    if(!audio.duration) return;
-    var pct = (audio.currentTime/audio.duration)*100;
-    fill.style.width = pct+'%';
-    cur.textContent = fmt(audio.currentTime);
-  });
-
-  // 點擊進度條跳轉
-  document.getElementById('mbProgress').addEventListener('click', function(e){
-    if(!audio.duration) return;
-    var rect = this.getBoundingClientRect();
-    var pct = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pct * audio.duration;
-  });
-
-  window.mbToggle = function(){
+  var audio=document.getElementById('bgAudio');
+  var fab=document.getElementById('musicFab');
+  audio.volume=0.6;
+  function updateMusicFab(){
+    var playing=!audio.paused;
+    fab.classList.toggle('is-playing',playing);
+    fab.setAttribute('aria-label',playing?'暫停背景音樂':'播放背景音樂');
+    fab.title=playing?'暫停背景音樂':'播放背景音樂';
+  }
+  window.mbToggle=function(){
     if(audio.paused){
-      audio.play().then(function(){ playBtn.textContent='⏸'; }).catch(function(){});
-    } else {
-      audio.pause(); playBtn.textContent='▶';
+      audio.play().then(updateMusicFab).catch(function(){ updateMusicFab(); });
+    }else{
+      audio.pause();
+      updateMusicFab();
     }
   };
-  window.mbRestart = function(){ audio.currentTime=0; };
-  window.mbSkip = function(s){ audio.currentTime = Math.min(audio.duration||0, audio.currentTime+s); };
-  window.mbSetVol = function(v){
-    audio.volume = parseFloat(v);
-    muted = false;
-    volIcon.textContent = v>0.5?'🔊':v>0?'🔉':'🔇';
-  };
-  window.mbMute = function(){
-    muted = !muted;
-    audio.muted = muted;
-    volIcon.textContent = muted ? '🔇' : (audio.volume>0.5?'🔊':'🔉');
-  };
-  window.mbClose = function(){
-    closed = true;
-    audio.pause();
-    bar.classList.remove('visible');
-  };
-
-  // 頁面載入後 2 秒滑入播放列（不自動播放，等用戶點擊）
-  setTimeout(function(){
-    if(!closed) bar.classList.add('visible');
-  }, 2000);
+  audio.addEventListener('play',updateMusicFab);
+  audio.addEventListener('pause',updateMusicFab);
+  updateMusicFab();
 })();
 
 function openToc(){
