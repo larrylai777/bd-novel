@@ -203,3 +203,108 @@ body.light .support-card,body.light .support-tier,body.light .about-card,body.li
   .reading-content { margin:58px auto !important; }
   .reading-content p { font-size:18px !important; line-height:2.05 !important; }
 }
+
+/* ── 可讀性修正：日間模式與手機閱讀工具列 ── */
+body.light {
+  --paper: #111722;
+  --paper-muted: rgba(17,23,34,.70);
+  --paper-faint: rgba(17,23,34,.48);
+  --dawn: #a65a0b;
+  --signal: #006fae;
+  --signal-soft: rgba(0,111,174,.12);
+  --dawn-soft: rgba(166,90,11,.12);
+  --ink-raised: #fffdf8;
+  --ink-soft: #e7e5df;
+}
+
+/* 首頁：日間模式固定使用深色主視覺，其餘區段使用深色文字 */
+body.light .archive-hero {
+  background:
+    radial-gradient(circle at 82% 24%, rgba(66,150,214,.23), transparent 28rem),
+    radial-gradient(circle at 5% 80%, rgba(231,147,68,.13), transparent 30rem),
+    #0a1019;
+}
+body.light .archive-hero::before { background:linear-gradient(90deg,rgba(10,16,25,.26),rgba(10,16,25,.92) 73%),linear-gradient(0deg,rgba(10,16,25,.88),transparent 58%); }
+body.light .archive-hero .archive-title { color:#f7f5ef; }
+body.light .archive-hero .archive-deck { color:rgba(247,245,239,.76); }
+body.light .archive-hero .archive-eyebrow { color:#98d7ff; }
+body.light .archive-hero .home-orbit { border-color:rgba(152,215,255,.24); }
+body.light .archive-hero .home-orbit.two { border-color:rgba(255,179,107,.2); }
+body.light .archive-index { background:rgba(10,16,25,.82); border-color:rgba(229,238,250,.24); color:#f7f5ef; }
+body.light .archive-index-title { color:#f7f5ef; }
+body.light .archive-index-copy { color:rgba(247,245,239,.68); }
+body.light .archive-index-meta { color:rgba(247,245,239,.52); border-color:rgba(247,245,239,.16); }
+body.light .archive-index-meta a { color:#98d7ff; }
+body.light .archive-hero .btn-outline { color:#9cddff !important; border-color:rgba(156,221,255,.58) !important; }
+body.light .archive-hero .btn-primary { background:#f7f5ef !important; border-color:#f7f5ef !important; color:#0a1019 !important; }
+body.light .volume-card.active { background:linear-gradient(145deg,#10283a,#0b1520) !important; }
+body.light .volume-card.active .volume-no,
+body.light .volume-card.active .volume-name,
+body.light .volume-card.active .volume-state { color:#f7f5ef !important; }
+body.light .volume-card.active .volume-state { color:rgba(247,245,239,.68) !important; }
+
+/* 書櫃：日間模式仍保留深色書封，正文面板改為白底深色字 */
+body.light .book-row { background:rgba(255,253,248,.9) !important; box-shadow:0 16px 44px rgba(21,28,39,.11); }
+body.light .book-row-cover { color:#f7f5ef !important; }
+body.light .book-row-cover::before,
+body.light .book-row-cover-title,
+body.light .book-row-cover-sub { color:#f7f5ef !important; }
+body.light .part2-card .book-row-cover-title,
+body.light .part2-card .book-row-cover-sub { color:#ffd39a !important; }
+body.light .part3-card .book-row-cover-title,
+body.light .part3-card .book-row-cover-sub { color:#a9ddff !important; }
+body.light .book-row-info { color:#111722; }
+body.light .book-row-title { color:#111722 !important; }
+body.light .book-row-desc { color:rgba(17,23,34,.72) !important; }
+body.light .book-row-meta { color:#006fae !important; }
+body.light .ch-list-header,
+body.light .ch-list-num { color:rgba(17,23,34,.48) !important; }
+body.light .ch-list-item { color:#111722 !important; }
+body.light .ch-list-status { color:#006fae !important; }
+
+/* 閱讀頁：不使用裝飾性首字，所有段落維持相同字級。 */
+.reading-content p:first-child::first-letter {
+  color:inherit !important;
+  float:none !important;
+  font-family:inherit !important;
+  font-size:inherit !important;
+  line-height:inherit !important;
+  padding-right:0 !important;
+}
+
+@media (max-width:768px) {
+  /* 將五個控制鈕壓縮為一列，避免目錄獨占第一列造成空白。 */
+  .reading-toolbar {
+    top:64px !important;
+    height:56px !important;
+    min-height:56px !important;
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:5px !important;
+    padding:7px 12px !important;
+  }
+  .reading-toolbar-left { width:auto !important; flex:0 0 auto !important; gap:3px !important; }
+  .reading-toolbar-center { flex:1 1 auto !important; justify-content:center !important; gap:3px !important; min-width:0; }
+  .reading-toolbar-right { flex:0 0 auto !important; gap:4px !important; }
+  .reading-toolbar .toolbar-btn {
+    min-height:38px !important;
+    padding:5px 8px !important;
+    border-radius:999px !important;
+    font-size:11px !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+    flex:0 0 auto !important;
+  }
+  .reading-toolbar-left .toolbar-btn { padding-left:9px !important; padding-right:9px !important; }
+  .reading-toolbar-right .toolbar-btn { min-width:42px !important; padding-left:7px !important; padding-right:7px !important; }
+  .reading-body { padding-top:136px !important; }
+  .reading-content { margin-top:48px !important; }
+}
+
+@media (max-width:360px) {
+  .reading-toolbar { padding-left:8px !important; padding-right:8px !important; gap:3px !important; }
+  .reading-toolbar .toolbar-btn { padding-left:6px !important; padding-right:6px !important; }
+  .reading-toolbar-right .toolbar-btn { min-width:38px !important; }
+}

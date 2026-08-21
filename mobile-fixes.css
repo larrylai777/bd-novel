@@ -1,0 +1,56 @@
+/* 第九次出生 — 閱讀頁最終手機介面覆寫 */
+@media (max-width: 768px) {
+  .reading-toolbar {
+    top: 64px !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 5px !important;
+    padding: 7px 12px !important;
+  }
+  .reading-toolbar-left {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    gap: 3px !important;
+  }
+  .reading-toolbar-center {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    gap: 3px !important;
+  }
+  .reading-toolbar-right {
+    flex: 0 0 auto !important;
+    gap: 4px !important;
+  }
+  .reading-toolbar .toolbar-btn {
+    min-height: 38px !important;
+    padding: 5px 8px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    flex: 0 0 auto !important;
+  }
+  .reading-toolbar-left .toolbar-btn { padding-left: 9px !important; padding-right: 9px !important; }
+  .reading-toolbar-right .toolbar-btn { min-width: 42px !important; padding-left: 7px !important; padding-right: 7px !important; }
+  .reading-body { padding-top: 136px !important; }
+  .reading-content { margin-top: 48px !important; }
+}
+@media (max-width: 360px) {
+  .reading-toolbar { padding-left: 8px !important; padding-right: 8px !important; gap: 3px !important; }
+  .reading-toolbar .toolbar-btn { padding-left: 6px !important; padding-right: 6px !important; }
+  .reading-toolbar-right .toolbar-btn { min-width: 38px !important; }
+}
+/* 不使用裝飾性首字，正文段落保持一致字級。 */
+.reading-content p:first-child::first-letter {
+  color: inherit !important;
+  float: none !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  padding-right: 0 !important;
+}
