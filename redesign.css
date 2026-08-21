@@ -308,3 +308,11 @@ body.light .ch-list-status { color:#006fae !important; }
   .reading-toolbar .toolbar-btn { padding-left:6px !important; padding-right:6px !important; }
   .reading-toolbar-right .toolbar-btn { min-width:38px !important; }
 }
+
+/* 全站英文統一採一般字重；中文仍依原有標題與正文層級顯示。 */
+.en-regular {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none;
+}

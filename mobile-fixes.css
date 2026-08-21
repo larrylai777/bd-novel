@@ -54,3 +54,22 @@
   line-height: inherit !important;
   padding-right: 0 !important;
 }
+
+/* 工具列音樂按鈕：直接播放／暫停，不展開播放條。 */
+.music-toolbar-btn {
+  min-width: 42px !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.music-toolbar-btn.is-playing {
+  background: var(--dawn) !important;
+  border-color: var(--dawn) !important;
+  color: #17120c !important;
+}
+body.light .music-toolbar-btn.is-playing {
+  background: #a65a0b !important;
+  border-color: #a65a0b !important;
+  color: #fffdf8 !important;
+}

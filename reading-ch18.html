@@ -145,6 +145,7 @@ body.light .music-fab { color:#1f1a10; }
   gtag('config', 'G-30GG7PY520');
 </script>
   <link rel="stylesheet" href="mobile-fixes.css">
+  <script src="english-regular.js" defer></script>
 </head>
 <body class="page-enter">
 <nav id="nav">
@@ -173,8 +174,7 @@ body.light .music-fab { color:#1f1a10; }
     <a href="reading-ch19.html" class="toolbar-btn primary">下一章 →</a>
   </div>
   <div class="reading-toolbar-right">
-    <button class="toolbar-btn" onclick="changeFontSize(-1)" title="縮小字體">A−</button>
-    <button class="toolbar-btn" onclick="changeFontSize(1)" title="放大字體">A+</button>
+    <button class="toolbar-btn music-toolbar-btn" id="toolbarMusicButton" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
   </div>
 </div>
 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -920,8 +920,6 @@ body.light .music-fab { color:#1f1a10; }
 </footer>
 
 <script>
-let fontSize=18;
-function changeFontSize(d){fontSize=Math.min(24,Math.max(14,fontSize+d));document.getElementById("readingContent").style.fontSize=fontSize+"px";}
 window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
 function updateThemeButton(){
   const btn=document.getElementById("themeBtn");
@@ -959,50 +957,31 @@ updateThemeButton();
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
 </script>
-<div class="music-dock" id="musicDock">
-  <button class="music-fab" id="musicFab" type="button" onclick="toggleMusicDock()" aria-label="展開背景音樂控制" title="展開背景音樂控制">🎶</button>
-  <div class="music-dock-panel" id="musicDockPanel" aria-hidden="true">
-    <div class="music-dock-info">
-      <div class="music-dock-title">第九次出生 主題曲</div>
-      <div class="music-dock-sub">《第九次出生》· 比爸 BD</div>
-    </div>
-    <button class="music-dock-play" id="musicDockPlay" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">▶</button>
-    <button class="music-dock-collapse" type="button" onclick="toggleMusicDock()" aria-label="收合播放列" title="收合播放列">⌄</button>
-  </div>
-</div>
 <audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
 <script>
 (function(){
   var audio=document.getElementById('bgAudio');
-  var dock=document.getElementById('musicDock');
-  var fab=document.getElementById('musicFab');
-  var panel=document.getElementById('musicDockPanel');
-  var playBtn=document.getElementById('musicDockPlay');
+  var toolbarButton=document.getElementById('toolbarMusicButton');
+  if(!audio || !toolbarButton) return;
   audio.volume=0.6;
-  function updateMusicDock(){
+  function updateToolbarMusic(){
     var playing=!audio.paused;
-    dock.classList.toggle('is-playing',playing);
-    playBtn.textContent=playing?'❚❚':'▶';
-    playBtn.setAttribute('aria-label',playing?'暫停背景音樂':'播放背景音樂');
-    playBtn.title=playing?'暫停背景音樂':'播放背景音樂';
+    toolbarButton.classList.toggle('is-playing',playing);
+    toolbarButton.textContent=playing?'❚❚':'🎶';
+    toolbarButton.setAttribute('aria-label',playing?'暫停背景音樂':'播放背景音樂');
+    toolbarButton.title=playing?'暫停背景音樂':'播放背景音樂';
   }
-  window.toggleMusicDock=function(){
-    var expanded=dock.classList.toggle('is-expanded');
-    panel.setAttribute('aria-hidden',expanded?'false':'true');
-    fab.setAttribute('aria-label',expanded?'收合背景音樂控制':'展開背景音樂控制');
-    fab.title=expanded?'收合背景音樂控制':'展開背景音樂控制';
-  };
   window.mbToggle=function(){
     if(audio.paused){
-      audio.play().then(updateMusicDock).catch(function(){ updateMusicDock(); });
+      audio.play().then(updateToolbarMusic).catch(updateToolbarMusic);
     }else{
       audio.pause();
-      updateMusicDock();
+      updateToolbarMusic();
     }
   };
-  audio.addEventListener('play',updateMusicDock);
-  audio.addEventListener('pause',updateMusicDock);
-  updateMusicDock();
+  audio.addEventListener('play',updateToolbarMusic);
+  audio.addEventListener('pause',updateToolbarMusic);
+  updateToolbarMusic();
 })();
 
 function openToc(){
@@ -1025,7 +1004,6 @@ document.addEventListener('keydown',function(e){
   <div class="toc-header">
     <span class="toc-header-title">《第九次出生》章節目錄</span>
   </div>
-  <div class="toc-part-label">第一部：第九門</div>
     <a href="reading.html" class="toc-item">
       <span class="toc-item-num">Ch.001</span>
       <span class="toc-item-title">出生警報</span>
@@ -1071,7 +1049,6 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">第九門</span>
       <span class="toc-item-arrow">›</span>
     </a>
-  <div class="toc-part-label">第二部：黑河低語</div>
     <a href="reading-ch10.html" class="toc-item">
       <span class="toc-item-num">Ch.010</span>
       <span class="toc-item-title">門後餘波</span>
@@ -1117,7 +1094,6 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">十八歲倒數</span>
       <span class="toc-item-arrow">›</span>
     </a>
-  <div class="toc-part-label">第三部：十八歲倒數</div>
     <a href="reading-ch19.html" class="toc-item">
       <span class="toc-item-num">Ch.019</span>
       <span class="toc-item-title">名字庫入口</span>
