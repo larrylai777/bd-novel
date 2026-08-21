@@ -1,675 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="比爸 BD — 科幻懸疑小說連載。《第九次出生》持續更新中。">
-<title>比爸 BD — 科幻懸疑小說</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css">
-<style>
-/* ── 第三部：名字庫星圖 ── */
-:root {
-  --part3-blue: #8ecbff;
-  --part3-blue-bright: #d5efff;
-  --part3-blue-soft: rgba(142,203,255,.18);
-  --part3-blue-faint: rgba(142,203,255,.07);
-  --part3-warning: #ff625f;
-}
-#nameSkyCanvas {
-  position: fixed; inset: 0; z-index: 0;
-  width: 100%; height: 100%; pointer-events: none;
-  opacity: .76;
-}
-body::before {
-  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(circle at 50% 42%, rgba(82,157,235,.17), transparent 32%),
-              radial-gradient(circle at 13% 84%, rgba(86,123,255,.10), transparent 28%), #000;
-}
-body > * { position: relative; z-index: 1; }
-/* ── 英雄區 ── */
-.hero-wrap {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 20px 24px 100px;
-}
-.hero-eyebrow {
-  font-size: 11px; font-weight: 400; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--text-xs);
-  margin-bottom: 32px;
-  opacity: 0; animation: fadeUp .9s .2s forwards;
-}
-.hero-title {
-  font-size: clamp(56px, 10vw, 120px);
-  font-weight: 700; color: var(--white);
-  letter-spacing: -0.04em; line-height: 0.92;
-  margin-bottom: 0;
-  opacity: 0; animation: fadeUp .9s .4s forwards;
-}
-.hero-title-sub {
-  display: block;
-  font-size: clamp(14px, 1.8vw, 18px);
-  font-weight: 400; color: var(--text-xs);
-  letter-spacing: .04em; line-height: 1;
-  margin-top: 20px;
-  opacity: 0; animation: fadeUp .9s .55s forwards;
-}
-.hero-desc {
-  font-size: clamp(15px, 1.8vw, 17px);
-  color: var(--text-dim);
-  max-width: 440px; margin: 40px auto 52px;
-  font-weight: 400; line-height: 1.9;
-  opacity: 0; animation: fadeUp .9s .7s forwards;
-}
-.hero-cta {
-  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp .9s .85s forwards;
-}
-.hero-scroll {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  opacity: 0; animation: fadeUp .9s 1.2s forwards;
-}
-.hero-scroll-line {
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--border2));
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-.hero-scroll-text {
-  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--text-xs);
-}
-
-/* ── 作品展示 ── */
-.novel-block {
-  position: relative; z-index: 1;
-  padding: 0 24px 120px;
-  max-width: 1100px; margin: 0 auto;
-}
-.novel-block-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-@media(max-width:768px){ .novel-block-inner { grid-template-columns: 1fr; } }
-.novel-main-panel {
-  background: var(--bg);
-  padding: 64px 48px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-@media(max-width:768px){ .novel-main-panel { padding: 40px 28px; } }
-.novel-main-eyebrow {
-  font-size: 11px; font-weight: 400; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--text-xs);
-  margin-bottom: 20px;
-}
-.novel-main-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700; color: var(--white);
-  letter-spacing: -0.03em; margin-bottom: 20px;
-  line-height: 1.1;
-}
-.novel-main-desc {
-  font-size: 14px; color: var(--text-dim);
-  line-height: 1.9; margin-bottom: 36px;
-  max-width: 380px;
-}
-.novel-side-panel {
-  background: var(--bg2);
-  display: flex; flex-direction: column;
-}
-.novel-side-item {
-  padding: 24px 32px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background .2s;
-  text-decoration: none; display: block;
-}
-.novel-side-item:last-child { border-bottom: none; }
-.novel-side-item:hover { background: var(--surface); }
-.novel-side-ch {
-  font-size: 10px; font-weight: 500; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--text-xs);
-  margin-bottom: 6px;
-}
-.novel-side-title {
-  font-size: 14px; font-weight: 500; color: var(--white);
-  margin-bottom: 4px;
-}
-.novel-side-desc { font-size: 12px; color: var(--text-xs); line-height: 1.6; }
-
-/* ── 數字統計 ── */
-.stats-strip {
-  position: relative; z-index: 1;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 56px 24px;
-}
-.stats-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; justify-content: center; gap: 0;
-}
-.stat-block {
-  text-align: center; padding: 0 64px;
-  border-right: 1px solid var(--border);
-}
-.stat-block:last-child { border-right: none; }
-.stat-n {
-  font-size: clamp(40px, 6vw, 64px);
-  font-weight: 700; color: var(--white);
-  letter-spacing: -0.04em; line-height: 1.0;
-}
-.stat-l {
-  font-size: 11px; color: var(--text-xs);
-  margin-top: 8px; letter-spacing: .06em;
-  text-transform: uppercase;
-}
-@media(max-width:600px){
-  .stats-inner { gap: 0; }
-  .stat-block { padding: 0 28px; }
-}
-
-/* ── 近期更新 ── */
-.updates-section {
-  position: relative; z-index: 1;
-  max-width: 1100px; margin: 0 auto;
-  padding: 120px 24px;
-}
-.updates-header {
-  margin-bottom: 56px;
-}
-.updates-eyebrow {
-  font-size: 11px; font-weight: 400; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--text-xs);
-  margin-bottom: 14px;
-}
-.updates-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700; color: var(--white);
-  letter-spacing: -0.03em;
-}
-.update-row {
-  display: flex; align-items: baseline; gap: 24px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none; color: var(--text);
-  transition: opacity .2s;
-}
-.update-row:last-child { border-bottom: none; }
-.update-row:hover { opacity: 0.6; }
-.update-row-num {
-  font-size: 11px; font-weight: 400; letter-spacing: .06em;
-  color: var(--text-xs); flex-shrink: 0; width: 20px;
-}
-.update-row-title {
-  flex: 1; font-size: 16px; font-weight: 400; color: var(--white);
-}
-.update-row-meta {
-  font-size: 12px; color: var(--text-xs); flex-shrink: 0;
-}
-
-/* ── 作者區 ── */
-.author-section {
-  position: relative; z-index: 1;
-  border-top: 1px solid var(--border);
-  padding: 100px 24px;
-}
-.author-inner {
-  max-width: 640px; margin: 0 auto; text-align: center;
-}
-.author-avatar-wrap {
-  width: 72px; height: 72px; border-radius: 50%;
-  overflow: hidden; margin: 0 auto 28px;
-  border: 1px solid var(--border);
-}
-.author-avatar-wrap img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center top;
-}
-.author-name {
-  font-size: 20px; font-weight: 600; color: var(--white);
-  margin-bottom: 16px; letter-spacing: -0.01em;
-}
-.author-bio {
-  font-size: 15px; color: var(--text-dim);
-  line-height: 1.9; margin-bottom: 32px;
-}
-.author-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-
-/* ── 第三部混合視覺：首頁層 ── */
-.hero-eyebrow { color: rgba(213,239,255,.64); }
-.hero-title { text-shadow: 0 0 58px rgba(142,203,255,.08); }
-.hero-title-sub { color: var(--part3-blue); letter-spacing: .13em; }
-.hero-caption { margin-top: 28px; font-size: 10px; letter-spacing: .15em; color: rgba(142,203,255,.55); opacity: 0; animation: fadeUp .9s 1s forwards; }
-.part3-feature {
-  border-color: rgba(142,203,255,.27);
-  background: linear-gradient(135deg, rgba(142,203,255,.07), rgba(255,255,255,.01) 46%, rgba(0,0,0,.32));
-  box-shadow: 0 0 80px rgba(80,151,233,.045), inset 0 1px 0 rgba(213,239,255,.05);
-}
-.part3-feature .novel-main-panel { background: linear-gradient(145deg, rgba(7,17,28,.96), rgba(0,0,0,.98) 66%); }
-.part3-feature .novel-side-panel { background: rgba(2,7,12,.94); }
-.part3-feature .novel-main-eyebrow { color: var(--part3-blue); }
-.part3-feature .novel-main-title { text-shadow: 0 0 32px rgba(142,203,255,.09); }
-.part3-feature .btn-primary { background: var(--part3-blue-bright); color: #07111a; border-color: var(--part3-blue-bright); }
-.part3-feature .btn-primary:hover { background: #fff; }
-.part3-recent .novel-side-ch, .part3-latest .novel-side-ch { color: var(--part3-blue) !important; }
-.part3-latest { background: linear-gradient(90deg, rgba(142,203,255,.08), transparent 75%) !important; border-left: 2px solid var(--part3-blue); }
-.part3-latest .novel-side-title { color: var(--part3-blue-bright); }
-@media(max-width:768px){
-  #nameSkyCanvas { opacity: .76; }
-  .hero-title-sub {
-    white-space:nowrap;
-    font-size:clamp(12px,4.15vw,16px);
-    letter-spacing:.03em;
-  }
-  .hero-caption { margin-top: 22px; font-size: 9px; }
-  .part3-feature { border-radius: 16px; }
-  .part3-latest { border-left-width: 1px; }
-}
-
-/* 日間模式：名字庫 Hero 與第三部卡片改用淺色星圖層，避免深色文字落在黑底 */
-body.light::before {
-  background: radial-gradient(circle at 50% 42%, rgba(92,164,231,.17), transparent 33%),
-              radial-gradient(circle at 13% 84%, rgba(103,140,255,.10), transparent 28%), #f8f8f6;
-}
-body.light #nameSkyCanvas { opacity:.24; mix-blend-mode:multiply; }
-body.light .hero-wrap { background:linear-gradient(180deg,rgba(248,252,255,.95),rgba(243,248,252,.98)); }
-body.light .hero-eyebrow { color:rgba(24,65,95,.62); }
-body.light .hero-title { color:#121820; text-shadow:none; }
-body.light .hero-title-sub { color:#2e6d9f; }
-body.light .hero-desc { color:rgba(20,35,48,.70); }
-body.light .hero-caption { color:rgba(46,109,159,.76); }
-body.light .part3-feature {
-  border-color:rgba(73,140,203,.28);
-  background:linear-gradient(135deg,rgba(210,236,255,.78),rgba(250,253,255,.92) 48%,rgba(229,244,255,.78));
-  box-shadow:0 14px 48px rgba(53,120,179,.10),inset 0 1px 0 rgba(255,255,255,.86);
-}
-body.light .part3-feature .novel-main-panel { background:linear-gradient(145deg,#eaf6ff,#f8fcff 68%); }
-body.light .part3-feature .novel-side-panel { background:#f3f9fd; }
-body.light .part3-feature .novel-main-eyebrow,
-body.light .part3-recent .novel-side-ch,
-body.light .part3-latest .novel-side-ch { color:#3579af !important; }
-body.light .part3-feature .novel-main-title { color:#15283a; text-shadow:none; }
-body.light .part3-feature .novel-main-desc { color:rgba(24,47,67,.72); }
-body.light .part3-feature .novel-side-title { color:#19344c; }
-body.light .part3-feature .novel-side-desc { color:rgba(24,47,67,.58); }
-body.light .part3-latest { background:linear-gradient(90deg,rgba(142,203,255,.18),transparent 75%) !important; }
-
-</style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-30GG7PY520');
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="比爸 BD《第九次出生》科幻懸疑小說連載。第四部《第一次出生》現正連載。">
+  <title>第九次出生 — 比爸 BD</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="redesign.css">
+  <style>
+    .archive-home { overflow:hidden; }
+    .home-orbit { position:absolute; border:1px solid rgba(152,215,255,.16); border-radius:50%; pointer-events:none; }
+    .home-orbit.one { width:min(78vw,960px); aspect-ratio:1; top:42px; right:-21vw; }
+    .home-orbit.two { width:min(56vw,650px); aspect-ratio:1; bottom:-240px; left:-18vw; border-color:rgba(255,179,107,.13); }
+    .home-signal { position:absolute; width:8px; height:8px; border-radius:50%; background:var(--signal); box-shadow:0 0 28px 8px rgba(152,215,255,.3); top:27%; right:21%; animation:signalPulse 3s ease-in-out infinite; }
+    @keyframes signalPulse { 50% { transform:scale(1.6); opacity:.45; } }
+    .archive-hero { position:relative; min-height:100svh; display:grid; align-items:end; padding:146px max(32px,calc((100vw - 1280px)/2)) 64px; border-bottom:1px solid var(--line); }
+    .archive-hero::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(8,10,15,.3),rgba(8,10,15,.87) 68%),linear-gradient(0deg,rgba(8,10,15,.85),transparent 56%); pointer-events:none; }
+    .archive-hero-inner { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(270px,.55fr); gap:64px; align-items:end; width:100%; }
+    .archive-eyebrow { font-size:11px; letter-spacing:.2em; color:var(--signal); display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+    .archive-eyebrow::before { content:""; width:28px; height:1px; background:var(--signal); }
+    .archive-title { max-width:790px; font-family:var(--serif); color:var(--paper); font-size:clamp(72px,12vw,168px); line-height:.78; letter-spacing:-.075em; }
+    .archive-title span { display:block; margin-left:.39em; color:var(--signal); font-size:.39em; letter-spacing:-.06em; line-height:1.02; }
+    .archive-deck { max-width:520px; margin:36px 0; color:var(--paper-muted); font-family:var(--serif); font-size:clamp(17px,2vw,22px); line-height:1.7; }
+    .archive-cta { display:flex; flex-wrap:wrap; gap:12px; }
+    .archive-index { border:1px solid var(--line-strong); border-radius:var(--radius-lg); padding:25px; background:rgba(8,10,15,.5); backdrop-filter:blur(14px); }
+    .archive-index-label { color:var(--dawn); font-size:10px; letter-spacing:.18em; margin-bottom:19px; }
+    .archive-index-title { font-family:var(--serif); font-size:34px; line-height:1.05; margin-bottom:12px; }
+    .archive-index-copy { color:var(--text-dim); font-size:13px; line-height:1.8; }
+    .archive-index-meta { display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:21px; margin-top:21px; border-top:1px solid var(--line); color:var(--text-xs); font-size:11px; }
+    .home-main { max-width:1280px; margin:auto; padding:0 32px; }
+    .signal-strip { display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px; border-bottom:1px solid var(--line); padding:22px 0; }
+    .signal-strip-copy { font-size:13px; color:var(--text-dim); }
+    .signal-strip-copy b { color:var(--paper); font-weight:600; }
+    .signal-strip a { color:var(--dawn); font-size:12px; white-space:nowrap; }
+    .home-section { padding:120px 0; border-bottom:1px solid var(--line); }
+    .section-kicker { color:var(--dawn); font-size:10px; letter-spacing:.2em; margin-bottom:16px; }
+    .section-heading { max-width:780px; font-family:var(--serif); font-size:clamp(42px,6vw,76px); letter-spacing:-.06em; line-height:.94; }
+    .section-heading em { color:var(--signal); font-style:normal; }
+    .volume-rail { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:52px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; }
+    .volume-card { position:relative; min-height:245px; padding:24px; background:var(--ink-raised); display:flex; flex-direction:column; justify-content:space-between; text-decoration:none; }
+    .volume-card::after { content:""; position:absolute; right:18px; top:16px; width:10px; height:10px; border-radius:50%; background:var(--text-xs); }
+    .volume-card:hover { opacity:1; background:var(--ink-soft); }
+    .volume-card.active { background:linear-gradient(145deg,#102130,#0e1119); }
+    .volume-card.active::after { background:var(--signal); box-shadow:0 0 18px var(--signal); }
+    .volume-no { color:var(--text-xs); font-size:10px; letter-spacing:.15em; }
+    .volume-name { font-family:var(--serif); font-size:clamp(24px,3vw,38px); line-height:1.02; letter-spacing:-.04em; }
+    .volume-state { color:var(--text-dim); font-size:12px; }
+    .chapter-layout { display:grid; grid-template-columns:minmax(240px,.58fr) minmax(0,1.42fr); gap:72px; align-items:start; }
+    .chapter-intro p { color:var(--text-dim); max-width:29rem; margin-top:22px; }
+    .chapter-list { border-top:1px solid var(--line); }
+    .chapter-row { display:grid; grid-template-columns:72px 1fr auto; align-items:center; gap:18px; padding:24px 0; border-bottom:1px solid var(--line); text-decoration:none; }
+    .chapter-row:hover { opacity:1; }
+    .chapter-row:hover .chapter-name { color:var(--signal); transform:translateX(6px); }
+    .chapter-no { color:var(--text-xs); font-size:11px; letter-spacing:.1em; }
+    .chapter-name { font-family:var(--serif); color:var(--paper); font-size:clamp(21px,2.5vw,31px); transition:color .2s,transform .2s; }
+    .chapter-part { color:var(--text-xs); font-size:11px; white-space:nowrap; }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; margin-top:55px; }
+    .metric { min-height:160px; padding:26px 30px; border-right:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; }
+    .metric:last-child { border-right:none; }
+    .metric-num { font-family:var(--serif); font-size:58px; letter-spacing:-.07em; line-height:.8; color:var(--paper); }
+    .metric-label { color:var(--text-xs); font-size:11px; letter-spacing:.1em; }
+    .author-band { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:28px; padding:70px 0; }
+    .author-band img { width:72px; height:72px; border-radius:50%; border:1px solid var(--line-strong); }
+    .author-band h2 { font-family:var(--serif); font-size:32px; }
+    .author-band p { color:var(--text-dim); max-width:570px; font-size:14px; }
+    @media(max-width:850px){ .archive-hero{padding:118px 22px 34px}.archive-hero-inner{grid-template-columns:1fr;gap:42px}.archive-index{max-width:520px}.home-main{padding:0 22px}.volume-rail{grid-template-columns:1fr 1fr}.chapter-layout{grid-template-columns:1fr;gap:42px}.home-section{padding:86px 0}.author-band{grid-template-columns:auto 1fr}.author-band .author-actions{grid-column:1 / -1}.metrics{margin-top:38px}.metric{padding:22px 18px}.metric-num{font-size:44px}.nav-menu.open li a{font-size:30px!important}.signal-strip{grid-template-columns:1fr}.archive-title{font-size:88px}.archive-title span{font-size:.4em} }
+    @media(max-width:520px){ .volume-rail{grid-template-columns:1fr}.volume-card{min-height:150px}.chapter-row{grid-template-columns:56px 1fr;gap:10px}.chapter-part{grid-column:2}.author-band{gap:16px}.author-band h2{font-size:27px} }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-30GG7PY520');</script>
 </head>
-<body class="page-enter">
-
-<!-- 第三部：名字庫星圖背景 -->
-<canvas id="nameSkyCanvas" aria-hidden="true"></canvas>
-
-<nav id="nav">
-  <div class="nav-wrap">
-    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="bookshelf.html">書櫃</a></li>
-      <li><a href="about.html">作者</a></li>
-      <li><a href="support.html">贊助</a></li>
-      <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-    </ul>
-    <div class="nav-right-mobile">
-      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
-
-      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
-        <span></span><span></span><span></span>
-      </button>
+<body class="archive-home page-enter">
+  <nav id="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo" aria-label="回到首頁"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="bookshelf.html">書櫃</a></li>
+        <li><a href="about.html">作者</a></li>
+        <li><a href="support.html">支持創作</a></li>
+        <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threads</a></li>
+      </ul>
+      <div class="nav-right-mobile"><button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日夜主題">☀</button><button class="nav-hamburger" type="button" onclick="toggleMenu()" aria-label="開啟選單"><span></span><span></span><span></span></button></div>
+      <button class="nav-menu-close" type="button" onclick="closeMenu()" aria-label="關閉選單">×</button>
     </div>
-    <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
-  </div>
-</nav>
+  </nav>
 
-<div class="latest-bar">
-  <strong>第四部《第一次出生》連載中</strong> — 第一章《黎明後》已上線。
-  <a href="reading-ch28.html" style="color:var(--part3-blue);text-decoration-color:rgba(142,203,255,0.4);">立即閱讀 →</a>
-</div>
-
-<!-- 英雄區 -->
-<div class="hero-wrap">
-  <div class="hero-eyebrow">比爸 BD · 科幻懸疑小說</div>
-  <h1 class="hero-title">
-    第九次出生
-    <span class="hero-title-sub">第四部：第一次出生 · 連載中</span>
-  </h1>
-  <p class="hero-desc">如果你出生時就記得前八世的人生，你還敢活到十八歲嗎？</p>
-  <div class="hero-cta">
-    <a href="reading.html" class="btn btn-primary">從第一章開始</a>
-    <a href="reading-ch28.html" class="btn btn-outline">閱讀第四部 →</a>
-  </div>
-  <div class="hero-caption">姓名節點／藍白源點／星圖連線／低頻呼吸動畫</div>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span class="hero-scroll-text">Scroll</span>
-  </div>
-</div>
-
-<!-- 作品展示 -->
-<div class="novel-block reveal">
-  <div class="novel-block-inner part3-feature">
-    <div class="novel-main-panel part3-current">
-      <div class="novel-main-eyebrow">第四部 · 連載中</div>
-      <h2 class="novel-main-title">第一次出生</h2>
-      <p class="novel-main-desc">冥河陣列熄滅之後，赤環城第一次必須學會自由。但有人已經將「選擇」寫成了新的制度。</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="reading.html" class="btn btn-outline btn-sm">第一部：第九門</a>
-        <a href="reading-ch10.html" class="btn btn-outline btn-sm">第二部：黑河低語</a>
-        <a href="reading-ch27.html" class="btn btn-outline btn-sm">第三部：十八歲倒數</a>
-        <a href="reading-ch28.html" class="btn btn-primary btn-sm">第四部：第一次出生（連載中）</a>
+  <header class="archive-hero">
+    <div class="home-orbit one"></div><div class="home-orbit two"></div><div class="home-signal"></div>
+    <div class="archive-hero-inner">
+      <div>
+        <div class="archive-eyebrow">比爸 BD · 科幻懸疑長篇</div>
+        <h1 class="archive-title">第九次<br>出生<span>THE NINTH BIRTH</span></h1>
+        <p class="archive-deck">當十七萬人重新擁有選擇記得或忘記的權利，林澈才發現：真正困難的不是醒來，而是怎麼活在黎明之後。</p>
+        <div class="archive-cta"><a class="btn btn-primary" href="reading-ch28.html">閱讀最新章〈黎明後〉</a><a class="btn btn-outline" href="bookshelf.html">探索全部章節</a></div>
       </div>
+      <aside class="archive-index">
+        <div class="archive-index-label">CURRENT TRANSMISSION · 04 / 01</div>
+        <h2 class="archive-index-title">第四部<br>第一次出生</h2>
+        <p class="archive-index-copy">城門打開後，中央校準局以溫和的詞彙重新定義自由。新的秩序，正在抵達。</p>
+        <div class="archive-index-meta"><span>Ch.028 · 黎明後</span><a href="reading-ch28.html">進入章節 →</a></div>
+      </aside>
     </div>
-    <div class="novel-side-panel">
-      <a href="reading-ch25.html" class="novel-side-item part3-recent">
-        <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.025 · 第三部</div>
-        <div class="novel-side-title">名字的重量</div>
-        <div class="novel-side-desc">被遺忘的名字成為打開赤環城門、迎向自由的重量。</div>
-      </a>
-      <a href="reading-ch26.html" class="novel-side-item part3-recent">
-        <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.026 · 第三部</div>
-        <div class="novel-side-title">十八分鐘的盡頭</div>
-        <div class="novel-side-desc">林澈與嬰兒走向黑河真正的源頭；沉睡太久的母親正隱約甦醒。</div>
-      </a>
-      <a href="reading-ch27.html" class="novel-side-item part3-recent">
-        <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.027 · 第三部最終章</div>
-        <div class="novel-side-title">第一次出生</div>
-        <div class="novel-side-desc">當十七萬人喚回林澈的名字，一個從未真正出生的孩子終於學會站立。</div>
-      </a>
-      <a href="reading-ch28.html" class="novel-side-item part3-latest">
-        <div class="novel-side-ch" style="color:var(--accent-gold);">Ch.028 · 第四部第一章</div>
-        <div class="novel-side-title">黎明後</div>
-        <div class="novel-side-desc">城門打開後的第一個早晨，一張來自中央校準局的告示，揭開新的選擇與危機。</div>
-      </a>
-    </div>
-    </div>
-    </div>
-  </div>
-</div>
+  </header>
 
-
-<!-- 數字統計 -->
-<div class="stats-strip reveal">
-  <div class="stats-inner">
-    <div class="stat-block">
-      <div class="stat-n">28</div>
-      <div class="stat-l">已上線章節</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-n">4</div>
-      <div class="stat-l">故事部數</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-n">∞</div>
-      <div class="stat-l">宇宙的可能性</div>
-    </div>
-  </div>
-</div>
-
-<!-- 近期更新 -->
-<div class="updates-section reveal">
-  <div class="updates-header">
-    <div class="updates-eyebrow">最新動態</div>
-    <h2 class="updates-title">近期更新</h2>
-  </div>
-  <a href="reading-ch28.html" class="update-row">
-    <span class="update-row-num">01</span>
-    <span class="update-row-title">第四部第一章《黎明後》正式上線</span>
-    <span class="update-row-meta">2026 · 第四部</span>
-  </a>
-  <a href="reading-ch27.html" class="update-row">
-    <span class="update-row-num">02</span>
-    <span class="update-row-title">第三部最終章《第一次出生》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch26.html" class="update-row">
-    <span class="update-row-num">03</span>
-    <span class="update-row-title">第三部第八章《十八分鐘的盡頭》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch25.html" class="update-row">
-    <span class="update-row-num">04</span>
-    <span class="update-row-title">第三部第七章《名字的重量》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch24.html" class="update-row">
-    <span class="update-row-num">05</span>
-    <span class="update-row-title">第三部第六章《嬰兒的呼吸》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch23.html" class="update-row">
-    <span class="update-row-num">06</span>
-    <span class="update-row-title">第三部第五章《祈安的傷口》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch22.html" class="update-row">
-    <span class="update-row-num">07</span>
-    <span class="update-row-title">第三部第四章《白司禮的晶片》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-  <a href="reading-ch21.html" class="update-row">
-    <span class="update-row-num">08</span>
-    <span class="update-row-title">第三部第三章《找回自我》正式上線</span>
-    <span class="update-row-meta">2026 · 第三部</span>
-  </a>
-</div>
-
-<!-- 作者區 -->
-<div class="author-section reveal">
-  <div class="author-inner">
-    <div class="author-avatar-wrap">
-      <img src="avatar.png" alt="比爸 BD">
-    </div>
-    <div class="author-name">比爸 BD</div>
-    <p class="author-bio">科幻懸疑小說創作者。相信最好的故事，是那些在宇宙的尺度裡，讓人看見自己的故事。《第九次出生》是他的第一部長篇連載作品。</p>
-    <div class="author-links">
-      <a href="about.html" class="btn btn-ghost btn-sm">關於作者</a>
-      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads</a>
-      <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-outline btn-sm">支持贊助</a>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-wrap">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-col-title" onclick="toggleFooterCol(this)">作品</div>
-        <ul>
-          <li><a href="bookshelf.html">書櫃</a></li>
-          <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
-          <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
-          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–027）</a></li>
-          <li><a href="bookshelf.html#part4">《第九次出生》第四部：第一次出生（Ch.028 · 連載中）</a></li>
-        </ul>
+  <main class="home-main">
+    <section class="signal-strip" aria-label="最新動態"><div class="signal-strip-copy"><b>最新動態</b>　第四部《第一次出生》第一章〈黎明後〉現已上線。</div><a href="reading-ch28.html">立即閱讀 →</a></section>
+    <section class="home-section">
+      <div class="section-kicker">VOLUME INDEX · 故事檔案</div>
+      <h2 class="section-heading">每一部，都是一次<br><em>重新命名自己。</em></h2>
+      <div class="volume-rail">
+        <a href="reading.html" class="volume-card"><span class="volume-no">VOLUME 01</span><span class="volume-name">第九門</span><span class="volume-state">Ch.001–009</span></a>
+        <a href="reading-ch10.html" class="volume-card"><span class="volume-no">VOLUME 02</span><span class="volume-name">黑河低語</span><span class="volume-state">Ch.010–018</span></a>
+        <a href="reading-ch19.html" class="volume-card"><span class="volume-no">VOLUME 03</span><span class="volume-name">十八歲倒數</span><span class="volume-state">Ch.019–027</span></a>
+        <a href="reading-ch28.html" class="volume-card active"><span class="volume-no">VOLUME 04 · NOW</span><span class="volume-name">第一次出生</span><span class="volume-state">Ch.028 · 連載中</span></a>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title" onclick="toggleFooterCol(this)">作者</div>
-        <ul>
-          <li><a href="about.html">關於比爸 BD</a></li>
-          <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
-          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank">Apple Podcast</a></li>
-        </ul>
+    </section>
+
+    <section class="home-section chapter-layout">
+      <div class="chapter-intro"><div class="section-kicker">READING LOG · 閱讀紀錄</div><h2 class="section-heading">從黑河的盡頭，走向黎明。</h2><p>最新四章連續記錄林澈、祈安與白司禮踏出城門之後的選擇。每一個名字被交還給原本的人，也同時喚醒另一種風險。</p><a class="btn btn-outline" style="margin-top:30px" href="bookshelf.html#part4">前往第四部目錄</a></div>
+      <div class="chapter-list">
+        <a class="chapter-row" href="reading-ch25.html"><span class="chapter-no">CH.025</span><span class="chapter-name">名字的重量</span><span class="chapter-part">第三部</span></a>
+        <a class="chapter-row" href="reading-ch26.html"><span class="chapter-no">CH.026</span><span class="chapter-name">十八分鐘的盡頭</span><span class="chapter-part">第三部</span></a>
+        <a class="chapter-row" href="reading-ch27.html"><span class="chapter-no">CH.027</span><span class="chapter-name">第一次出生</span><span class="chapter-part">第三部</span></a>
+        <a class="chapter-row" href="reading-ch28.html"><span class="chapter-no">CH.028</span><span class="chapter-name">黎明後</span><span class="chapter-part">第四部 · 最新</span></a>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div>
-        <ul>
-          <li><a href="support.html">贊助方案</a></li>
-          <li><a href="https://portaly.cc/bbdaddy924/support" target="_blank">Portaly 贊助</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title" onclick="toggleFooterCol(this)">法律</div>
-        <ul>
-          <li><a href="privacy.html">隱私權政策</a></li>
-          <li><a href="terms.html">服務條款</a></li>
-          <li><a href="mailto:bbdaddy924@gmail.com">聯絡我們</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">
-        <p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p>
-      </div>
-      <nav class="footer-legal">
-        <a href="privacy.html">隱私權政策</a>
-        <a href="terms.html">服務條款</a>
-        <a href="mailto:bbdaddy924@gmail.com">聯絡我們</a>
-      </nav>
-    </div>
-  </div>
-</footer>
+      <div class="metrics"><div class="metric"><span class="metric-num">28</span><span class="metric-label">已上線章節</span></div><div class="metric"><span class="metric-num">04</span><span class="metric-label">故事部數</span></div><div class="metric"><span class="metric-num">∞</span><span class="metric-label">未命名的可能</span></div></div>
+    </section>
 
-<script>
-/* ── 第三部：名字庫星圖動畫 ── */
-(function(){
-  const canvas = document.getElementById('nameSkyCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const labels = ['林澈','祈安','白司禮','源點','空白','未命名','名字庫','第九次','冥河','若曦','出生','回聲','鎖定','陣列'];
-  let W, H, dpr, nodes = [], animId;
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  function initNodes(){
-    const count = W < 768 ? 22 : 36;
-    nodes = Array.from({length:count}, (_,i)=>({
-      x:Math.random()*W, y:Math.random()*H, r:Math.random()*2.3+.8,
-      vx:(Math.random()-.5)*.10, vy:(Math.random()-.5)*.10,
-      label:labels[i%labels.length], alpha:.42+Math.random()*.38,
-      phase:Math.random()*Math.PI*2
-    }));
-  }
-  function draw(t){
-    ctx.clearRect(0,0,W,H);
-    nodes.forEach(n=>{ n.x+=n.vx; n.y+=n.vy; if(n.x<-35)n.x=W+35; if(n.x>W+35)n.x=-35; if(n.y<-35)n.y=H+35; if(n.y>H+35)n.y=-35; });
-    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
-      const a=nodes[i], b=nodes[j], distance=Math.hypot(a.x-b.x,a.y-b.y);
-      if(distance<205){
-        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle='rgba(142,203,255,'+((1-distance/205)*.34)+')'; ctx.lineWidth=1.45; ctx.stroke();
-      }
-    }
-    nodes.forEach(n=>{
-      const pulse=.72+Math.sin(t*.0011+n.phase)*.28;
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r*pulse,0,Math.PI*2);
-      ctx.fillStyle='rgba(213,239,255,'+n.alpha+')'; ctx.fill();
-      if(n.alpha>.42 && W>320){
-        ctx.font=(W<768?'12px':'12px')+' -apple-system,BlinkMacSystemFont,"PingFang TC",sans-serif';
-        ctx.fillStyle='rgba(190,229,255,'+Math.min(.96,n.alpha*.94)+')'; ctx.fillText(n.label,n.x+10,n.y-9);
-      }
-    });
-    animId=requestAnimationFrame(draw);
-  }
-  let resizeTimer;
-  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(animId)cancelAnimationFrame(animId);resize();initNodes();draw(0);},150);});
-  resize(); initNodes(); draw(0);
-})();
+    <section class="author-band"><img src="avatar.png" alt="比爸 BD"><div><h2>比爸 BD</h2><p>在宇宙的尺度裡，寫下那些仍然選擇成為自己的人。歡迎追蹤連載、聽 Podcast，也歡迎用一杯咖啡支持下一次出生。</p></div><div class="author-actions"><a class="btn btn-outline" href="about.html">認識作者</a> <a class="btn btn-primary" href="support.html">支持創作</a></div></section>
+  </main>
 
-/* ── 導覽列 ── */
-function toggleMenu(){
-  var m=document.getElementById('navMenu');
-  var h=document.querySelector('.nav-hamburger');
-  var c=document.querySelector('.nav-menu-close');
-  var isOpen=!m.classList.contains('open');
-  m.classList.toggle('open', isOpen);
-  h.classList.toggle('active', isOpen);
-  if(c) c.classList.toggle('visible', isOpen);
-}
-function closeMenu(){
-  var m=document.getElementById('navMenu');
-  var h=document.querySelector('.nav-hamburger');
-  var c=document.querySelector('.nav-menu-close');
-  m.classList.remove('open');
-  h.classList.remove('active');
-  if(c) c.classList.remove('visible');
-}
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){
-    closeMenu();
-  }
-});
+  <footer><div class="footer-wrap"><div class="footer-grid"><div class="footer-col"><div class="footer-col-title" onclick="toggleFooterCol(this)">作品</div><ul><li><a href="bookshelf.html">作品總目錄</a></li><li><a href="reading.html">第一部 · 第九門</a></li><li><a href="reading-ch10.html">第二部 · 黑河低語</a></li><li><a href="reading-ch19.html">第三部 · 十八歲倒數</a></li><li><a href="reading-ch28.html">第四部 · 第一次出生</a></li></ul></div><div class="footer-col"><div class="footer-col-title" onclick="toggleFooterCol(this)">追蹤</div><ul><li><a href="about.html">關於比爸 BD</a></li><li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threads</a></li><li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank" rel="noopener">Apple Podcast</a></li></ul></div><div class="footer-col"><div class="footer-col-title" onclick="toggleFooterCol(this)">支持</div><ul><li><a href="support.html">贊助方案</a></li><li><a href="https://portaly.cc/bbdaddy924/support" target="_blank" rel="noopener">Portaly 贊助</a></li></ul></div><div class="footer-col"><div class="footer-col-title" onclick="toggleFooterCol(this)">法律</div><ul><li><a href="privacy.html">隱私權政策</a></li><li><a href="terms.html">服務條款</a></li><li><a href="mailto:bbdaddy924@gmail.com">聯絡信箱</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy"><p>© 2026 比爸 BD 版權所有</p></div><div class="footer-legal"><a href="privacy.html">隱私權政策</a><a href="terms.html">服務條款</a></div></div></div></footer>
 
-/* ── 主題切換 ── */
-function toggleTheme(){
-  document.body.classList.toggle('light');
-  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-}
-if(localStorage.getItem('theme') === 'light') document.body.classList.add('light');
-
-/* ── 頁尾 Accordion ── */
-function toggleFooterCol(el){
-  if(window.innerWidth > 768) return;
-  el.parentElement.classList.toggle('open');
-}
-
-/* ── Scroll Reveal ── */
-(function(){
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-})();
-
-/* ── 章節連結過場動畫 ── */
-document.querySelectorAll('a[href*="reading"]').forEach(a => {
-  a.addEventListener('click', function(e){
-    const href = this.getAttribute('href');
-    if(href && !href.startsWith('http') && !href.startsWith('#')){
-      e.preventDefault();
-      document.body.style.transition = 'opacity .3s ease';
-      document.body.style.opacity = '0';
-      setTimeout(() => { window.location.href = href; }, 300);
-    }
-  });
-});
-</script>
-
-<script>
-/* 共用導覽列日夜切換狀態：保留既有閱讀工具列按鈕，並同步更新導覽列圖示。 */
-(function(){
-  function updateNavThemeToggle(){
-    var isLight=document.body.classList.contains('light');
-    document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
-      btn.textContent=isLight?'☾':'☀';
-      btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
-      btn.title=isLight?'切換深色模式':'切換日間模式';
-    });
-  }
-  var originalToggle=window.toggleTheme;
-  if(typeof originalToggle==='function' && !window.__navThemeToggleWrapped){
-    window.toggleTheme=function(){
-      originalToggle();
-      updateNavThemeToggle();
-    };
-    window.__navThemeToggleWrapped=true;
-  }
-  updateNavThemeToggle();
-})();
-</script>
-
+  <script>
+    function toggleMenu(){document.getElementById('navMenu').classList.add('open');document.querySelector('.nav-hamburger').classList.add('active');document.querySelector('.nav-menu-close').classList.add('visible');document.body.classList.add('menu-open')}
+    function closeMenu(){document.getElementById('navMenu').classList.remove('open');document.querySelector('.nav-hamburger').classList.remove('active');document.querySelector('.nav-menu-close').classList.remove('visible');document.body.classList.remove('menu-open')}
+    function toggleTheme(){const light=document.body.classList.toggle('light');localStorage.setItem('bd-theme',light?'light':'dark');document.querySelector('.nav-theme-toggle').textContent=light?'☾':'☀'}
+    function toggleFooterCol(el){if(window.innerWidth<769)el.parentElement.classList.toggle('open')}
+    if(localStorage.getItem('bd-theme')==='light'){document.body.classList.add('light');document.querySelector('.nav-theme-toggle').textContent='☾'}
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+    document.addEventListener('contextmenu',e=>e.preventDefault());
+    document.addEventListener('selectstart',e=>{if(!e.target.closest('input,textarea'))e.preventDefault()});
+  </script>
 </body>
 </html>

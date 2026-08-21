@@ -1,0 +1,205 @@
+/*
+  第九次出生 — 黎明檔案（Dawn Archive）
+  2026 redesign layer
+*/
+:root {
+  --ink: #080a0f;
+  --ink-raised: #10141d;
+  --ink-soft: #171c28;
+  --paper: #f5f4ef;
+  --paper-muted: rgba(245,244,239,.62);
+  --paper-faint: rgba(245,244,239,.36);
+  --line: rgba(223,235,255,.15);
+  --line-strong: rgba(223,235,255,.27);
+  --dawn: #ffb36b;
+  --dawn-soft: rgba(255,179,107,.16);
+  --signal: #98d7ff;
+  --signal-soft: rgba(152,215,255,.16);
+  --serif: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PMingLiU", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+body {
+  --bg: var(--ink);
+  --bg2: var(--ink-raised);
+  --bg3: var(--ink-soft);
+  --white: var(--paper);
+  --text: var(--paper);
+  --text-dim: var(--paper-muted);
+  --text-xs: var(--paper-faint);
+  --border: var(--line);
+  --border2: var(--line-strong);
+  --surface: rgba(255,255,255,.045);
+  --surface2: rgba(255,255,255,.08);
+  --accent: var(--paper);
+  --accent-gold: var(--dawn);
+  --font: var(--sans);
+  background: var(--ink) !important;
+  color: var(--paper);
+  letter-spacing: .01em;
+}
+body::after {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.58;
+  background:
+    linear-gradient(rgba(153,208,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(153,208,255,.035) 1px, transparent 1px),
+    radial-gradient(circle at 74% 0%, rgba(84,142,217,.16), transparent 31rem),
+    radial-gradient(circle at 8% 92%, rgba(255,160,88,.08), transparent 34rem);
+  background-size: 48px 48px, 48px 48px, auto, auto;
+}
+body.light {
+  --bg: #f4f3ef;
+  --bg2: #eceae5;
+  --bg3: #e4e1da;
+  --white: #111722;
+  --text: #111722;
+  --text-dim: rgba(17,23,34,.64);
+  --text-xs: rgba(17,23,34,.43);
+  --border: rgba(17,23,34,.12);
+  --border2: rgba(17,23,34,.22);
+  --surface: rgba(17,23,34,.035);
+  --surface2: rgba(17,23,34,.07);
+  --accent: #111722;
+  --ink: #f4f3ef;
+  --ink-raised: #eceae5;
+}
+body.light::after { opacity:.36; background-image:linear-gradient(rgba(17,23,34,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(17,23,34,.045) 1px,transparent 1px),radial-gradient(circle at 74% 0%,rgba(84,142,217,.13),transparent 31rem),radial-gradient(circle at 8% 92%,rgba(255,160,88,.1),transparent 34rem); }
+
+::selection { background: var(--dawn); color:#15100c; }
+body.menu-open { overflow:hidden; }
+
+/* Navigation */
+#nav {
+  height:72px; background:rgba(8,10,15,.78) !important; border-bottom:1px solid var(--line) !important;
+  backdrop-filter:blur(22px) saturate(130%); -webkit-backdrop-filter:blur(22px) saturate(130%);
+}
+body.light #nav { background:rgba(244,243,239,.82) !important; }
+.nav-wrap { max-width:1280px; padding:0 32px; }
+.nav-logo { gap:10px; }
+.nav-logo::after { content:"BD / NINTH BIRTH"; font-size:10px; letter-spacing:.16em; color:var(--text-xs); white-space:nowrap; }
+.nav-logo-img { width:34px; height:34px; border-radius:10px; }
+.nav-menu { gap:4px; }
+.nav-menu li a { height:72px; padding:0 15px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+.nav-menu li a.active { color:var(--dawn); }
+.nav-theme-toggle { width:38px !important; height:38px !important; border:1px solid var(--line) !important; border-radius:50%; background:var(--surface) !important; color:var(--white) !important; }
+.nav-hamburger span { background:var(--white); }
+
+/* Buttons & reusable rhythm */
+.btn, .toolbar-btn {
+  border:1px solid var(--line-strong) !important; border-radius:999px !important;
+  background:transparent !important; color:var(--white) !important; box-shadow:none !important;
+  font-weight:600 !important; letter-spacing:.035em; transition:transform .22s ease, background .22s ease, border-color .22s ease !important;
+}
+.btn:hover,.toolbar-btn:hover { transform:translateY(-2px); opacity:1 !important; background:var(--surface2) !important; border-color:var(--dawn) !important; }
+.btn-primary,.toolbar-btn.primary { background:var(--paper) !important; color:var(--ink) !important; border-color:var(--paper) !important; }
+body.light .btn-primary,body.light .toolbar-btn.primary { background:#111722 !important; color:#f4f3ef !important; border-color:#111722 !important; }
+.btn-outline { color:var(--signal) !important; border-color:rgba(152,215,255,.42) !important; }
+
+/* Page headings and footer */
+.page-header,.page-hero { background:transparent !important; border-bottom:1px solid var(--line) !important; }
+.page-header-inner,.page-hero-inner { max-width:1280px !important; }
+.section-title,.page-title { font-family:var(--serif); letter-spacing:-.05em !important; }
+footer { background:rgba(8,10,15,.72) !important; border-top:1px solid var(--line) !important; }
+body.light footer { background:rgba(236,234,229,.76) !important; }
+.footer-wrap { max-width:1280px !important; }
+.footer-col-title { color:var(--dawn) !important; letter-spacing:.12em !important; }
+.footer-col a { color:var(--text-dim) !important; }
+
+/* Bookshelf: editorial volume cards */
+.shelf-section { max-width:1280px !important; padding:164px 32px 120px !important; }
+.shelf-part-label {
+  margin:94px 0 16px !important; padding:0 0 12px !important;
+  border-bottom:1px solid var(--line) !important; font-size:12px !important;
+  letter-spacing:.18em !important; color:var(--dawn) !important; text-transform:uppercase;
+}
+.shelf-part-label:first-of-type { margin-top:50px !important; }
+.book-row {
+  display:grid !important; grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr) !important;
+  min-height:440px; border:1px solid var(--line-strong) !important; border-radius:var(--radius-lg) !important;
+  overflow:hidden; background:rgba(13,17,25,.72) !important; box-shadow:0 22px 80px rgba(0,0,0,.2);
+}
+.book-row-cover {
+  min-height:440px; border-right:1px solid var(--line) !important;
+  background:linear-gradient(145deg,#19202d,#080a0f 66%) !important; display:flex !important;
+  flex-direction:column; justify-content:flex-end !important; align-items:flex-start !important; padding:38px !important;
+}
+.book-row-cover::before { content:"VOLUME"; position:absolute; top:28px; left:32px; font-size:10px; letter-spacing:.22em; color:var(--paper-faint); }
+.book-row-cover-title { font-family:var(--serif) !important; font-size:clamp(44px,5vw,72px) !important; text-align:left !important; line-height:.9 !important; }
+.book-row-cover-sub { margin-top:18px !important; font-size:11px !important; letter-spacing:.16em !important; color:var(--paper-muted) !important; }
+.part2-card .book-row-cover { background:linear-gradient(145deg,#251c10,#090a0f 68%) !important; }
+.part2-card .book-row-cover-title,.part2-card .book-row-cover-sub { color:var(--dawn) !important; }
+.part3-card .book-row-cover { background:linear-gradient(145deg,#0a1f2f,#080a0f 68%) !important; }
+.part3-card .book-row-cover-title { color:var(--signal) !important; text-shadow:none !important; }
+.part3-card .book-row-cover-sub { color:var(--signal) !important; }
+.book-row-info { padding:42px 46px !important; background:transparent !important; }
+.book-row-badges { margin-bottom:24px !important; }
+.badge { border-color:var(--line) !important; background:var(--surface) !important; color:var(--text-dim) !important; }
+.part3-badge { color:var(--signal) !important; border-color:rgba(152,215,255,.38) !important; background:var(--signal-soft) !important; }
+.book-row-title { font-family:var(--serif) !important; font-size:clamp(27px,3vw,42px) !important; line-height:1.04 !important; }
+.book-row-desc { font-size:15px !important; line-height:1.9 !important; max-width:48rem; }
+.book-row-meta { color:var(--signal) !important; }
+.ch-list-header { color:var(--paper-faint) !important; letter-spacing:.16em !important; }
+.ch-list-item { border-bottom-color:var(--line) !important; }
+.ch-list-item:hover { background:var(--surface) !important; }
+.ch-list-num { color:var(--paper-faint) !important; }
+.ch-list-status { color:var(--signal) !important; }
+
+/* Reading pages: quiet manuscript */
+.reading-toolbar {
+  top:72px !important; border-bottom:1px solid var(--line) !important; background:rgba(8,10,15,.84) !important;
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); padding:12px max(20px,calc((100vw - 1200px)/2)) !important;
+}
+body.light .reading-toolbar { background:rgba(244,243,239,.86) !important; }
+.reading-toolbar-center { gap:8px !important; }
+.toolbar-chapter-label { color:var(--text-xs) !important; letter-spacing:.08em; }
+.progress-bar { height:2px !important; background:transparent !important; }
+.progress-fill { background:linear-gradient(90deg,var(--dawn),var(--signal)) !important; }
+.reading-body { max-width:860px !important; padding:174px 28px 128px !important; }
+.reading-body > div:first-child { padding-top:0 !important; }
+.part-badge { border-color:rgba(152,215,255,.35) !important; color:var(--signal) !important; background:rgba(152,215,255,.08) !important; letter-spacing:.14em !important; }
+.reading-chapter-title { font-family:var(--serif) !important; font-size:clamp(46px,7vw,86px) !important; letter-spacing:-.065em !important; line-height:.95 !important; margin:30px 0 16px !important; }
+.reading-meta { color:var(--paper-faint) !important; }
+.part3-source-status { border-color:var(--line-strong) !important; background:rgba(152,215,255,.055) !important; }
+.podcast-embed { border-color:var(--line) !important; background:rgba(255,255,255,.025) !important; }
+.reading-content { max-width:640px !important; margin:82px auto !important; }
+.reading-content p { font-family:var(--serif) !important; color:var(--paper) !important; font-size:clamp(18px,2vw,21px) !important; line-height:2.16 !important; letter-spacing:.025em !important; margin:0 0 1.62em !important; }
+body.light .reading-content p { color:#20232b !important; }
+.reading-content p:first-child::first-letter { color:var(--dawn); font-size:3.3em; float:left; line-height:.72; padding-right:.11em; font-family:var(--serif); }
+.reading-nav { border-top:1px solid var(--line) !important; padding-top:32px !important; }
+.toc-overlay { background:rgba(8,10,15,.98) !important; }
+.toc-panel { background:transparent !important; border-bottom:1px solid var(--line) !important; }
+.toc-part-heading { color:var(--dawn) !important; }
+.toc-item { border-bottom-color:var(--line) !important; }
+.toc-active { background:var(--surface) !important; }
+.music-dock { border-color:var(--line-strong) !important; background:rgba(12,16,24,.92) !important; box-shadow:0 12px 44px rgba(0,0,0,.35) !important; }
+.music-dock.is-playing { border-color:var(--dawn) !important; }
+
+/* Support, author, simple information pages */
+.support-card,.support-tier,.about-card,.legal-card,.podcast-card { border-color:var(--line) !important; background:rgba(14,18,27,.7) !important; border-radius:var(--radius-lg) !important; }
+body.light .support-card,body.light .support-tier,body.light .about-card,body.light .legal-card,body.light .podcast-card { background:rgba(255,255,255,.56) !important; }
+.reveal { transition:opacity .65s ease,transform .65s ease; }
+
+@media (max-width:768px) {
+  #nav { height:64px; }
+  .nav-wrap { padding:0 18px; }
+  .nav-logo::after { display:none; }
+  .nav-menu.open { background:rgba(8,10,15,.98) !important; padding-top:104px !important; }
+  body.light .nav-menu.open { background:rgba(244,243,239,.98) !important; }
+  .nav-menu.open li a { color:var(--white) !important; font-family:var(--serif); font-size:34px !important; }
+  .shelf-section { padding:118px 18px 72px !important; }
+  .shelf-part-label { margin-top:66px !important; }
+  .book-row { grid-template-columns:1fr !important; min-height:0 !important; }
+  .book-row-cover { min-height:250px !important; border-right:none !important; border-bottom:1px solid var(--line) !important; padding:28px !important; }
+  .book-row-info { padding:30px 26px !important; }
+  .book-row-cover-title { font-size:54px !important; }
+  .reading-toolbar { top:64px !important; flex-wrap:wrap !important; gap:8px !important; padding:10px 18px !important; }
+  .reading-toolbar-left { width:100% !important; }
+  .toolbar-chapter-label { display:none !important; }
+  .reading-body { padding:176px 22px 88px !important; }
+  .reading-chapter-title { font-size:48px !important; }
+  .reading-content { margin:58px auto !important; }
+  .reading-content p { font-size:18px !important; line-height:2.05 !important; }
+}
