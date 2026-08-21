@@ -73,3 +73,40 @@ body.light .music-toolbar-btn.is-playing {
   border-color: #a65a0b !important;
   color: #fffdf8 !important;
 }
+
+/* 章節目錄依部別分段：標題維持在章節列上方，不採固定或絕對定位。 */
+.toc-part-label {
+  position: relative !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 28px 32px 12px !important;
+  min-height: 56px !important;
+  color: var(--dawn) !important;
+  background: transparent !important;
+  border-top: 1px solid var(--line) !important;
+  border-bottom: 0 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: .1em !important;
+  text-transform: none !important;
+}
+.toc-header + .toc-part-label {
+  border-top: 0 !important;
+  padding-top: 22px !important;
+}
+.toc-part-label + .toc-item { border-top: 0 !important; }
+
+@media (max-width: 768px) {
+  .toc-header {
+    padding: calc(var(--nav-h, 64px) + 8px) 22px 15px !important;
+  }
+  .toc-part-label {
+    min-height: 50px !important;
+    padding: 23px 22px 10px !important;
+    font-size: 12px !important;
+    letter-spacing: .07em !important;
+  }
+  .toc-item { padding-left: 22px !important; padding-right: 22px !important; }
+}
