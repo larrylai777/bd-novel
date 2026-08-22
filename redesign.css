@@ -316,3 +316,34 @@ body.light .ch-list-status { color:#006fae !important; }
   font-style: normal !important;
   font-synthesis: none;
 }
+
+/* ── 全站中英字型統一 ──
+   以 Apple 系統字族為核心：英文採 SF Pro，中文採 PingFang TC，
+   兩者字面比例與筆畫密度相近，避免中英混排出現風格落差。 */
+:root {
+  --site-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
+  --sans: var(--site-font);
+  --serif: var(--site-font);
+}
+html, body,
+button, input, select, textarea,
+body *, body *::before, body *::after {
+  font-family: var(--site-font) !important;
+  font-synthesis: none;
+}
+
+/* 英文與中英文混排採一致字距；既有英文一般字重規則持續生效。 */
+.en-regular {
+  font-family: var(--site-font) !important;
+  letter-spacing: inherit !important;
+}
+.reading-content p,
+.reading-content p:first-child::first-letter,
+.reading-chapter-title,
+.section-title,
+.page-title,
+.book-row-cover-title,
+.book-row-title,
+.archive-title {
+  font-family: var(--site-font) !important;
+}
