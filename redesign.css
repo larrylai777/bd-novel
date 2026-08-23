@@ -592,3 +592,93 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   body.light .reading-content p { color:#312b36 !important; }
   body.light .archive-hero { min-height:auto !important; }
 }
+
+/* ── 首頁與書櫃：四部填滿色卡 ──
+   將原本偏白的卡片內容面板改為完整部別色塊，文字採高對比深色或白色。 */
+body.light .volume-rail { background:rgba(83,61,96,.20) !important; border-color:rgba(83,61,96,.25) !important; box-shadow:0 16px 34px rgba(62,42,80,.10) !important; }
+body.light .volume-rail .volume-card { background:#e7eaf0 !important; color:#242a32 !important; }
+body.light .volume-rail .volume-card:nth-child(1) { background:linear-gradient(145deg,#f5f6f8,#d9dee7) !important; color:#252c35 !important; }
+body.light .volume-rail .volume-card:nth-child(2) { background:linear-gradient(145deg,#ffe8a7,#e9b943) !important; color:#342405 !important; }
+body.light .volume-rail .volume-card:nth-child(3) { background:linear-gradient(145deg,#b9e4ff,#69afe9) !important; color:#092b44 !important; }
+body.light .volume-rail .volume-card:nth-child(4),
+body.light .volume-rail .volume-card:nth-child(4).active { background:radial-gradient(circle at 80% 14%,rgba(237,213,255,.64),transparent 26%),linear-gradient(145deg,#7445a7,#35185d) !important; color:#fff !important; }
+body.light .volume-rail .volume-card:nth-child(1) .volume-no,
+body.light .volume-rail .volume-card:nth-child(1) .volume-name,
+body.light .volume-rail .volume-card:nth-child(1) .volume-state { color:#29313b !important; }
+body.light .volume-rail .volume-card:nth-child(2) .volume-no,
+body.light .volume-rail .volume-card:nth-child(2) .volume-name,
+body.light .volume-rail .volume-card:nth-child(2) .volume-state { color:#352604 !important; }
+body.light .volume-rail .volume-card:nth-child(3) .volume-no,
+body.light .volume-rail .volume-card:nth-child(3) .volume-name,
+body.light .volume-rail .volume-card:nth-child(3) .volume-state { color:#0a2b45 !important; }
+body.light .volume-rail .volume-card:nth-child(4) .volume-no,
+body.light .volume-rail .volume-card:nth-child(4) .volume-name,
+body.light .volume-rail .volume-card:nth-child(4) .volume-state { color:#fff !important; }
+body.light .volume-rail .volume-card::after { background:currentColor !important; opacity:.58; }
+body.light .volume-rail .volume-card:nth-child(4)::after { background:#efceff !important; opacity:1; box-shadow:0 0 14px #efceff; }
+body.light .volume-rail .volume-card:hover { filter:saturate(1.06) brightness(1.025); transform:translateY(-3px); }
+
+/* 書櫃卡片：封面與資訊、章節清單共用同一部別色域。 */
+body.light .book-row.part1-card { background:linear-gradient(145deg,#f6f7f9,#dce1e8) !important; border-color:#c7ced8 !important; color:#27303a !important; }
+body.light .book-row.part2-card { background:linear-gradient(145deg,#ffeab0,#eabe50) !important; border-color:#d6a93c !important; color:#392803 !important; }
+body.light .book-row.part3-card { background:linear-gradient(145deg,#bde6ff,#70b8ec) !important; border-color:#5ca8df !important; color:#092d48 !important; }
+body.light .book-row.part4-card { background:radial-gradient(circle at 78% 12%,rgba(241,218,255,.62),transparent 27%),linear-gradient(145deg,#8252b4,#3c1b66) !important; border-color:#8b55bd !important; color:#fff !important; box-shadow:0 18px 46px rgba(97,52,145,.25) !important; }
+body.light .book-row.part1-card .book-row-cover { background:linear-gradient(145deg,#5d6875,#252d37) !important; }
+body.light .book-row.part2-card .book-row-cover { background:linear-gradient(145deg,#8d6209,#3e2800) !important; }
+body.light .book-row.part3-card .book-row-cover { background:linear-gradient(145deg,#196b9e,#0a2d48) !important; }
+body.light .book-row.part4-card .book-row-cover { background:radial-gradient(circle at 72% 14%,rgba(232,196,255,.38),transparent 28%),linear-gradient(145deg,#6f3ea1,#281044) !important; }
+body.light .book-row.part1-card .book-row-info,
+body.light .book-row.part2-card .book-row-info,
+body.light .book-row.part3-card .book-row-info,
+body.light .book-row.part4-card .book-row-info { background:transparent !important; color:inherit !important; }
+body.light .book-row.part1-card .book-row-title, body.light .book-row.part1-card .book-row-desc, body.light .book-row.part1-card .ch-list-item, body.light .book-row.part1-card .ch-list-header, body.light .book-row.part1-card .ch-list-num { color:#27303a !important; }
+body.light .book-row.part2-card .book-row-title, body.light .book-row.part2-card .book-row-desc, body.light .book-row.part2-card .ch-list-item, body.light .book-row.part2-card .ch-list-header, body.light .book-row.part2-card .ch-list-num { color:#392803 !important; }
+body.light .book-row.part3-card .book-row-title, body.light .book-row.part3-card .book-row-desc, body.light .book-row.part3-card .ch-list-item, body.light .book-row.part3-card .ch-list-header, body.light .book-row.part3-card .ch-list-num { color:#092d48 !important; }
+body.light .book-row.part4-card .book-row-title, body.light .book-row.part4-card .book-row-desc, body.light .book-row.part4-card .ch-list-item, body.light .book-row.part4-card .ch-list-header, body.light .book-row.part4-card .ch-list-num { color:#fff !important; }
+body.light .book-row.part1-card .ch-list-item { border-bottom-color:rgba(39,48,58,.16) !important; }
+body.light .book-row.part2-card .ch-list-item { border-bottom-color:rgba(57,40,3,.18) !important; }
+body.light .book-row.part3-card .ch-list-item { border-bottom-color:rgba(9,45,72,.18) !important; }
+body.light .book-row.part4-card .ch-list-item { border-bottom-color:rgba(255,255,255,.20) !important; }
+body.light .book-row.part1-card .ch-list-item:hover { background:rgba(255,255,255,.44) !important; }
+body.light .book-row.part2-card .ch-list-item:hover { background:rgba(255,248,213,.36) !important; }
+body.light .book-row.part3-card .ch-list-item:hover { background:rgba(224,246,255,.32) !important; }
+body.light .book-row.part4-card .ch-list-item:hover { background:rgba(255,255,255,.13) !important; }
+body.light .book-row.part1-card .ch-list-status { color:#48515d !important; }
+body.light .book-row.part2-card .ch-list-status { color:#684500 !important; }
+body.light .book-row.part3-card .ch-list-status { color:#124a72 !important; }
+body.light .book-row.part4-card .ch-list-status { color:#f3ddff !important; }
+@media (max-width:768px) {
+  body.light .book-row.part1-card, body.light .book-row.part2-card, body.light .book-row.part3-card, body.light .book-row.part4-card { background-image:none !important; }
+  body.light .book-row.part1-card { background:#e2e6ed !important; }
+  body.light .book-row.part2-card { background:#f5ca67 !important; }
+  body.light .book-row.part3-card { background:#87c9f5 !important; }
+  body.light .book-row.part4-card { background:#694099 !important; }
+}
+
+/* ── 統一卡片曲率與贊助方案對比 ── */
+:root { --card-radius: 28px; --card-radius-mobile: 22px; }
+.volume-rail, .metrics, .support-grid, .free-ways, .book-row, .support-card, .support-tier, .about-card, .legal-card, .podcast-card, .notice-box, .archive-index { border-radius:var(--card-radius) !important; }
+.support-grid, .free-ways { overflow:hidden !important; }
+.support-tier, .free-way { border-radius:0 !important; }
+body.light .support-grid { background:rgba(92,68,112,.24) !important; border-color:rgba(92,68,112,.26) !important; box-shadow:0 18px 40px rgba(52,35,65,.10) !important; }
+body.light .support-tier { background:#f1edf3 !important; color:#2d2634 !important; }
+body.light .support-tier:nth-child(3) { background:#dfd5ec !important; color:#352640 !important; }
+body.light .support-tier.featured { background:radial-gradient(circle at 78% 13%,rgba(242,218,255,.48),transparent 28%),linear-gradient(145deg,#7b49a9,#432068) !important; color:#fff !important; }
+body.light .support-tier .tier-name,
+body.light .support-tier .tier-price { color:inherit !important; }
+body.light .support-tier .tier-price span,
+body.light .support-tier .tier-desc { color:rgba(45,38,52,.72) !important; }
+body.light .support-tier.featured .tier-name,
+body.light .support-tier.featured .tier-price { color:#fff !important; text-shadow:0 1px 1px rgba(39,13,58,.24); }
+body.light .support-tier.featured .tier-price span,
+body.light .support-tier.featured .tier-desc { color:rgba(255,255,255,.86) !important; }
+body.light .support-tier.featured .btn-primary { background:#fff !important; border-color:#fff !important; color:#4a2672 !important; }
+body.light .support-tier.featured::before { background:#f2cc75 !important; color:#3b2705 !important; box-shadow:0 2px 8px rgba(46,24,67,.24) !important; }
+body.light .support-tier:not(.featured) .btn { color:#4b2871 !important; border-color:rgba(75,40,113,.42) !important; background:rgba(255,255,255,.42) !important; }
+body.light .free-ways { background:rgba(92,68,112,.20) !important; border-color:rgba(92,68,112,.24) !important; }
+body.light .free-way { background:#f5f1f7 !important; color:#30283a !important; }
+body.light .free-way-title { color:#39264d !important; }
+body.light .free-way-desc { color:#665e6c !important; }
+@media (max-width:768px) {
+  .volume-rail, .metrics, .support-grid, .free-ways, .book-row, .support-card, .support-tier, .about-card, .legal-card, .podcast-card, .notice-box, .archive-index { border-radius:var(--card-radius-mobile) !important; }
+}
