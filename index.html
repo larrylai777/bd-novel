@@ -85,7 +85,7 @@
         <li><a href="support.html">支持創作</a></li>
         <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threads</a></li>
       </ul>
-      <div class="nav-right-mobile"><button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日夜主題">☀</button><button class="nav-hamburger" type="button" onclick="toggleMenu()" aria-label="開啟選單"><span></span><span></span><span></span></button></div>
+      <div class="nav-right-mobile"><button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日夜主題">☼</button><button class="nav-hamburger" type="button" onclick="toggleMenu()" aria-label="開啟選單"><span></span><span></span><span></span></button></div>
       <button class="nav-menu-close" type="button" onclick="closeMenu()" aria-label="關閉選單">×</button>
     </div>
   </nav>
@@ -186,7 +186,7 @@
   <script>
     function toggleMenu(){document.getElementById('navMenu').classList.add('open');document.querySelector('.nav-hamburger').classList.add('active');document.querySelector('.nav-menu-close').classList.add('visible');document.body.classList.add('menu-open')}
     function closeMenu(){document.getElementById('navMenu').classList.remove('open');document.querySelector('.nav-hamburger').classList.remove('active');document.querySelector('.nav-menu-close').classList.remove('visible');document.body.classList.remove('menu-open')}
-    function toggleTheme(){const light=document.body.classList.toggle('light');localStorage.setItem('bd-theme',light?'light':'dark');document.querySelector('.nav-theme-toggle').textContent=light?'☾':'☀'}
+    function toggleTheme(){const light=document.body.classList.toggle('light');localStorage.setItem('bd-theme',light?'light':'dark');document.querySelector('.nav-theme-toggle').textContent=light?'☾':'☼'}
     function toggleFooterCol(el){if(window.innerWidth<769)el.parentElement.classList.toggle('open')}
     if(localStorage.getItem('bd-theme')==='light'){document.body.classList.add('light');document.querySelector('.nav-theme-toggle').textContent='☾'}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});

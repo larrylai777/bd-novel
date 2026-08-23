@@ -177,7 +177,7 @@ body.light .music-fab { color:#1f1a10; }
       <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
     </ul>
     <div class="nav-right-mobile">
-      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☼</button>
       <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
     <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
   </div>
@@ -1077,7 +1077,7 @@ function updateThemeButton(){
   const btn=document.getElementById("themeBtn");
   if(!btn) return;
   const isLight=document.body.classList.contains("light");
-  btn.textContent=isLight?"☾":"☀";
+  btn.textContent=isLight?"☾":"☼";
   btn.title=isLight?"切換深色模式":"切換日間模式";
 }
 function toggleTheme(){
@@ -1319,7 +1319,7 @@ document.addEventListener('keydown',function(e){
   function updateNavThemeToggle(){
     var isLight=document.body.classList.contains('light');
     document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
-      btn.textContent=isLight?'☾':'☀';
+      btn.textContent=isLight?'☾':'☼';
       btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
       btn.title=isLight?'切換深色模式':'切換日間模式';
     });

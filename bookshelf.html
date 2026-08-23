@@ -206,7 +206,7 @@ body.light .part3-badge { color:#3579af !important; border-color:rgba(73,140,203
       <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank">Threads</a></li>
     </ul>
     <div class="nav-right-mobile">
-      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☼</button>
 
       <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
         <span></span><span></span><span></span>
@@ -578,7 +578,7 @@ if(localStorage.getItem('theme') === 'light') document.body.classList.add('light
   function updateNavThemeToggle(){
     var isLight=document.body.classList.contains('light');
     document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
-      btn.textContent=isLight?'☾':'☀';
+      btn.textContent=isLight?'☾':'☼';
       btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
       btn.title=isLight?'切換深色模式':'切換日間模式';
     });

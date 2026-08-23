@@ -496,3 +496,99 @@ body.light .site-footer .footer-col a,
 body.light .site-footer .footer-copy,
 body.light .site-footer .footer-legal a { color:rgba(247,245,251,.72) !important; }
 body.light .site-footer .footer-col-title { color:#eedaff !important; }
+
+/* ── 白天模式：長篇閱讀優化 ──
+   採用暖白紙張、深灰紫正文與低刺激紫色識別，降低長時間閱讀疲勞。 */
+body.light {
+  --bg: #fbfaf8;
+  --bg2: #f3f0f5;
+  --bg3: #eae5ee;
+  --white: #28222f;
+  --text: #28222f;
+  --text-dim: #665e6c;
+  --text-xs: #867d8a;
+  --border: rgba(68,49,78,.14);
+  --border2: rgba(68,49,78,.25);
+  --surface: rgba(104,65,166,.045);
+  --surface2: rgba(104,65,166,.09);
+  --accent: #38294b;
+  --ink: #fbfaf8;
+  --ink-raised: #f3f0f5;
+  --ink-soft: #eae5ee;
+  --paper: #28222f;
+  --paper-muted: #665e6c;
+  --paper-faint: #867d8a;
+  --dawn: #6941a7;
+  --dawn-soft: rgba(105,65,167,.12);
+  --signal: #6941a7;
+  --signal-soft: rgba(105,65,167,.12);
+  background:#fbfaf8 !important;
+  color:#28222f !important;
+}
+body.light::after {
+  opacity:.55;
+  background-image:
+    linear-gradient(rgba(94,68,111,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(94,68,111,.045) 1px,transparent 1px),
+    radial-gradient(circle at 74% 0%,rgba(183,140,235,.16),transparent 31rem),
+    radial-gradient(circle at 8% 92%,rgba(216,173,255,.14),transparent 34rem) !important;
+}
+body.light #nav { background:rgba(251,250,248,.90) !important; border-bottom-color:rgba(83,61,96,.16) !important; }
+body.light .nav-menu.open { background:rgba(251,250,248,.98) !important; }
+body.light .nav-menu.open li a { color:#30263a !important; }
+body.light .nav-theme-toggle { color:#6941a7 !important; border-color:rgba(105,65,167,.32) !important; background:rgba(105,65,167,.06) !important; }
+
+/* 首頁白天模式改為淺薰衣草主視覺，避免白底白字與過深大面積背景。 */
+body.light .archive-hero {
+  background:radial-gradient(circle at 82% 20%,rgba(205,165,245,.44),transparent 27rem),radial-gradient(circle at 9% 88%,rgba(162,112,218,.16),transparent 32rem),#f7f2fb !important;
+}
+body.light .archive-hero::before { background:linear-gradient(90deg,rgba(247,242,251,.30),rgba(247,242,251,.82) 74%),linear-gradient(0deg,rgba(247,242,251,.75),transparent 60%) !important; }
+body.light .archive-hero .archive-title { color:#30263a !important; }
+body.light .archive-hero .archive-title span { color:#6941a7 !important; text-shadow:0 0 22px rgba(151,99,214,.20) !important; }
+body.light .archive-hero .archive-deck { color:#665e6c !important; }
+body.light .archive-hero .archive-eyebrow { color:#6941a7 !important; }
+body.light .archive-hero .home-orbit { border-color:rgba(105,65,167,.22) !important; }
+body.light .archive-index { background:rgba(255,255,255,.74) !important; border-color:rgba(105,65,167,.22) !important; box-shadow:0 18px 44px rgba(75,45,101,.10) !important; color:#28222f !important; }
+body.light .archive-index-title { color:#30263a !important; }
+body.light .archive-index-copy { color:#665e6c !important; }
+body.light .archive-index-meta { color:#867d8a !important; border-color:rgba(83,61,96,.16) !important; }
+body.light .archive-index-meta a { color:#6941a7 !important; }
+body.light .archive-hero .btn-primary { background:#6941a7 !important; border-color:#6941a7 !important; color:#fff !important; }
+body.light .archive-hero .btn-outline { color:#6941a7 !important; border-color:rgba(105,65,167,.46) !important; background:rgba(255,255,255,.42) !important; }
+
+/* 卡片與清單：白紙面板、深灰紫文字與清楚邊界。 */
+body.light .book-row { background:rgba(255,255,255,.86) !important; border-color:rgba(83,61,96,.18) !important; box-shadow:0 14px 36px rgba(52,35,65,.09) !important; }
+body.light .book-row-info, body.light .chapter-row, body.light .support-card, body.light .support-tier, body.light .about-card, body.light .legal-card, body.light .podcast-card { color:#28222f !important; }
+body.light .book-row-title, body.light .section-title, body.light .page-title { color:#30263a !important; }
+body.light .book-row-desc, body.light .chapter-row, body.light .about-card p, body.light .legal-card p { color:#665e6c !important; }
+body.light .chapter-row { border-bottom-color:rgba(83,61,96,.14) !important; }
+body.light .chapter-row:hover { background:rgba(105,65,167,.055) !important; }
+body.light .metric-num, body.light .signal-strip b, body.light .signal-strip a { color:#6941a7 !important; }
+body.light .signal-strip { background:rgba(105,65,167,.065) !important; border-color:rgba(105,65,167,.22) !important; }
+
+/* 閱讀頁：奶白紙張與深灰紫正文，降低眩光並提高段落辨識度。 */
+body.light .reading-toolbar { background:rgba(251,250,248,.94) !important; border-bottom-color:rgba(83,61,96,.18) !important; }
+body.light .reading-toolbar .toolbar-btn { color:#392d45 !important; border-color:rgba(83,61,96,.30) !important; background:rgba(255,255,255,.64) !important; }
+body.light .reading-toolbar .toolbar-btn.primary { background:#6941a7 !important; border-color:#6941a7 !important; color:#fff !important; }
+body.light .toolbar-chapter-label, body.light .reading-meta { color:#867d8a !important; }
+body.light .reading-body { background:rgba(255,255,255,.44) !important; }
+body.light .reading-chapter-title { color:#38294b !important; text-shadow:none !important; }
+body.light .part-badge { color:#6941a7 !important; border-color:rgba(105,65,167,.32) !important; background:rgba(105,65,167,.07) !important; }
+body.light .part3-source-status { background:rgba(105,65,167,.055) !important; border-color:rgba(105,65,167,.24) !important; }
+body.light .podcast-embed { background:rgba(255,255,255,.74) !important; border-color:rgba(83,61,96,.15) !important; }
+body.light .reading-content { background:rgba(255,255,255,.62); border:1px solid rgba(83,61,96,.10); border-radius:22px; padding:30px 38px; }
+body.light .reading-content p { color:#302b35 !important; }
+body.light .reading-nav { border-top-color:rgba(83,61,96,.17) !important; }
+body.light .toc-overlay { background:rgba(249,247,250,.98) !important; }
+body.light .toc-panel { border-bottom-color:rgba(83,61,96,.14) !important; }
+body.light .toc-item { color:#30263a !important; border-bottom-color:rgba(83,61,96,.13) !important; }
+body.light .toc-item-num, body.light .toc-item-arrow { color:#867d8a !important; }
+body.light .toc-item.toc-active { background:rgba(105,65,167,.08) !important; border-color:rgba(105,65,167,.22) !important; }
+
+body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !important; }
+
+@media (max-width:768px) {
+  body.light .reading-content { border-radius:16px; padding:23px 20px; background:rgba(255,255,255,.70); }
+  body.light .reading-content p { color:#312b36 !important; }
+  body.light .archive-hero { min-height:auto !important; }
+}

@@ -62,7 +62,7 @@ body.light .support-tier.featured::before{background:#c9a84c;color:#17130a;}
       
     </ul>
     <div class="nav-right-mobile">
-      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☀</button>
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☼</button>
       <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
     <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
   </div>
@@ -219,7 +219,7 @@ if(localStorage.getItem("theme")==="light")document.body.classList.add("light");
   function updateNavThemeToggle(){
     var isLight=document.body.classList.contains('light');
     document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
-      btn.textContent=isLight?'☾':'☀';
+      btn.textContent=isLight?'☾':'☼';
       btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
       btn.title=isLight?'切換深色模式':'切換日間模式';
     });
