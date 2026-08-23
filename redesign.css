@@ -446,3 +446,53 @@ body.light .part4-reading .reading-chapter-title { color:#743ab1 !important; tex
 body.light .archive-hero { background:radial-gradient(circle at 82% 22%,rgba(216,173,255,.25),transparent 31rem),radial-gradient(circle at 8% 88%,rgba(125,74,203,.16),transparent 35rem),#0a1019 !important; }
 body.light .archive-hero .archive-eyebrow { color:#d9b4ff !important; }
 body.light .archive-hero .archive-title span { color:#e7ccff !important; }
+
+/* ── 統一頁尾與紫色識別字 ──
+   正文與灰白輔助文字不變；僅原有的彩色介面識別統一為第四部紫色。 */
+:root {
+  --accent-gold: var(--part4);
+  --signal: var(--part4);
+  --signal-soft: var(--part4-soft);
+}
+.site-footer {
+  border-top:1px solid rgba(216,173,255,.22) !important;
+  background:linear-gradient(180deg,rgba(20,13,31,.98),rgba(7,8,13,.99)) !important;
+}
+.site-footer .footer-col-title,
+.site-footer .footer-col-title::after,
+.site-footer .footer-legal a:hover,
+.site-footer .footer-col a:hover { color:var(--part4) !important; }
+.site-footer .footer-col-title { border-bottom-color:rgba(216,173,255,.24) !important; }
+.site-footer .footer-col a:hover { text-shadow:0 0 14px rgba(216,173,255,.24); }
+.site-footer .footer-bottom { border-top-color:rgba(216,173,255,.18) !important; }
+
+/* 通用的彩色互動文字與標籤改採紫色；正文、白字與灰字維持原狀。 */
+.signal-strip b,
+.signal-strip a,
+.archive-index-meta a,
+.metric-num,
+.ch-list-status,
+.part-badge,
+.toc-part-label,
+.part3-source-name,
+.part3-source-detail,
+.status-label,
+.badge[style*="color"],
+.btn-primary:not(.nav-menu .btn-primary) {
+  color:var(--part4) !important;
+}
+.signal-strip,
+.part3-source-status { border-color:rgba(216,173,255,.40) !important; }
+.signal-strip a:hover,
+.archive-index-meta a:hover { color:var(--part4-bright) !important; }
+
+/* 四部書櫃與其對應閱讀頁保留各自專屬色，不被通用紫色規則覆蓋。 */
+.book-row.part1-card .book-row-cover-title, .book-row.part1-card .book-row-cover-sub, .book-row.part1-card .book-row-meta, .book-row.part1-card .ch-list-status { color:var(--part1) !important; }
+.book-row.part2-card .book-row-cover-title, .book-row.part2-card .book-row-cover-sub, .book-row.part2-card .book-row-meta, .book-row.part2-card .ch-list-status { color:var(--part2) !important; }
+.book-row.part3-card .book-row-cover-title, .book-row.part3-card .book-row-cover-sub, .book-row.part3-card .book-row-meta, .book-row.part3-card .ch-list-status { color:var(--part3) !important; }
+.book-row.part4-card .book-row-cover-title, .book-row.part4-card .book-row-cover-sub, .book-row.part4-card .book-row-meta, .book-row.part4-card .ch-list-status { color:var(--part4) !important; }
+body.light .site-footer { background:linear-gradient(180deg,#211535,#100d18) !important; }
+body.light .site-footer .footer-col a,
+body.light .site-footer .footer-copy,
+body.light .site-footer .footer-legal a { color:rgba(247,245,251,.72) !important; }
+body.light .site-footer .footer-col-title { color:#eedaff !important; }
