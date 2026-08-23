@@ -347,3 +347,102 @@ body *, body *::before, body *::after {
 .archive-title {
   font-family: var(--site-font) !important;
 }
+
+/* ── 四部固定識別色 ──
+   第一部：灰白；第二部：黃色；第三部：藍色；第四部：紫色。 */
+:root {
+  --part1: #e5e9ef;
+  --part1-soft: rgba(229,233,239,.15);
+  --part2: #f6c967;
+  --part2-soft: rgba(246,201,103,.15);
+  --part3: #86cbff;
+  --part3-soft: rgba(134,203,255,.15);
+  --part4: #d8adff;
+  --part4-bright: #ebd7ff;
+  --part4-soft: rgba(216,173,255,.16);
+}
+
+/* 書櫃的部別標題與卷宗卡片。 */
+.shelf-part-label.part1-label { color:var(--part1) !important; }
+.shelf-part-label.part2-label { color:var(--part2) !important; }
+.shelf-part-label.part3-label { color:var(--part3) !important; }
+.shelf-part-label.part4-label { color:var(--part4) !important; text-shadow:0 0 18px rgba(216,173,255,.22); }
+
+.book-row.part1-card .book-row-cover { background:linear-gradient(145deg,#242a33,#080a0f 68%) !important; }
+.book-row.part1-card .book-row-cover-title,
+.book-row.part1-card .book-row-cover-sub,
+.book-row.part1-card .book-row-meta,
+.book-row.part1-card .ch-list-status { color:var(--part1) !important; }
+.book-row.part1-card .badge:nth-child(3) { color:var(--part1) !important; border-color:rgba(229,233,239,.36) !important; background:var(--part1-soft) !important; }
+
+.book-row.part2-card .book-row-cover { background:radial-gradient(circle at 72% 15%,rgba(246,201,103,.20),transparent 34%),linear-gradient(145deg,#2b2110,#090a0f 68%) !important; }
+.book-row.part2-card .book-row-cover-title,
+.book-row.part2-card .book-row-cover-sub,
+.book-row.part2-card .book-row-meta,
+.book-row.part2-card .ch-list-status { color:var(--part2) !important; }
+.book-row.part2-card .badge:nth-child(3) { color:var(--part2) !important; border-color:rgba(246,201,103,.40) !important; background:var(--part2-soft) !important; }
+
+.book-row.part3-card .book-row-cover { background:radial-gradient(circle at 72% 15%,rgba(134,203,255,.18),transparent 34%),linear-gradient(145deg,#092233,#080a0f 68%) !important; }
+.book-row.part3-card .book-row-cover-title,
+.book-row.part3-card .book-row-cover-sub,
+.book-row.part3-card .book-row-meta,
+.book-row.part3-card .ch-list-status { color:var(--part3) !important; }
+.book-row.part3-card .badge:nth-child(3) { color:var(--part3) !important; border-color:rgba(134,203,255,.40) !important; background:var(--part3-soft) !important; }
+
+.book-row.part4-card { border-color:rgba(216,173,255,.38) !important; box-shadow:0 22px 80px rgba(107,58,164,.18),0 0 40px rgba(216,173,255,.06) !important; }
+.book-row.part4-card .book-row-cover { background:radial-gradient(circle at 72% 14%,rgba(216,173,255,.30),transparent 33%),radial-gradient(circle at 15% 85%,rgba(133,91,237,.18),transparent 45%),linear-gradient(145deg,#211536,#090a12 70%) !important; }
+.book-row.part4-card .book-row-cover-title { color:var(--part4-bright) !important; text-shadow:0 0 24px rgba(216,173,255,.38),0 0 56px rgba(149,91,241,.17) !important; }
+.book-row.part4-card .book-row-cover-sub,
+.book-row.part4-card .book-row-meta,
+.book-row.part4-card .ch-list-status { color:var(--part4) !important; }
+.book-row.part4-card .badge:nth-child(3) { color:var(--part4-bright) !important; border-color:rgba(216,173,255,.48) !important; background:var(--part4-soft) !important; box-shadow:0 0 16px rgba(216,173,255,.10); }
+.book-row.part4-card .ch-list-item:hover { background:rgba(216,173,255,.07) !important; }
+
+/* 首頁：四部索引與第四部當前章的紫光訊號。 */
+.volume-card:nth-child(1) .volume-name { color:var(--part1); }
+.volume-card:nth-child(2) .volume-name { color:var(--part2); }
+.volume-card:nth-child(3) .volume-name { color:var(--part3); }
+.volume-card:nth-child(4).active { background:radial-gradient(circle at 80% 15%,rgba(216,173,255,.25),transparent 34%),linear-gradient(145deg,#2b1943,#0e1019) !important; }
+.volume-card:nth-child(4) .volume-name,
+.volume-card:nth-child(4) .volume-no { color:var(--part4-bright) !important; }
+.volume-card:nth-child(4).active::after { background:var(--part4) !important; box-shadow:0 0 18px var(--part4),0 0 36px rgba(216,173,255,.34) !important; }
+.archive-index-label { color:var(--part4) !important; }
+.archive-index-title { color:var(--part4-bright) !important; text-shadow:0 0 22px rgba(216,173,255,.22); }
+.archive-index-meta a { color:var(--part4) !important; }
+
+/* 各部閱讀頁：徽章、狀態列、目錄與章名採用一致的部別色。 */
+body.part1-reading .part-badge, body.part1-reading .toc-part1-label { color:var(--part1) !important; border-color:rgba(229,233,239,.40) !important; background:var(--part1-soft) !important; }
+body.part2-reading .part-badge, body.part2-reading .toc-part2-label { color:var(--part2) !important; border-color:rgba(246,201,103,.42) !important; background:var(--part2-soft) !important; }
+body.part3-reading .part-badge, body.part3-reading .toc-part3-label { color:var(--part3) !important; border-color:rgba(134,203,255,.42) !important; background:var(--part3-soft) !important; }
+body.part4-reading .part-badge, body.part4-reading .toc-part4-label { color:var(--part4-bright) !important; border-color:rgba(216,173,255,.50) !important; background:var(--part4-soft) !important; box-shadow:0 0 18px rgba(216,173,255,.13); }
+body.part1-reading .reading-chapter-title { color:var(--part1) !important; }
+body.part2-reading .reading-chapter-title { color:var(--part2) !important; }
+body.part3-reading .reading-chapter-title { color:var(--part3) !important; }
+body.part4-reading .reading-chapter-title { color:var(--part4-bright) !important; text-shadow:0 0 28px rgba(216,173,255,.20); }
+body.part4-reading .reading-toolbar { border-bottom-color:rgba(216,173,255,.30) !important; }
+body.part4-reading .part3-source-status { border-color:rgba(216,173,255,.42) !important; background:rgba(216,173,255,.075) !important; }
+body.part4-reading .part3-source-orb { background:var(--part4) !important; box-shadow:0 0 14px var(--part4) !important; }
+body.part4-reading .part3-source-name { color:var(--part4-bright) !important; }
+body.part4-reading .toc-item.toc-active { border-color:rgba(216,173,255,.42) !important; background:rgba(216,173,255,.09) !important; }
+body.part4-reading .toc-item.toc-active .toc-item-num,
+body.part4-reading .toc-item.toc-active .toc-item-title,
+body.part4-reading .toc-item.toc-active .toc-item-arrow { color:var(--part4) !important; }
+
+body.light .book-row.part1-card .book-row-cover-title, body.light .book-row.part1-card .book-row-cover-sub { color:#f8f9fb !important; }
+body.light .book-row.part2-card .book-row-cover-title, body.light .book-row.part2-card .book-row-cover-sub { color:#ffe2a6 !important; }
+body.light .book-row.part3-card .book-row-cover-title, body.light .book-row.part3-card .book-row-cover-sub { color:#b9e3ff !important; }
+body.light .book-row.part4-card .book-row-cover-title, body.light .book-row.part4-card .book-row-cover-sub { color:#efddff !important; }
+body.light .volume-card:nth-child(4).active { background:radial-gradient(circle at 80% 15%,rgba(216,173,255,.35),transparent 34%),linear-gradient(145deg,#38235a,#191326) !important; }
+body.light .part4-reading .reading-chapter-title { color:#743ab1 !important; text-shadow:none; }
+
+/* 首頁目前聚焦第四部，主視覺沿用紫光訊號。 */
+.archive-hero {
+  background:radial-gradient(circle at 82% 22%,rgba(216,173,255,.22),transparent 31rem),radial-gradient(circle at 8% 88%,rgba(125,74,203,.14),transparent 35rem),var(--ink) !important;
+}
+.archive-eyebrow { color:var(--part4) !important; }
+.archive-eyebrow::before { background:var(--part4) !important; }
+.archive-title span { color:var(--part4) !important; text-shadow:0 0 30px rgba(216,173,255,.24); }
+.home-signal { background:var(--part4) !important; box-shadow:0 0 28px 8px rgba(216,173,255,.30) !important; }
+body.light .archive-hero { background:radial-gradient(circle at 82% 22%,rgba(216,173,255,.25),transparent 31rem),radial-gradient(circle at 8% 88%,rgba(125,74,203,.16),transparent 35rem),#0a1019 !important; }
+body.light .archive-hero .archive-eyebrow { color:#d9b4ff !important; }
+body.light .archive-hero .archive-title span { color:#e7ccff !important; }
