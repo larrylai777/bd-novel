@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第二十五章：名字的重量｜第九次出生｜比爸 BD</title>
+<title>第三十四章：林若曦的殘響｜第九次出生｜比爸 BD</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
@@ -21,109 +21,7 @@
   color: var(--text-xs); text-transform: uppercase;
   margin-bottom: 10px;
 }
-.music-dock {
-  position:fixed;
-  right:24px;
-  bottom:calc(24px + env(safe-area-inset-bottom,0px));
-  z-index:9999;
-  width:58px;
-  height:58px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.20);
-  border-radius:50%;
-  background:rgba(12,12,14,.88);
-  box-shadow:0 10px 30px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.10);
-  backdrop-filter:saturate(140%) blur(18px);
-  -webkit-backdrop-filter:saturate(140%) blur(18px);
-  transition:width .34s cubic-bezier(.2,.8,.2,1),border-radius .34s cubic-bezier(.2,.8,.2,1),background .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.music-dock.is-expanded {
-  width:min(286px,calc(100vw - 36px));
-  border-radius:30px;
-  border-color:rgba(255,255,255,.28);
-  background:rgba(12,12,14,.94);
-}
-.music-fab {
-  position:absolute;
-  inset:0 auto 0 0;
-  z-index:2;
-  width:58px;
-  height:58px;
-  display:grid;
-  place-items:center;
-  border:0;
-  border-radius:50%;
-  background:transparent;
-  color:#fff;
-  font-size:23px;
-  line-height:1;
-  cursor:pointer;
-  transition:transform .22s ease,background .22s ease;
-}
-.music-fab:hover { background:rgba(255,255,255,.08); }
-.music-fab:active { transform:scale(.92); }
-.music-dock.is-playing:not(.is-expanded) {
-  border-color:rgba(201,168,76,.72);
-  background:radial-gradient(circle at 34% 28%,rgba(255,234,171,.32),rgba(201,168,76,.22) 44%,rgba(13,13,15,.94) 76%);
-  box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 22px rgba(201,168,76,.25);
-  animation:musicDockPulse 2.1s ease-in-out infinite;
-}
-.music-dock.is-playing.is-expanded { border-color:rgba(201,168,76,.56); }
-@keyframes musicDockPulse {
-  0%,100% { box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 18px rgba(201,168,76,.20); }
-  50% { box-shadow:0 0 0 9px rgba(201,168,76,.04),0 12px 34px rgba(0,0,0,.40),0 0 30px rgba(201,168,76,.34); }
-}
-.music-dock-panel {
-  position:absolute;
-  top:0;
-  right:0;
-  left:58px;
-  height:58px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:0 10px 0 4px;
-  opacity:0;
-  transform:translateX(-12px);
-  pointer-events:none;
-  transition:opacity .20s ease .10s,transform .32s cubic-bezier(.2,.8,.2,1);
-}
-.music-dock.is-expanded .music-dock-panel {
-  opacity:1;
-  transform:translateX(0);
-  pointer-events:auto;
-}
-.music-dock-info { min-width:0; flex:1; }
-.music-dock-title { overflow:hidden; color:var(--white); font-size:12px; font-weight:600; line-height:1.25; text-overflow:ellipsis; white-space:nowrap; }
-.music-dock-sub { overflow:hidden; color:var(--text-xs); font-size:10px; line-height:1.25; margin-top:2px; text-overflow:ellipsis; white-space:nowrap; }
-.music-dock-play,.music-dock-collapse {
-  display:grid;
-  place-items:center;
-  flex:0 0 auto;
-  width:34px;
-  height:34px;
-  border:1px solid var(--border);
-  border-radius:50%;
-  background:var(--surface);
-  color:var(--white);
-  cursor:pointer;
-  transition:background .18s ease,transform .18s ease,border-color .18s ease;
-}
-.music-dock-play { background:rgba(201,168,76,.16); border-color:rgba(201,168,76,.42); color:#f1d77c; font-size:12px; }
-.music-dock-collapse { color:var(--text-dim); font-size:15px; }
-.music-dock-play:hover,.music-dock-collapse:hover { background:var(--surface2); transform:scale(1.06); }
-body.light .music-dock { background:rgba(255,255,255,.92); border-color:rgba(20,20,25,.16); box-shadow:0 10px 28px rgba(20,30,45,.16),inset 0 1px 0 rgba(255,255,255,.9); }
-body.light .music-dock.is-playing:not(.is-expanded) { background:radial-gradient(circle at 34% 28%,rgba(255,239,192,.86),rgba(221,190,102,.50) 46%,rgba(255,255,255,.96) 78%); border-color:rgba(138,96,0,.44); }
-body.light .music-fab { color:#1f1a10; }
-@media(max-width:768px) {
-  .music-dock { right:18px; bottom:calc(18px + env(safe-area-inset-bottom,0px)); width:54px; height:54px; }
-  .music-dock.is-expanded { width:min(270px,calc(100vw - 36px)); border-radius:28px; }
-  .music-fab { width:54px; height:54px; font-size:22px; }
-  .music-dock-panel { left:54px; height:54px; gap:8px; padding-right:8px; }
-  .music-dock-title { font-size:11px; }
-  .music-dock-sub { font-size:9px; }
-  .music-dock-play,.music-dock-collapse { width:32px; height:32px; }
-}
+
 .reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
 .reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
 .reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
@@ -166,26 +64,26 @@ body.light .music-fab { color:#1f1a10; }
   <link rel="stylesheet" href="mobile-fixes.css">
   <script src="english-regular.js" defer></script>
 <!-- SEO START -->
-  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十五章：名字的重量。">
+  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十四章：林若曦的殘響。">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-ch25.html">
+  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-ch34.html">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="第九次出生｜比爸 BD 科幻懸疑小說">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="第二十五章：名字的重量｜第九次出生｜比爸 BD">
-  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十五章：名字的重量。">
-  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-ch25.html">
+  <meta property="og:title" content="第三十四章：林若曦的殘響｜第九次出生｜比爸 BD">
+  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十四章：林若曦的殘響。">
+  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-ch34.html">
   <meta property="og:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
   <meta property="og:image:alt" content="《第九次出生》比爸 BD 科幻懸疑小說">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="第二十五章：名字的重量｜第九次出生｜比爸 BD">
-  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十五章：名字的重量。">
+  <meta name="twitter:title" content="第三十四章：林若曦的殘響｜第九次出生｜比爸 BD">
+  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十四章：林若曦的殘響。">
   <meta name="twitter:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
   <meta name="theme-color" content="#0c0b12">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"第二十五章：名字的重量","url":"https://larrylai777.github.io/bd-novel/reading-ch25.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"第三十四章：林若曦的殘響","url":"https://larrylai777.github.io/bd-novel/reading-ch34.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
 <!-- SEO END -->
 </head>
-<body class="page-enter part3-reading">
+<body class="page-enter part4-reading">
 <nav id="nav">
   <div class="nav-wrap">
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
@@ -205,11 +103,11 @@ body.light .music-fab { color:#1f1a10; }
 <div class="reading-toolbar">
   <div class="reading-toolbar-left">
     <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
-    <span class="toolbar-chapter-label">第二十五章：名字的重量</span>
+    <span class="toolbar-chapter-label">第三十四章：林若曦的殘響</span>
   </div>
   <div class="reading-toolbar-center">
-    <a href="reading-ch24.html" class="toolbar-btn">← 上一章</a>
-    <a href="reading-ch26.html" class="toolbar-btn primary">下一章 →</a>
+    <a href="reading-ch33.html" class="toolbar-btn">← 上一章</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">下一章 →</span>
   </div>
   <div class="reading-toolbar-right">
     <button class="toolbar-btn music-toolbar-btn" id="toolbarMusicButton" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
@@ -219,313 +117,455 @@ body.light .music-fab { color:#1f1a10; }
 
 <div class="reading-body">
   <div style="text-align:center;padding-top:32px;">
-    <span class="part-badge">第三部：十八歲倒數</span>
+    <span class="part-badge">第四部：第一次出生</span>
   </div>
-  <h1 class="reading-chapter-title">第二十五章：名字的重量</h1>
+  <h1 class="reading-chapter-title">第三十四章：林若曦的殘響</h1>
   <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
-  <div class="part3-source-status is-warning" aria-label="城門解鎖倒數狀態">
+  <div class="part3-source-status" aria-label="第四部第七章狀態">
     <span class="part3-source-orb"></span>
-    <span class="part3-source-name">城門解鎖儀式</span>
-    <span class="part3-source-detail">被遺忘的名字正在回歸</span>
-    <span class="part3-countdown">00:03:00</span>
+    <span class="part3-source-name">母體權限的告白</span>
+    <span class="part3-source-detail">林若曦的殘響／留給第九次出生的一段空白</span>
   </div>
 
   <div class="podcast-embed">
     <div class="podcast-label">🎧 本章有音頻版本</div>
-    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第二十五集上線後將在此嵌入，敬請期待。</p>
+    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第三十四集上線後將在此嵌入，敬請期待。</p>
   </div>
 
   <div class="reading-content" id="readingContent">
-    <p>紅光越來越亮。</p>
-    <p>管道的盡頭終於出現一個真正的出口。</p>
-    <p>林澈的光抱著嬰兒穿過那道出口，</p>
-    <p>眼前豁然開朗。</p>
-    <p>他們站在一片巨大的空間裡，</p>
-    <p>頭頂不再是管道低矮的天花板，</p>
-    <p>是一整片裸露的岩壁，高聳延伸，看不到盡頭。</p>
-    <p>前方矗立著一扇巨大的鋼化城門，</p>
-    <p>比第九門、比舊門都要更加龐大、更加沉重。</p>
-    <p>城門的表面沒有任何裝飾，</p>
-    <p>只有大片冰冷的金屬，</p>
-    <p>反射著從門縫滲出的那道紅光。</p>
-    <p>「到了。」嬰兒喃喃。</p>
-    <p>「這是城門，赤環城唯一的出口。」</p>
-    <p>林澈的光看著那扇巨大的門，</p>
-    <p>心裡湧起一種複雜的情緒。</p>
-    <p>九次生命裡，它從未真正靠近過這道城門，</p>
-    <p>每一次都死在城市的深處，</p>
-    <p>死在某個它甚至不知道具體位置的房間裡。</p>
-    <p>如今第一次，它真正地站在這裡，</p>
-    <p>站在一道通往自由的門前。</p>
-    <p>城門底部亮起一整排警示燈，</p>
-    <p>不是紫色，是一種祈安從未見過的深紅，</p>
-    <p>比任何之前見過的警報都更加肅殺。</p>
-    <p>一個冰冷的聲音透過擴音器，</p>
-    <p>在整片空間裡迴盪：</p>
-    <p>「城門即將永久封閉。</p>
-    <p>所有未經授權離開赤環城者，視為叛逃，格殺勿論。」</p>
-    <p>城門兩側的暗處傳來整齊的腳步聲，</p>
-    <p>比之前在名字庫裡聽見的更多、更密集。</p>
-    <p>一整排冷光槍的充能聲此起彼落，</p>
-    <p>像一場即將爆發的雷雨前的低鳴。</p>
-    <p>林澈的光猛地停下腳步。</p>
-    <p>它看著那些從黑暗中逐漸顯露出輪廓的士兵，</p>
-    <p>心裡湧起一陣寒意。</p>
-    <p>不是因為害怕死亡，</p>
-    <p>是因為害怕再一次，</p>
-    <p>在即將觸碰到自由的那一刻，被強行地拉回去。</p>
-    <p>嬰兒的呼吸也急促起來。</p>
-    <p>「不要，這一次不要再被拉回去。」他喘息著。</p>
-    <p>一排冷光槍齊齊舉起，</p>
-    <p>瞄準那片環繞著嬰兒的藍光。</p>
-    <p>沒有人下令，也沒有人猶豫，</p>
-    <p>冷光如暴雨般傾瀉而下。</p>
-    <p>林澈的光猛地擋在嬰兒面前。</p>
-    <p>它沒有實體的身軀，</p>
-    <p>無法像祈安那樣用血肉去阻擋那些冷光，</p>
-    <p>穿透它的輪廓，帶走一小片一小片它的存在。</p>
-    <p>它感覺到自己正在一點一點地稀薄下去，</p>
-    <p>比在廣場上釋放記憶時更快、更猛烈。</p>
-    <p>那種流失的感覺很奇特，不是痛，</p>
-    <p>是一種近乎虛無的冰冷，</p>
-    <p>彷彿它正在被從這個世界一點一點地擦除。</p>
-    <p>嬰兒在它懷裡驚恐地喊：</p>
-    <p>「不要，不要再消失了，</p>
-    <p>已經有一個人為我消失了。」</p>
-    <p>林澈的光沒有回答，</p>
-    <p>它只是更加用力地把自己僅剩的輪廓擴大，</p>
-    <p>擋在嬰兒與那片冷光之間。</p>
-    <p>它想起九次死亡裡，每一次被奪走的那些瞬間——</p>
-    <p>第一世墜落時看見的紅色天空，</p>
-    <p>第二世白色房間裡漫長的孤獨，</p>
-    <p>第三世廣場上那句沒能說出口的話，</p>
-    <p>第四世液體裡兩個自己的對視，</p>
-    <p>第五世黑色的火，</p>
-    <p>第六世假的穹頂，</p>
-    <p>第七世被劃掉的名單，</p>
-    <p>第八世那扇沒有進去的門。</p>
-    <p>八段人生同時在它即將消散的意識裡翻湧，</p>
-    <p>每一段都帶著自己的顏色、自己的溫度、自己未完成的句子。</p>
-    <p>但這一次，它沒有被那份重量壓垮。</p>
-    <p>它忽然明白過來，自己不只是自己，</p>
-    <p>它還裝著阿飛——那個抱著只有一隻耳朵的玩偶的女孩，</p>
-    <p>裝著許寧——那個嘴唇無聲地念著媽媽的男孩，</p>
-    <p>裝著小雨——那個在廣場上想起自己名字而流淚的女孩，</p>
-    <p>裝著一整座城市裡，所有被劃掉、被清洗、被奪走姓名的人。</p>
-    <p>「我不是一個人在消失。」它在心裡喊，</p>
-    <p>聲音不再只是它一個人的聲音，是無數個聲音疊加而成的共鳴。</p>
-    <p>「是所有人在說話。」</p>
-    <p>它的輪廓猛地爆發出一陣更加猛烈的藍光，</p>
-    <p>不再是單純的防禦，是一種主動的反擊。</p>
-    <p>那道光裡浮現出無數個名字，</p>
-    <p>一個接一個從它的意識深處湧出——</p>
-    <p>阿飛、許寧、小雨，</p>
-    <p>還有更多它從未正式認識，</p>
-    <p>卻在記憶黑市、在黑河圖書館、在廣場上短暫觸碰過的名字。</p>
-    <p>那些名字化成一道道細小的光線，</p>
-    <p>朝著那扇巨大的城門飛去，</p>
-    <p>撞上冰冷的金屬表面。</p>
-    <p>每一次撞擊，城門的表面就浮現出一絲裂痕的紋路，</p>
-    <p>像那些名字正在用自己的重量，</p>
-    <p>一寸一寸地鑿開這道阻擋了無數人自由的門。</p>
-    <p>士兵們停下了射擊。</p>
-    <p>他們看著眼前這一幕，臉上寫滿震驚，</p>
-    <p>與一種近乎敬畏的茫然。</p>
-    <p>冷光槍的充能聲漸漸地停歇，</p>
-    <p>沒有人再繼續扣下扳機。</p>
-    <p>但城門依然沒有真正打開，</p>
-    <p>那些裂痕只是停留在表面，沒有繼續擴大。</p>
-    <p>嬰兒看著林澈的光那越來越稀薄的輪廓，</p>
-    <p>忽然明白了什麼。</p>
-    <p>「你用錯力氣了。」他虛弱地說。</p>
-    <p>林澈的光愣了一下。「什麼意思。」</p>
-    <p>「城門不是用力量打開的。」嬰兒繼續說。</p>
-    <p>「它是用放下打開的。</p>
-    <p>你一直在用藍光衝撞它，那是力量，</p>
-    <p>城門認得力量，它一輩子都在抵抗力量。</p>
-    <p>你需要的不是衝撞，是放手。」</p>
-    <p>林澈的光沉默了一瞬。</p>
-    <p>它想起自己在晶片壓制那一夜，</p>
-    <p>拒絕切斷黑河的那個選擇，</p>
-    <p>想起自己說過的話——我不切。</p>
-    <p>那個時候，它選擇的不是力量，</p>
-    <p>是一種更接近承受的姿態。</p>
-    <p>也許現在需要的，也是同一種姿態。</p>
-    <p>「怎麼放手。」它艱難地問，</p>
-    <p>聲音裡帶著一絲它自己都沒有意識到的脆弱。</p>
-    <p>嬰兒伸出自己小小的手，</p>
-    <p>貼上它那片即將消散的光。</p>
-    <p>「別再撞，別再衝，只要記得就好。</p>
-    <p>記得他們的名字，不是拿去當武器，</p>
-    <p>是單純地記得他們曾經活過。」</p>
-    <p>林澈的光閉上它看不見的眼睛。</p>
-    <p>它停止衝撞，</p>
-    <p>不再用那些名字當作利刃去鑿開城門。</p>
-    <p>它只是安靜地一個一個地，</p>
-    <p>在心裡重新念過那些名字——</p>
-    <p>阿飛，七歲，死過四次，</p>
-    <p>第一個看見它真正樣子的人。</p>
-    <p>許寧，被強行植入晶片那一刻，</p>
-    <p>嘴唇還在念著媽媽。</p>
-    <p>小雨，以為自己生來沒有名字的女孩，</p>
-    <p>在廣場上第一次喊出自己的名字時，</p>
-    <p>眼裡的光比任何警報都更加明亮。</p>
-    <p>還有祈安，死過四次，</p>
-    <p>卻依然選擇在第五次，</p>
-    <p>用自己化成一道願意守護、而不是逃跑的門。</p>
-    <p>還有母親林若曦，</p>
-    <p>一次又一次把自己變成工程師、變成兇手，</p>
-    <p>只為了護住它，</p>
-    <p>那份從未真正說出口的愛。</p>
-    <p>它念著，念著，不再是在戰鬥，是在懷念。</p>
-    <p>它的輪廓不再擴張，不再猛烈地膨脹，</p>
-    <p>反而漸漸地安靜下來，</p>
-    <p>化為一種更加柔和、更加沉靜的光。</p>
-    <p>那道光輕輕地貼上城門冰冷的表面，</p>
-    <p>不是撞擊，是一種近乎擁抱的觸碰。</p>
-    <p>城門猛地震動了一下，</p>
-    <p>不是因為外力的衝擊，</p>
-    <p>是一種從內部湧起的回應，</p>
-    <p>彷彿這扇門也一直在等待，</p>
-    <p>有人不是用力量，而是用記得去觸碰它。</p>
-    <p>裂痕從表面的紋路開始一寸一寸地擴散，</p>
-    <p>深入那些厚重的金屬之中，</p>
-    <p>不再是猛烈的破碎，是一種緩慢的、近乎溫柔的裂開，</p>
-    <p>像一顆種子終於找到破土而出的方式。</p>
-    <p>士兵們看著眼前這一幕，沒有人移動，</p>
-    <p>冷光槍垂在他們手中，</p>
-    <p>像某種已經失去意義的裝飾。</p>
-    <p>一個聲音從隊伍後方傳來。</p>
-    <p>「都退開。」</p>
-    <p>白司禮走了出來。</p>
-    <p>他的腳步不再匆忙，帶著一種近乎莊重的沉穩。</p>
-    <p>他走到隊伍最前方，抬起手，</p>
-    <p>示意所有士兵放下武器。</p>
-    <p>「這不是一場叛逃。」他說，聲音穿透整片空間。</p>
-    <p>「這是一場歸還。」</p>
-    <p>士兵們面面相覷，</p>
-    <p>一個接一個緩緩地垂下手中冷光槍的槍口。</p>
-    <p>白司禮望向那道正在裂開的城門，</p>
-    <p>心裡湧起一種複雜的情緒。</p>
-    <p>他想起自己過去追捕林澈的每一次任務紀錄，</p>
-    <p>裡面寫著的「污染源」「反鑰匙」「冥河主鑰」，</p>
-    <p>這些冰冷的稱呼，</p>
-    <p>如今在他眼前，</p>
-    <p>化成一片正在溫柔地打開一扇門的光。</p>
-    <p>裂痕繼續蔓延，</p>
-    <p>從城門的正中央一路朝著四周擴散，</p>
-    <p>每一道裂痕裡都透出更多的紅光，</p>
-    <p>像無數細小的血管被重新點亮。</p>
-    <p>倒數依然在繼續跳動著，六分鐘，五分五十九秒。</p>
-    <p>嬰兒看著那道即將完全打開的城門，輕聲問：</p>
-    <p>「我們做到了嗎。」</p>
-    <p>林澈的光依然貼著那扇裂開的門，</p>
-    <p>聲音裡帶著一絲疲憊、卻滿足的平靜。</p>
-    <p>「還沒，但快了。」</p>
-    <p>嬰兒靠在它的懷抱裡，閉上眼睛，</p>
-    <p>不再害怕，不再顫抖。</p>
-    <p>「我可以感覺到外面的風。」他輕聲說。</p>
-    <p>那句話很輕，卻讓林澈的光心裡湧起一陣酸楚。</p>
-    <p>一個被囚禁了不知道多少年的孩子，</p>
-    <p>第一次透過一道尚未完全打開的門縫，</p>
-    <p>感受到風的存在，</p>
-    <p>那種感覺，想必比任何言語都更加珍貴。</p>
-    <p>裂痕繼續擴大，</p>
-    <p>從門的中心一路蔓延到邊緣，</p>
-    <p>那些粗大的鉚釘一顆接著一顆開始鬆動，</p>
-    <p>發出沉悶的金屬摩擦聲，</p>
-    <p>像一頭沉睡太久的巨獸終於開始甦醒、伸展自己僵硬的肢體。</p>
-    <p>白司禮站在不遠處，靜靜地看著這一切。</p>
-    <p>他的士兵也同樣地站在原地，</p>
-    <p>沒有人再提起武器，</p>
-    <p>沒有人再質疑眼前正在發生的奇蹟。</p>
-    <p>一個年輕的士兵忽然跪了下來，</p>
-    <p>雙手掩面，肩膀劇烈地顫抖。</p>
-    <p>「我妹妹的名字。」他哽咽著說。</p>
-    <p>「叫阿霓，我終於想起她的臉了。」</p>
-    <p>更多士兵跟著跪下，</p>
-    <p>有人哭，有人沉默地閉上眼睛，</p>
-    <p>彷彿那道正在打開的城門裡透出的光，</p>
-    <p>也同時照進了他們自己心裡那些早已被塵封的角落。</p>
-    <p>倒數的聲音依然在跳動，五分鐘，四分五十九秒。</p>
-    <p>但此刻，沒有人再急著去聽那個數字，</p>
-    <p>所有人的目光都被眼前那道正在一寸一寸地裂開的城門，</p>
-    <p>牢牢地吸引住了。</p>
-    <p>裂痕已經蔓延到整扇門的每一個角落，</p>
-    <p>那些粗大的鉚釘一顆接著一顆從門的表面脫落，</p>
-    <p>墜落在地面上，發出沉悶的金屬撞擊聲，</p>
-    <p>一聲接著一聲，像某種古老的倒數。</p>
-    <p>紅光從那些裂痕裡大片大片地湧出，</p>
-    <p>染紅整個空間，染紅每一張抬頭仰望的臉。</p>
-    <p>嬰兒在林澈的光的懷抱裡輕輕地顫抖，</p>
-    <p>不是因為恐懼，是因為一種近乎狂喜的期待。</p>
-    <p>「我聞到了火星的味道。」他喃喃。</p>
-    <p>那種味道透過門縫裡湧出的風，</p>
-    <p>第一次真實地吹進這片被囚禁太久的空間裡，</p>
-    <p>塵土的氣息混合著一種乾燥卻自由的冷冽。</p>
-    <p>林澈的光也深深地吸入那股氣息，</p>
-    <p>即使它沒有真正的肺，沒有真正的呼吸，</p>
-    <p>但那個動作依然讓它感覺到一種前所未有的輕盈。</p>
-    <p>倒數繼續跳動著，四分鐘，三分五十九秒。</p>
-    <p>城門的最後一道裂痕終於貫穿整個門面，</p>
-    <p>一道刺眼的紅光猛地從門的正中央炸開。</p>
-    <p>那道光太猛烈，</p>
-    <p>所有人下意識地舉起手臂遮擋自己的眼睛。</p>
-    <p>一陣強風伴隨著那道光灌了進來，</p>
-    <p>帶著外面世界真正的溫度、真正的氣味、真正的聲音。</p>
-    <p>等眾人重新睜開眼睛，</p>
-    <p>城門已經碎成無數巨大的金屬碎片，散落在地面上。</p>
-    <p>門後是一片真正的火星紅色沙漠。</p>
-    <p>夕陽，或者說那顆遙遠的太陽，</p>
-    <p>正低垂在地平線上，灑下一片橘紅色的光。</p>
-    <p>沒有穹頂，沒有濾鏡，沒有任何人工修飾過的顏色，</p>
-    <p>只有最原始、最真實的火星的黃昏。</p>
-    <p>嬰兒在林澈的光裡仰起小小的臉，</p>
-    <p>望向那片從未見過的天空。</p>
-    <p>淚水再次滑落，這一次不是因為痛苦，</p>
-    <p>是因為一種終於被實現的渴望。</p>
-    <p>「這是天空。」他輕聲說。「真正的天空。」</p>
-    <p>白司禮站在碎裂的城門前，</p>
-    <p>望著那片從未真正見過的火星黃昏。</p>
-    <p>他活了這麼久，第一次覺得自己的眼睛也跟著濕潤起來。</p>
-    <p>那些跪在地上的士兵也紛紛抬起頭，</p>
-    <p>望向那片橘紅色的天空。</p>
-    <p>有人站起來，朝著門外走了一步，又一步，</p>
-    <p>像在確認這一切不是一場幻覺。</p>
-    <p>風從門外源源不絕地灌進來，</p>
-    <p>帶走這片空間裡積累了太久的沉悶與冰冷。</p>
-    <p>林澈的光抱著嬰兒，緩緩地朝著那道破碎的城門飄去。</p>
-    <p>它回頭望了一眼那些站在原地的人們——</p>
-    <p>白司禮、士兵們，還有更深處，</p>
-    <p>那道依然守著名字庫的門。</p>
-    <p>它在心裡輕聲說：</p>
-    <p>謝謝你們，謝謝每一個選擇放下武器的人。</p>
-    <p>然後它抱緊懷裡的嬰兒，</p>
-    <p>一起走進那片真正的紅色黃昏裡。</p>
-    <p>倒數還在繼續跳動著，三分鐘，二分五十九秒。</p>
-    <p>但此刻，那個數字不再像一個威脅，</p>
-    <p>更像一場即將完成的儀式的最後倒數。</p>
-    <p>沙漠的風拂過林澈的光，拂過嬰兒的臉頰，</p>
-    <p>拂過這片赤環城從未真正擁有過、</p>
-    <p>卻始終嚮往著的自由。</p>
-    <p>嬰兒在風中輕輕地閉上眼睛，</p>
-    <p>第一次不是因為痛苦、不是因為恐懼，</p>
-    <p>只是單純地享受這陣屬於自由的風。</p>
-    <p>風拂過的地方，一切都安靜了下來，</p>
-    <p>彷彿整座赤環城在這一刻，</p>
-    <p>也跟著深深地吸了一口氣，</p>
-    <p>準備迎接一段全新的、屬於所有人的、真正自由的呼吸。</p>
+    <p>那三個字懸在半空，離地面大概一個人的高度。</p>
+    <p>林澈站在下面，抬頭看了很久。</p>
+    <p>它的亮度不穩定。</p>
+    <p>亮一下，暗下去，再亮一下，</p>
+    <p>間隔沒有規律。</p>
+    <p>不像名字庫裡其他的名字。</p>
+    <p>其他的名字是靜靜地亮著，</p>
+    <p>像一整片停在原地的星。</p>
+    <p>這一個在閃。</p>
+    <p>他伸出手。</p>
+    <p>手停在半空，離那三個字還有一段距離。</p>
+    <p>他停了很久。</p>
+    <p>久到他自己都覺得可笑——</p>
+    <p>他跑了整整九次生命想找她，</p>
+    <p>現在她就在他手可以碰到的地方，</p>
+    <p>而他不敢碰。</p>
+    <p>他想起第二部第六章，天橋上。</p>
+    <p>那時候她站在那裡，隔著一整條街，</p>
+    <p>沒有靠近，也沒有出手。</p>
+    <p>他當時最想要的，就是能夠走過去。</p>
+    <p>現在他可以了。</p>
+    <p>他碰上去。</p>
+    <p>——</p>
+    <p>沒有畫面。</p>
+    <p>先來的是聲音。</p>
+    <p>「如果你聽見這個。」</p>
+    <p>那個聲音一出來，林澈整個人就散了。</p>
+    <p>不是崩潰。</p>
+    <p>是一種更接近脫力的東西，</p>
+    <p>膝蓋忽然不曉得該怎麼撐住身體，</p>
+    <p>他往下坐，坐在名字庫的地面上，</p>
+    <p>背靠著一根什麼也沒有的空氣。</p>
+    <p>那是她的聲音。</p>
+    <p>不是他記憶裡的版本，</p>
+    <p>不是黑河模擬出來的殘響，</p>
+    <p>是真的。</p>
+    <p>有點啞，有點趕，</p>
+    <p>尾音收得很快，</p>
+    <p>那是一個習慣長時間說話、</p>
+    <p>又習慣不被打斷的人才會有的節奏。</p>
+    <p>「如果你聽見這個，」她說，</p>
+    <p>「表示你走到名字庫了。」</p>
+    <p>「也表示我已經不在。」</p>
+    <p>「這兩件事我都算到了。」</p>
+    <p>「但我沒有算到時間。」</p>
+    <p>停頓。</p>
+    <p>「所以我先講最重要的。」</p>
+    <p>「講完再講其他的，免得來不及。」</p>
+    <p>——</p>
+    <p>「源點鎖定協議需要一個活體錨。」</p>
+    <p>她說得很快，像在報告。</p>
+    <p>「它封住的不是一個裝置，是一個活著的意識。」</p>
+    <p>「一個活著的東西不能被機器單方面壓住，</p>
+    <p>它會找出口。」</p>
+    <p>「所以協議需要另一個活著的意識，</p>
+    <p>在系統的另一端，把那個出口壓著。」</p>
+    <p>「那個位置只能由擁有母體權限的人擔任。」</p>
+    <p>「因為母體權限是這座城市裡，</p>
+    <p>唯一一種可以承認『這是一個新生命』的權限。」</p>
+    <p>「能承認的，才能否認。」</p>
+    <p>停頓。</p>
+    <p>「當年他們找上我的時候，我二十六歲。」</p>
+    <p>「他們告訴我這是一個技術職位。」</p>
+    <p>「監控、維持、每季校驗一次。」</p>
+    <p>「他們沒有告訴我，錨會被消耗。」</p>
+    <p>「我是後來自己算出來的。」</p>
+    <p>「大概第七年。」</p>
+    <p>她的聲音在這裡有一點變化。</p>
+    <p>不是難過。</p>
+    <p>比較像一個工程師發現自己算錯了一個係數。</p>
+    <p>「消耗的速度取決於協議承受多少壓力。」</p>
+    <p>「他越想醒，我耗得越快。」</p>
+    <p>「前面很多年他很安靜。」</p>
+    <p>「所以我撐得住。」</p>
+    <p>——</p>
+    <p>「然後你死了。」</p>
+    <p>那句話說得很平。</p>
+    <p>平到林澈的呼吸停了。</p>
+    <p>「第一次。」她說。</p>
+    <p>「不是重置的那個第一次。」</p>
+    <p>「是真正的第一次。」</p>
+    <p>「你十七歲十一個月。」</p>
+    <p>「那不是處決。」</p>
+    <p>「那是意外。」</p>
+    <p>「北環的一段管線減壓，你剛好在那裡。」</p>
+    <p>「跟制度沒有關係，跟白司禮沒有關係，</p>
+    <p>跟這座城市所有我後來去恨的東西，都沒有關係。」</p>
+    <p>「就只是一段管線。」</p>
+    <p>停頓。很長。</p>
+    <p>「我抱著你在醫療艙外面站了四個小時。」</p>
+    <p>「然後我用母體權限，把你重新登記了一次。」</p>
+    <p>「那是第二次出生。」</p>
+    <p>「所有人都以為冥河子宮是為了控制輪迴者發明的。」</p>
+    <p>「不是。」</p>
+    <p>「它一開始是為了那個。」</p>
+    <p>「為了一個工程師不肯承認自己的孩子死了。」</p>
+    <p>林澈坐在地上，一動也不能動。</p>
+    <p>第一世。</p>
+    <p>第九門灌進他腦子裡的那些畫面，</p>
+    <p>那些墜落、白色房間、廣場、藍色液體，</p>
+    <p>原來全部都不是他的。</p>
+    <p>他的第一世很短，也很普通。</p>
+    <p>一段管線減壓。</p>
+    <p>沒有陰謀，沒有制度，沒有原罪。</p>
+    <p>只是一個十七歲的人，剛好走到那裡。</p>
+    <p>而這整座城市之所以會變成後來的樣子，</p>
+    <p>是因為一個母親在醫療艙外面站了四個小時，</p>
+    <p>然後決定不接受。</p>
+    <p>「這座城市的第一個謊言不是我造的。」林若曦說。</p>
+    <p>「第一個謊言是蘇晚那個孩子。」</p>
+    <p>「但第二個是我。」</p>
+    <p>「而且我知道第一個的存在，還是照做了。」</p>
+    <p>「所以我沒有藉口。」</p>
+    <p>——</p>
+    <p>「第三次到第八次，你已經知道了。」</p>
+    <p>「每一次都在十八歲附近。」</p>
+    <p>「每一次我都告訴自己是他們逼我的。」</p>
+    <p>「有幾次是真的。」</p>
+    <p>「有幾次不是。」</p>
+    <p>停頓。</p>
+    <p>「第六次不是。」</p>
+    <p>那三個字說出來的時候，</p>
+    <p>林澈的手指陷進了自己的手臂裡。</p>
+    <p>處決室。</p>
+    <p>刀落下來。</p>
+    <p>她跪在他面前，替他擦掉額上的血，</p>
+    <p>說對不起，說這是最後一次。</p>
+    <p>「那一次是我判斷的。」林若曦說。</p>
+    <p>「你那一世活得太好了。」</p>
+    <p>「你有朋友，你有工作，你有一個你喜歡的人。」</p>
+    <p>「你開始不想逃了。」</p>
+    <p>「不想逃的人會被找到。」</p>
+    <p>「我算過，如果讓你繼續下去，你會在二十歲前被完整銷毀，</p>
+    <p>不是重置，是銷毀。」</p>
+    <p>「所以我在你十八歲那年，先動手。」</p>
+    <p>「你在那間房間裡看著我。」</p>
+    <p>「你以為我是被逼的。」</p>
+    <p>「我讓你以為。」</p>
+    <p>「因為那樣你比較好過。」</p>
+    <p>她的聲音第一次出現裂痕。</p>
+    <p>只有一點。</p>
+    <p>「那是我做過最壞的一件事。」</p>
+    <p>「不是殺了你。」</p>
+    <p>「是讓你以為我沒有選擇。」</p>
+    <p>——</p>
+    <p>「八道。」她說。</p>
+    <p>「你可能已經發現了。」</p>
+    <p>「每一次重置，系統會把你的記憶清乾淨，</p>
+    <p>但有一種東西它存不住。」</p>
+    <p>「不是記憶。」</p>
+    <p>「是反應。」</p>
+    <p>「怕、想抓住人、生氣、覺得自己髒、難過、不相信、</p>
+    <p>捨不得別人痛、還有——想自己決定。」</p>
+    <p>「這八種東西不是資料，是身體學會的。」</p>
+    <p>「冥河陣列讀不到，所以也刪不掉。」</p>
+    <p>「我每一次都留一點給你。」</p>
+    <p>「留到第八次，你身上有八種它處理不了的東西。」</p>
+    <p>「那樣你就不能被做成一把乾淨的鑰匙。」</p>
+    <p>「白司禮要的是一把可以打開門、又不會問問題的鑰匙。」</p>
+    <p>「有這八種東西的人不行。」</p>
+    <p>「他會問。」</p>
+    <p>停頓。</p>
+    <p>「這是我唯一做對的事。」</p>
+    <p>「也是我最沒有資格做的事。」</p>
+    <p>「因為我從來沒有問過你，要不要當那把反鑰匙。」</p>
+    <p>——</p>
+    <p>「第九次。」</p>
+    <p>她的聲音變慢了。</p>
+    <p>「第九次我用了別人的名字。」</p>
+    <p>「名字庫最深處有一個名額，那是蘇晚那個孩子的。」</p>
+    <p>「他從來沒有被登記為活著，所以他的名額一直空著。」</p>
+    <p>「我借了。」</p>
+    <p>「我算過，我可以在你十八歲以前把它還回去。」</p>
+    <p>「我需要八年。」</p>
+    <p>「我以為我有八年。」</p>
+    <p>「我沒有。」</p>
+    <p>「借出去的那一刻，錨的消耗速度變成三倍。」</p>
+    <p>「因為協議同時要壓住兩個東西——」</p>
+    <p>「他，還有那個被我拿走的名額。」</p>
+    <p>停頓。</p>
+    <p>「我在你出生前十四天算出來的。」</p>
+    <p>「答案是七個月。」</p>
+    <p>「我剩七個月。」</p>
+    <p>——</p>
+    <p>林澈在地上蜷起來。</p>
+    <p>七個月。</p>
+    <p>從第七產房到廢棄線，中間不到兩天。</p>
+    <p>她根本沒有走到七個月。</p>
+    <p>「你現在大概在想，我為什麼還是做了。」林若曦說。</p>
+    <p>「因為那時候已經停不下來了。」</p>
+    <p>「如果我不借那個名額，你的第九次出生就登記不了。」</p>
+    <p>「登記不了，你就是一個沒有身分的東西。」</p>
+    <p>「沒有身分的東西在赤環城不會被審判。」</p>
+    <p>「會被直接處理掉。」</p>
+    <p>「所以我借了。」</p>
+    <p>「我知道我還不了。」</p>
+    <p>「我還是借了。」</p>
+    <p>「這件事沒有辦法解釋成一個好的決定。」</p>
+    <p>「它就是一個母親偷了另一個孩子的東西。」</p>
+    <p>「而且偷完之後死掉，讓債留在原地。」</p>
+    <p>停頓。</p>
+    <p>「如果那個孩子有一天醒過來，」</p>
+    <p>「他有權利恨我。」</p>
+    <p>「你不要替我去求他原諒。」</p>
+    <p>——</p>
+    <p>那之後她沉默了很久。</p>
+    <p>久到林澈以為錄音結束了。</p>
+    <p>他抬起頭。</p>
+    <p>那三個字還在閃。</p>
+    <p>「還有一件事。」林若曦說。</p>
+    <p>「這一件我想了很久要不要留。」</p>
+    <p>「因為它比較像是我自己想說，不是你需要知道的。」</p>
+    <p>「但我還是留了。」</p>
+    <p>「我這輩子最後悔的不是那六次。」</p>
+    <p>「是我一直是唯一有鑰匙的人。」</p>
+    <p>林澈整個人震了一下。</p>
+    <p>「母體權限只有我有。」她說。</p>
+    <p>「每一道門在我靠近的時候會開。」</p>
+    <p>「每一份資料我可以改。」</p>
+    <p>「每一次重置我可以簽。」</p>
+    <p>「一開始這是我保護你的方法。」</p>
+    <p>「後來這變成我思考事情的方法。」</p>
+    <p>「我不再問別人。」</p>
+    <p>「我不再讓別人參與。」</p>
+    <p>「因為我確定我比他們都清楚。」</p>
+    <p>「我確定我是為了你。」</p>
+    <p>停頓。</p>
+    <p>「白司禮跟我共事十九年。」</p>
+    <p>「他每一次都問我，妳確定嗎。」</p>
+    <p>「我每一次都說我確定。」</p>
+    <p>「他後來就不問了。」</p>
+    <p>「他變成那個樣子，我有份。」</p>
+    <p>「一個人身邊如果所有人都不再問他確定嗎，」</p>
+    <p>「他就會變成制度。」</p>
+    <p>「不管他原本是什麼。」</p>
+    <p>她的聲音低下去。</p>
+    <p>「所以我想跟你說——」</p>
+    <p>「如果有一天你手上有一把只有你有的鑰匙，」</p>
+    <p>「不要留著。」</p>
+    <p>「不要因為你確定自己是好人就留著。」</p>
+    <p>「我也確定過。」</p>
+    <p>——</p>
+    <p>「最後。」</p>
+    <p>林若曦說。</p>
+    <p>那個聲音已經很累了。</p>
+    <p>「我想問你一句話。」</p>
+    <p>「但我知道我聽不見答案。」</p>
+    <p>「這個錄音是單向的，我沒有辦法做成雙向的。」</p>
+    <p>「而且我做完這個以後大概活不了幾天。」</p>
+    <p>「所以這句話問出來也沒有用。」</p>
+    <p>「可是沒有人會問我。」</p>
+    <p>「我做過的事，不會有法院審，不會有人拿名冊來找我，</p>
+    <p>不會有人指著我的臉問我，簽字那天有沒有看他一眼。」</p>
+    <p>「我會死在某個沒有人看見的地方，然後就沒有了。」</p>
+    <p>「所以我自己問我自己。」</p>
+    <p>停頓。</p>
+    <p>「我問過你嗎。」</p>
+    <p>「沒有。」</p>
+    <p>「八次，一次都沒有。」</p>
+    <p>「第八次你自己說了。」</p>
+    <p>「你說你選不讓我們選。」</p>
+    <p>「那是你這一生唯一一次真正的選擇。」</p>
+    <p>「而我當場衝去控制台，想把它按掉。」</p>
+    <p>「我沒有按到。」</p>
+    <p>「不是因為我改變主意。」</p>
+    <p>「是因為我來不及。」</p>
+    <p>「我要你知道這個。」</p>
+    <p>「不要把我想得比較好。」</p>
+    <p>她的呼吸聲進來了。</p>
+    <p>很輕，很淺，帶著一點雜音。</p>
+    <p>「澈澈。」</p>
+    <p>「這一次我不替你選。」</p>
+    <p>「這句話我在廢棄線裡有沒有說出口，我不知道。」</p>
+    <p>「我現在先說一次，免得來不及。」</p>
+    <p>「說完我留一段空白。」</p>
+    <p>「你如果想回答我，就回答。」</p>
+    <p>「我聽不見。」</p>
+    <p>「但那段空白是留給你的。」</p>
+    <p>——</p>
+    <p>然後就沒有聲音了。</p>
+    <p>名字庫裡安靜下來。</p>
+    <p>那三個字還在閃，一亮一暗，</p>
+    <p>在等一個它接收不到的東西。</p>
+    <p>林澈坐在地上。</p>
+    <p>他張開嘴，發現喉嚨裡什麼都沒有。</p>
+    <p>他想過幾千次，如果能再見她一面要說什麼。</p>
+    <p>九次生命裡他排練過幾千個版本。</p>
+    <p>有的是質問。</p>
+    <p>有的是控訴。</p>
+    <p>有的是把每一世的每一個細節攤開來，</p>
+    <p>一件一件念給她聽，像念一份名冊。</p>
+    <p>現在真的輪到他說了，</p>
+    <p>那幾千個版本一個都不在。</p>
+    <p>他坐在那裡，坐了很久。</p>
+    <p>那段空白很長。</p>
+    <p>長到他忽然明白，她是故意留這麼長的。</p>
+    <p>她算過。</p>
+    <p>她算過一個人要說出這種話需要多少時間。</p>
+    <p>「我恨過你。」他終於說。</p>
+    <p>聲音很啞。</p>
+    <p>「八次，每一次都恨。」</p>
+    <p>「第六次最恨。」</p>
+    <p>「你跪在我面前擦我的血，然後刀就落下來了，</p>
+    <p>沒有慢一秒。」</p>
+    <p>「我到現在還記得那沒有慢的那一秒。」</p>
+    <p>他停下來。</p>
+    <p>「你剛才說那一次是你判斷的。」</p>
+    <p>「我聽完以後更恨。」</p>
+    <p>「因為原來你是可以不做的。」</p>
+    <p>他喘了一口氣。</p>
+    <p>「可是我也知道，如果你不做，我會在二十歲前被銷毀。」</p>
+    <p>「你算的那個我也會算。」</p>
+    <p>「我算完的答案跟你一樣。」</p>
+    <p>「這件事最難的地方是這個。」</p>
+    <p>「不是你錯。」</p>
+    <p>「是我知道你沒有更好的辦法，我還是恨你。」</p>
+    <p>「而且我覺得我有權利恨。」</p>
+    <p>他抬起頭，看著那三個字。</p>
+    <p>「所以我不原諒你。」</p>
+    <p>「不是因為我不想。」</p>
+    <p>「是因為原諒這件事，」</p>
+    <p>「應該是你活著的時候，我當著你的面決定的。」</p>
+    <p>「你死了，我一個人說原諒，那只是我在放過我自己。」</p>
+    <p>「那對你不公平。」</p>
+    <p>「你也不會想要那種東西。」</p>
+    <p>那三個字閃了一下。</p>
+    <p>「但我可以做一件別的。」</p>
+    <p>林澈站起來。</p>
+    <p>他的腿還在抖，站得不太穩。</p>
+    <p>「我會把你做過的事記下來。」</p>
+    <p>「全部。」</p>
+    <p>「跟白司禮那疊紙一樣，一件一行，不加解釋。」</p>
+    <p>「你六次判斷、一次偷走別人的名額、</p>
+    <p>十九年沒有讓任何人問你確定嗎。」</p>
+    <p>「我會寫下來，放在名字庫裡，</p>
+    <p>放在所有人都可以查到的地方。」</p>
+    <p>「不是為了審判你。」</p>
+    <p>「是為了讓你不用一個人扛。」</p>
+    <p>他的聲音開始抖。</p>
+    <p>「你剛才說沒有人會問你。」</p>
+    <p>「我問你了。」</p>
+    <p>「這樣就有一個了。」</p>
+    <p>——</p>
+    <p>那三個字亮了很久。</p>
+    <p>比之前任何一次都久。</p>
+    <p>然後它慢慢地暗下去。</p>
+    <p>不是熄滅。</p>
+    <p>是回到跟周圍其他名字一樣的亮度，</p>
+    <p>靜靜地懸在那裡，</p>
+    <p>不再閃。</p>
+    <p>林澈站在下面，仰著頭。</p>
+    <p>一直到他發現自己的臉是濕的，</p>
+    <p>他才伸手擦了一下。</p>
+    <p>有人在他身後開口。</p>
+    <p>「哥哥。」</p>
+    <p>林澈轉身。</p>
+    <p>弟弟站在幾步外，</p>
+    <p>不知道站了多久。</p>
+    <p>那孩子的臉上有淚，也沒有擦。</p>
+    <p>「我都聽見了。」他說。</p>
+    <p>林澈沒有說話。</p>
+    <p>他不知道該怎麼跟一個孩子解釋，</p>
+    <p>剛才那個聲音偷走了他的名字，</p>
+    <p>而那個聲音是自己的母親。</p>
+    <p>弟弟走過來。</p>
+    <p>他仰起頭，看著那個已經不再閃的名字。</p>
+    <p>「她說我有權利恨她。」</p>
+    <p>「對。」林澈說。</p>
+    <p>「那我要不要恨她。」</p>
+    <p>林澈蹲下來。</p>
+    <p>「我不知道。」他說。</p>
+    <p>「這件事沒有人可以替你決定。」</p>
+    <p>「連我也不行。」</p>
+    <p>「特別是我不行。」</p>
+    <p>弟弟看著那個名字，看了很久。</p>
+    <p>「我不恨。」他最後說。</p>
+    <p>「為什麼。」</p>
+    <p>「因為她死掉的時候，也沒有人抱她。」</p>
+    <p>弟弟說得很輕。</p>
+    <p>「跟我一樣。」</p>
+    <p>「我媽媽等了我很久很久。」</p>
+    <p>「她也是一個人。」</p>
+    <p>「她們兩個都是一個人。」</p>
+    <p>他伸出手，朝那個名字的方向。</p>
+    <p>碰不到。</p>
+    <p>太高了。</p>
+    <p>他就那樣舉著手，舉了一會兒，</p>
+    <p>然後放下來。</p>
+    <p>「我不恨她。」他說。</p>
+    <p>「可是我也不想原諒她。」</p>
+    <p>「我只是覺得——」</p>
+    <p>他想了很久，找不到那個詞。</p>
+    <p>「我只是覺得她很可憐。」</p>
+    <p>林澈看著他。</p>
+    <p>胸口有一個地方很燙。</p>
+    <p>那個東西他認得。</p>
+    <p>那不是原諒。</p>
+    <p>原諒需要對方在場。</p>
+    <p>那是別的東西——</p>
+    <p>一種在你明知道對方傷害過你、</p>
+    <p>而且你並不打算放過那件事的情況下，</p>
+    <p>還是能看見對方也在受苦的能力。</p>
+    <p>第七道。</p>
+    <p>慈悲。</p>
+    <p>他一直以為那道人性應該給祈安，</p>
+    <p>或者給廣場上那些人。</p>
+    <p>原來不是。</p>
+    <p>原來它最難的地方，</p>
+    <p>是留給那個傷害你最深的人。</p>
+    <p>而教會他的，</p>
+    <p>是一個五天前才學會走路的孩子。</p>
+    <p>——</p>
+    <p>他們一起往上爬。</p>
+    <p>爬到一半，弟弟停下來。</p>
+    <p>「哥哥。」</p>
+    <p>「嗯。」</p>
+    <p>「你剛才說要把她做過的事寫下來，放在所有人都查得到的地方。」</p>
+    <p>「對。」</p>
+    <p>「那名字庫要開嗎。」</p>
+    <p>林澈停在梯子上，沒有立刻回答。</p>
+    <p>上面透下來一點光。</p>
+    <p>天快亮了。</p>
+    <p>「要。」他說。</p>
   </div>
 
   <div class="reading-nav">
-    <a href="reading-ch24.html" class="btn btn-ghost btn-sm">← 上一章</a>
-    <a href="bookshelf.html#part3" class="btn btn-ghost btn-sm">回目錄</a>
-    <a href="reading-ch26.html" class="btn btn-primary btn-sm">下一章 →</a>
+    <a href="reading-ch33.html" class="btn btn-ghost btn-sm">← 上一章</a>
+    <a href="bookshelf.html#part4" class="btn btn-ghost btn-sm">回目錄</a>
     <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
   </div>
 
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
-    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《名字的重量》嗎？</p>
+    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《林若曦的殘響》嗎？</p>
     <p style="font-size:14px;color:var(--text-dim);margin:0 0 18px;">如果你喜歡《第九次出生》，歡迎隨緣贊助，支持比爸 BD 繼續創作。每一份支持都會成為下一章的燃料。</p>
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
       <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-primary btn-sm">❤ 隨緣贊助作者</a>
@@ -791,7 +831,7 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">嬰兒的呼吸</span>
       <span class="toc-item-arrow">›</span>
     </a>
-    <a href="reading-ch25.html" class="toc-item toc-active">
+    <a href="reading-ch25.html" class="toc-item">
       <span class="toc-item-num">Ch.025</span>
       <span class="toc-item-title">名字的重量</span>
       <span class="toc-item-arrow">›</span>
@@ -837,7 +877,7 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">溫序的提議</span>
       <span class="toc-item-arrow">›</span>
     </a>
-    <a href="reading-ch34.html" class="toc-item">
+    <a href="reading-ch34.html" class="toc-item toc-active">
       <span class="toc-item-num">Ch.034</span>
       <span class="toc-item-title">林若曦的殘響</span>
       <span class="toc-item-arrow">›</span>
