@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://larrylai777.github.io/bd-novel/sitemap.xml
