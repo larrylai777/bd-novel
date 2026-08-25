@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第二十三章：祈安的傷口｜第九次出生｜比爸 BD</title>
+<title>第三十二章：名冊｜第九次出生｜比爸 BD</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
@@ -21,109 +21,7 @@
   color: var(--text-xs); text-transform: uppercase;
   margin-bottom: 10px;
 }
-.music-dock {
-  position:fixed;
-  right:24px;
-  bottom:calc(24px + env(safe-area-inset-bottom,0px));
-  z-index:9999;
-  width:58px;
-  height:58px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.20);
-  border-radius:50%;
-  background:rgba(12,12,14,.88);
-  box-shadow:0 10px 30px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.10);
-  backdrop-filter:saturate(140%) blur(18px);
-  -webkit-backdrop-filter:saturate(140%) blur(18px);
-  transition:width .34s cubic-bezier(.2,.8,.2,1),border-radius .34s cubic-bezier(.2,.8,.2,1),background .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.music-dock.is-expanded {
-  width:min(286px,calc(100vw - 36px));
-  border-radius:30px;
-  border-color:rgba(255,255,255,.28);
-  background:rgba(12,12,14,.94);
-}
-.music-fab {
-  position:absolute;
-  inset:0 auto 0 0;
-  z-index:2;
-  width:58px;
-  height:58px;
-  display:grid;
-  place-items:center;
-  border:0;
-  border-radius:50%;
-  background:transparent;
-  color:#fff;
-  font-size:23px;
-  line-height:1;
-  cursor:pointer;
-  transition:transform .22s ease,background .22s ease;
-}
-.music-fab:hover { background:rgba(255,255,255,.08); }
-.music-fab:active { transform:scale(.92); }
-.music-dock.is-playing:not(.is-expanded) {
-  border-color:rgba(201,168,76,.72);
-  background:radial-gradient(circle at 34% 28%,rgba(255,234,171,.32),rgba(201,168,76,.22) 44%,rgba(13,13,15,.94) 76%);
-  box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 22px rgba(201,168,76,.25);
-  animation:musicDockPulse 2.1s ease-in-out infinite;
-}
-.music-dock.is-playing.is-expanded { border-color:rgba(201,168,76,.56); }
-@keyframes musicDockPulse {
-  0%,100% { box-shadow:0 0 0 5px rgba(201,168,76,.09),0 12px 34px rgba(0,0,0,.40),0 0 18px rgba(201,168,76,.20); }
-  50% { box-shadow:0 0 0 9px rgba(201,168,76,.04),0 12px 34px rgba(0,0,0,.40),0 0 30px rgba(201,168,76,.34); }
-}
-.music-dock-panel {
-  position:absolute;
-  top:0;
-  right:0;
-  left:58px;
-  height:58px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:0 10px 0 4px;
-  opacity:0;
-  transform:translateX(-12px);
-  pointer-events:none;
-  transition:opacity .20s ease .10s,transform .32s cubic-bezier(.2,.8,.2,1);
-}
-.music-dock.is-expanded .music-dock-panel {
-  opacity:1;
-  transform:translateX(0);
-  pointer-events:auto;
-}
-.music-dock-info { min-width:0; flex:1; }
-.music-dock-title { overflow:hidden; color:var(--white); font-size:12px; font-weight:600; line-height:1.25; text-overflow:ellipsis; white-space:nowrap; }
-.music-dock-sub { overflow:hidden; color:var(--text-xs); font-size:10px; line-height:1.25; margin-top:2px; text-overflow:ellipsis; white-space:nowrap; }
-.music-dock-play,.music-dock-collapse {
-  display:grid;
-  place-items:center;
-  flex:0 0 auto;
-  width:34px;
-  height:34px;
-  border:1px solid var(--border);
-  border-radius:50%;
-  background:var(--surface);
-  color:var(--white);
-  cursor:pointer;
-  transition:background .18s ease,transform .18s ease,border-color .18s ease;
-}
-.music-dock-play { background:rgba(201,168,76,.16); border-color:rgba(201,168,76,.42); color:#f1d77c; font-size:12px; }
-.music-dock-collapse { color:var(--text-dim); font-size:15px; }
-.music-dock-play:hover,.music-dock-collapse:hover { background:var(--surface2); transform:scale(1.06); }
-body.light .music-dock { background:rgba(255,255,255,.92); border-color:rgba(20,20,25,.16); box-shadow:0 10px 28px rgba(20,30,45,.16),inset 0 1px 0 rgba(255,255,255,.9); }
-body.light .music-dock.is-playing:not(.is-expanded) { background:radial-gradient(circle at 34% 28%,rgba(255,239,192,.86),rgba(221,190,102,.50) 46%,rgba(255,255,255,.96) 78%); border-color:rgba(138,96,0,.44); }
-body.light .music-fab { color:#1f1a10; }
-@media(max-width:768px) {
-  .music-dock { right:18px; bottom:calc(18px + env(safe-area-inset-bottom,0px)); width:54px; height:54px; }
-  .music-dock.is-expanded { width:min(270px,calc(100vw - 36px)); border-radius:28px; }
-  .music-fab { width:54px; height:54px; font-size:22px; }
-  .music-dock-panel { left:54px; height:54px; gap:8px; padding-right:8px; }
-  .music-dock-title { font-size:11px; }
-  .music-dock-sub { font-size:9px; }
-  .music-dock-play,.music-dock-collapse { width:32px; height:32px; }
-}
+
 .reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
 .reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
 .reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
@@ -166,26 +64,26 @@ body.light .music-fab { color:#1f1a10; }
   <link rel="stylesheet" href="mobile-fixes.css">
   <script src="english-regular.js" defer></script>
 <!-- SEO START -->
-  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十三章：祈安的傷口。">
+  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十二章：名冊。">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-ch23.html">
+  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-ch32.html">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="第九次出生｜比爸 BD 科幻懸疑小說">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="第二十三章：祈安的傷口｜第九次出生｜比爸 BD">
-  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十三章：祈安的傷口。">
-  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-ch23.html">
+  <meta property="og:title" content="第三十二章：名冊｜第九次出生｜比爸 BD">
+  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十二章：名冊。">
+  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-ch32.html">
   <meta property="og:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
   <meta property="og:image:alt" content="《第九次出生》比爸 BD 科幻懸疑小說">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="第二十三章：祈安的傷口｜第九次出生｜比爸 BD">
-  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第二十三章：祈安的傷口。">
+  <meta name="twitter:title" content="第三十二章：名冊｜第九次出生｜比爸 BD">
+  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》第三十二章：名冊。">
   <meta name="twitter:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
   <meta name="theme-color" content="#0c0b12">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"第二十三章：祈安的傷口","url":"https://larrylai777.github.io/bd-novel/reading-ch23.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"第三十二章：名冊","url":"https://larrylai777.github.io/bd-novel/reading-ch32.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
 <!-- SEO END -->
 </head>
-<body class="page-enter part3-reading">
+<body class="page-enter part4-reading">
 <nav id="nav">
   <div class="nav-wrap">
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
@@ -205,11 +103,11 @@ body.light .music-fab { color:#1f1a10; }
 <div class="reading-toolbar">
   <div class="reading-toolbar-left">
     <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
-    <span class="toolbar-chapter-label">第二十三章：祈安的傷口</span>
+    <span class="toolbar-chapter-label">第三十二章：名冊</span>
   </div>
   <div class="reading-toolbar-center">
-    <a href="reading-ch22.html" class="toolbar-btn">← 上一章</a>
-    <a href="reading-ch24.html" class="toolbar-btn primary">下一章 →</a>
+    <a href="reading-ch31.html" class="toolbar-btn">← 上一章</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">下一章 →</span>
   </div>
   <div class="reading-toolbar-right">
     <button class="toolbar-btn music-toolbar-btn" id="toolbarMusicButton" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
@@ -219,283 +117,391 @@ body.light .music-fab { color:#1f1a10; }
 
 <div class="reading-body">
   <div style="text-align:center;padding-top:32px;">
-    <span class="part-badge">第三部：十八歲倒數</span>
+    <span class="part-badge">第四部：第一次出生</span>
   </div>
-  <h1 class="reading-chapter-title">第二十三章：祈安的傷口</h1>
+  <h1 class="reading-chapter-title">第三十二章：名冊</h1>
   <div class="reading-meta">《第九次出生》· 比爸 BD · 2026</div>
-  <div class="part3-source-status" aria-label="名字庫異常狀態">
+  <div class="part3-source-status" aria-label="第四部第五章狀態">
     <span class="part3-source-orb"></span>
-    <span class="part3-source-name">舊門覺醒</span>
-    <span class="part3-source-detail">祈安化為門之防線</span>
+    <span class="part3-source-name">被寫下的名字</span>
+    <span class="part3-source-detail">手寫名冊／有人選擇替記憶留下證詞</span>
   </div>
 
   <div class="podcast-embed">
     <div class="podcast-label">🎧 本章有音頻版本</div>
-    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第二十三集上線後將在此嵌入，敬請期待。</p>
+    <p style="font-size:13px;color:var(--text-dim);margin:0;">Podcast 第三十二集上線後將在此嵌入，敬請期待。</p>
   </div>
 
   <div class="reading-content" id="readingContent">
-    <p>裂痕越來越大。</p>
-    <p>那道灰白色的屏障，</p>
-    <p>在三人的共同抵抗下，</p>
-    <p>發出刺耳的嘎吱聲，</p>
-    <p>像一塊正在碎裂的冰。</p>
-    <p>那些裂痕蔓延的方式很奇特，</p>
-    <p>不是隨機的，而是沿著某種看不見的紋路一路延伸，</p>
-    <p>彷彿這道屏障本身也有自己的骨架、自己的弱點。</p>
-    <p>祈安能感覺到自己的手掌，</p>
-    <p>正貼在那些裂痕最密集的地方。</p>
-    <p>每一次用力，裂痕就會擴大一分，</p>
-    <p>但隨之而來的疼痛也加劇一分。</p>
-    <p>她的指尖已經沒有任何知覺，</p>
-    <p>那種麻木感正一寸一寸地朝著她的手腕蔓延。</p>
-    <p>她知道如果繼續下去，</p>
-    <p>自己很快就會失去對這隻手的控制。</p>
-    <p>但她沒有退。</p>
-    <p>她的腦海裡不斷浮現，</p>
-    <p>那些在廣場上看見的臉——</p>
-    <p>那個唱歌的老婦人，</p>
-    <p>那對相認的母女，</p>
-    <p>那個放下槍的城防隊員。</p>
-    <p>如果她現在放棄，</p>
-    <p>那些人用命換來的一切，</p>
-    <p>都會變得毫無意義。</p>
-    <p>白司禮的手臂已經開始不受控制地顫抖，</p>
-    <p>汗水從他的額頭滑落，滴進眼睛裡。</p>
-    <p>他眨了眨眼，沒有鬆開貼在屏障上的手。</p>
-    <p>「它在調動更多的資源。」他喘息著說。</p>
-    <p>的確，祈安能感覺到那股抵抗的力量正在一分一秒地增強，</p>
-    <p>不再是之前那種單純的抽取，</p>
-    <p>是一種更急迫、近乎暴怒的反撲。</p>
-    <p>柱體周圍的紫色警示光，</p>
-    <p>從原本的規律閃爍，變成一種近乎失控的頻閃，</p>
-    <p>不再只是紫色，偶爾會夾雜著一絲刺眼的紅，</p>
-    <p>像一台正在過熱的機器發出的警告。</p>
-    <p>「系統判定我們是威脅等級最高的入侵者。」白司禮艱難地說。</p>
-    <p>「它要不計代價地排除我們。」</p>
-    <p>灰白色的光柱猛地擴大，</p>
-    <p>不再只是一道單純的抽取光柱，</p>
-    <p>而是一整片籠罩住搖籃、也籠罩住祈安與白司禮的冰冷光幕。</p>
-    <p>那片光幕觸碰到祈安身上的每一寸皮膚，</p>
-    <p>都帶來一種近乎灼燒的痛楚。</p>
-    <p>不是熱，是一種更深層的抗拒，</p>
-    <p>彷彿她存在的每一個分子，</p>
-    <p>都在被系統強行地質疑——</p>
-    <p>妳不該存在，妳只是一個編號，</p>
-    <p>一個早該被清洗的異常。</p>
-    <p>祈安咬牙抵抗著那種侵蝕，</p>
-    <p>心裡一遍又一遍地告訴自己：</p>
-    <p>不，我不只是一個編號，我是祈安。</p>
-    <p>祈安感覺到自己的身體，</p>
-    <p>正在被一種前所未有的寒意侵蝕。</p>
-    <p>不是溫度的冷，是一種更接近存在本身被稀釋的冷，</p>
-    <p>像她也要被這個系統當成某種需要清除的雜質，一併抹去。</p>
-    <p>她想起自己第一次死之前，</p>
-    <p>醫療艙裡那種冰冷的液體慢慢漫過她的身體。</p>
-    <p>那個時候她以為，那就是死亡該有的感覺。</p>
-    <p>現在她才發現，眼前這種寒意比那個更加徹底，</p>
-    <p>因為那個至少還留下了一個完整的軀體，</p>
-    <p>而這個似乎想要連她存在過的痕跡都一併抹去。</p>
-    <p>但她沒有退縮。</p>
-    <p>她想起自己第二次死亡，</p>
-    <p>那次她被丟進一個冰冷的焚化室，</p>
-    <p>孤獨地聽著外面機器運轉的聲音，</p>
-    <p>沒有人在乎她是否害怕。</p>
-    <p>第三次死亡，她被電擊，倒在冰冷的地板上，</p>
-    <p>意識模糊前最後看見的，</p>
-    <p>是天花板上一盞冷白色的燈。</p>
-    <p>第四次死亡，她已經不太記得，</p>
-    <p>只剩下一種深沉的麻木。</p>
-    <p>四次死亡，四次孤獨。</p>
-    <p>而這一次，至少她身邊有人，</p>
-    <p>有一個正在被守護的孩子，</p>
-    <p>有一個願意放下武器、一起見證真相的人。</p>
-    <p>她的肩傷在這股寒意裡猛地裂開，</p>
-    <p>血大片地滲出來，</p>
-    <p>順著她的手臂滴落在名字庫的地面上，</p>
-    <p>暈開一小片暗紅色的痕跡。</p>
-    <p>那片痕跡落在一個懸浮的名字旁邊，</p>
-    <p>那個名字微微地亮了一下，</p>
-    <p>彷彿在回應她的犧牲。</p>
-    <p>「祈安。」白司禮喊，聲音裡帶著真切的擔憂。</p>
-    <p>「妳撐不住的，妳先退開。」</p>
-    <p>祈安搖頭，咬緊牙關。</p>
-    <p>「不。」她說，聲音因為疼痛而破碎，卻異常堅定。</p>
-    <p>「我答應過他們。」</p>
-    <p>她想起許寧，想起阿飛，</p>
-    <p>想起那句——謝謝妳，讓我們不只是數字。</p>
-    <p>如果她現在退開，</p>
-    <p>那個承諾就會變成一句空話。</p>
-    <p>而她已經厭倦了自己這一生，</p>
-    <p>聽過太多太多沒有被兌現的承諾。</p>
-    <p>她的左眼忽然劇烈地抽痛起來，</p>
-    <p>那種痛比之前任何一次都要更加猛烈，</p>
-    <p>像有什麼東西正在從她的眼窩深處被強行地撬開。</p>
-    <p>那種感覺很奇怪，不像受傷，</p>
-    <p>更像一扇被塵封太久的門，終於被用力地推開。</p>
-    <p>灰色的眼球裡，那道原本清晰的藍色光流忽然凝聚，</p>
-    <p>化成一個祈安從未見過的形狀——</p>
-    <p>一道門框的輪廓。</p>
-    <p>不是投射，不是幻覺，</p>
-    <p>是從她的眼睛裡真實地浮現出來，</p>
-    <p>懸浮在半空中的一道微型的門。</p>
-    <p>那道門很小，只有拳頭那麼大，</p>
-    <p>但它的存在感卻強烈得不成比例，</p>
-    <p>彷彿它不屬於這個空間的任何物理法則。</p>
-    <p>祈安猛地睜大僅剩的那隻黑色的眼睛。</p>
-    <p>她感覺到一種前所未有的拉扯感，</p>
-    <p>從自己的骨頭深處湧出，</p>
-    <p>彷彿她的整個身體正在被重新定義——</p>
-    <p>不再只是一個死過四次的女孩，</p>
-    <p>而是某種更古老、更本質的存在。</p>
-    <p>她想起第一部裡，在舊門前，</p>
-    <p>她對林澈說過的話——</p>
-    <p>我死過四次，每一次都被洗掉，每一次都變成四號。</p>
-    <p>這隻眼睛是門留下的，門需要看見它的人。</p>
-    <p>她一直以為那句話指的是，</p>
-    <p>她被賦予了看見門的能力。</p>
-    <p>現在她才明白，那句話還有另一層意思。</p>
-    <p>「這是舊門早就告訴過我的。」她艱難地說。</p>
-    <p>「這隻眼睛是門留下的，因為我本來就是門的一部分。」</p>
-    <p>那道門框的輪廓開始擴大，</p>
-    <p>從一個只有拳頭大小的投影，</p>
-    <p>逐漸延展、籠罩住祈安的整個身體。</p>
-    <p>她的輪廓開始變得模糊、半透明，</p>
-    <p>像正在從一個人類轉變為一種更接近概念性的存在。</p>
-    <p>那種轉變伴隨著一種深入骨髓的疼痛，</p>
-    <p>像她身體裡每一個細胞都在被重新排列、重新定義。</p>
-    <p>她想起自己第一世、第二世、第三世、第四世死去的那些片段。</p>
-    <p>原來那些死亡不是單純的結束，</p>
-    <p>是某種更漫長的轉化，</p>
-    <p>一次又一次地把她打磨得更接近，</p>
-    <p>現在這個真正的自己。</p>
-    <p>白司禮驚恐地後退一步。</p>
-    <p>「祈安。」他喊。「妳在做什麼。」</p>
-    <p>祈安沒有立刻回答，</p>
-    <p>她能感覺到自己正在變成一道真正的門，</p>
-    <p>一道能夠阻擋任何想要穿過的力量的門。</p>
-    <p>「我要擋住這道屏障。」她說，</p>
-    <p>聲音已經不再只是一個人的聲音，</p>
-    <p>而是一種疊加了無數個回音的共鳴。</p>
-    <p>「讓林澈帶著他離開。」</p>
-    <p>搖籃裡的嬰兒猛地抬起頭。</p>
-    <p>「不。」他喊，聲音裡滿是驚恐。</p>
-    <p>「不要，妳會消失的。」</p>
-    <p>他掙扎著想要從搖籃裡坐起來，</p>
-    <p>但那道灰白色的抽取依然壓制著他的身體，讓他動彈不得。</p>
-    <p>「我不需要妳這樣做。」他喘息著。</p>
-    <p>「我寧願被抽走所有的記憶，也不要妳消失。」</p>
-    <p>祈安朝著那個方向露出一個疲憊、卻溫柔的笑容。</p>
-    <p>「我死過四次。」她說。</p>
-    <p>「這一次，至少讓我為了一件值得的事消失。」</p>
-    <p>她的聲音裡沒有任何猶豫，</p>
-    <p>只有一種近乎平靜的決心。</p>
-    <p>「你的記憶。」她繼續說。</p>
-    <p>「不是可以隨便捨棄的東西，</p>
-    <p>那裡面裝著你母親的臉，</p>
-    <p>裝著你第一次感受到痛苦與愛的瞬間。</p>
-    <p>我不能讓他們拿走這些。」</p>
-    <p>嬰兒淚水再次湧出。</p>
-    <p>「那妳呢。」他問，聲音破碎。</p>
-    <p>「誰來保護妳的記憶。」</p>
-    <p>祈安沉默了一瞬，然後輕聲說：</p>
-    <p>「你們會記得我的，對嗎。這樣就夠了。」</p>
-    <p>那道門框的輪廓開始擴大，</p>
-    <p>祈安的輪廓完全地化為一片半透明的門形，</p>
-    <p>橫亙在灰白色的屏障與搖籃之間。</p>
-    <p>那道門沒有任何裝飾，沒有任何多餘的線條，</p>
-    <p>只是一道純粹的阻擋。</p>
-    <p>灰白色的光柱猛地撞上那道門，</p>
-    <p>發出一聲震耳欲聾的轟鳴，</p>
-    <p>整座名字庫劇烈地搖晃，</p>
-    <p>無數個懸浮的名字從高處墜落，</p>
-    <p>又在半空中重新飄浮起來，</p>
-    <p>像一場無聲的星辰風暴。</p>
-    <p>那道門沒有倒下，</p>
-    <p>它穩穩地擋住了那股冰冷的抽取的力量。</p>
-    <p>「快走。」祈安的聲音從那道門的深處傳出。</p>
-    <p>「趁我還撐得住，快走。」</p>
-    <p>白司禮站在原地，看著那道半透明的門，</p>
-    <p>看著門的輪廓裡，隱約還能辨認出祈安的臉。</p>
-    <p>那張臉依然帶著那個疲憊、卻溫柔的笑容，</p>
-    <p>彷彿即使變成了一道門，</p>
-    <p>她依然是那個會在意別人的祈安。</p>
-    <p>「妳會回來嗎。」他哽咽著說。</p>
-    <p>那道門沒有立刻回答，</p>
-    <p>過了好一會兒，一個聲音從深處傳出，很輕，卻清晰。</p>
-    <p>「我不知道。」祈安說。</p>
-    <p>「但至少這一次，我是自己選擇留下的。」</p>
-    <p>搖籃裡的嬰兒看著那道門，</p>
-    <p>眼淚從他的眼角滑落。</p>
-    <p>那是他第一次流下真正的眼淚，</p>
-    <p>不是因為痛苦，是因為一種更深沉的情感，</p>
-    <p>一種他從未體驗過的、被保護的感覺。</p>
-    <p>環繞在他身邊的淡藍色守護之光重新亮了起來，</p>
-    <p>比之前任何一次都要更加穩定。</p>
-    <p>祈安的犧牲給了他一個喘息的空間。</p>
-    <p>「我們該走了。」嬰兒看向祈安懷裡，</p>
-    <p>原本守護著他的那片藍光。</p>
-    <p>「趁她還撐得住。」</p>
-    <p>那片藍光微微地震動了一下，</p>
-    <p>不情願地朝著那道門靠近，</p>
-    <p>想要再看祈安最後一眼。</p>
-    <p>「不要。」祈安的聲音再次從門裡傳出，</p>
-    <p>帶著一絲堅定的命令。「走，別讓我的犧牲白費。」</p>
-    <p>那片藍光停頓了一瞬，然後緩緩地轉身，</p>
-    <p>朝著搖籃飄去，包裹住那個即將再次甦醒的嬰兒，</p>
-    <p>準備帶著他離開這座正在被系統猛烈攻擊的名字庫。</p>
-    <p>白司禮看著這一幕，握緊拳頭。</p>
-    <p>他知道自己不能就這樣離開，</p>
-    <p>不能留下祈安一個人面對接下來即將到來的一切。</p>
-    <p>「我留下。」他說，聲音異常堅定。「陪她。」</p>
-    <p>祈安的門微微地震動了一下，像在搖頭。</p>
-    <p>「不需要。」她說。</p>
-    <p>「你還有更重要的事要做，</p>
-    <p>這座城市還有太多人，需要一個知道真相的你。</p>
-    <p>回去，告訴他們。」</p>
-    <p>白司禮愣住。「告訴他們什麼。」</p>
-    <p>祈安的門散發出一絲更加柔和的光。</p>
-    <p>「告訴他們，每一個名字都值得被記得。」</p>
-    <p>白司禮看著那道散發著柔光的門，</p>
-    <p>深深地點頭。「我會的，我保證。」</p>
-    <p>他轉身，朝著那些依然站在遠處的士兵走去。</p>
-    <p>他的腳步不再像之前那樣猶豫，</p>
-    <p>而是帶著一種全新的堅定。</p>
-    <p>那些士兵看著他走近，不知道該如何反應。</p>
-    <p>「放下武器。」白司禮說，</p>
-    <p>聲音穿透整座震動的名字庫。</p>
-    <p>「我們不是來摧毀什麼的，我們是來見證一個真相的。」</p>
-    <p>士兵們面面相覷，</p>
-    <p>一個接一個緩緩地放下手中的槍。</p>
-    <p>倒數繼續跳動著，</p>
-    <p>八分鐘，七分五十九秒。</p>
-    <p>那道灰白色的屏障依然猛烈地撞擊著祈安的門，</p>
-    <p>每一次撞擊，門的輪廓就會微微地搖晃，</p>
-    <p>但始終沒有倒下。</p>
-    <p>那種堅持不是因為她不痛，</p>
-    <p>是因為她選擇了忽略那種痛，</p>
-    <p>用自己僅剩的意志力，撐住這道她親手築起的防線。</p>
-    <p>白司禮聽著士兵們放下武器的聲音，</p>
-    <p>一聲接著一聲，金屬落地的清脆聲響，</p>
-    <p>在這座震動的名字庫裡，顯得格外安靜、格外沉重。</p>
-    <p>他知道這只是一個開始，</p>
-    <p>真正的考驗還在後面等著他們每一個人。</p>
-    <p>但至少現在，他們不再是各自為政的追捕者與逃亡者，</p>
-    <p>是一群願意一起面對真相的人。</p>
-    <p>這座赤環城，也許第一次有了改變的可能。</p>
-    <p>而這一切，都從一道願意犧牲自己的門開始——</p>
-    <p>一道用愛築成的門，一道不會輕易倒下的門。</p>
+    <p>白司禮寫了四天。</p>
+    <p>沒有人知道他是什麼時候開始的。</p>
+    <p>大概是被丟石頭的那天晚上，</p>
+    <p>因為隔天早上有人看見他在破碎的城門底下，</p>
+    <p>坐在一塊翻倒的金屬板上，</p>
+    <p>用一枝不知道從哪裡撿來的筆，</p>
+    <p>在紙上寫東西。</p>
+    <p>那疊紙每天都在變厚。</p>
+    <p>第一天是薄薄一層。</p>
+    <p>第四天早上，那疊紙已經堆到他的膝蓋。</p>
+    <p>林澈是第三天去看他的。</p>
+    <p>他走過去的時候，白司禮沒有抬頭。</p>
+    <p>「四千三百七十一件。」白司禮說。</p>
+    <p>「什麼。」</p>
+    <p>「我簽過的。」</p>
+    <p>他的筆沒有停。</p>
+    <p>「這是我目前能記起來的數量。」</p>
+    <p>「應該還有一些沒想起來，我還在想。」</p>
+    <p>林澈在他旁邊蹲下來，看那些紙。</p>
+    <p>字寫得很小，很密，</p>
+    <p>一行一件，格式完全一致——</p>
+    <p>編號、姓名、日期、處分類別、我簽的位置。</p>
+    <p>沒有任何多餘的字。</p>
+    <p>沒有解釋，沒有情況說明，沒有理由。</p>
+    <p>「你沒有檔案。」林澈說。</p>
+    <p>「檔案在記憶署。」白司禮說。</p>
+    <p>「記憶署的伺服器上個月就被封存了，鑰匙在中央。」</p>
+    <p>「所以你在憑記憶寫。」</p>
+    <p>「對。」</p>
+    <p>林澈翻了幾張。</p>
+    <p>那些紙上有些地方被劃掉重寫，</p>
+    <p>有些地方旁邊註了一個很小的問號。</p>
+    <p>「這些問號是什麼。」</p>
+    <p>「是我不確定的。」白司禮說。</p>
+    <p>「不確定日期，或者不確定那個人的名字。」</p>
+    <p>「我不會把不確定的東西寫成確定的。」</p>
+    <p>他終於停下筆，抬起頭。</p>
+    <p>「我這輩子做過最壞的一件事，」他說，</p>
+    <p>「就是把不確定的東西寫成確定的。」</p>
+    <p>——</p>
+    <p>第五天早上，他把那疊紙搬到廣場。</p>
+    <p>沒有人幫他。</p>
+    <p>那疊紙很重，他搬了三趟。</p>
+    <p>第三趟的時候，一個年輕人走過去，</p>
+    <p>伸手接了一半。</p>
+    <p>然後他看清楚了自己接的是什麼，</p>
+    <p>也看清楚了搬東西的人是誰。</p>
+    <p>他把紙放在地上，轉身走了。</p>
+    <p>沒有丟，也沒有踩。</p>
+    <p>只是放下就走了。</p>
+    <p>白司禮自己把那半疊搬完。</p>
+    <p>廣場中央還留著校準台被拆走以後的痕跡，</p>
+    <p>一圈一圈的螺栓孔，</p>
+    <p>像地上長了很多沒有閉合的傷口。</p>
+    <p>他把紙攤在那些孔洞旁邊，</p>
+    <p>一疊一疊排開，</p>
+    <p>排成一列，很長。</p>
+    <p>然後他站到那列紙的旁邊，</p>
+    <p>雙手垂在身側。</p>
+    <p>他沒有說話。</p>
+    <p>也沒有叫任何人來。</p>
+    <p>第一個過來的人是一個老人。</p>
+    <p>他沿著那列紙走，</p>
+    <p>從頭走到尾，</p>
+    <p>再從尾走回來。</p>
+    <p>「編號怎麼查。」他問。</p>
+    <p>「不用查編號。」白司禮說。</p>
+    <p>「按日期排的。」</p>
+    <p>「您想找哪一年。」</p>
+    <p>老人說了一個年份。</p>
+    <p>白司禮蹲下去，從第七疊裡抽出一張，遞給他。</p>
+    <p>老人接過去，看了很久。</p>
+    <p>然後他把那張紙折起來，放進口袋，走了。</p>
+    <p>一句話都沒有說。</p>
+    <p>那之後人開始多起來。</p>
+    <p>——</p>
+    <p>到中午的時候，廣場上聚了大概兩千人。</p>
+    <p>隊伍不成形。</p>
+    <p>有人在找名字，</p>
+    <p>有人只是站著看，</p>
+    <p>有人靠得很近，近到只有兩步。</p>
+    <p>那兩步是危險的。</p>
+    <p>林澈站在外圍，一直沒有靠近。</p>
+    <p>祈安在他旁邊。</p>
+    <p>弟弟坐在祈安腳邊，抱著膝蓋。</p>
+    <p>「他知道自己在做什麼嗎。」祈安低聲說。</p>
+    <p>「知道。」</p>
+    <p>「那他為什麼不找幾個人站在旁邊。」</p>
+    <p>「因為那樣就變成保護。」林澈說。</p>
+    <p>「他不要保護。」</p>
+    <p>第一個動手的人是在下午。</p>
+    <p>一個中年男人衝過人群，</p>
+    <p>一拳打在白司禮臉上。</p>
+    <p>白司禮往後退了兩步，撞在紙堆上，</p>
+    <p>一疊紙散開，被風吹起來幾張。</p>
+    <p>他沒有還手。</p>
+    <p>他先去撿那幾張紙。</p>
+    <p>那個動作比挨打更激怒了那個男人。</p>
+    <p>第二拳打在他背上。</p>
+    <p>第三拳的時候，人群開始往前推。</p>
+    <p>那種推很危險。</p>
+    <p>林澈認得那種節奏，</p>
+    <p>第二部他在廣場上看過一次——</p>
+    <p>一個人的憤怒可以停下來，</p>
+    <p>兩千個人的憤怒不會。</p>
+    <p>他往前走。</p>
+    <p>祈安拉住他。</p>
+    <p>「等一下。」</p>
+    <p>「他會死。」</p>
+    <p>「還沒到那一步。」祈安說。</p>
+    <p>「你現在上去，他們的憤怒就會轉到你身上。」</p>
+    <p>「然後你會贏。」</p>
+    <p>「然後這件事就變成你替他擋下來的。」</p>
+    <p>她鬆開手。</p>
+    <p>「那不是他要的。」</p>
+    <p>——</p>
+    <p>擋下來的不是林澈。</p>
+    <p>是一個女人。</p>
+    <p>她從人群裡擠出來，站到白司禮前面，</p>
+    <p>伸開手臂。</p>
+    <p>林澈認得她。</p>
+    <p>第二天早上，第五街，</p>
+    <p>那個手裡握著碎磚的人。</p>
+    <p>「等一下。」她說。</p>
+    <p>那三個字說得不大，</p>
+    <p>但因為說話的人是她，</p>
+    <p>前排的人停住了。</p>
+    <p>「妳幹什麼。」有人喊。</p>
+    <p>「妳兒子不是他害死的嗎。」</p>
+    <p>女人沒有回頭。</p>
+    <p>她轉身面對白司禮。</p>
+    <p>「我兒子叫阿岸。」她說。</p>
+    <p>「編號二四七七。」</p>
+    <p>「第三批。」</p>
+    <p>「三年前的春天。」</p>
+    <p>「同意書右下角是你的名字。」</p>
+    <p>白司禮的嘴角在流血。</p>
+    <p>他點頭。</p>
+    <p>「是。」</p>
+    <p>「我要問你一件事。」女人說。</p>
+    <p>她的聲音開始抖，</p>
+    <p>但她沒有停。</p>
+    <p>「你簽那份字的那天。」</p>
+    <p>「你有沒有看他一眼。」</p>
+    <p>整個廣場安靜下來。</p>
+    <p>白司禮站在那裡，</p>
+    <p>過了很久才開口。</p>
+    <p>「沒有。」他說。</p>
+    <p>「為什麼沒有。」</p>
+    <p>「因為那天有一百四十件。」白司禮說。</p>
+    <p>「我從早上八點簽到晚上七點。」</p>
+    <p>「如果我每一件都看，我簽不完。」</p>
+    <p>「所以我訓練自己不要看。」</p>
+    <p>「我看編號，不看臉。」</p>
+    <p>他停頓了一下。</p>
+    <p>「那不是失誤。」</p>
+    <p>「那是我的工作方法。」</p>
+    <p>「我花了兩年把自己訓練成那樣。」</p>
+    <p>女人的肩膀開始劇烈地抖。</p>
+    <p>「那你現在看著我。」她說。</p>
+    <p>白司禮抬起頭。</p>
+    <p>他看著她。</p>
+    <p>「我叫姚沅。」女人說。</p>
+    <p>「我兒子叫阿岸。」</p>
+    <p>「他九歲。」</p>
+    <p>「他怕黑，睡覺要開一盞燈。」</p>
+    <p>「他被帶走的那天早上還在吃早餐。」</p>
+    <p>「碗裡剩了半個蛋。」</p>
+    <p>「那半個蛋我留了三個月。」</p>
+    <p>白司禮的臉上沒有任何表情。</p>
+    <p>不是冷漠。</p>
+    <p>是那種一個人如果動了一條肌肉，</p>
+    <p>整張臉就會塌下來的表情。</p>
+    <p>「我記住了。」他說。</p>
+    <p>「你記住有什麼用。」姚沅吼。</p>
+    <p>「他已經死了。」</p>
+    <p>「沒有用。」白司禮說。</p>
+    <p>「一點用都沒有。」</p>
+    <p>他的聲音第一次出現裂痕。</p>
+    <p>「但這是我現在唯一還能做的事。」</p>
+    <p>「妳可以打我。」</p>
+    <p>「妳可以現在就打死我。」</p>
+    <p>「我不會躲，也不會怪妳。」</p>
+    <p>「只是這樣的話，」</p>
+    <p>「明天沒有人記得阿岸吃剩半個蛋。」</p>
+    <p>姚沅站在那裡，</p>
+    <p>手舉了一半，</p>
+    <p>又放下去。</p>
+    <p>她哭了。</p>
+    <p>哭得整個人蹲下去。</p>
+    <p>——</p>
+    <p>「我有話說。」祈安說。</p>
+    <p>她從人群裡走出來。</p>
+    <p>她走得很慢，因為身體還沒有恢復，</p>
+    <p>每走幾步就要停一下。</p>
+    <p>那個緩慢反而讓所有人都在看她。</p>
+    <p>「我叫祈安。」她說。</p>
+    <p>「我死過四次。」</p>
+    <p>「四次都是他的系統做的。」</p>
+    <p>「第一次我十歲，是我自己走進校準艙的，</p>
+    <p>因為我以為乾淨一點就不會痛。」</p>
+    <p>「第二次、第三次、第四次，我不記得了。」</p>
+    <p>「每一次醒來，我都是四號。」</p>
+    <p>人群安靜下來。</p>
+    <p>「所以我有資格說這句話。」祈安說。</p>
+    <p>「留著他。」</p>
+    <p>「憑什麼。」有人喊。</p>
+    <p>「不是憑什麼。」祈安說。</p>
+    <p>「是因為那疊紙。」</p>
+    <p>她指著地上那一長列。</p>
+    <p>「那是憑他一個人的記憶寫出來的。」</p>
+    <p>「他沒有檔案。」</p>
+    <p>「檔案在中央校準局手上，你們沒有。」</p>
+    <p>「今天你們打死他，那疊紙就到此為止。」</p>
+    <p>「你們的孩子、你們的父母、你們的兄弟姐妹，</p>
+    <p>還有多少人的名字，還沒有被他想起來、還沒有被寫下來——」</p>
+    <p>「就永遠不會被寫下來了。」</p>
+    <p>她停頓了一下。</p>
+    <p>「你們可以審判他。」</p>
+    <p>「你們應該審判他。」</p>
+    <p>「但不要在他寫完之前。」</p>
+    <p>「那是這座城市唯一一份，不是機器記得的紀錄。」</p>
+    <p>有人在人群裡開口。</p>
+    <p>「那寫完以後呢。」</p>
+    <p>祈安轉頭看向那個聲音。</p>
+    <p>「寫完以後你們再決定。」她說。</p>
+    <p>「我不替你們決定。」</p>
+    <p>「我只是不想讓你們，」</p>
+    <p>「在還來不及知道自己失去了誰之前，」</p>
+    <p>「就把唯一知道的人殺掉。」</p>
+    <p>——</p>
+    <p>那天沒有結論。</p>
+    <p>人群慢慢散了。</p>
+    <p>散得很不甘心，</p>
+    <p>有些人走到廣場邊緣又回頭，</p>
+    <p>站在那裡看很久才離開。</p>
+    <p>姚沅走的時候，</p>
+    <p>從第三疊裡抽了一張紙帶走。</p>
+    <p>那張紙上有她兒子的名字。</p>
+    <p>她沒有跟白司禮說任何話。</p>
+    <p>太陽開始斜的時候，</p>
+    <p>廣場上只剩下幾個人。</p>
+    <p>弟弟一直坐在那列紙的旁邊。</p>
+    <p>他看那些字看了一下午。</p>
+    <p>他還不太認得字，</p>
+    <p>但他很認真地一張一張看過去。</p>
+    <p>白司禮在他旁邊坐下來。</p>
+    <p>「你在看什麼。」</p>
+    <p>「我在看有沒有很多人。」弟弟說。</p>
+    <p>「有很多。」</p>
+    <p>「四千三百七十一。」白司禮說。</p>
+    <p>「這是我記得的部分。」</p>
+    <p>弟弟抬起頭。</p>
+    <p>「你會不會也想忘記。」</p>
+    <p>白司禮沉默了很長一段時間。</p>
+    <p>長到林澈以為他不會回答。</p>
+    <p>「每天。」他說。</p>
+    <p>「每天都想。」</p>
+    <p>「那你為什麼不去。」弟弟指了指第五街的方向。</p>
+    <p>「那邊有椅子。」</p>
+    <p>白司禮看著那個方向。</p>
+    <p>十一座棚子的燈已經開始亮起來。</p>
+    <p>「因為我如果去了，」他說，</p>
+    <p>「這四千三百七十一個人裡面，</p>
+    <p>會有很多人，」</p>
+    <p>「從此就沒有任何一個活著的人記得他們了。」</p>
+    <p>他低頭看著自己的手。</p>
+    <p>「我一輩子都在替這座城市決定什麼該被記得。」</p>
+    <p>「現在我唯一能做的，」</p>
+    <p>「是替我自己決定一次——」</p>
+    <p>「我不忘。」</p>
+    <p>——</p>
+    <p>溫序是傍晚來的。</p>
+    <p>他一個人，沒有帶任何人。</p>
+    <p>他沿著那列紙走了一遍，走得很慢，</p>
+    <p>跟早上那個老人一樣，</p>
+    <p>從頭走到尾，再走回來。</p>
+    <p>「四千三百七十一。」他說。</p>
+    <p>「憑記憶。」</p>
+    <p>「你們的檔案在誰手上。」白司禮問。</p>
+    <p>「在我手上。」溫序說。</p>
+    <p>他說得很坦白，沒有一點遲疑。</p>
+    <p>「記憶署所有的原始檔案，上個月起由中央校準局保管。」</p>
+    <p>「完整的。」</p>
+    <p>「包括你想不起來的那幾百件。」</p>
+    <p>白司禮抬起頭。</p>
+    <p>「你要什麼。」</p>
+    <p>溫序笑了一下。</p>
+    <p>「這次不要什麼。」他說。</p>
+    <p>他從口袋裡拿出一個很小的匣子，</p>
+    <p>放在地上那疊紙旁邊。</p>
+    <p>「第三批的完整名冊。」</p>
+    <p>「三年前春天那一批。」</p>
+    <p>「一百四十件，一件不缺。」</p>
+    <p>「裡面有一個叫阿岸的孩子，編號二四七七。」</p>
+    <p>「他的完整處分紀錄，包括他被帶走以後的三十七天。」</p>
+    <p>「你不知道那三十七天，對吧。」</p>
+    <p>白司禮沒有動。</p>
+    <p>「這不是交換。」溫序說。</p>
+    <p>「你不需要答應我任何事。」</p>
+    <p>「我只是想讓你知道，那些東西還在，而且很完整。」</p>
+    <p>他站起來，拍了拍膝蓋上的灰。</p>
+    <p>「你在這裡憑記憶寫四天，寫出四千三百七十一件。」</p>
+    <p>「我可以在一個小時內給你四萬件。」</p>
+    <p>「而且不會有問號。」</p>
+    <p>他往廣場外走了兩步，又停下來。</p>
+    <p>「我只是覺得，」他說，</p>
+    <p>「一座城市的紀錄，</p>
+    <p>不應該取決於一個人記不記得。」</p>
+    <p>「那樣太脆弱了。」</p>
+    <p>他走了。</p>
+    <p>那個小匣子留在地上。</p>
+    <p>——</p>
+    <p>那天夜裡，林澈坐在廣場邊緣。</p>
+    <p>那列紙還攤在地上，</p>
+    <p>有人拿石頭壓住四個角，</p>
+    <p>免得夜風吹散。</p>
+    <p>祈安在他旁邊坐下來。</p>
+    <p>「你今天很安靜。」她說。</p>
+    <p>林澈沒有立刻回答。</p>
+    <p>他一直在看那疊紙。</p>
+    <p>「我在想我媽。」他終於說。</p>
+    <p>祈安轉頭看他。</p>
+    <p>「她簽的字比他多。」林澈說。</p>
+    <p>「她是冥河陣列的核心工程師。」</p>
+    <p>「前八次都是她把我送進去的。」</p>
+    <p>「第三世白司禮遞文件，簽名的是她。」</p>
+    <p>「她做的事不會比他輕。」</p>
+    <p>他停頓了很久。</p>
+    <p>「可是她沒有機會坐在那裡。」</p>
+    <p>「沒有人問過她那些名字。」</p>
+    <p>「沒有人問她，簽字那天有沒有看我一眼。」</p>
+    <p>「她死在廢棄線裡，</p>
+    <p>死之前只來得及說三句話。」</p>
+    <p>他的聲音變了。</p>
+    <p>「我今天看著白司禮被人問。」</p>
+    <p>「被打，被吼，被人指著臉問你有沒有看我兒子一眼。」</p>
+    <p>「我看著看著，忽然覺得——」</p>
+    <p>他說不下去。</p>
+    <p>祈安等著。</p>
+    <p>「我覺得那樣比較好。」林澈說。</p>
+    <p>「我媽沒有得到那個。」</p>
+    <p>「她連被審問的機會都沒有。」</p>
+    <p>「她只是死掉了。」</p>
+    <p>「然後我這輩子都不會知道，」</p>
+    <p>「如果有人這樣問她，她會怎麼回答。」</p>
+    <p>祈安沒有安慰他。</p>
+    <p>她只是坐在那裡，</p>
+    <p>肩膀靠著他的肩膀。</p>
+    <p>風從破碎的城門那個方向吹進來，</p>
+    <p>穿過整座廣場，</p>
+    <p>把那列紙的邊角掀起來又放下。</p>
+    <p>一張一張。</p>
+    <p>像有人在很慢地翻頁。</p>
+    <p>林澈坐在那裡，</p>
+    <p>第一次為林若曦哭了。</p>
+    <p>不是為她的死。</p>
+    <p>是為她從來沒有機會，</p>
+    <p>把自己做過的事說出口。</p>
   </div>
 
   <div class="reading-nav">
-    <a href="reading-ch22.html" class="btn btn-ghost btn-sm">← 上一章</a>
-    <a href="bookshelf.html#part3" class="btn btn-ghost btn-sm">回目錄</a>
-    <a href="reading-ch24.html" class="btn btn-primary btn-sm">下一章 →</a>
+    <a href="reading-ch31.html" class="btn btn-ghost btn-sm">← 上一章</a>
+    <a href="bookshelf.html#part4" class="btn btn-ghost btn-sm">回目錄</a>
     <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm">Threads 留言討論</a>
   </div>
 
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
-    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《祈安的傷口》嗎？</p>
+    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《名冊》嗎？</p>
     <p style="font-size:14px;color:var(--text-dim);margin:0 0 18px;">如果你喜歡《第九次出生》，歡迎隨緣贊助，支持比爸 BD 繼續創作。每一份支持都會成為下一章的燃料。</p>
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
       <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-primary btn-sm">❤ 隨緣贊助作者</a>
@@ -751,7 +757,7 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">白司禮的晶片</span>
       <span class="toc-item-arrow">›</span>
     </a>
-    <a href="reading-ch23.html" class="toc-item toc-active">
+    <a href="reading-ch23.html" class="toc-item">
       <span class="toc-item-num">Ch.023</span>
       <span class="toc-item-title">祈安的傷口</span>
       <span class="toc-item-arrow">›</span>
@@ -797,7 +803,7 @@ document.addEventListener('keydown',function(e){
       <span class="toc-item-title">阿飛的母親</span>
       <span class="toc-item-arrow">›</span>
     </a>
-    <a href="reading-ch32.html" class="toc-item">
+    <a href="reading-ch32.html" class="toc-item toc-active">
       <span class="toc-item-num">Ch.032</span>
       <span class="toc-item-title">名冊</span>
       <span class="toc-item-arrow">›</span>
