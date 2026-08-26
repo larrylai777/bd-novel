@@ -682,3 +682,91 @@ body.light .free-way-desc { color:#665e6c !important; }
 @media (max-width:768px) {
   .volume-rail, .metrics, .support-grid, .free-ways, .book-row, .support-card, .support-tier, .about-card, .legal-card, .podcast-card, .notice-box, .archive-index { border-radius:var(--card-radius-mobile) !important; }
 }
+
+/* ── 首頁：Logo 金黃色文字識別 ──
+   首頁完成連載後改用 Logo 金黃作為文字強調色；
+   僅限 archive-home，書櫃與各部閱讀頁仍保留固定四色。 */
+body.archive-home {
+  --home-logo-gold: #f6c967;
+  --home-logo-gold-bright: #ffe2a6;
+}
+body.archive-home .archive-eyebrow,
+body.archive-home .archive-title span,
+body.archive-home .archive-index-label,
+body.archive-home .archive-index-title,
+body.archive-home .archive-index-meta a,
+body.archive-home .section-kicker,
+body.archive-home .section-heading em,
+body.archive-home .signal-strip b,
+body.archive-home .signal-strip a,
+body.archive-home .metric-num,
+body.archive-home .chapter-row:hover .chapter-name {
+  color:var(--home-logo-gold) !important;
+  text-shadow:none !important;
+}
+body.archive-home .archive-eyebrow::before { background:var(--home-logo-gold) !important; }
+body.archive-home .archive-index-meta a:hover,
+body.archive-home .signal-strip a:hover { color:var(--home-logo-gold-bright) !important; }
+body.archive-home .archive-hero .btn-primary {
+  background:var(--home-logo-gold) !important;
+  border-color:var(--home-logo-gold) !important;
+  color:#17120a !important;
+}
+body.archive-home .archive-hero .btn-outline {
+  color:var(--home-logo-gold) !important;
+  border-color:rgba(246,201,103,.52) !important;
+  background:transparent !important;
+}
+body.archive-home .nav-theme-toggle {
+  color:var(--home-logo-gold) !important;
+  border-color:rgba(246,201,103,.40) !important;
+  background:rgba(246,201,103,.06) !important;
+}
+body.light.archive-home .archive-title span,
+body.light.archive-home .archive-eyebrow,
+body.light.archive-home .archive-index-meta a,
+body.light.archive-home .section-kicker,
+body.light.archive-home .section-heading em,
+body.light.archive-home .signal-strip b,
+body.light.archive-home .signal-strip a,
+body.light.archive-home .metric-num,
+body.light.archive-home .chapter-row:hover .chapter-name {
+  color:#a65a0b !important;
+  text-shadow:none !important;
+}
+body.light.archive-home .archive-hero .btn-primary {
+  background:#a65a0b !important;
+  border-color:#a65a0b !important;
+  color:#fffaf0 !important;
+}
+body.light.archive-home .archive-hero .btn-outline {
+  color:#a65a0b !important;
+  border-color:rgba(166,90,11,.48) !important;
+  background:rgba(255,250,240,.48) !important;
+}
+body.light.archive-home .nav-theme-toggle {
+  color:#a65a0b !important;
+  border-color:rgba(166,90,11,.36) !important;
+  background:rgba(166,90,11,.06) !important;
+}
+
+body.archive-home .volume-card:nth-child(4) .volume-name,
+body.archive-home .volume-card:nth-child(4) .volume-no,
+body.archive-home .site-footer .footer-col-title,
+body.archive-home .site-footer .footer-col-title::after,
+body.archive-home .site-footer .footer-legal a:hover,
+body.archive-home .site-footer .footer-col a:hover {
+  color:var(--home-logo-gold) !important;
+  border-color:rgba(246,201,103,.32) !important;
+  text-shadow:none !important;
+}
+body.light.archive-home .volume-card:nth-child(4) .volume-name,
+body.light.archive-home .volume-card:nth-child(4) .volume-no,
+body.light.archive-home .site-footer .footer-col-title,
+body.light.archive-home .site-footer .footer-col-title::after,
+body.light.archive-home .site-footer .footer-legal a:hover,
+body.light.archive-home .site-footer .footer-col a:hover {
+  color:#a65a0b !important;
+  border-color:rgba(166,90,11,.28) !important;
+  text-shadow:none !important;
+}
