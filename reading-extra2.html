@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>番外二：蘇晚｜比爸 BD</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="redesign.css">
+<style>
+.podcast-embed {
+  margin: 24px 0 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.podcast-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  color: var(--text-xs); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s; white-space: nowrap; }
+.toolbar-btn:hover { background: var(--surface2); color: var(--white); opacity: 1; }
+.toolbar-btn.primary { background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
+.toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+@media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+.part-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--accent-gold); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 3px 10px; margin-bottom: 12px; }
+
+/* 第三部：名字庫／源點識別（不干擾正文閱讀） */
+:root { --part3-blue:#8ecbff; --part3-blue-bright:#d5efff; --part3-warning:#ff625f; }
+.part3-reading .reading-toolbar { border-bottom-color:rgba(142,203,255,.20); box-shadow:0 8px 28px rgba(44,110,180,.035); }
+.part3-reading .part-badge { color:var(--part3-blue); border-color:rgba(142,203,255,.32); background:rgba(142,203,255,.08); box-shadow:0 0 18px rgba(142,203,255,.055); }
+.part3-reading .reading-body { position:relative; }
+.part3-reading .reading-body::before { content:""; position:absolute; top:24px; left:50%; transform:translateX(-50%); width:min(560px,88vw); height:210px; pointer-events:none; background:radial-gradient(ellipse at center top,rgba(142,203,255,.055),transparent 70%); z-index:-1; }
+.part3-source-status { max-width:720px; margin:0 auto 34px; padding:11px 14px; display:flex; align-items:center; gap:10px; border:1px solid rgba(142,203,255,.22); border-radius:8px; background:rgba(142,203,255,.045); color:rgba(213,239,255,.78); font-size:10px; letter-spacing:.10em; text-transform:uppercase; }
+.part3-source-orb { width:8px; height:8px; border-radius:50%; background:var(--part3-blue); box-shadow:0 0 14px var(--part3-blue); flex:0 0 auto; }
+.part3-source-name { color:var(--part3-blue); white-space:nowrap; }
+.part3-source-detail { color:var(--text-xs); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.part3-source-status.is-warning { border-color:rgba(255,98,95,.34); background:rgba(255,98,95,.065); }
+.part3-source-status.is-warning .part3-source-orb { background:var(--part3-warning); box-shadow:0 0 14px var(--part3-warning); }
+.part3-source-status.is-warning .part3-source-name { color:#ffaaa8; }
+.part3-countdown { margin-left:auto; color:#ff837e; font-size:13px; font-variant-numeric:tabular-nums; letter-spacing:.08em; white-space:nowrap; }
+.part3-reading .toc-item.toc-active { border-color:rgba(142,203,255,.34); background:rgba(142,203,255,.08); }
+.part3-reading .toc-item.toc-active .toc-item-num, .part3-reading .toc-item.toc-active .toc-item-title, .part3-reading .toc-item.toc-active .toc-item-arrow { color:var(--part3-blue) !important; }
+@media(max-width:768px){ .part3-source-status { margin:0 0 26px; padding:10px 12px; gap:8px; font-size:9px; } .part3-source-detail { max-width:120px; } .part3-countdown { font-size:12px; } }
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30GG7PY520');
+</script>
+  <link rel="stylesheet" href="mobile-fixes.css">
+  <script src="english-regular.js" defer></script>
+<!-- SEO START -->
+  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外二：蘇晚。第一個火星孩子的母親，在沒有被聽見的名字與長達一百多年的管線裡，留下自己的紀錄。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-extra2.html">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="第九次出生｜比爸 BD 科幻懸疑小說">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="番外二：蘇晚｜比爸 BD">
+  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外二：蘇晚。第一個火星孩子的母親，在沒有被聽見的名字與長達一百多年的管線裡，留下自己的紀錄。">
+  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-extra2.html">
+  <meta property="og:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
+  <meta property="og:image:alt" content="《第九次出生》比爸 BD 科幻懸疑小說">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="番外二：蘇晚｜比爸 BD">
+  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外二：蘇晚。第一個火星孩子的母親，在沒有被聽見的名字與長達一百多年的管線裡，留下自己的紀錄。">
+  <meta name="twitter:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
+  <meta name="theme-color" content="#0c0b12">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"番外二：蘇晚","url":"https://larrylai777.github.io/bd-novel/reading-extra2.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
+<!-- SEO END -->
+</head>
+<body class="page-enter part4-reading extra-reading">
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">作者</a></li>
+      <li><a href="support.html">贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer">Threads</a></li>
+    </ul>
+    <div class="nav-right-mobile">
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☉</button>
+      <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+    <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
+  </div>
+</nav>
+
+<div class="reading-toolbar">
+  <div class="reading-toolbar-left">
+    <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
+    <span class="toolbar-chapter-label">番外二：蘇晚</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-extra1.html" class="toolbar-btn">← 番外一</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">番外篇</span>
+  </div>
+  <div class="reading-toolbar-right">
+    <button class="toolbar-btn music-toolbar-btn" id="toolbarMusicButton" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="reading-body">
+  <div style="text-align:center;padding-top:32px;">
+    <span class="part-badge">番外篇：蘇晚的紀錄</span>
+  </div>
+  <h1 class="reading-chapter-title">番外二：蘇晚</h1>
+  <div class="reading-meta">《第九次出生》· 比爸 BD · 番外篇</div>
+  <div class="part3-source-status" aria-label="番外二狀態">
+    <span class="part3-source-orb"></span>
+    <span class="part3-source-name">冷凝艙／蘇晚的紀錄</span>
+    <span class="part3-source-detail">四十分鐘的名字</span>
+  </div>
+
+  <div class="reading-content" id="readingContent">
+    <p>蘇晚是第三批登陸的。</p>
+    <p>不是第一批。</p>
+    <p>這件事後來的紀錄都寫錯了，</p>
+    <p>寫成她是第一批。</p>
+    <p>因為第一個孩子的母親，</p>
+    <p>必須是第一批。</p>
+    <p>那樣故事比較好聽。</p>
+    <p>她真正的身分是低溫作業技師。</p>
+    <p>負責維護製氧模組的冷凝段。</p>
+    <p>那是一個沒有人想做的工作，</p>
+    <p>因為要長時間待在零下的艙裡，</p>
+    <p>手指會失去知覺。</p>
+    <p>她做了四年。</p>
+    <p>她喜歡那個工作。</p>
+    <p>沒有人打擾她，</p>
+    <p>而且那個艙裡很安靜，</p>
+    <p>安靜到她可以聽見自己呼吸的回音。</p>
+    <p>她在地球上沒有家人。</p>
+    <p>這件事是她被選上的原因之一，</p>
+    <p>雖然名單上不會這樣寫。</p>
+    <p>第三批的一百二十個人裡面，</p>
+    <p>八十七個沒有直系親屬。</p>
+    <p>有人算過這個比例，</p>
+    <p>算完以後沒有人提。</p>
+    <p>——</p>
+    <p>懷孕是意外。</p>
+    <p>殖民地的第一年沒有人被鼓勵生育。</p>
+    <p>配給算得很精確，</p>
+    <p>多一個人就要重算。</p>
+    <p>孩子的父親是同一組的人。</p>
+    <p>那件事持續了大概五個月，</p>
+    <p>沒有名字，也沒有承諾，</p>
+    <p>兩個人都很清楚那是什麼——</p>
+    <p>是零下的艙裡兩個人靠著取暖，</p>
+    <p>而不是別的。</p>
+    <p>那個人在她第二個月的時候調去南環。</p>
+    <p>她沒有告訴他。</p>
+    <p>後來南環出了一次事故，</p>
+    <p>名單上有他。</p>
+    <p>她也沒有跟任何人說過那件事。</p>
+    <p>她發現懷孕的時候已經三個月了。</p>
+    <p>她本來想申報。</p>
+    <p>申報的話有處理程序，</p>
+    <p>程序很快，而且不會有人怪她。</p>
+    <p>她在申報表前面坐了一個下午。</p>
+    <p>沒有交。</p>
+    <p>第二天上面的人先找上她。</p>
+    <p>不是來責備的。</p>
+    <p>來的是三個人，帶著一台攝影設備。</p>
+    <p>「這是好消息。」他們說。</p>
+    <p>「這是非常好的消息。」</p>
+    <p>他們解釋了很久。</p>
+    <p>大意是這樣——</p>
+    <p>火星殖民地成立四年，</p>
+    <p>一直沒有辦法證明人類可以在這裡延續。</p>
+    <p>不是技術問題，是心理問題。</p>
+    <p>地球那邊的資金委員會需要一個畫面。</p>
+    <p>一個在火星出生的孩子。</p>
+    <p>「妳是第一個。」他們說。</p>
+    <p>那天他們拍了很多照片。</p>
+    <p>蘇晚站在製氧模組前面，</p>
+    <p>手放在肚子上，</p>
+    <p>那個姿勢是他們指導的。</p>
+    <p>她本來沒有那樣放。</p>
+    <p>——</p>
+    <p>之後的六個月她沒有再上過班。</p>
+    <p>他們給她換了住處，</p>
+    <p>給她加了配給，</p>
+    <p>給她安排了一個醫生和一個技術員。</p>
+    <p>那個醫生叫什麼名字她後來忘了。</p>
+    <p>技術員她記得，</p>
+    <p>因為那個人很年輕，大概二十出頭，</p>
+    <p>每次量數據的時候手都在抖。</p>
+    <p>有一次他把血壓計摔在地上，</p>
+    <p>慌張得像犯了什麼大錯。</p>
+    <p>蘇晚跟他說沒關係。</p>
+    <p>他抬起頭，臉紅得很厲害。</p>
+    <p>「我是第一次。」他說。</p>
+    <p>「第一次量血壓？」</p>
+    <p>「第一次接觸孕婦。」</p>
+    <p>他頓了一下。</p>
+    <p>「我們沒有人接觸過。」</p>
+    <p>「整個殖民地都沒有。」</p>
+    <p>那句話讓蘇晚愣了很久。</p>
+    <p>她那時候才真正明白自己的處境——</p>
+    <p>她不是被特別照顧的人。</p>
+    <p>她是一個沒有人做過的實驗。</p>
+    <p>有人每個禮拜來拍一次。</p>
+    <p>拍她的肚子，拍她吃飯，</p>
+    <p>拍她站在穹頂下面抬頭看天空。</p>
+    <p>天空那張拍了十七次。</p>
+    <p>因為他們要她笑得自然一點。</p>
+    <p>第十七次的時候，導演——</p>
+    <p>他們真的帶了一個導演——</p>
+    <p>跟她說，妳想一件開心的事。</p>
+    <p>蘇晚站在那裡想。</p>
+    <p>她想不出來。</p>
+    <p>她那個時候二十九歲，</p>
+    <p>在火星上活了四年，</p>
+    <p>在地球上活了二十五年。</p>
+    <p>她發現自己想不出一件開心的事。</p>
+    <p>然後孩子在裡面動了一下。</p>
+    <p>她笑了。</p>
+    <p>那一張過了。</p>
+    <p>——</p>
+    <p>她開始討厭那個孩子。</p>
+    <p>她自己知道這件事，也覺得羞恥。</p>
+    <p>但她確實有一段時間討厭他。</p>
+    <p>因為從他存在的那一天開始，</p>
+    <p>她就不再是低溫作業技師蘇晚。</p>
+    <p>她變成了「第一個」。</p>
+    <p>她的名字開始出現在廣播裡。</p>
+    <p>她走在通道上會有人回頭。</p>
+    <p>有一次她想去買東西——</p>
+    <p>那時候還沒有配給站，只有一個交換所——</p>
+    <p>排隊的人全部讓她先。</p>
+    <p>她說不用。</p>
+    <p>他們堅持。</p>
+    <p>那天她沒有買東西就回去了。</p>
+    <p>第八個月的時候她不討厭了。</p>
+    <p>那個轉變沒有原因。</p>
+    <p>有一天晚上她躺著，</p>
+    <p>感覺到裡面有東西動了一下，</p>
+    <p>很輕，像有人在很遠的地方敲門。</p>
+    <p>她整個人愣住。</p>
+    <p>然後她哭了很久。</p>
+    <p>那天晚上她替他取了一個名字。</p>
+    <p>沒有告訴任何人。</p>
+    <p>那是她的。</p>
+    <p>那個名字不是她想出來的。</p>
+    <p>是她地球上的祖母的名字裡的一個字，</p>
+    <p>加上她自己想了很久的一個字。</p>
+    <p>第一個字代表有人在她之前。</p>
+    <p>第二個字代表有人在她之後。</p>
+    <p>她把那兩個字合在一起念了一遍，</p>
+    <p>念得很小聲，</p>
+    <p>小聲到連牆都聽不見。</p>
+    <p>她那時候不知道，</p>
+    <p>那會是那個名字被說出來的第一次，</p>
+    <p>而第二次要等一百多年。</p>
+    <p>——</p>
+    <p>生產是在帳篷裡。</p>
+    <p>不是醫院。</p>
+    <p>那時候殖民地還沒有醫院，</p>
+    <p>只有一個叫醫療區的地方，</p>
+    <p>那裡有三張床，兩張是壞的。</p>
+    <p>所以他們搭了一個帳篷。</p>
+    <p>帳篷是加壓的，</p>
+    <p>外面就是火星。</p>
+    <p>她記得那個聲音。</p>
+    <p>風打在帳篷布上，</p>
+    <p>一下一下，很鈍。</p>
+    <p>她生了十一個小時。</p>
+    <p>醫生說很順利。</p>
+    <p>技術員的手一直在抖。</p>
+    <p>孩子出來的時候哭了。</p>
+    <p>她聽見了。</p>
+    <p>她很清楚地聽見了。</p>
+    <p>那個哭聲不長。</p>
+    <p>大概二十秒。</p>
+    <p>然後就沒有了。</p>
+    <p>她說，怎麼了。</p>
+    <p>沒有人回答她。</p>
+    <p>她又說了一次，聲音大一點。</p>
+    <p>醫生退了一步。</p>
+    <p>他搖頭。</p>
+    <p>——</p>
+    <p>蘇晚後來想過很多次。</p>
+    <p>她想的不是那二十秒。</p>
+    <p>她想的是那之後的四十分鐘。</p>
+    <p>那四十分鐘裡她把孩子抱在自己身上。</p>
+    <p>沒有人來搶。</p>
+    <p>沒有人來處理。</p>
+    <p>因為他們不知道該怎麼辦。</p>
+    <p>那是一個沒有人準備過的狀況。</p>
+    <p>所以她抱了四十分鐘。</p>
+    <p>她一直在拍他的背。</p>
+    <p>很輕，很規律，</p>
+    <p>像在哄他睡覺。</p>
+    <p>她自己知道他不會醒。</p>
+    <p>她還是在拍。</p>
+    <p>因為她想不出別的可以做的事，</p>
+    <p>而她不想停下來，</p>
+    <p>停下來就代表結束了。</p>
+    <p>那四十分鐘裡她做了三件事。</p>
+    <p>第一件是拍他。</p>
+    <p>第二件是看他的臉。</p>
+    <p>她想把那張臉記住，</p>
+    <p>而她那個時候還不知道，</p>
+    <p>記憶是這座城市後來唯一會被沒收的東西。</p>
+    <p>第三件是說話。</p>
+    <p>她跟他說了那個名字。</p>
+    <p>說了一次。</p>
+    <p>只有帳篷裡的四個人在場，</p>
+    <p>醫生在角落裡填東西，</p>
+    <p>技術員背對著她發抖，</p>
+    <p>還有一個她不知道什麼時候進來的人，</p>
+    <p>站在門邊。</p>
+    <p>那三個人都沒有聽見。</p>
+    <p>因為她說得非常小聲。</p>
+    <p>那是她這一生唯一一次抱他。</p>
+    <p>四十分鐘。</p>
+    <p>——</p>
+    <p>四十分鐘之後，來了很多人。</p>
+    <p>他們的動作變得很快，很有效率。</p>
+    <p>有人把孩子從她身上拿走。</p>
+    <p>有人開始填表。</p>
+    <p>有人在角落裡爭執，聲音壓得很低，</p>
+    <p>她只聽到幾個詞——</p>
+    <p>委員會、下一期、批准。</p>
+    <p>然後有一個人拿著一份文件走過來。</p>
+    <p>「出生確認書。」他說。</p>
+    <p>「請簽名。」</p>
+    <p>蘇晚看那份文件。</p>
+    <p>上面有一個名字。</p>
+    <p>不是她給的那個。</p>
+    <p>那個名字是他們取的，</p>
+    <p>取得很好聽，</p>
+    <p>像一個給宣傳影像用的名字。</p>
+    <p>底下有出生時間，有健康報告，</p>
+    <p>還有一欄狀態。</p>
+    <p>那一欄寫著兩個字。</p>
+    <p>存活。</p>
+    <p>「他死了。」蘇晚說。</p>
+    <p>「妳簽名。」那個人說。</p>
+    <p>「他死了。」</p>
+    <p>那個人蹲下來，跟她平視。</p>
+    <p>他的語氣很溫和。</p>
+    <p>蘇晚後來很多年都記得那個溫和。</p>
+    <p>「蘇小姐。」他說。</p>
+    <p>「妳知道我們在火星上有多少人嗎。」</p>
+    <p>「一千一百四十七個。」</p>
+    <p>「地球那邊每三年審一次。」</p>
+    <p>「下一次審是明年。」</p>
+    <p>「如果他們知道第一個孩子活不過一分鐘，</p>
+    <p>補給會停。」</p>
+    <p>「補給停了，我們一千一百四十七個人，</p>
+    <p>大概撐十四個月。」</p>
+    <p>他停了一下。</p>
+    <p>「包括妳。」</p>
+    <p>蘇晚看著那份文件。</p>
+    <p>「所以你們要我說他活著。」</p>
+    <p>「我們要妳簽一份文件。」那個人說。</p>
+    <p>「妳沒有要說任何話。」</p>
+    <p>「說話的是我們。」</p>
+    <p>她簽了。</p>
+    <p>她簽的時候，</p>
+    <p>那個年輕的技術員在她背後轉過身去。</p>
+    <p>她聽見他吸了一口氣，</p>
+    <p>然後又憋住。</p>
+    <p>那個聲音她記了很久。</p>
+    <p>那是那個帳篷裡，</p>
+    <p>唯一一個為那件事難受過的人發出來的聲音。</p>
+    <p>——</p>
+    <p>那不是最壞的部分。</p>
+    <p>最壞的部分是接下來的十九年。</p>
+    <p>因為那個孩子在紀錄上活著，</p>
+    <p>所以她在紀錄上是一個母親。</p>
+    <p>一個成功的、驕傲的、</p>
+    <p>殖民地的第一位母親。</p>
+    <p>他們每年都來。</p>
+    <p>孩子的生日那天。</p>
+    <p>拍照，訪問，</p>
+    <p>問她孩子今天幾歲了，長得好不好。</p>
+    <p>她要回答。</p>
+    <p>她要笑。</p>
+    <p>第一年她做不到。</p>
+    <p>第一年她在鏡頭前面崩潰了兩次，</p>
+    <p>那兩次的影像被銷毀。</p>
+    <p>第三年她學會了。</p>
+    <p>她發現有一種笑是可以裝的，</p>
+    <p>只要眼睛不要動就好。</p>
+    <p>她們把那個孩子養在紀錄裡。</p>
+    <p>他上學了。</p>
+    <p>他有成績單。</p>
+    <p>他有一次生病的門診紀錄。</p>
+    <p>那些東西都是有人寫的。</p>
+    <p>寫得很仔細，</p>
+    <p>因為要經得起查。</p>
+    <p>蘇晚看過其中幾份。</p>
+    <p>有一份寫著他七歲那年跌倒，膝蓋擦傷。</p>
+    <p>她看著那一行字，坐了一整夜。</p>
+    <p>那個晚上她一直在想同一件事——</p>
+    <p>寫這一行的人，</p>
+    <p>是不是有一個七歲的孩子。</p>
+    <p>是不是他自己的孩子跌倒過。</p>
+    <p>是不是他從自己的生活裡，</p>
+    <p>抽了一小塊出來，貼在一個死掉的嬰兒身上。</p>
+    <p>她不恨那個人。</p>
+    <p>她甚至有一點感謝他。</p>
+    <p>因為那是她的孩子唯一「發生」過的事。</p>
+    <p>那個膝蓋是假的。</p>
+    <p>可是有人為了讓它看起來真，</p>
+    <p>想過真的膝蓋。</p>
+    <p>——</p>
+    <p>第十一年她遇到另一個母親。</p>
+    <p>那個女人叫什麼她忘了。</p>
+    <p>她們是在低溫艙外面的通道上遇到的。</p>
+    <p>那個女人蹲在地上，</p>
+    <p>一隻手摀住嘴，</p>
+    <p>肩膀在抖。</p>
+    <p>蘇晚站在那裡看了一會兒。</p>
+    <p>然後她走過去，蹲下來，</p>
+    <p>什麼都沒有說。</p>
+    <p>過了很久那個女人抬起頭。</p>
+    <p>「妳是蘇晚。」</p>
+    <p>「嗯。」</p>
+    <p>「妳的孩子活著。」</p>
+    <p>蘇晚沒有回答。</p>
+    <p>那個女人擦了臉。</p>
+    <p>「我的沒有。」她說。</p>
+    <p>「上個禮拜。」</p>
+    <p>「他們說不能辦。」</p>
+    <p>「不能辦什麼。」</p>
+    <p>「不能辦葬禮。」那個女人說。</p>
+    <p>「他們說殖民地目前沒有死亡儀式的相關規範，</p>
+    <p>而且會影響士氣。」</p>
+    <p>「他們給了我三天的休假。」</p>
+    <p>「三天。」</p>
+    <p>她笑了一下。</p>
+    <p>「我今天是第四天。」</p>
+    <p>蘇晚在那裡蹲了很久。</p>
+    <p>她想告訴她。</p>
+    <p>她想說，我的也死了，</p>
+    <p>死在第一分鐘，</p>
+    <p>我抱了他四十分鐘，</p>
+    <p>然後我簽了一份說他活著的文件，</p>
+    <p>而我已經這樣過了十一年。</p>
+    <p>她沒有說。</p>
+    <p>因為她簽的那份文件裡有一條，</p>
+    <p>寫在最後面，字很小——</p>
+    <p>任何洩露本文件內容之行為，</p>
+    <p>視為違反殖民地存續義務。</p>
+    <p>她那時候還不知道什麼叫做「不能說」。</p>
+    <p>她只知道說出來，</p>
+    <p>那個女人也會被牽連。</p>
+    <p>所以她只做了一件事。</p>
+    <p>她伸手，抱了那個女人一下。</p>
+    <p>那個女人愣住。</p>
+    <p>然後她哭得比剛才更厲害。</p>
+    <p>「對不起。」那個女人說。</p>
+    <p>「妳的孩子活著，我還跟妳說這種話。」</p>
+    <p>蘇晚搖頭。</p>
+    <p>她說了她這一生唯一一次接近實話的話。</p>
+    <p>「我知道那是什麼感覺。」</p>
+    <p>——</p>
+    <p>她不能哭。</p>
+    <p>這件事沒有人明文規定過。</p>
+    <p>但是每一次她哭，</p>
+    <p>第二天就會有人來關心她的「情緒穩定度」。</p>
+    <p>第三年有一次，</p>
+    <p>她在配給站哭了大概十秒鐘，</p>
+    <p>因為排在她前面的人抱著一個嬰兒。</p>
+    <p>那天晚上有兩個人來她家坐了兩個小時。</p>
+    <p>他們很客氣。</p>
+    <p>他們說，蘇小姐，妳是這座城市的象徵。</p>
+    <p>象徵不可以有裂痕。</p>
+    <p>從那以後她只在沒有人的地方哭。</p>
+    <p>儲藏室。</p>
+    <p>維修井。</p>
+    <p>深夜的低溫作業艙——</p>
+    <p>她後來申請調回原本的工作，</p>
+    <p>不是因為她喜歡，</p>
+    <p>是因為那個艙裡只有她一個人。</p>
+    <p>她在那裡哭了十九年。</p>
+    <p>有時候用毛巾摀住嘴。</p>
+    <p>不是怕吵到人。</p>
+    <p>那個艙是密封的，沒有人聽得見。</p>
+    <p>是習慣。</p>
+    <p>哭的時候摀住嘴，這件事她做了太多次，</p>
+    <p>已經變成身體的一部分。</p>
+    <p>——</p>
+    <p>第二十年，工程隊來找她。</p>
+    <p>那時候赤環城已經在蓋了。</p>
+    <p>穹頂的架構完成一半，</p>
+    <p>動力核心開始試運轉。</p>
+    <p>他們遇到一個問題。</p>
+    <p>核心的排熱效率不夠。</p>
+    <p>火星的大氣太薄，散不掉。</p>
+    <p>他們試過很多種循環液。</p>
+    <p>「我們找到了一種。」他們說。</p>
+    <p>蘇晚不懂技術。</p>
+    <p>她只是一個低溫作業技師。</p>
+    <p>但他們給她看了資料。</p>
+    <p>那些資料上有一行字，</p>
+    <p>她看了三次才看懂。</p>
+    <p>「情緒殘留物質具有異常之熱容特性。</p>
+    <p>其中以長期壓抑之哀慟型殘留，導熱效率最高。」</p>
+    <p>底下有一張比對表。</p>
+    <p>表上有很多編號。</p>
+    <p>其中一個編號被圈了起來。</p>
+    <p>旁邊寫著兩個字。</p>
+    <p>蘇晚。</p>
+    <p>——</p>
+    <p>「妳的意思是。」她說。</p>
+    <p>「我們不是要拿走妳的東西。」他們說。</p>
+    <p>「我們是要保存它。」</p>
+    <p>「妳這二十年來，那些沒有被說出來的，</p>
+    <p>那些沒有人聽見的——」</p>
+    <p>「它們現在有用了。」</p>
+    <p>「它們可以讓一千一百四十七個人，</p>
+    <p>變成十七萬個人。」</p>
+    <p>蘇晚坐在那裡。</p>
+    <p>她想起帳篷。</p>
+    <p>想起那四十分鐘。</p>
+    <p>想起那個人蹲下來說，妳知道我們有多少人嗎。</p>
+    <p>原來是同一句話。</p>
+    <p>隔了二十年，換了一組人，</p>
+    <p>還是同一句話。</p>
+    <p>「這個過程。」她說。</p>
+    <p>「叫什麼。」</p>
+    <p>那些人互相看了一眼。</p>
+    <p>「回收。」其中一個說。</p>
+    <p>他說得很小聲。</p>
+    <p>蘇晚點頭。</p>
+    <p>「那我可以問一件事嗎。」</p>
+    <p>「請說。」</p>
+    <p>「回收以後，那些東西還在嗎。」</p>
+    <p>「在。」</p>
+    <p>「一直在？」</p>
+    <p>「一直在。」他們說。</p>
+    <p>「它們會在管線裡循環。」</p>
+    <p>「只要這座城市在運轉，它們就在流動。」</p>
+    <p>蘇晚沉默了很久。</p>
+    <p>久到那些人開始不安。</p>
+    <p>然後她做了一件他們沒有預料到的事。</p>
+    <p>她笑了。</p>
+    <p>那個笑是真的。</p>
+    <p>眼睛也動了。</p>
+    <p>那是她二十年來第一個真的笑。</p>
+    <p>「好。」她說。</p>
+    <p>「我簽。」</p>
+    <p>——</p>
+    <p>那些人走了以後，她一個人坐在低溫艙裡。</p>
+    <p>她知道自己在做什麼。</p>
+    <p>她不是被騙的。</p>
+    <p>她算得很清楚。</p>
+    <p>如果她拒絕，他們會找別人。</p>
+    <p>這座城市裡不缺被壓著不能哭的人。</p>
+    <p>那個在通道上蹲著的女人就是一個。</p>
+    <p>她拒絕，那些東西就會被燒掉、被清掉、</p>
+    <p>被當成廢棄的情緒殘留處理掉。</p>
+    <p>她簽了，那些東西會流。</p>
+    <p>會在每一條管線裡流動，</p>
+    <p>會在每一次城市散熱的時候循環。</p>
+    <p>一百年。</p>
+    <p>兩百年。</p>
+    <p>只要這座城市還亮著。</p>
+    <p>她的兒子活了不到一分鐘。</p>
+    <p>紀錄上他活了很久，但那不是他。</p>
+    <p>真正屬於他的，</p>
+    <p>只有她那二十年沒有說出口的東西。</p>
+    <p>如果那些東西可以一直流下去，</p>
+    <p>那麼在某種很難解釋的意義上，</p>
+    <p>他也還在流。</p>
+    <p>那是她能想到的，</p>
+    <p>唯一一種讓他不完全消失的方法。</p>
+    <p>她那天晚上在低溫艙裡寫了一張紙。</p>
+    <p>不是遺書。</p>
+    <p>她沒有東西要交代。</p>
+    <p>她寫的是一份清單。</p>
+    <p>那份清單上有二十年來，</p>
+    <p>她每一次哭的日期。</p>
+    <p>她記得全部。</p>
+    <p>一共四百零三次。</p>
+    <p>她寫完以後把那張紙折起來，</p>
+    <p>塞進艙壁的一道縫裡。</p>
+    <p>那個縫她做維護的時候發現的，</p>
+    <p>深度大概十公分，</p>
+    <p>沒有人會去看那裡。</p>
+    <p>那張紙後來一直在那裡。</p>
+    <p>一百多年。</p>
+    <p>沒有被發現。</p>
+    <p>沒有被回收。</p>
+    <p>那是她這一生唯一一件，</p>
+    <p>完全屬於她自己的東西。</p>
+    <p>——</p>
+    <p>回收的那天，她穿了工作服。</p>
+    <p>不是宣傳照那件。</p>
+    <p>是她原本的那件，</p>
+    <p>袖口磨破了，領口自己縫過，</p>
+    <p>針腳歪歪的。</p>
+    <p>那件衣服跟她一起進去。</p>
+    <p>她走進去以前，</p>
+    <p>在門口停了一下。</p>
+    <p>她低頭，</p>
+    <p>對著自己的胸口，</p>
+    <p>很輕地說了一個名字。</p>
+    <p>那個名字沒有被任何一台儀器錄到。</p>
+    <p>因為那個房間裡的儀器，</p>
+    <p>只錄情緒殘留的強度，</p>
+    <p>不錄聲音。</p>
+    <p>她說完就走進去了。</p>
+    <p>——</p>
+    <p>管線裡的一百多年沒有辦法用時間描述。</p>
+    <p>那不是漫長。</p>
+    <p>漫長需要有人在等。</p>
+    <p>那是一種循環。</p>
+    <p>從核心出來，走過整座城市，</p>
+    <p>到穹頂外緣把熱放掉，</p>
+    <p>再回到核心。</p>
+    <p>一趟大概四十分鐘。</p>
+    <p>她不知道那是巧合還是有人算過。</p>
+    <p>四十分鐘。</p>
+    <p>每四十分鐘，她會經過這座城市一次。</p>
+    <p>經過產房的地板下面。</p>
+    <p>經過育成所的岩壁裡。</p>
+    <p>經過廣場的螺栓孔底下。</p>
+    <p>經過每一戶人家的牆。</p>
+    <p>有時候她會感覺到上面有人在哭。</p>
+    <p>那種感覺很淡，像隔著很厚的牆聽見的聲音。</p>
+    <p>她沒有辦法回應。</p>
+    <p>她只能繼續流。</p>
+    <p>她流過那些地方的時候，</p>
+    <p>有時候會有一個很短的念頭。</p>
+    <p>那個念頭不是完整的句子。</p>
+    <p>如果要翻譯成句子，大概是這樣——</p>
+    <p>我知道。</p>
+    <p>我知道你不能哭。</p>
+    <p>我在下面。</p>
+    <p>——</p>
+    <p>一百多年後，</p>
+    <p>在一個沒有穹頂的地方，</p>
+    <p>在一片深藍色的水邊，</p>
+    <p>有一個孩子走到她面前。</p>
+    <p>她認得他。</p>
+    <p>她抱起他。</p>
+    <p>她的手臂很僵硬，角度也不對，</p>
+    <p>因為她只抱過一次，</p>
+    <p>而且那一次他沒有醒。</p>
+    <p>她把嘴唇靠近他的耳朵。</p>
+    <p>她說了那個名字。</p>
+    <p>那是第二次。</p>
+    <p>也是她這一生唯一一次，</p>
+    <p>有人聽見了。</p>
+  </div>
+
+  <div class="reading-nav">
+    <a href="reading-extra1.html" class="btn btn-ghost btn-sm">← 上一篇番外</a>
+    <a href="bookshelf.html#extra" class="btn btn-ghost btn-sm">回番外目錄</a>
+    <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm" rel="noopener noreferrer">Threads 留言討論</a>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
+    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《第九次出生》嗎？</p>
+    <p style="font-size:14px;color:var(--text-dim);margin:0 0 18px;">如果你喜歡《第九次出生》，歡迎隨緣贊助，支持比爸 BD 繼續創作。每一份支持都會成為下一個故事的燃料。</p>
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <a href="https://portaly.cc/bbdaddy924/support" target="_blank" class="btn btn-primary btn-sm" rel="noopener noreferrer">❤ 隨緣贊助作者</a>
+      <a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn btn-outline btn-sm" rel="noopener noreferrer">前往 Threads 留言</a>
+    </div>
+    <p style="font-size:11px;color:var(--text-xs);margin:16px 0 0;">贊助為自願行為，不影響公開篇章的閱讀。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">作品</div>
+        <ul>
+          <li><a href="bookshelf.html">書櫃</a></li>
+          <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
+          <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
+          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–027）</a></li>
+          <li><a href="bookshelf.html#part4">《第九次出生》第四部：第一次出生（Ch.028–037 · 全書完結）</a></li>
+          <li><a href="bookshelf.html#extra">《第九次出生》番外篇（番外一、番外二）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">作者</div>
+        <ul>
+          <li><a href="about.html">關於比爸 BD</a></li>
+          <li><a href="https://www.threads.com/@bbdaddy924?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threads</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank" rel="noopener">Apple Podcast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">支持</div>
+        <ul>
+          <li><a href="support.html">贊助方案</a></li>
+          <li><a href="https://portaly.cc/bbdaddy924/support" target="_blank" rel="noopener">Portaly 贊助</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">法律</div>
+        <ul>
+          <li><a href="privacy.html">隱私權政策</a></li>
+          <li><a href="terms.html">服務條款</a></li>
+          <li><a href="mailto:bbdaddy924@gmail.com">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
+      <nav class="footer-legal" aria-label="頁尾法律連結">
+        <a href="privacy.html">隱私權政策</a>
+        <a href="terms.html">服務條款</a>
+        <a href="mailto:bbdaddy924@gmail.com">聯絡我們</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
+function updateThemeButton(){
+  const btn=document.getElementById("themeBtn");
+  if(!btn) return;
+  const isLight=document.body.classList.contains("light");
+  btn.textContent=isLight?"☽︎":"☉";
+  btn.title=isLight?"切換深色模式":"切換日間模式";
+}
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+  updateThemeButton();
+}
+function toggleMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  var isOpen=!m.classList.contains('open');
+  m.classList.toggle('open', isOpen);
+  h.classList.toggle('active', isOpen);
+  if(c) c.classList.toggle('visible', isOpen);
+}
+function closeMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  m.classList.remove('open');
+  h.classList.remove('active');
+  if(c) c.classList.remove('visible');
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
+function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
+if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+updateThemeButton();
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+</script>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
+<script>
+(function(){
+  var audio=document.getElementById('bgAudio');
+  var toolbarButton=document.getElementById('toolbarMusicButton');
+  if(!audio || !toolbarButton) return;
+  audio.volume=0.6;
+  function updateToolbarMusic(){
+    var playing=!audio.paused;
+    toolbarButton.classList.toggle('is-playing',playing);
+    toolbarButton.textContent=playing?'❚❚':'🎶';
+    toolbarButton.setAttribute('aria-label',playing?'暫停背景音樂':'播放背景音樂');
+    toolbarButton.title=playing?'暫停背景音樂':'播放背景音樂';
+  }
+  window.mbToggle=function(){
+    if(audio.paused){
+      audio.play().then(updateToolbarMusic).catch(updateToolbarMusic);
+    }else{
+      audio.pause();
+      updateToolbarMusic();
+    }
+  };
+  audio.addEventListener('play',updateToolbarMusic);
+  audio.addEventListener('pause',updateToolbarMusic);
+  updateToolbarMusic();
+})();
+
+function openToc(){
+  document.getElementById('tocOverlay').classList.add('open');
+  document.getElementById('tocPanel').classList.add('open');
+  document.getElementById('tocCloseFixed').classList.add('visible');
+}
+function closeToc(){
+  document.getElementById('tocOverlay').classList.remove('open');
+  document.getElementById('tocPanel').classList.remove('open');
+  document.getElementById('tocCloseFixed').classList.remove('visible');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeToc();
+});
+</script>
+<!-- TOC 彈出層 -->
+<div class="toc-overlay" id="tocOverlay"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-header">
+    <span class="toc-header-title">《第九次出生》章節目錄</span>
+  </div>
+    <div class="toc-part-label toc-part1-label">第一部：第九門</div>
+    <a href="reading.html" class="toc-item">
+      <span class="toc-item-num">Ch.001</span>
+      <span class="toc-item-title">出生警報</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch2.html" class="toc-item">
+      <span class="toc-item-num">Ch.002</span>
+      <span class="toc-item-title">母親的謊言</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch3.html" class="toc-item">
+      <span class="toc-item-num">Ch.003</span>
+      <span class="toc-item-title">最後一次</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch4.html" class="toc-item">
+      <span class="toc-item-num">Ch.004</span>
+      <span class="toc-item-title">死者醒來</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch5.html" class="toc-item">
+      <span class="toc-item-num">Ch.005</span>
+      <span class="toc-item-title">管道盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch6.html" class="toc-item">
+      <span class="toc-item-num">Ch.006</span>
+      <span class="toc-item-title">地下學校</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch7.html" class="toc-item">
+      <span class="toc-item-num">Ch.007</span>
+      <span class="toc-item-title">周嶺的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch8.html" class="toc-item">
+      <span class="toc-item-num">Ch.008</span>
+      <span class="toc-item-title">舊門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch9.html" class="toc-item">
+      <span class="toc-item-num">Ch.009</span>
+      <span class="toc-item-title">第九門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part2-label">第二部：黑河低語</div>
+    <a href="reading-ch10.html" class="toc-item">
+      <span class="toc-item-num">Ch.010</span>
+      <span class="toc-item-title">門後餘波</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch11.html" class="toc-item">
+      <span class="toc-item-num">Ch.011</span>
+      <span class="toc-item-title">記憶黑市</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch12.html" class="toc-item">
+      <span class="toc-item-num">Ch.012</span>
+      <span class="toc-item-title">名字法院</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch13.html" class="toc-item">
+      <span class="toc-item-num">Ch.013</span>
+      <span class="toc-item-title">黑河圖書館</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch14.html" class="toc-item">
+      <span class="toc-item-num">Ch.014</span>
+      <span class="toc-item-title">晶片壓制</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch15.html" class="toc-item">
+      <span class="toc-item-num">Ch.015</span>
+      <span class="toc-item-title">母親的暗訊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch16.html" class="toc-item">
+      <span class="toc-item-num">Ch.016</span>
+      <span class="toc-item-title">白紙令擴散</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch17.html" class="toc-item">
+      <span class="toc-item-num">Ch.017</span>
+      <span class="toc-item-title">集體崩潰</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch18.html" class="toc-item">
+      <span class="toc-item-num">Ch.018</span>
+      <span class="toc-item-title">十八歲倒數</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part3-label">第三部：十八歲倒數</div>
+    <a href="reading-ch19.html" class="toc-item">
+      <span class="toc-item-num">Ch.019</span>
+      <span class="toc-item-title">名字庫入口</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch20.html" class="toc-item">
+      <span class="toc-item-num">Ch.020</span>
+      <span class="toc-item-title">被刪除的名字</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch21.html" class="toc-item">
+      <span class="toc-item-num">Ch.021</span>
+      <span class="toc-item-title">找回自我</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch22.html" class="toc-item">
+      <span class="toc-item-num">Ch.022</span>
+      <span class="toc-item-title">白司禮的晶片</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch23.html" class="toc-item">
+      <span class="toc-item-num">Ch.023</span>
+      <span class="toc-item-title">祈安的傷口</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch24.html" class="toc-item">
+      <span class="toc-item-num">Ch.024</span>
+      <span class="toc-item-title">嬰兒的呼吸</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch25.html" class="toc-item">
+      <span class="toc-item-num">Ch.025</span>
+      <span class="toc-item-title">名字的重量</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch26.html" class="toc-item">
+      <span class="toc-item-num">Ch.026</span>
+      <span class="toc-item-title">十八分鐘的盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch27.html" class="toc-item">
+      <span class="toc-item-num">Ch.027</span>
+      <span class="toc-item-title">第一次出生</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part4-label">第四部：第一次出生</div>
+    <a href="reading-ch28.html" class="toc-item">
+      <span class="toc-item-num">Ch.028</span>
+      <span class="toc-item-title">黎明後</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch29.html" class="toc-item">
+      <span class="toc-item-num">Ch.029</span>
+      <span class="toc-item-title">第一張名單</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch30.html" class="toc-item">
+      <span class="toc-item-num">Ch.030</span>
+      <span class="toc-item-title">自願整理站</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch31.html" class="toc-item">
+      <span class="toc-item-num">Ch.031</span>
+      <span class="toc-item-title">阿飛的母親</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch32.html" class="toc-item">
+      <span class="toc-item-num">Ch.032</span>
+      <span class="toc-item-title">名冊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch33.html" class="toc-item">
+      <span class="toc-item-num">Ch.033</span>
+      <span class="toc-item-title">溫序的提議</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch34.html" class="toc-item">
+      <span class="toc-item-num">Ch.034</span>
+      <span class="toc-item-title">林若曦的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch35.html" class="toc-item">
+      <span class="toc-item-num">Ch.035</span>
+      <span class="toc-item-title">十七萬人</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch36.html" class="toc-item">
+      <span class="toc-item-num">Ch.036</span>
+      <span class="toc-item-title">白司禮的宣告</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch37.html" class="toc-item">
+      <span class="toc-item-num">Ch.037</span>
+      <span class="toc-item-title">第九次出生</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part4-label">番外篇</div>
+    <a href="reading-extra1.html" class="toc-item">
+      <span class="toc-item-num">番外一</span>
+      <span class="toc-item-title">第七產房的那個早上</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-extra2.html" class="toc-item toc-active">
+      <span class="toc-item-num">番外二</span>
+      <span class="toc-item-title">蘇晚</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+</div>
+<button id="tocCloseFixed" class="toc-close-fixed" onclick="closeToc()" aria-label="關閉目錄">✕</button>
+
+<script>
+/* 共用導覽列日夜切換狀態：保留既有閱讀工具列按鈕，並同步更新導覽列圖示。 */
+(function(){
+  function updateNavThemeToggle(){
+    var isLight=document.body.classList.contains('light');
+    document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
+      btn.textContent=isLight?'☽︎':'☉';
+      btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
+      btn.title=isLight?'切換深色模式':'切換日間模式';
+    });
+  }
+  var originalToggle=window.toggleTheme;
+  if(typeof originalToggle==='function' && !window.__navThemeToggleWrapped){
+    window.toggleTheme=function(){
+      originalToggle();
+      updateNavThemeToggle();
+    };
+    window.__navThemeToggleWrapped=true;
+  }
+  updateNavThemeToggle();
+})();
+</script>
+
+</body>
+</html>
