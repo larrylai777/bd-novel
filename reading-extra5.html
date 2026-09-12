@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>番外五：妳確定嗎｜比爸 BD</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="redesign.css">
+<style>
+.podcast-embed {
+  margin: 24px 0 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.podcast-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  color: var(--text-xs); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.reading-toolbar { position: sticky; top: var(--nav-h, 60px); z-index: 800; background: rgba(0,0,0,0.88); backdrop-filter: saturate(120%) blur(20px); -webkit-backdrop-filter: saturate(120%) blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; gap: 12px; }
+.reading-toolbar-left { display: flex; align-items: center; gap: 8px; }
+.reading-toolbar-center { display: flex; align-items: center; gap: 4px; }
+.reading-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.toolbar-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s; white-space: nowrap; }
+.toolbar-btn:hover { background: var(--surface2); color: var(--white); opacity: 1; }
+.toolbar-btn.primary { background: var(--surface2); border-color: var(--border2); color: var(--white); }
+.toolbar-btn.primary:hover { background: rgba(255,255,255,0.12); }
+.toolbar-chapter-label { font-size: 12px; color: var(--text-xs); padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+@media(max-width:768px){ .reading-toolbar { padding: 0 14px; height: 48px; } .toolbar-chapter-label { display: none; } .toolbar-btn { padding: 5px 9px; font-size: 11px; } .reading-toolbar-center { gap: 2px; } }
+.part-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--accent-gold); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 3px 10px; margin-bottom: 12px; }
+
+/* 第三部：名字庫／源點識別（不干擾正文閱讀） */
+:root { --part3-blue:#8ecbff; --part3-blue-bright:#d5efff; --part3-warning:#ff625f; }
+.part3-reading .reading-toolbar { border-bottom-color:rgba(142,203,255,.20); box-shadow:0 8px 28px rgba(44,110,180,.035); }
+.part3-reading .part-badge { color:var(--part3-blue); border-color:rgba(142,203,255,.32); background:rgba(142,203,255,.08); box-shadow:0 0 18px rgba(142,203,255,.055); }
+.part3-reading .reading-body { position:relative; }
+.part3-reading .reading-body::before { content:""; position:absolute; top:24px; left:50%; transform:translateX(-50%); width:min(560px,88vw); height:210px; pointer-events:none; background:radial-gradient(ellipse at center top,rgba(142,203,255,.055),transparent 70%); z-index:-1; }
+.part3-source-status { max-width:720px; margin:0 auto 34px; padding:11px 14px; display:flex; align-items:center; gap:10px; border:1px solid rgba(142,203,255,.22); border-radius:8px; background:rgba(142,203,255,.045); color:rgba(213,239,255,.78); font-size:10px; letter-spacing:.10em; text-transform:uppercase; }
+.part3-source-orb { width:8px; height:8px; border-radius:50%; background:var(--part3-blue); box-shadow:0 0 14px var(--part3-blue); flex:0 0 auto; }
+.part3-source-name { color:var(--part3-blue); white-space:nowrap; }
+.part3-source-detail { color:var(--text-xs); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.part3-source-status.is-warning { border-color:rgba(255,98,95,.34); background:rgba(255,98,95,.065); }
+.part3-source-status.is-warning .part3-source-orb { background:var(--part3-warning); box-shadow:0 0 14px var(--part3-warning); }
+.part3-source-status.is-warning .part3-source-name { color:#ffaaa8; }
+.part3-countdown { margin-left:auto; color:#ff837e; font-size:13px; font-variant-numeric:tabular-nums; letter-spacing:.08em; white-space:nowrap; }
+.part3-reading .toc-item.toc-active { border-color:rgba(142,203,255,.34); background:rgba(142,203,255,.08); }
+.part3-reading .toc-item.toc-active .toc-item-num, .part3-reading .toc-item.toc-active .toc-item-title, .part3-reading .toc-item.toc-active .toc-item-arrow { color:var(--part3-blue) !important; }
+@media(max-width:768px){ .part3-source-status { margin:0 0 26px; padding:10px 12px; gap:8px; font-size:9px; } .part3-source-detail { max-width:120px; } .part3-countdown { font-size:12px; } }
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30GG7PY520"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30GG7PY520');
+</script>
+  <link rel="stylesheet" href="mobile-fixes.css">
+  <script src="english-regular.js" defer></script>
+<!-- SEO START -->
+  <meta name="description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外五：妳確定嗎。白司禮記錄十九年來問林若曦這句話的次數，直到明白問題本身不能替任何人承擔責任。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://larrylai777.github.io/bd-novel/reading-extra5.html">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="第九次出生｜比爸 BD 科幻懸疑小說">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="番外五：妳確定嗎｜比爸 BD">
+  <meta property="og:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外五：妳確定嗎。白司禮記錄十九年來問林若曦這句話的次數，直到明白問題本身不能替任何人承擔責任。">
+  <meta property="og:url" content="https://larrylai777.github.io/bd-novel/reading-extra5.html">
+  <meta property="og:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
+  <meta property="og:image:alt" content="《第九次出生》比爸 BD 科幻懸疑小說">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="番外五：妳確定嗎｜比爸 BD">
+  <meta name="twitter:description" content="比爸 BD 原創科幻懸疑小說《第九次出生》番外五：妳確定嗎。白司禮記錄十九年來問林若曦這句話的次數，直到明白問題本身不能替任何人承擔責任。">
+  <meta name="twitter:image" content="https://larrylai777.github.io/bd-novel/cover-ninth-birth.jpg">
+  <meta name="theme-color" content="#0c0b12">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"番外五：妳確定嗎","url":"https://larrylai777.github.io/bd-novel/reading-extra5.html","inLanguage":"zh-TW","author":{"@type":"Person","name":"比爸 BD"},"isPartOf":{"@type":"Book","name":"第九次出生","author":{"@type":"Person","name":"比爸 BD"}}}</script>
+<!-- SEO END -->
+</head>
+<body class="page-enter part4-reading extra-reading">
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="比爸 BD" class="nav-logo-img"></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="bookshelf.html" class="active">書櫃</a></li>
+      <li><a href="about.html">作者</a></li>
+      <li><a href="support.html">贊助</a></li>
+      <li><a href="https://www.threads.com/@bbdaddy888?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer">Threads</a></li>
+    </ul>
+    <div class="nav-right-mobile">
+      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☉</button>
+      <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+    <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
+  </div>
+</nav>
+
+<div class="reading-toolbar">
+  <div class="reading-toolbar-left">
+    <button class="toolbar-btn" onclick="openToc()">☰ 目錄</button>
+    <span class="toolbar-chapter-label">番外五：妳確定嗎</span>
+  </div>
+  <div class="reading-toolbar-center">
+    <a href="reading-extra4.html" class="toolbar-btn">← 番外四</a>
+    <span class="toolbar-btn primary" style="opacity:.35;cursor:default;">番外篇</span>
+  </div>
+  <div class="reading-toolbar-right">
+    <button class="toolbar-btn music-toolbar-btn" id="toolbarMusicButton" type="button" onclick="mbToggle()" aria-label="播放背景音樂" title="播放背景音樂">🎶</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="reading-body">
+  <div style="text-align:center;padding-top:32px;">
+    <span class="part-badge">番外篇：九號管理者檔案</span>
+  </div>
+  <h1 class="reading-chapter-title">番外五：妳確定嗎</h1>
+  <div class="reading-meta">《第九次出生》· 比爸 BD · 番外篇</div>
+  <div class="part3-source-status" aria-label="番外五狀態">
+    <span class="part3-source-orb"></span>
+    <span class="part3-source-name">名字庫／白司禮的紀錄</span>
+    <span class="part3-source-detail">確認與責任</span>
+  </div>
+
+  <div class="reading-content" id="readingContent">
+    <p>第一年</p>
+    <p>他問了三十七次。</p>
+    <p>那個數字是他自己算的。</p>
+    <p>他有記錄的習慣，</p>
+    <p>不是為了什麼目的，</p>
+    <p>只是因為他被製造出來的時候，</p>
+    <p>被放進去的第一組行為模式就是記錄。</p>
+    <p>三十七次。</p>
+    <p>每一次的形式都一樣。</p>
+    <p>林若曦把一份文件推過來。</p>
+    <p>那份文件的依據條款欄通常是空的，</p>
+    <p>或者填著一個不成立的條款。</p>
+    <p>白司禮會看一遍，</p>
+    <p>然後抬起頭。</p>
+    <p>「妳確定嗎。」</p>
+    <p>前面十幾次她會解釋。</p>
+    <p>解釋得很仔細，</p>
+    <p>有時候會拿紙畫給他看，</p>
+    <p>畫冥河陣列的結構，</p>
+    <p>畫記憶回流的路徑，</p>
+    <p>畫她兒子那組基因序列在系統裡的位置。</p>
+    <p>「如果我不做，他會被判定為重複個體。」</p>
+    <p>「重複個體的處理方式是即刻銷毀。」</p>
+    <p>「所以我要在系統認出他之前，先把他登記成別人。」</p>
+    <p>「這樣他就是一個新生兒，不是重複個體。」</p>
+    <p>白司禮聽完會點頭。</p>
+    <p>然後他會問一次。</p>
+    <p>「妳確定嗎。」</p>
+    <p>「確定。」</p>
+    <p>他會簽。</p>
+    <p>第二十幾次以後，她不解釋了。</p>
+    <p>她只是把文件推過來。</p>
+    <p>他還是會問。</p>
+    <p>「妳確定嗎。」</p>
+    <p>「確定。」</p>
+    <p>那變成一個儀式。</p>
+    <p>一個兩秒鐘的儀式，</p>
+    <p>在每一次違規之前執行一次。</p>
+    <p>白司禮那時候十九歲。</p>
+    <p>他以為那個問題是有作用的。</p>
+    <p>——</p>
+    <p>第二年</p>
+    <p>那一年他們開始一起吃飯。</p>
+    <p>不是社交。</p>
+    <p>是因為第七區的餐廳只有一個時段，</p>
+    <p>而他們兩個都是最後才去的人。</p>
+    <p>第一次是偶然坐在同一張桌子。</p>
+    <p>第二次是她走過來坐下。</p>
+    <p>第三次以後就變成習慣了。</p>
+    <p>他們大概吃過三十次。</p>
+    <p>白司禮算過。</p>
+    <p>三十次裡面，她有二十次沒有吃完。</p>
+    <p>那件事他記錄在自己的筆記裡，</p>
+    <p>跟她手抖那一頁放在一起。</p>
+    <p>有一次她問他吃東西是什麼感覺。</p>
+    <p>「什麼意思。」</p>
+    <p>「你有味覺嗎。」</p>
+    <p>「有。」</p>
+    <p>「那你喜歡什麼。」</p>
+    <p>白司禮想了很久。</p>
+    <p>那是他這一生第一次被問這個問題。</p>
+    <p>他發現自己沒有答案。</p>
+    <p>不是因為他沒有味覺。</p>
+    <p>是因為沒有人教過他，</p>
+    <p>食物除了熱量之外還可以被評價。</p>
+    <p>「我不知道。」他說。</p>
+    <p>林若曦看著他。</p>
+    <p>那天她把自己那份吃完了。</p>
+    <p>那是三十次裡面的第十次，</p>
+    <p>也是很少的一次她吃完的。</p>
+    <p>她吃完以後說了一句話。</p>
+    <p>「你以後如果知道了，跟我說。」</p>
+    <p>白司禮沒有回答。</p>
+    <p>他那時候不知道那句話是什麼意思。</p>
+    <p>三十四年後，他坐在廣場那塊金屬板上，</p>
+    <p>有人拿了一碗東西給他，</p>
+    <p>他吃到一半忽然停下來。</p>
+    <p>那個東西是甜的。</p>
+    <p>他發現自己喜歡甜的。</p>
+    <p>他在那裡坐了很久。</p>
+    <p>因為那句話他終於有答案了，</p>
+    <p>而他沒有人可以說。</p>
+    <p>——</p>
+    <p>第四年</p>
+    <p>那一年他問了二十一次。</p>
+    <p>次數減少不是因為她做的事變少。</p>
+    <p>是因為有些他不問了。</p>
+    <p>他自己歸納出一套標準。</p>
+    <p>有些事情他認為屬於「可預期範圍」，</p>
+    <p>那些他不問。</p>
+    <p>只有超出範圍的他才問。</p>
+    <p>那套標準是他自己定的。</p>
+    <p>沒有人要求他定。</p>
+    <p>也沒有人審核。</p>
+    <p>有一次他發現自己在心裡替她想理由。</p>
+    <p>那是一份重新登記的文件，</p>
+    <p>依據條款欄一樣是空的。</p>
+    <p>他看到的瞬間，</p>
+    <p>腦子裡自動跑出了一個解釋——</p>
+    <p>大概是因為前一次的容器數據有問題。</p>
+    <p>他想完才發現，</p>
+    <p>她根本還沒有說任何話。</p>
+    <p>那是他第一次替她把空白填起來。</p>
+    <p>他那天晚上想了很久。</p>
+    <p>他想的是——</p>
+    <p>如果我可以自己把空白填起來，</p>
+    <p>那我問她確定嗎，</p>
+    <p>是在問什麼。</p>
+    <p>他沒有得出結論。</p>
+    <p>第二天他還是問了。</p>
+    <p>「妳確定嗎。」</p>
+    <p>「確定。」</p>
+    <p>——</p>
+    <p>第七年</p>
+    <p>那一年他問了九次。</p>
+    <p>也是那一年，他第一次發現她的手在抖。</p>
+    <p>不是明顯的抖。</p>
+    <p>是拿東西的時候，</p>
+    <p>指尖會有一個很小的、高頻的震動。</p>
+    <p>他問過一次。</p>
+    <p>不是問文件，是問她。</p>
+    <p>「妳身體不舒服嗎。」</p>
+    <p>林若曦愣了一下。</p>
+    <p>她大概沒有預料到他會問這種話。</p>
+    <p>「咖啡喝太多。」她說。</p>
+    <p>白司禮點頭。</p>
+    <p>他把那件事記錄下來。</p>
+    <p>在他自己的筆記裡，</p>
+    <p>不是在任何一份公文上。</p>
+    <p>那一頁上他寫了三行。</p>
+    <p>第七年第四月。</p>
+    <p>林工程師持續性震顫，右手，頻率約每秒八次。</p>
+    <p>推測與長期權限使用相關。</p>
+    <p>他沒有再問第二次。</p>
+    <p>因為他發現她不希望他問。</p>
+    <p>而那一年他已經開始學會一件事——</p>
+    <p>如果你想要一段關係繼續運作，</p>
+    <p>就要學會不要問對方不希望你問的事。</p>
+    <p>那件事他學得比法規還快。</p>
+    <p>那一年他還做了另一件事。</p>
+    <p>他去查了源點鎖定協議。</p>
+    <p>他的權限不夠。</p>
+    <p>他查到的只有名稱、權限等級，</p>
+    <p>還有一行說明——</p>
+    <p>「本協議需一名持有母體權限之在職人員擔任持續性平衡端。」</p>
+    <p>持續性。</p>
+    <p>他把那三個字圈起來。</p>
+    <p>他那時候就知道了。</p>
+    <p>不是全部，但足夠讓他知道一件事——</p>
+    <p>她的手不是咖啡喝太多。</p>
+    <p>他沒有告訴她他查過。</p>
+    <p>三十四年後他想過，</p>
+    <p>如果他那年說了會怎麼樣。</p>
+    <p>他想不出來。</p>
+    <p>因為他能想到的每一個版本裡，</p>
+    <p>她的回答都是同一句。</p>
+    <p>我確定。</p>
+    <p>——</p>
+    <p>第九年</p>
+    <p>那一年他問了四次。</p>
+    <p>其中一次是在深夜。</p>
+    <p>第五次重置的前置作業。</p>
+    <p>林若曦在控制台前面站了很久。</p>
+    <p>白司禮站在她後面。</p>
+    <p>那個房間只有他們兩個人。</p>
+    <p>「這一次會失敗。」她忽然說。</p>
+    <p>「為什麼。」</p>
+    <p>「因為他上一次醒得太快。」</p>
+    <p>「醒得太快代表殘留量太高。」</p>
+    <p>「殘留量太高的話，重置後的容器會有前次記憶。」</p>
+    <p>「有前次記憶的個體會被系統標記。」</p>
+    <p>「被標記的個體，我沒有辦法再登記第六次。」</p>
+    <p>她說得很平，</p>
+    <p>像在報告一個工程數據。</p>
+    <p>白司禮站在後面。</p>
+    <p>「那妳要怎麼辦。」</p>
+    <p>「我要在他這一次醒之前，先降低殘留。」</p>
+    <p>「怎麼降。」</p>
+    <p>林若曦沒有回答。</p>
+    <p>她在控制台上打了一串指令。</p>
+    <p>白司禮看得懂那串指令。</p>
+    <p>那是情緒模組的部分抑制。</p>
+    <p>抑制的程度是第四級。</p>
+    <p>第四級的意思是，</p>
+    <p>那個孩子接下來三年，</p>
+    <p>會感覺不到害怕。</p>
+    <p>「妳確定嗎。」他說。</p>
+    <p>那次她沒有立刻回答。</p>
+    <p>她的手停在控制台上，</p>
+    <p>停了很久。</p>
+    <p>久到白司禮以為她要收手。</p>
+    <p>「你為什麼一直問我這個。」她說。</p>
+    <p>那是她第一次反問。</p>
+    <p>白司禮想了一下。</p>
+    <p>「因為我不知道還能問什麼。」</p>
+    <p>林若曦轉過身看他。</p>
+    <p>那是他們共事九年，</p>
+    <p>她第一次真正看他的臉。</p>
+    <p>「你不覺得那個問題很殘忍嗎。」她說。</p>
+    <p>白司禮愣住。</p>
+    <p>「我以為那是在確認。」</p>
+    <p>「不是。」林若曦說。</p>
+    <p>「你問我確定嗎，我說確定。」</p>
+    <p>「這樣文件就成立了。」</p>
+    <p>「你不用負責任，因為是我確定的。」</p>
+    <p>「我也不用負責任，因為有人問過我，我回答了，程序完整。」</p>
+    <p>她的聲音很輕。</p>
+    <p>「我們兩個都乾淨了。」</p>
+    <p>「那個問題不是在阻止我。」</p>
+    <p>「它是在讓我可以繼續做下去。」</p>
+    <p>白司禮站在那裡，</p>
+    <p>一句話都說不出來。</p>
+    <p>「那我應該問什麼。」他最後說。</p>
+    <p>林若曦看著他，很久。</p>
+    <p>「我不知道。」她說。</p>
+    <p>「但不是那句。」</p>
+    <p>那天晚上她按了那串指令。</p>
+    <p>他簽了字。</p>
+    <p>那次以後，他問的次數又少了。</p>
+    <p>——</p>
+    <p>第十二年</p>
+    <p>那一年他問了一次。</p>
+    <p>只有一次。</p>
+    <p>那一次是第六世。</p>
+    <p>——</p>
+    <p>那份文件送到他桌上的時候，</p>
+    <p>他翻到背面，看依據條款。</p>
+    <p>那一欄第一次不是空的。</p>
+    <p>上面寫著一組完整的、合法的、</p>
+    <p>在任何審查裡都站得住的條款。</p>
+    <p>處分類別：即刻執行。</p>
+    <p>執行人：林若曦。</p>
+    <p>白司禮翻回正面。</p>
+    <p>他的視線離開了右下角。</p>
+    <p>那是他上任十二年來，</p>
+    <p>第二次做這件事。</p>
+    <p>正面貼著一張照片。</p>
+    <p>十七歲的男性，</p>
+    <p>跟九年前那張很像，</p>
+    <p>但不完全一樣。</p>
+    <p>那個人臉上有一種九年前沒有的東西。</p>
+    <p>白司禮盯著那個東西看了很久，</p>
+    <p>才想出那是什麼。</p>
+    <p>那是放鬆。</p>
+    <p>那個人不再逃了。</p>
+    <p>他還看到別的。</p>
+    <p>那張照片是在戶外拍的。</p>
+    <p>背景裡有另外兩個人，</p>
+    <p>被裁掉了一半，</p>
+    <p>只剩下肩膀和一隻手。</p>
+    <p>那隻手搭在那個男性的肩膀上。</p>
+    <p>白司禮盯著那隻手看了很久。</p>
+    <p>他從來沒有在任何一張處分照片裡，</p>
+    <p>看見過一隻搭在別人肩膀上的手。</p>
+    <p>因為處分照片是行政用的。</p>
+    <p>行政用的照片會避開那種東西。</p>
+    <p>這一張沒有避開。</p>
+    <p>這一張是隨手拿的。</p>
+    <p>大概是因為那一世的林澈已經很久沒有被追蹤，</p>
+    <p>所以檔案裡沒有正式照片，</p>
+    <p>只能從生活紀錄裡調一張。</p>
+    <p>白司禮那天晚上想了一件事。</p>
+    <p>那隻手屬於誰。</p>
+    <p>那個人現在知不知道。</p>
+    <p>那個人明天會不會等他。</p>
+    <p>他沒有查。</p>
+    <p>他有權限可以查。</p>
+    <p>他沒有查。</p>
+    <p>那是他第三次替一件事留白，</p>
+    <p>而這一次他知道自己為什麼——</p>
+    <p>因為如果他查了，</p>
+    <p>那隻手就會有名字。</p>
+    <p>而他十五歲那年學過一次，</p>
+    <p>念了名字以後會發生什麼。</p>
+    <p>——</p>
+    <p>林若曦來的時候是傍晚。</p>
+    <p>她自己來的，沒有帶任何人。</p>
+    <p>她站在他桌子前面。</p>
+    <p>「你看過了。」</p>
+    <p>「看過了。」</p>
+    <p>「有什麼問題。」</p>
+    <p>白司禮把那份文件推回去。</p>
+    <p>「依據條款是真的。」他說。</p>
+    <p>「對。」</p>
+    <p>「妳自己寫的。」</p>
+    <p>「對。」</p>
+    <p>「妳自己查的資料，妳自己算的風險，</p>
+    <p>妳自己判斷他會在二十歲前被完整銷毀，</p>
+    <p>所以妳決定在十八歲先動手。」</p>
+    <p>「對。」</p>
+    <p>「沒有人逼妳。」</p>
+    <p>林若曦沒有回答。</p>
+    <p>那個沉默就是回答。</p>
+    <p>白司禮低下頭。</p>
+    <p>他看著那份文件的右下角。</p>
+    <p>那裡有一個空格，等他簽名。</p>
+    <p>他這輩子填過大概兩萬個那樣的空格。</p>
+    <p>「妳確定嗎。」他說。</p>
+    <p>聲音很輕。</p>
+    <p>輕到他自己都聽不太清楚。</p>
+    <p>那是第十二年的唯一一次。</p>
+    <p>林若曦看著他。</p>
+    <p>那一刻她的臉上有一種東西。</p>
+    <p>白司禮很多年以後才想明白那是什麼。</p>
+    <p>那是希望。</p>
+    <p>她在希望他說別的。</p>
+    <p>她在希望他說，不要。</p>
+    <p>她在希望他說，妳可以不做，</p>
+    <p>我幫妳想別的辦法，</p>
+    <p>我們一起想。</p>
+    <p>她站在那裡等了大概四秒鐘。</p>
+    <p>四秒鐘。</p>
+    <p>白司禮沒有說。</p>
+    <p>他不知道要說什麼。</p>
+    <p>他是被製造出來的。</p>
+    <p>他的行為模式裡沒有那一項。</p>
+    <p>沒有人教過他，</p>
+    <p>當一個人問妳確定嗎的時候，</p>
+    <p>其實是希望你阻止她。</p>
+    <p>那不在他的訓練裡。</p>
+    <p>而且還有一件事。</p>
+    <p>三年前她自己說過——</p>
+    <p>那個問題不是在阻止我，是在讓我可以繼續做下去。</p>
+    <p>所以他那四秒鐘裡想的是——</p>
+    <p>如果我說不要，</p>
+    <p>那我就違反了她三年前告訴我的規則。</p>
+    <p>她告訴我那句話沒有用。</p>
+    <p>她告訴我我們兩個都在利用它。</p>
+    <p>那我現在說別的，</p>
+    <p>不就是在假裝我可以救她。</p>
+    <p>他那四秒鐘裡想的是這個。</p>
+    <p>他很多年以後才明白，</p>
+    <p>那正是最壞的一種聰明——</p>
+    <p>他把她三年前的一句自我譴責，</p>
+    <p>當成了自己不用開口的依據。</p>
+    <p>四秒鐘過去。</p>
+    <p>林若曦的臉恢復了。</p>
+    <p>「確定。」她說。</p>
+    <p>白司禮簽了字。</p>
+    <p>——</p>
+    <p>第十五年</p>
+    <p>第八次回收。</p>
+    <p>那一天他站在門外。</p>
+    <p>他沒有進去。</p>
+    <p>那不是體貼。</p>
+    <p>那是流程——</p>
+    <p>執行人在內，監督人在外，</p>
+    <p>門要關著，因為房間裡的收容場會干擾投影。</p>
+    <p>他站在門外，聽著裡面的聲音。</p>
+    <p>他聽見林若曦說，這一次你可以選。</p>
+    <p>他聽見那個十八歲的人笑了一下，說，</p>
+    <p>你們每次都這樣說，先把門鎖上，再叫我選。</p>
+    <p>白司禮站在門外。</p>
+    <p>那句話穿過門板，</p>
+    <p>打在他身上。</p>
+    <p>他那個時候手裡有一份文件。</p>
+    <p>他站在那裡看著那份文件的右下角。</p>
+    <p>那一欄是空的，等他監督簽章。</p>
+    <p>他忽然發現一件事。</p>
+    <p>那個十八歲的人剛才說的話，</p>
+    <p>跟他自己每次問「妳確定嗎」是同一件事。</p>
+    <p>先把門鎖上，再叫她確定。</p>
+    <p>程序完整。</p>
+    <p>兩個人都乾淨。</p>
+    <p>他在門外站了大概二十秒。</p>
+    <p>然後他開口，</p>
+    <p>用他訓練了十五年的那種語氣。</p>
+    <p>「林工程師。」</p>
+    <p>「請完成回收。」</p>
+    <p>那句話說出來以後，</p>
+    <p>他自己在心裡記了一筆。</p>
+    <p>不是懷疑。</p>
+    <p>不是後悔。</p>
+    <p>只是一筆紀錄。</p>
+    <p>第十五年第八月。</p>
+    <p>本人於門外催告。</p>
+    <p>本人知情。</p>
+    <p>那一筆他一直留著。</p>
+    <p>三十四年後，他把它寫進了名字庫。</p>
+    <p>編號在第四千三百件之後，</p>
+    <p>因為那不是他簽的處分，</p>
+    <p>是他做過的事。</p>
+    <p>——</p>
+    <p>第十九年</p>
+    <p>那一年他一次都沒有問。</p>
+    <p>那一年他也做了一件他從來沒有寫進任何紀錄的事。</p>
+    <p>第九次出生的前三個月，</p>
+    <p>他看見她下去。</p>
+    <p>不是名字庫的入口——那個地方他那時候還不知道。</p>
+    <p>是源點腔體的維修通道。</p>
+    <p>他在監控上看到那個影像，</p>
+    <p>時間是凌晨三點多。</p>
+    <p>她一個人，帶著一台很舊的儲存裝置。</p>
+    <p>她在下面待了六個小時。</p>
+    <p>上來的時候她的權限環是暗的。</p>
+    <p>完全暗的。</p>
+    <p>她扶著牆走了很久，</p>
+    <p>走了大概十分鐘才走完一段平常兩分鐘的路。</p>
+    <p>白司禮那天在辦公室裡看完了整段影像。</p>
+    <p>看完以後他做了一件事。</p>
+    <p>他把那段影像從系統裡刪掉了。</p>
+    <p>那是他一生唯一一次使用刪除權限。</p>
+    <p>他自己知道那是什麼意思。</p>
+    <p>他知道她下去做了什麼。</p>
+    <p>他不知道細節，</p>
+    <p>但一個人在自己快要不行的時候，</p>
+    <p>帶著儲存裝置去一個沒有人找得到的地方待六個小時，</p>
+    <p>理由只有一種。</p>
+    <p>她在留東西給誰。</p>
+    <p>他刪掉那段影像的理由，</p>
+    <p>他後來想過很多次。</p>
+    <p>最誠實的版本是這樣——</p>
+    <p>他這十九年沒有阻止過她任何一件事。</p>
+    <p>那是他唯一能替她做的一件。</p>
+    <p>他不能救她。</p>
+    <p>他不能問她。</p>
+    <p>他只能讓她留下來的那個東西，</p>
+    <p>不要被任何人發現。</p>
+    <p>三十四年後，他在廣場上第一次聽見有人說「名字庫」，</p>
+    <p>那個人是林澈。</p>
+    <p>白司禮站在人群後面。</p>
+    <p>他那一秒鐘想的不是制度，不是紀錄，不是贖罪。</p>
+    <p>他想的是——</p>
+    <p>原來妳留成了。</p>
+    <p>——</p>
+    <p>最後一次見面是在廢棄線。</p>
+    <p>不是面對面。</p>
+    <p>隔著一整條通道，</p>
+    <p>隔著黑河，</p>
+    <p>隔著一群從管壁裡伸出來的手。</p>
+    <p>他聽見她的聲音。</p>
+    <p>「你要的是門。」</p>
+    <p>「我給你的。」</p>
+    <p>「從來都不是孩子。」</p>
+    <p>白司禮站在通道那一頭。</p>
+    <p>他手上有槍，也有整支隊伍。</p>
+    <p>他可以在三十秒內結束那件事。</p>
+    <p>他沒有。</p>
+    <p>他站在那裡，</p>
+    <p>聽見自己的聲音穿過通道。</p>
+    <p>「你現在才說這句話。」</p>
+    <p>「太晚了。」</p>
+    <p>那是他對她說的最後一句話。</p>
+    <p>他後來想過幾百次那句話。</p>
+    <p>太晚了。</p>
+    <p>他當時的意思是——</p>
+    <p>妳現在才劃清界線，太晚了。</p>
+    <p>他很多年以後才知道，</p>
+    <p>那句話有另一個意思，</p>
+    <p>而那個意思才是真的。</p>
+    <p>太晚了。</p>
+    <p>是他太晚了。</p>
+    <p>第十二年有四秒鐘。</p>
+    <p>四秒鐘裡，一個人問他確定嗎，</p>
+    <p>而她在等他說不要。</p>
+    <p>他沒有說。</p>
+    <p>從那以後，</p>
+    <p>那個房間裡就沒有人會問了。</p>
+    <p>不是她變成了殺人的人。</p>
+    <p>不是他變成了制度。</p>
+    <p>是他們兩個一起把那個問題弄丟了。</p>
+    <p>而一個地方一旦沒有人問確定嗎，</p>
+    <p>它就會自己往下滑，</p>
+    <p>滑得很順，很有效率，</p>
+    <p>每一步都合法，</p>
+    <p>每一步都有依據條款，</p>
+    <p>一直滑到有一天，</p>
+    <p>一個十一歲的孩子的照片，</p>
+    <p>跟右下角的距離是十一公分，</p>
+    <p>而沒有人會抬頭看。</p>
+    <p>——</p>
+    <p>三十四年後，</p>
+    <p>在廣場上，一個叫祈安的女孩念出七條規則。</p>
+    <p>念到第七條的時候，白司禮站在旁邊。</p>
+    <p>第七條是——</p>
+    <p>任何一百個人連署，可以換掉守門人。</p>
+    <p>不需要理由。</p>
+    <p>他聽完，第一個站出來要那個位置。</p>
+    <p>沒有人知道為什麼。</p>
+    <p>有人以為他在贖罪。</p>
+    <p>有人以為他在爭權。</p>
+    <p>都不是。</p>
+    <p>他要的是那張連署表。</p>
+    <p>那張表的意思是，</p>
+    <p>從今天開始，</p>
+    <p>在這座城市裡，</p>
+    <p>隨時會有一百個人可以問他一次——</p>
+    <p>你確定嗎。</p>
+    <p>而他不能回答確定。</p>
+    <p>他只能走。</p>
+    <p>那是他這一生想出來的、</p>
+    <p>唯一一種讓那個問題不會再被弄丟的辦法。</p>
+    <p>不是靠一個好人記得要問。</p>
+    <p>是靠一張紙，</p>
+    <p>放在入口，</p>
+    <p>任何人都可以簽。</p>
+    <p>四十七天後，</p>
+    <p>那張表湊到了一百零三個人。</p>
+    <p>他交出路線圖，</p>
+    <p>走出名字庫。</p>
+    <p>那天他沒有難過。</p>
+    <p>他後來跟祈安說過一句話。</p>
+    <p>「這是十九年來第一次，</p>
+    <p>有人問我確定嗎，</p>
+    <p>而我沒有辦法說確定。」</p>
+    <p>「感覺怎麼樣。」祈安問。</p>
+    <p>白司禮想了很久。</p>
+    <p>「很好。」他說。</p>
+    <p>——</p>
+    <p>他離開名字庫的那天下午，</p>
+    <p>回到廣場那塊金屬板上。</p>
+    <p>那疊紙還在。</p>
+    <p>他坐下來，翻到最新的一頁。</p>
+    <p>然後他做了一件他自己都沒有預期的事。</p>
+    <p>他在最上面加了一行標題。</p>
+    <p>那行標題不是格式的一部分。</p>
+    <p>那是他自己想的。</p>
+    <p>他寫的是——</p>
+    <p>「本冊記載事項，均由本人簽署或本人在場。」</p>
+    <p>「本人於每次簽署前，曾被詢問一次是否確定。」</p>
+    <p>「本人每次回答確定。」</p>
+    <p>「詢問者為林若曦。」</p>
+    <p>「本人現在把這個問題，交給任何看到這一頁的人。」</p>
+    <p>那一頁後來被送進名字庫。</p>
+    <p>放在他自己的條目最前面，</p>
+    <p>在祈安那七條規定的位置上。</p>
+    <p>任何人第一次進去都會看到。</p>
+    <p>三十年後有一個少年查到那一頁。</p>
+    <p>他不認識白司禮，</p>
+    <p>那個名字對他來說只是紀錄。</p>
+    <p>他讀完那五行，</p>
+    <p>在下面加了一句話。</p>
+    <p>規則允許任何人這樣做。</p>
+    <p>他寫的是——</p>
+    <p>「我確定。」</p>
+    <p>那三個字被留在那裡。</p>
+    <p>沒有人刪除它。</p>
+    <p>因為守門人不能刪除任何東西。</p>
+    <p>那三個字後來一直在那裡，</p>
+    <p>跟那五行放在一起，</p>
+    <p>看起來像一段對話，</p>
+    <p>雖然說話的兩個人相差三十年，</p>
+    <p>而且從來沒有見過。</p>
+  </div>
+
+  <div class="reading-nav">
+    <a href="reading-extra4.html" class="btn btn-ghost btn-sm">← 上一篇番外</a>
+    <a href="bookshelf.html#extra" class="btn btn-ghost btn-sm">回番外目錄</a>
+    <a href="https://www.threads.com/@bbdaddy888" target="_blank" class="btn btn-outline btn-sm" rel="noopener noreferrer">Threads 留言討論</a>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px;text-align:center;">
+    <p style="font-size:16px;color:var(--white);margin:0 0 8px;">喜歡《第九次出生》嗎？</p>
+    <p style="font-size:14px;color:var(--text-dim);margin:0 0 18px;">如果你喜歡《第九次出生》，歡迎隨緣贊助，支持比爸 BD 繼續創作。每一份支持都會成為下一個故事的燃料。</p>
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <a href="https://portaly.cc/bbdaddy888/support" target="_blank" class="btn btn-primary btn-sm" rel="noopener noreferrer">❤ 隨緣贊助作者</a>
+      <a href="https://www.threads.com/@bbdaddy888" target="_blank" class="btn btn-outline btn-sm" rel="noopener noreferrer">前往 Threads 留言</a>
+    </div>
+    <p style="font-size:11px;color:var(--text-xs);margin:16px 0 0;">贊助為自願行為，不影響公開篇章的閱讀。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">作品</div>
+        <ul>
+          <li><a href="bookshelf.html">書櫃</a></li>
+          <li><a href="reading.html">《第九次出生》第一部：第九門（Ch.001–009）</a></li>
+          <li><a href="reading-ch10.html">《第九次出生》第二部：黑河低語（Ch.010–018）</a></li>
+          <li><a href="bookshelf.html#part3">《第九次出生》第三部：十八歲倒數（Ch.019–027）</a></li>
+          <li><a href="bookshelf.html#part4">《第九次出生》第四部：第一次出生（Ch.028–037 · 全書完結）</a></li>
+          <li><a href="bookshelf.html#extra">《第九次出生》番外篇（番外一至番外五）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">作者</div>
+        <ul>
+          <li><a href="about.html">關於比爸 BD</a></li>
+          <li><a href="https://www.threads.com/@bbdaddy888?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threads</a></li>
+          <li><a href="https://podcasts.apple.com/tw/podcast/id1760949371" target="_blank" rel="noopener">Apple Podcast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">支持</div>
+        <ul>
+          <li><a href="support.html">贊助方案</a></li>
+          <li><a href="https://portaly.cc/bbdaddy888/support" target="_blank" rel="noopener">Portaly 贊助</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" onclick="if(window.toggleFooterCol)toggleFooterCol(this)">法律</div>
+        <ul>
+          <li><a href="privacy.html">隱私權政策</a></li>
+          <li><a href="terms.html">服務條款</a></li>
+          <li><a href="mailto:bbdaddy888@gmail.com">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy"><p>© 2026 比爸 BD 版權所有 All Rights Reserved.</p></div>
+      <nav class="footer-legal" aria-label="頁尾法律連結">
+        <a href="privacy.html">隱私權政策</a>
+        <a href="terms.html">服務條款</a>
+        <a href="mailto:bbdaddy888@gmail.com">聯絡我們</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById("progressFill").style.width=pct+"%";});
+function updateThemeButton(){
+  const btn=document.getElementById("themeBtn");
+  if(!btn) return;
+  const isLight=document.body.classList.contains("light");
+  btn.textContent=isLight?"☽︎":"☉";
+  btn.title=isLight?"切換深色模式":"切換日間模式";
+}
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+  updateThemeButton();
+}
+function toggleMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  var isOpen=!m.classList.contains('open');
+  m.classList.toggle('open', isOpen);
+  h.classList.toggle('active', isOpen);
+  if(c) c.classList.toggle('visible', isOpen);
+}
+function closeMenu(){
+  var m=document.getElementById('navMenu');
+  var h=document.querySelector('.nav-hamburger');
+  var c=document.querySelector('.nav-menu-close');
+  m.classList.remove('open');
+  h.classList.remove('active');
+  if(c) c.classList.remove('visible');
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
+function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
+if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+updateThemeButton();
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+</script>
+<audio id="bgAudio" loop preload="metadata"><source src="theme.mp3" type="audio/mpeg"></audio>
+<script>
+(function(){
+  var audio=document.getElementById('bgAudio');
+  var toolbarButton=document.getElementById('toolbarMusicButton');
+  if(!audio || !toolbarButton) return;
+  audio.volume=0.6;
+  function updateToolbarMusic(){
+    var playing=!audio.paused;
+    toolbarButton.classList.toggle('is-playing',playing);
+    toolbarButton.textContent=playing?'❚❚':'🎶';
+    toolbarButton.setAttribute('aria-label',playing?'暫停背景音樂':'播放背景音樂');
+    toolbarButton.title=playing?'暫停背景音樂':'播放背景音樂';
+  }
+  window.mbToggle=function(){
+    if(audio.paused){
+      audio.play().then(updateToolbarMusic).catch(updateToolbarMusic);
+    }else{
+      audio.pause();
+      updateToolbarMusic();
+    }
+  };
+  audio.addEventListener('play',updateToolbarMusic);
+  audio.addEventListener('pause',updateToolbarMusic);
+  updateToolbarMusic();
+})();
+
+function openToc(){
+  document.getElementById('tocOverlay').classList.add('open');
+  document.getElementById('tocPanel').classList.add('open');
+  document.getElementById('tocCloseFixed').classList.add('visible');
+}
+function closeToc(){
+  document.getElementById('tocOverlay').classList.remove('open');
+  document.getElementById('tocPanel').classList.remove('open');
+  document.getElementById('tocCloseFixed').classList.remove('visible');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeToc();
+});
+</script>
+<!-- TOC 彈出層 -->
+<div class="toc-overlay" id="tocOverlay"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-header">
+    <span class="toc-header-title">《第九次出生》章節目錄</span>
+  </div>
+    <div class="toc-part-label toc-part1-label">第一部：第九門</div>
+    <a href="reading.html" class="toc-item">
+      <span class="toc-item-num">Ch.001</span>
+      <span class="toc-item-title">出生警報</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch2.html" class="toc-item">
+      <span class="toc-item-num">Ch.002</span>
+      <span class="toc-item-title">母親的謊言</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch3.html" class="toc-item">
+      <span class="toc-item-num">Ch.003</span>
+      <span class="toc-item-title">最後一次</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch4.html" class="toc-item">
+      <span class="toc-item-num">Ch.004</span>
+      <span class="toc-item-title">死者醒來</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch5.html" class="toc-item">
+      <span class="toc-item-num">Ch.005</span>
+      <span class="toc-item-title">管道盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch6.html" class="toc-item">
+      <span class="toc-item-num">Ch.006</span>
+      <span class="toc-item-title">地下學校</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch7.html" class="toc-item">
+      <span class="toc-item-num">Ch.007</span>
+      <span class="toc-item-title">周嶺的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch8.html" class="toc-item">
+      <span class="toc-item-num">Ch.008</span>
+      <span class="toc-item-title">舊門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch9.html" class="toc-item">
+      <span class="toc-item-num">Ch.009</span>
+      <span class="toc-item-title">第九門</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part2-label">第二部：黑河低語</div>
+    <a href="reading-ch10.html" class="toc-item">
+      <span class="toc-item-num">Ch.010</span>
+      <span class="toc-item-title">門後餘波</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch11.html" class="toc-item">
+      <span class="toc-item-num">Ch.011</span>
+      <span class="toc-item-title">記憶黑市</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch12.html" class="toc-item">
+      <span class="toc-item-num">Ch.012</span>
+      <span class="toc-item-title">名字法院</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch13.html" class="toc-item">
+      <span class="toc-item-num">Ch.013</span>
+      <span class="toc-item-title">黑河圖書館</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch14.html" class="toc-item">
+      <span class="toc-item-num">Ch.014</span>
+      <span class="toc-item-title">晶片壓制</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch15.html" class="toc-item">
+      <span class="toc-item-num">Ch.015</span>
+      <span class="toc-item-title">母親的暗訊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch16.html" class="toc-item">
+      <span class="toc-item-num">Ch.016</span>
+      <span class="toc-item-title">白紙令擴散</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch17.html" class="toc-item">
+      <span class="toc-item-num">Ch.017</span>
+      <span class="toc-item-title">集體崩潰</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch18.html" class="toc-item">
+      <span class="toc-item-num">Ch.018</span>
+      <span class="toc-item-title">十八歲倒數</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part3-label">第三部：十八歲倒數</div>
+    <a href="reading-ch19.html" class="toc-item">
+      <span class="toc-item-num">Ch.019</span>
+      <span class="toc-item-title">名字庫入口</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch20.html" class="toc-item">
+      <span class="toc-item-num">Ch.020</span>
+      <span class="toc-item-title">被刪除的名字</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch21.html" class="toc-item">
+      <span class="toc-item-num">Ch.021</span>
+      <span class="toc-item-title">找回自我</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch22.html" class="toc-item">
+      <span class="toc-item-num">Ch.022</span>
+      <span class="toc-item-title">白司禮的晶片</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch23.html" class="toc-item">
+      <span class="toc-item-num">Ch.023</span>
+      <span class="toc-item-title">祈安的傷口</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch24.html" class="toc-item">
+      <span class="toc-item-num">Ch.024</span>
+      <span class="toc-item-title">嬰兒的呼吸</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch25.html" class="toc-item">
+      <span class="toc-item-num">Ch.025</span>
+      <span class="toc-item-title">名字的重量</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch26.html" class="toc-item">
+      <span class="toc-item-num">Ch.026</span>
+      <span class="toc-item-title">十八分鐘的盡頭</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch27.html" class="toc-item">
+      <span class="toc-item-num">Ch.027</span>
+      <span class="toc-item-title">第一次出生</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part4-label">第四部：第一次出生</div>
+    <a href="reading-ch28.html" class="toc-item">
+      <span class="toc-item-num">Ch.028</span>
+      <span class="toc-item-title">黎明後</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch29.html" class="toc-item">
+      <span class="toc-item-num">Ch.029</span>
+      <span class="toc-item-title">第一張名單</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch30.html" class="toc-item">
+      <span class="toc-item-num">Ch.030</span>
+      <span class="toc-item-title">自願整理站</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch31.html" class="toc-item">
+      <span class="toc-item-num">Ch.031</span>
+      <span class="toc-item-title">阿飛的母親</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch32.html" class="toc-item">
+      <span class="toc-item-num">Ch.032</span>
+      <span class="toc-item-title">名冊</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch33.html" class="toc-item">
+      <span class="toc-item-num">Ch.033</span>
+      <span class="toc-item-title">溫序的提議</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch34.html" class="toc-item">
+      <span class="toc-item-num">Ch.034</span>
+      <span class="toc-item-title">林若曦的殘響</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch35.html" class="toc-item">
+      <span class="toc-item-num">Ch.035</span>
+      <span class="toc-item-title">十七萬人</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch36.html" class="toc-item">
+      <span class="toc-item-num">Ch.036</span>
+      <span class="toc-item-title">白司禮的宣告</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-ch37.html" class="toc-item">
+      <span class="toc-item-num">Ch.037</span>
+      <span class="toc-item-title">第九次出生</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <div class="toc-part-label toc-part4-label">番外篇</div>
+    <a href="reading-extra1.html" class="toc-item">
+      <span class="toc-item-num">番外一</span>
+      <span class="toc-item-title">第七產房的那個早上</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-extra2.html" class="toc-item">
+      <span class="toc-item-num">番外二</span>
+      <span class="toc-item-title">蘇晚</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-extra3.html" class="toc-item">
+      <span class="toc-item-num">番外三</span>
+      <span class="toc-item-title">第一份文件</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-extra4.html" class="toc-item">
+      <span class="toc-item-num">番外四</span>
+      <span class="toc-item-title">四號</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+    <a href="reading-extra5.html" class="toc-item toc-active">
+      <span class="toc-item-num">番外五</span>
+      <span class="toc-item-title">妳確定嗎</span>
+      <span class="toc-item-arrow">›</span>
+    </a>
+</div>
+<button id="tocCloseFixed" class="toc-close-fixed" onclick="closeToc()" aria-label="關閉目錄">✕</button>
+
+<script>
+/* 共用導覽列日夜切換狀態：保留既有閱讀工具列按鈕，並同步更新導覽列圖示。 */
+(function(){
+  function updateNavThemeToggle(){
+    var isLight=document.body.classList.contains('light');
+    document.querySelectorAll('.nav-theme-toggle').forEach(function(btn){
+      btn.textContent=isLight?'☽︎':'☉';
+      btn.setAttribute('aria-label',isLight?'切換深色模式':'切換日間模式');
+      btn.title=isLight?'切換深色模式':'切換日間模式';
+    });
+  }
+  var originalToggle=window.toggleTheme;
+  if(typeof originalToggle==='function' && !window.__navThemeToggleWrapped){
+    window.toggleTheme=function(){
+      originalToggle();
+      updateNavThemeToggle();
+    };
+    window.__navThemeToggleWrapped=true;
+  }
+  updateNavThemeToggle();
+})();
+</script>
+
+</body>
+</html>
