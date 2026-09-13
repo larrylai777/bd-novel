@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="redesign.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
   <style>
     html:has(.archive-home) { overflow-y:auto; }
     body.archive-home { min-height:100%; height:auto; overflow-x:hidden !important; overflow-y:auto !important; position:static !important; }
@@ -18,12 +19,21 @@
     .home-orbit.two { width:min(56vw,650px); aspect-ratio:1; bottom:-240px; left:-18vw; border-color:rgba(255,179,107,.13); }
     .home-signal { position:absolute; width:8px; height:8px; border-radius:50%; background:var(--signal); box-shadow:0 0 28px 8px rgba(152,215,255,.3); top:27%; right:21%; animation:signalPulse 3s ease-in-out infinite; }
     @keyframes signalPulse { 50% { transform:scale(1.6); opacity:.45; } }
+    .hero-starchart { position:absolute; top:11%; right:24%; width:400px; height:400px; z-index:0; pointer-events:none; }
+    .hero-starchart svg { position:absolute; inset:0; width:100%; height:100%; animation:heroChartSpin 200s linear infinite; }
+    .hero-starchart .ring { fill:none; stroke:rgba(152,215,255,.32); stroke-width:1; }
+    .hero-starchart .link { fill:none; stroke:rgba(246,201,103,.5); stroke-width:1; }
+    .hero-starchart .pt { fill:#f6c967; }
+    .hero-starchart .beacon { fill:#98d7ff; transform-origin:center; animation:signalPulse 3.2s ease-in-out infinite; }
+    @keyframes heroChartSpin { to { transform:rotate(360deg); } }
+    .hero-cover { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:190px; height:auto; border-radius:6px; box-shadow:0 30px 70px -18px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.09); }
+    @media(max-width:1000px){ .hero-starchart{ display:none; } }
     .archive-hero { position:relative; min-height:100svh; display:grid; align-items:end; padding:146px max(32px,calc((100vw - 1280px)/2)) 64px; border-bottom:1px solid var(--line); }
     .archive-hero::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(8,10,15,.3),rgba(8,10,15,.87) 68%),linear-gradient(0deg,rgba(8,10,15,.85),transparent 56%); pointer-events:none; }
     .archive-hero-inner { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(270px,.55fr); gap:64px; align-items:end; width:100%; }
     .archive-eyebrow { font-size:11px; letter-spacing:.2em; color:var(--signal); display:flex; align-items:center; gap:12px; margin-bottom:24px; }
     .archive-eyebrow::before { content:""; width:28px; height:1px; background:var(--signal); }
-    .archive-title { max-width:790px; font-family:var(--serif); color:var(--paper); font-size:clamp(72px,12vw,168px); line-height:.78; letter-spacing:-.075em; }
+    .archive-title { max-width:790px; font-family:"Noto Serif TC","Songti TC","PMingLiU",serif !important; color:var(--paper); font-size:clamp(72px,12vw,168px); line-height:.78; letter-spacing:-.075em; }
     .archive-title span { display:block; margin-left:.39em; color:var(--signal); font-size:.39em; letter-spacing:-.06em; line-height:1.02; }
     .archive-deck { max-width:520px; margin:36px 0; color:var(--paper-muted); font-family:var(--serif); font-size:clamp(17px,2vw,22px); line-height:1.7; }
     .archive-cta { display:flex; flex-wrap:wrap; gap:12px; }
@@ -111,6 +121,28 @@
 
   <header class="archive-hero">
     <div class="home-orbit one"></div><div class="home-orbit two"></div><div class="home-signal"></div>
+    <div class="hero-starchart" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <circle class="ring" cx="200" cy="200" r="178"></circle>
+        <circle class="ring" cx="200" cy="200" r="130" opacity=".5"></circle>
+        <g>
+          <line class="link" x1="200" y1="46" x2="316" y2="112"></line>
+          <line class="link" x1="316" y1="112" x2="336" y2="228"></line>
+          <line class="link" x1="336" y1="228" x2="232" y2="336"></line>
+          <line class="link" x1="232" y1="336" x2="92" y2="300"></line>
+          <line class="link" x1="92" y1="300" x2="62" y2="152"></line>
+          <line class="link" x1="62" y1="152" x2="200" y2="46"></line>
+        </g>
+        <circle class="pt" cx="200" cy="46" r="4"></circle>
+        <circle class="pt" cx="316" cy="112" r="3.5"></circle>
+        <circle class="pt" cx="336" cy="228" r="3.5"></circle>
+        <circle class="pt" cx="232" cy="336" r="4"></circle>
+        <circle class="pt" cx="92" cy="300" r="3.5"></circle>
+        <circle class="pt" cx="62" cy="152" r="3.5"></circle>
+        <circle class="beacon" cx="258" cy="182" r="4"></circle>
+      </svg>
+      <img src="cover-ninth-birth.jpg" class="hero-cover" alt="《第九次出生》書封">
+    </div>
     <div class="archive-hero-inner">
       <div>
         <div class="archive-eyebrow">比爸 BD · 科幻懸疑長篇 · 全書完結＋加碼番外</div>
