@@ -197,7 +197,7 @@ body.light .music-fab { color:#1f1a10; }
       <li><a href="https://www.threads.com/@bbdaddy888?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer">Threads</a></li>
     </ul>
     <div class="nav-right-mobile">
-      <button class="nav-theme-toggle" type="button" onclick="toggleTheme()" aria-label="切換日間模式" title="切換日間模式">☉</button>
+      
       <button class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
     <button class="nav-menu-close" onclick="closeMenu()" aria-label="關閉選單">✕</button>
   </div>
@@ -711,7 +711,7 @@ function closeMenu(){
 }
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMenu();}});
 function toggleFooterCol(el){if(window.innerWidth>768)return;el.parentElement.classList.toggle("open");}
-if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+
 updateThemeButton();
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
