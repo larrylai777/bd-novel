@@ -603,19 +603,47 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   }
   .reading-content.facing-pages { background:transparent !important; border:0 !important; border-radius:0 !important; padding:0 !important; }
   .reading-spread {
+    position:relative;
     display:grid;
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:clamp(22px,4vw,64px);
+    gap:10px;
+    padding:clamp(9px,1.4vw,16px);
     margin:0 auto clamp(38px,6vw,74px);
+    border:1px solid rgba(229,220,239,.18);
+    border-radius:30px;
+    background:
+      linear-gradient(90deg,rgba(4,4,8,.72),rgba(44,35,51,.72) 50%,rgba(4,4,8,.72)),
+      linear-gradient(145deg,#201827,#0d0c12 60%,#231a2b);
+    box-shadow:0 30px 80px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.10);
+  }
+  .reading-spread::before {
+    content:"";
+    position:absolute;
+    z-index:2;
+    top:clamp(24px,4vw,48px);
+    bottom:clamp(24px,4vw,48px);
+    left:50%;
+    width:14px;
+    transform:translateX(-50%);
+    border-radius:999px;
+    background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(255,255,255,.09) 48%,rgba(0,0,0,.84));
+    box-shadow:0 0 14px rgba(0,0,0,.55),inset 1px 0 rgba(255,255,255,.12);
+    pointer-events:none;
   }
   .reading-leaf {
+    position:relative;
     height:clamp(520px,calc(100vh - 204px),740px);
     overflow:hidden;
     padding:clamp(26px,3.4vw,52px);
-    border:1px solid var(--border);
-    border-radius:22px;
-    background:rgba(255,255,255,.028);
+    border:1px solid rgba(238,229,245,.14);
+    background:
+      radial-gradient(circle at 0 50%,rgba(255,255,255,.055),transparent 42%),
+      linear-gradient(105deg,rgba(255,255,255,.045),transparent 24%),
+      linear-gradient(145deg,#1b1720,#111016 72%,#1a1520);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 54px rgba(0,0,0,.18);
   }
+  .reading-leaf:first-child { border-radius:22px 5px 5px 22px; }
+  .reading-leaf:last-child { border-radius:5px 22px 22px 5px; }
   .reading-leaf > *:first-child { margin-top:0 !important; }
   .reading-leaf > *:last-child { margin-bottom:0 !important; }
   .reading-leaf > p {
@@ -625,7 +653,17 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
     orphans:2;
     widows:2;
   }
-  body.light .reading-leaf { background:rgba(255,255,255,.70); border-color:rgba(83,61,96,.14); box-shadow:0 14px 34px rgba(52,35,65,.07); }
+  body.light .reading-spread {
+    border-color:rgba(91,67,110,.22);
+    background:linear-gradient(90deg,#d8cddc,#f0eaf2 50%,#d8cddc);
+    box-shadow:0 24px 58px rgba(63,43,78,.16),inset 0 1px 0 rgba(255,255,255,.88);
+  }
+  body.light .reading-spread::before { background:linear-gradient(90deg,rgba(83,61,96,.34),rgba(255,255,255,.88) 48%,rgba(83,61,96,.38)); box-shadow:0 0 12px rgba(83,61,96,.20); }
+  body.light .reading-leaf {
+    background:linear-gradient(105deg,rgba(255,255,255,.72),transparent 28%),linear-gradient(145deg,#fffdfa,#f6f0f7 70%,#eee6f0);
+    border-color:rgba(83,61,96,.14);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.94),inset 0 0 48px rgba(110,80,129,.055);
+  }
 }
 
 /* ── 首頁與書櫃：四部填滿色卡 ──
