@@ -593,6 +593,17 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   body.light .archive-hero { min-height:auto !important; }
 }
 
+/* ── 桌面閱讀：放大正文，手機維持既有 18px 字級 ──
+   以較寬的稿面維持每行約二十個中文字，避免放大後行長過短。 */
+@media (min-width:769px) {
+  .reading-body { max-width:1120px !important; }
+  .reading-content { max-width:900px !important; }
+  .reading-content p {
+    font-size:clamp(44px,3.2vw,52px) !important;
+    line-height:1.68 !important;
+  }
+}
+
 /* ── 首頁與書櫃：四部填滿色卡 ──
    將原本偏白的卡片內容面板改為完整部別色塊，文字採高對比深色或白色。 */
 body.light .volume-rail { background:rgba(83,61,96,.20) !important; border-color:rgba(83,61,96,.25) !important; box-shadow:0 16px 34px rgba(62,42,80,.10) !important; }
