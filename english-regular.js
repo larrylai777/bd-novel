@@ -5,7 +5,7 @@
   const facingPageQuery = window.matchMedia('(min-width:700px) and (min-height:700px)');
   const mobilePageQuery = window.matchMedia('(max-width:699px), ((max-height:699px) and (pointer:coarse))');
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pageTurnDuration = 420;
+  const pageTurnDuration = 680;
   let readingState = null;
   let resizeFrame = null;
 
