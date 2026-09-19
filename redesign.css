@@ -593,6 +593,77 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   body.light .archive-hero { min-height:auto !important; }
 }
 
+/* ── 手機閱讀：單欄書頁與左右滑動翻頁 ──
+   採用 pointer event 判斷水平滑動，保留垂直手勢讓讀者可捲動其他頁面區塊。 */
+@media (max-width:699px), (max-height:699px) and (pointer:coarse) {
+  .reading-content.mobile-pages {
+    margin:38px auto !important;
+    padding:0 !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    touch-action:pan-y;
+  }
+  .mobile-reading-page {
+    position:relative;
+    height:clamp(340px,calc(100svh - 230px),560px);
+    overflow:hidden;
+    padding:28px 24px 24px;
+    border:1px solid rgba(238,229,245,.16);
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 0 50%,rgba(255,255,255,.055),transparent 42%),
+      linear-gradient(105deg,rgba(255,255,255,.045),transparent 24%),
+      linear-gradient(145deg,#1b1720,#111016 72%,#1a1520);
+    box-shadow:0 20px 48px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 46px rgba(0,0,0,.16);
+    will-change:transform,opacity;
+  }
+  .mobile-reading-page[hidden] { display:none !important; }
+  .mobile-reading-page > *:first-child { margin-top:0 !important; }
+  .mobile-reading-page > *:last-child { margin-bottom:0 !important; }
+  .mobile-reading-page > p {
+    font-size:18px !important;
+    line-height:2.05 !important;
+    margin-bottom:1.45em !important;
+  }
+  .mobile-reading-page.is-turning-next-out { animation:mobile-page-next-out .21s cubic-bezier(.42,0,.22,1) both; }
+  .mobile-reading-page.is-turning-next-in { animation:mobile-page-next-in .21s cubic-bezier(.42,0,.22,1) both; }
+  .mobile-reading-page.is-turning-prev-out { animation:mobile-page-prev-out .21s cubic-bezier(.42,0,.22,1) both; }
+  .mobile-reading-page.is-turning-prev-in { animation:mobile-page-prev-in .21s cubic-bezier(.42,0,.22,1) both; }
+  .mobile-page-controls {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:0 auto 14px;
+  }
+  .mobile-page-btn {
+    display:inline-grid;
+    place-items:center;
+    width:42px;
+    height:40px;
+    padding:0;
+    border:1px solid rgba(229,220,239,.28);
+    border-radius:50%;
+    background:rgba(17,14,22,.82);
+    color:var(--white);
+    font-size:20px;
+    cursor:pointer;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease,opacity .18s ease;
+  }
+  .mobile-page-btn:active:not(:disabled) { transform:scale(.94); }
+  .mobile-page-btn:focus-visible { outline:2px solid var(--part4); outline-offset:3px; }
+  .mobile-page-btn:disabled { opacity:.30; cursor:not-allowed; }
+  .mobile-page-label { color:var(--text-dim); font-size:11px; letter-spacing:.04em; text-align:center; font-variant-numeric:tabular-nums; }
+  body.light .mobile-reading-page {
+    border-color:rgba(83,61,96,.14);
+    background:linear-gradient(105deg,rgba(255,255,255,.72),transparent 28%),linear-gradient(145deg,#fffdfa,#f6f0f7 70%,#eee6f0);
+    box-shadow:0 18px 40px rgba(52,35,65,.10),inset 0 1px 0 rgba(255,255,255,.94),inset 0 0 42px rgba(110,80,129,.05);
+  }
+  body.light .mobile-page-btn { background:rgba(255,255,255,.84); border-color:rgba(83,61,96,.24); color:#392d45; }
+  body.light .mobile-page-label { color:#665e6c; }
+}
+
 /* ── 平板與桌面閱讀：連續順序的攤開對頁 ──
    手機與橫向手機維持原本單欄；閱讀腳本會依序填入左頁、右頁與下一組對頁。 */
 @media (min-width:700px) and (min-height:700px) {
@@ -723,11 +794,31 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   0% { opacity:0; transform:rotateY(-72deg) translateX(-3%); filter:brightness(.50); }
   100% { opacity:1; transform:rotateY(0deg) translateX(0); filter:brightness(1); }
 }
+@keyframes mobile-page-next-out {
+  0% { opacity:1; transform:translateX(0) scale(1); }
+  100% { opacity:0; transform:translateX(-14%) scale(.985); }
+}
+@keyframes mobile-page-next-in {
+  0% { opacity:0; transform:translateX(14%) scale(.985); }
+  100% { opacity:1; transform:translateX(0) scale(1); }
+}
+@keyframes mobile-page-prev-out {
+  0% { opacity:1; transform:translateX(0) scale(1); }
+  100% { opacity:0; transform:translateX(14%) scale(.985); }
+}
+@keyframes mobile-page-prev-in {
+  0% { opacity:0; transform:translateX(-14%) scale(.985); }
+  100% { opacity:1; transform:translateX(0) scale(1); }
+}
 @media (prefers-reduced-motion:reduce) {
   .reading-spread.is-turning-next-out,
   .reading-spread.is-turning-next-in,
   .reading-spread.is-turning-prev-out,
-  .reading-spread.is-turning-prev-in { animation:none !important; }
+  .reading-spread.is-turning-prev-in,
+  .mobile-reading-page.is-turning-next-out,
+  .mobile-reading-page.is-turning-next-in,
+  .mobile-reading-page.is-turning-prev-out,
+  .mobile-reading-page.is-turning-prev-in { animation:none !important; }
 }
 
 /* ── 首頁與書櫃：四部填滿色卡 ──
