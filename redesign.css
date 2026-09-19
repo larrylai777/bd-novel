@@ -593,16 +593,24 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   body.light .archive-hero { min-height:auto !important; }
 }
 
-/* ── 桌面閱讀：放大正文，手機維持既有 18px 字級 ──
-   以較寬的稿面維持每行約二十個中文字，並調整行高與段距，
-   讓大字體閱讀時仍保有清楚的行間呼吸感。 */
-@media (min-width:769px) {
-  .reading-body { max-width:1120px !important; }
-  .reading-content { max-width:900px !important; }
+/* ── 平板與桌面閱讀：以雙欄模擬攤開的對頁 ──
+   手機與橫向手機維持原本單欄；雙頁字級依螢幕寬度漸進放大。 */
+@media (min-width:700px) and (min-height:700px) {
+  .reading-body { max-width:1220px !important; padding-left:32px !important; padding-right:32px !important; }
+  .reading-content {
+    max-width:1100px !important;
+    margin:64px auto !important;
+    column-count:2;
+    column-gap:clamp(40px,6vw,88px);
+    column-rule:1px solid var(--border);
+  }
   .reading-content p {
-    font-size:clamp(44px,3.2vw,52px) !important;
-    line-height:1.76 !important;
-    margin-bottom:.95em !important;
+    font-size:clamp(24px,2.8vw,44px) !important;
+    line-height:1.82 !important;
+    margin-bottom:1.04em !important;
+    break-inside:avoid-column;
+    orphans:2;
+    widows:2;
   }
 }
 
