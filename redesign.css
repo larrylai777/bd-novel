@@ -593,25 +593,39 @@ body.light .site-footer { background:linear-gradient(180deg,#2b1b3d,#160d21) !im
   body.light .archive-hero { min-height:auto !important; }
 }
 
-/* ── 平板與桌面閱讀：以雙欄模擬攤開的對頁 ──
-   手機與橫向手機維持原本單欄；雙頁字級依螢幕寬度漸進放大。 */
+/* ── 平板與桌面閱讀：連續順序的攤開對頁 ──
+   手機與橫向手機維持原本單欄；閱讀腳本會依序填入左頁、右頁與下一組對頁。 */
 @media (min-width:700px) and (min-height:700px) {
   .reading-body { max-width:1220px !important; padding-left:32px !important; padding-right:32px !important; }
   .reading-content {
     max-width:1100px !important;
     margin:64px auto !important;
-    column-count:2;
-    column-gap:clamp(40px,6vw,88px);
-    column-rule:1px solid var(--border);
   }
-  .reading-content p {
+  .reading-content.facing-pages { background:transparent !important; border:0 !important; border-radius:0 !important; padding:0 !important; }
+  .reading-spread {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(22px,4vw,64px);
+    margin:0 auto clamp(38px,6vw,74px);
+  }
+  .reading-leaf {
+    height:clamp(520px,calc(100vh - 204px),740px);
+    overflow:hidden;
+    padding:clamp(26px,3.4vw,52px);
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:rgba(255,255,255,.028);
+  }
+  .reading-leaf > *:first-child { margin-top:0 !important; }
+  .reading-leaf > *:last-child { margin-bottom:0 !important; }
+  .reading-leaf > p {
     font-size:clamp(24px,2.8vw,44px) !important;
     line-height:1.82 !important;
     margin-bottom:1.04em !important;
-    break-inside:avoid-column;
     orphans:2;
     widows:2;
   }
+  body.light .reading-leaf { background:rgba(255,255,255,.70); border-color:rgba(83,61,96,.14); box-shadow:0 14px 34px rgba(52,35,65,.07); }
 }
 
 /* ── 首頁與書櫃：四部填滿色卡 ──
