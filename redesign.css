@@ -1170,3 +1170,38 @@ body::before {
     margin-bottom:1.62em !important;
   }
 }
+
+/* ── AdSense：閱讀頁左側欄（核准與設定版位後才顯示） ──
+   保留閱讀正文的連續垂直流；小螢幕不建立廣告欄，避免干擾閱讀。 */
+.adsense-reading-rail { display:none; }
+@media (min-width:1280px) and (min-height:700px) {
+  .adsense-reading-rail[data-ad-slot] {
+    position:fixed;
+    z-index:11;
+    top:174px;
+    left:calc(50% - 604px);
+    display:block;
+    width:160px;
+    min-height:600px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:rgba(10,13,20,.34);
+  }
+  body.light .adsense-reading-rail[data-ad-slot] { background:rgba(255,255,255,.54); }
+  .adsense-reading-rail[data-ad-slot]::before {
+    content:"廣告";
+    display:block;
+    padding:10px 0 8px;
+    color:var(--paper-faint);
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:.16em;
+    text-align:center;
+  }
+  .adsense-reading-rail[data-ad-slot] .adsbygoogle {
+    display:block;
+    width:160px;
+    min-height:600px;
+  }
+}
